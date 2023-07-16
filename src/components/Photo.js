@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import styles from "../photo.module.css";
+import styles from "../css/photo.module.css";
 
 function Photo({ id, coverImg, title, likes }) {
   return (
-    <div>
+    <div className={styles}>
       <img className={styles.thumbnail} src={coverImg} alt={title} />
       <h2>{title}</h2>
       <p>{likes}</p>

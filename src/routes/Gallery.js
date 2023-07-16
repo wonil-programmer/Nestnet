@@ -1,12 +1,32 @@
 import { useState, useEffect } from "react";
 import Photo from "../components/Photo";
-import styles from "../gallery.module.css";
+import styles from "../css/gallery.module.css";
+
+console.log(styles);
+
+const generateURL = (url, options) => {
+  let _url = url + "?";
+
+  Object.keys(options).forEach((key) => {
+    const query = "&" + key + "=" + options[key];
+
+    _url += query;
+  });
+
+  return _url;
+};
+
+const options = {
+  page: 3,
+  client_id: "lArlrouEq1MxqzfJJyG0mFKIJ31zpffw6H0jUH88z8k",
+};
 
 function Gallery() {
   const [loading, setLoading] = useState(true);
   const [photos, setPhotos] = useState([]);
-  const Access_Key = "lArlrouEq1MxqzfJJyG0mFKIJ31zpffw6H0jUH88z8k";
-  const url = `https://api.unsplash.com/photos?page=3&client_id=${Access_Key}`;
+
+  const url = generateURL("https://api.unsplash.com/photos", options);
+
   const getPhotos = async () => {
     const response = await fetch(url);
     const json = await response.json();
@@ -14,6 +34,7 @@ function Gallery() {
     setPhotos(json);
     setLoading(false);
   };
+
   useEffect(() => {
     getPhotos();
   }, []);
@@ -22,7 +43,7 @@ function Gallery() {
       {loading ? (
         <h1>LOADING...</h1>
       ) : (
-        <div className="galleryView">
+        <div className={styles.galleryView}>
           {photos.map((photo) => (
             <Photo
               key={photo.id}
@@ -36,4 +57,5 @@ function Gallery() {
     </div>
   );
 }
+
 export default Gallery;
