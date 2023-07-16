@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Photo from "../components/Photo";
+import Photo from "../components/Photo/Photo";
 import styles from "../css/gallery.module.css";
 
 console.log(styles);
@@ -17,7 +17,7 @@ const generateURL = (url, options) => {
 };
 
 const options = {
-  page: 3,
+  per_page: 30,
   client_id: "lArlrouEq1MxqzfJJyG0mFKIJ31zpffw6H0jUH88z8k",
 };
 
@@ -43,7 +43,7 @@ function Gallery() {
       {loading ? (
         <h1>LOADING...</h1>
       ) : (
-        <div className={styles.galleryView}>
+        <div className={styles.photos}>
           {photos.map((photo) => (
             <Photo
               key={photo.id}
