@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import Photo from "../components/Photo/Photo";
 import styles from "../css/gallery.module.css";
 
-console.log(styles);
-
 const generateURL = (url, options) => {
   let _url = url + "?";
 
@@ -30,7 +28,6 @@ function Gallery() {
   const getPhotos = async () => {
     const response = await fetch(url);
     const json = await response.json();
-    console.log(json);
     setPhotos(json);
     setLoading(false);
   };
@@ -46,6 +43,7 @@ function Gallery() {
         <div className={styles.photos}>
           {photos.map((photo) => (
             <Photo
+              id={photo.id}
               key={photo.id}
               coverImg={photo.urls.small_s3}
               title={photo.alt_description}
