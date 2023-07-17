@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Photo from "../components/Photo/Photo";
-import styles from "../css/gallery.module.css";
+import Photo from "../../components/Photo/Photo";
+import styles from "./Gallery.module.css";
 
 const generateURL = (url, options) => {
   let _url = url + "?";

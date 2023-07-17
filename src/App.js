@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Modal from "./components/Modal/Modal";
+import Album from "./routes/Gallery/Album";
 import Home from "./routes/Home";
-import Gallery from "./routes/Gallery";
+import Gallery from "./routes/Gallery/Gallery";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         />
         <Route
           path={`${process.env.PUBLIC_URL}/gallery/:id`}
-          element={<Modal />}
+          element={<Album />}
         />
       </Routes>
     </BrowserRouter>
