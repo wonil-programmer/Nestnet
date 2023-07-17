@@ -6,13 +6,12 @@ function Photo({ id, coverImg, title, likes }) {
   return (
     <div className={styles.photo}>
       <img className={styles.thumbnail} src={coverImg} alt={title} />
-      <div className={styles.link}>
-        <h2>
-          <Link to={`${id}`}>aaa</Link>
-        </h2>
-        <h2>{title}</h2>
-        <p>{likes}</p>
-      </div>
+      <Link to={`${id}`}>
+        <div className={styles.link}>
+          <h2>{title}</h2>
+          <p>{likes}</p>
+        </div>
+      </Link>
     </div>
   );
 }
