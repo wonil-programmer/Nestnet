@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import styles from "./photo.module.css";
+import styles from "./Photo.module.css";
 import { Link } from "react-router-dom";
 
 function Photo({ id, coverImg, title, likes }) {

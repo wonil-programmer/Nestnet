@@ -1,57 +1,62 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./Album.module.css";
+import Comments from "../../components/Comments/Comments";
+import callAlbum from "../../api/Album/callAlbum";
+import Photo from "../../components/Photo/Photo";
 
 function Album() {
   const { id } = useParams();
-  const [photo, setPhoto] = useState([]);
+  const [thumbnail, setThumbnail] = useState([]);
+  const [allPhotos, setAllPhotos] = useState([]);
+  const [aside, setAside] = useState(false);
   const getPhoto = useCallback(async () => {
     const json = await (
       await fetch(
         `https://api.unsplash.com/photos/${id}?client_id=lArlrouEq1MxqzfJJyG0mFKIJ31zpffw6H0jUH88z8k`
       )
     ).json();
-    setPhoto(json.urls.small);
+    setThumbnail(json.urls.small);
   }, [id]);
+  const toggleAllPhotos = () => {
+    setAside(!aside);
+    callAlbum()
+      .then((res) => res.json())
+      .then((body) => {
+        console.log(body);
+        setAllPhotos(body);
+      });
+  };
   useEffect(() => {
     getPhoto();
   }, [getPhoto]);
 
   return (
     <>
+      <button onClick={toggleAllPhotos} className={styles.btn__unfold}>
+        dfadfs
+      </button>
       <section className={styles.album}>
         <div className={styles.album__container}>
-          <img className={styles.photo} src={photo} alt="img__main" />
-
+          <img className={styles.thumbnail} src={thumbnail} alt="img__main" />
           <div className={styles.detail}>
-            <div>
-              <h1 className={styles.title}>23학년도 1학기 개강총회</h1>
-              <div className={styles.divider}>
-                <div className={styles.divider__shadow}></div>
-              </div>
-            </div>
-            <div className={styles.comments}>
-              <h3 className={styles.comments__title}>댓글</h3>
-              <div className={styles.comments__list}></div>
-            </div>
-            <div className={styles.interaction}>
-              <div className={styles.interaction__data}>
-                <h3>댓글 16개</h3>
-                <div>16 하트</div>
-              </div>
-              <div className={styles.comment}>
-                <div className={styles.comment__profile}></div>
-                <input
-                  className={styles.comment__input}
-                  type="text"
-                  placeholder="댓글 추가"
-                />
-              </div>
-            </div>
+            <Comments />
           </div>
         </div>
       </section>
-      <div></div>
+      {aside && (
+        <div className={styles.allPhotos}>
+          {allPhotos.map((photo) => (
+            <Photo
+              id={photo.id}
+              key={photo.id}
+              coverImg={photo.urls.small_s3}
+              title={photo.alt_description}
+              likes={photo.likes}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 }
