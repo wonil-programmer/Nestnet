@@ -24,14 +24,15 @@ function Album() {
           <img className={styles.photo} src={photo} alt="img__main" />
 
           <div className={styles.detail}>
-            <div className={styles.metadata}>
+            <div>
               <h1 className={styles.title}>23학년도 1학기 개강총회</h1>
               <div className={styles.divider}>
-                <div className={styles.shadow__title}></div>
+                <div className={styles.divider__shadow}></div>
               </div>
-              <div className={styles.comments__column}>
-                <h3 className={styles.comments__list}>댓글</h3>
-              </div>
+            </div>
+            <div className={styles.comments}>
+              <h3 className={styles.comments__title}>댓글</h3>
+              <div className={styles.comments__list}></div>
             </div>
             <div className={styles.interaction}>
               <div className={styles.interaction__data}>
