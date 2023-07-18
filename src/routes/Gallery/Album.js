@@ -36,27 +36,39 @@ function Album() {
       <button onClick={toggleAllPhotos} className={styles.btn__unfold}>
         dfadfs
       </button>
-      <section className={styles.album}>
-        <div className={styles.album__container}>
-          <img className={styles.thumbnail} src={thumbnail} alt="img__main" />
-          <div className={styles.detail}>
-            <Comments />
-          </div>
-        </div>
-      </section>
-      {aside && (
-        <div className={styles.allPhotos}>
-          {allPhotos.map((photo) => (
-            <Photo
-              id={photo.id}
-              key={photo.id}
-              coverImg={photo.urls.small_s3}
-              title={photo.alt_description}
-              likes={photo.likes}
+      <div className={styles.wrapper}>
+        <section className={styles.album}>
+          <div
+            className={
+              aside
+                ? [styles.leftContainer, styles.centerContainer].join(" ")
+                : styles.centerContainer
+            }
+          >
+            <img
+              className={aside ? styles.leftPhoto : styles.centerPhoto}
+              src={thumbnail}
+              alt="img__main"
             />
-          ))}
-        </div>
-      )}
+            <div className={styles.detail}>
+              <Comments />
+            </div>
+          </div>
+        </section>
+        {aside && (
+          <div className={styles.allPhotos}>
+            {allPhotos.map((photo) => (
+              <Photo
+                id={photo.id}
+                key={photo.id}
+                coverImg={photo.urls.small_s3}
+                title={photo.alt_description}
+                likes={photo.likes}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 }
