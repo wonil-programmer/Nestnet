@@ -1,6 +1,10 @@
+import { useState } from "react";
+import CommentForm from "./CommentForm";
 import styles from "./Comments.module.css";
 
 function Comments() {
+  const [comments, setComments] = useState([]);
+
   return (
     <>
       <div>
@@ -11,22 +15,15 @@ function Comments() {
       </div>
       <div className={styles.comments}>
         <h3 className={styles.comments__title}>댓글</h3>
-        <div className={styles.comments__list}></div>
-      </div>
-      <div className={styles.interaction}>
-        <div className={styles.interaction__data}>
-          <h3>댓글 16개</h3>
-          <div>16 하트</div>
-        </div>
-        <div className={styles.comment}>
-          <div className={styles.comment__profile}></div>
-          <input
-            className={styles.comment__input}
-            type="text"
-            placeholder="댓글 추가"
-          />
+        <div className={styles.comments__list}>
+          <ul>
+            {comments.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
         </div>
       </div>
+      <CommentForm setComments={setComments} />
     </>
   );
 }

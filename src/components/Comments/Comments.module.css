@@ -31,37 +31,5 @@
 .comments__list {
   padding: 0.5rem 2rem 1rem;
   width: 100%;
-  height: 300x;
-}
-.interaction {
-  height: 10rem;
-  width: 100%;
-  padding: 0.8rem 2rem 0;
-  margin-top: auto;
-  border-top: 1px solid rgba(239, 239, 239);
-}
-.interaction__data {
-  padding: 0.8rem 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.comment {
-  padding: 1rem 0;
-  display: flex;
-  flex-direction: row;
-}
-.comment__profile {
-  background-color: black;
-  width: 3rem;
-  height: 3rem;
-  margin-right: 1rem;
-  border-radius: 100%;
-}
-.comment__input {
-  width: calc(100% - 4rem);
-  border: none;
-  border-radius: 2rem;
-  background-color: rgba(239, 239, 239);
-  padding: 0 1.5rem;
+  height: 300px;
 }
