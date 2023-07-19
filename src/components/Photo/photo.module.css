@@ -1,6 +1,7 @@
 .photo {
   position: relative;
   break-inside: avoid;
+  cursor: pointer;
 }
 .thumbnail {
   width: 100%;

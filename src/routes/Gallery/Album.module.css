@@ -29,8 +29,9 @@
   margin: 1.5rem auto;
   flex-direction: column;
   position: fixed;
-  top: 1rem;
-  left: 1.5rem;
+  top: 1.5rem;
+  left: 14rem;
+  overflow-y: auto;
 }
 
 .centerPhoto {
@@ -41,23 +42,28 @@
 }
 
 /* Right section */
-.detail {
+.detailCenter {
   width: 50%;
   display: flex;
   flex-direction: column;
 }
+.detailLeft {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Aside all photos */
 .allPhotos {
-  width: 1400px;
-  margin: 1.5rem auto;
-  columns: 3;
-  column-gap: 1.2rem;
-  flex: 1;
-  overflow-y: scroll;
+  position: relative;
+  margin: 1.5rem;
+  margin-left: auto;
+  columns: 2;
+  column-width: 11rem;
+  column-gap: rem;
 }
 @media (max-width: 1000px) {
-  .centerContainer {
-    width: 30rem;
+  .leftContainer {
     flex-direction: column;
   }
   .centerPhoto {

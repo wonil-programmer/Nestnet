@@ -7,30 +7,46 @@ import Photo from "../../components/Photo/Photo";
 
 function Album() {
   const { id } = useParams();
-  const [thumbnail, setThumbnail] = useState([]);
+  // const [thumbnail, setThumbnail] = useState([]);
   const [allPhotos, setAllPhotos] = useState([]);
   const [aside, setAside] = useState(false);
+
+  const [mainImage, setMainImage] = useState("");
+  const [clickedImage, setClickedImage] = useState("");
+
   const getPhoto = useCallback(async () => {
     const json = await (
       await fetch(
         `https://api.unsplash.com/photos/${id}?client_id=lArlrouEq1MxqzfJJyG0mFKIJ31zpffw6H0jUH88z8k`
       )
     ).json();
-    setThumbnail(json.urls.small);
+    setMainImage(json.urls.small_s3);
   }, [id]);
   const toggleAllPhotos = () => {
     setAside(!aside);
     callAlbum()
       .then((res) => res.json())
       .then((body) => {
-        console.log(body);
         setAllPhotos(body);
       });
   };
+
+  const handleImageClick = (imagePath) => {
+    setClickedImage(imagePath);
+  };
+  const swapImages = useCallback(() => {
+    if (clickedImage) {
+      setMainImage(clickedImage);
+    }
+  }, [clickedImage]);
+
   useEffect(() => {
     getPhoto();
   }, [getPhoto]);
 
+  useEffect(() => {
+    swapImages();
+  }, [swapImages]);
   return (
     <>
       <button onClick={toggleAllPhotos} className={styles.btn__unfold}>
@@ -47,26 +63,29 @@ function Album() {
           >
             <img
               className={aside ? styles.leftPhoto : styles.centerPhoto}
-              src={thumbnail}
+              src={mainImage}
               alt="img__main"
             />
-            <div className={styles.detail}>
+            <div className={aside ? styles.detailLeft : styles.detailCenter}>
               <Comments />
             </div>
           </div>
         </section>
         {aside && (
-          <div className={styles.allPhotos}>
+          <section className={styles.allPhotos}>
             {allPhotos.map((photo) => (
               <Photo
                 id={photo.id}
                 key={photo.id}
-                coverImg={photo.urls.small_s3}
+                coverImg={photo.urls.small}
                 title={photo.alt_description}
                 likes={photo.likes}
+                onClick={() => {
+                  handleImageClick(photo.urls.small_s3);
+                }}
               />
             ))}
-          </div>
+          </section>
         )}
       </div>
     </>

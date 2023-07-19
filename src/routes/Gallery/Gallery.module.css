@@ -4,24 +4,28 @@
   box-sizing: border-box;
 }
 .photos {
-  width: 1400px;
+  width: calc(100% - 2.5rem);
   margin: 1.5rem auto;
   columns: 4;
+  column-width: 20rem;
   column-gap: 1.2rem;
 }
 @media (max-width: 1200px) {
   .photos {
-    width: calc(100% - 40px);
+    width: calc(100% - 2.5rem);
     columns: 3;
+    column-width: 20rem;
   }
 }
 @media (max-width: 768px) {
   .photos {
     columns: 2;
+    column-width: 20rem;
   }
 }
 @media (max-width: 480px) {
   .photos {
     columns: 1;
+    column-width: 20rem;
   }
 }
