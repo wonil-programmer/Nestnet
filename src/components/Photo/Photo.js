@@ -7,10 +7,7 @@ function Photo({ id, coverImg, title, likes, onClick }) {
     <div className={styles.photo} onClick={onClick}>
       <img className={styles.thumbnail} src={coverImg} alt={title} />
       <Link to={`${id}`}>
-        {/* <div className={styles.link}>
-          <h2>{title}</h2>
-          <p>{likes}</p>
-        </div> */}
+        <div>{title}</div>
       </Link>
     </div>
   );

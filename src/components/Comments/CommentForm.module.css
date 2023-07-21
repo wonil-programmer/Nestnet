@@ -1,11 +1,13 @@
-.interaction {
+.container {
   height: 10rem;
   width: 100%;
   padding: 0.8rem 2rem 0;
   margin-top: auto;
   border-top: 1px solid rgba(239, 239, 239);
+  position: sticky;
+  bottom: px;
 }
-.interaction__data {
+.like {
   padding: 0.8rem 0;
   display: flex;
   flex-direction: row;
@@ -16,15 +18,23 @@
   display: flex;
   flex-direction: row;
 }
-.comment__profile {
+.profile {
   background-color: black;
   width: 3rem;
   height: 3rem;
   margin-right: 1rem;
   border-radius: 100%;
 }
-.comment__input {
-  width: calc(100% - 4rem);
+.form {
+  display: flex;
+  flex-direction: row;
+}
+form {
+  flex: 1;
+}
+.input {
+  width: 100%;
+  height: 100%;
   border: none;
   border-radius: 2rem;
   background-color: rgba(239, 239, 239);

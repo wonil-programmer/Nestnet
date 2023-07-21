@@ -63,13 +63,13 @@
   column-gap: rem;
 }
 @media (max-width: 1000px) {
-  .leftContainer {
+  .centerContainer {
     flex-direction: column;
   }
   .centerPhoto {
     width: 100%;
   }
-  .detail {
+  .detailCenter {
     width: 100%;
   }
 }

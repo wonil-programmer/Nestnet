@@ -3,7 +3,9 @@ import styles from "./CommentForm.module.css";
 
 function CommentFooter({ setComments }) {
   const [comment, setComment] = useState("");
-  const onChange = (event) => setComment(event.target.value);
+  const onChange = (event) => {
+    setComment(event.target.value);
+  };
   const onSubmit = (event) => {
     event.preventDefault();
     if (comment === "") {
@@ -12,17 +14,19 @@ function CommentFooter({ setComments }) {
     setComments((currentInput) => [comment, ...currentInput]);
     setComment("");
   };
+
   return (
-    <div className={styles.interaction}>
-      <div className={styles.interaction__data}>
+    <div className={styles.container}>
+      <div className={styles.like}>
         <div>16 하트</div>
       </div>
-      <div>
-        <div className={styles.comment__profile}></div>
-        <form onSubmit={onSubmit} className={styles.comment__form}>
+      <div className={styles.form}>
+        <div className={styles.profile}></div>
+        <form onSubmit={onSubmit}>
           <input
             onChange={onChange}
-            className={styles.comment__input}
+            className={styles.input}
+            value={comment}
             type="text"
             placeholder="댓글 추가"
           />

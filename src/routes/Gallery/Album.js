@@ -4,10 +4,10 @@ import styles from "./Album.module.css";
 import Comments from "../../components/Comments/Comments";
 import callAlbum from "../../api/Album/callAlbum";
 import Photo from "../../components/Photo/Photo";
+import Button from "../../components/Button";
 
 function Album() {
   const { id } = useParams();
-  // const [thumbnail, setThumbnail] = useState([]);
   const [allPhotos, setAllPhotos] = useState([]);
   const [aside, setAside] = useState(false);
 
@@ -22,14 +22,6 @@ function Album() {
     ).json();
     setMainImage(json.urls.small_s3);
   }, [id]);
-  const toggleAllPhotos = () => {
-    setAside(!aside);
-    callAlbum()
-      .then((res) => res.json())
-      .then((body) => {
-        setAllPhotos(body);
-      });
-  };
 
   const handleImageClick = (imagePath) => {
     setClickedImage(imagePath);
@@ -49,9 +41,6 @@ function Album() {
   }, [swapImages]);
   return (
     <>
-      <button onClick={toggleAllPhotos} className={styles.btn__unfold}>
-        dfadfs
-      </button>
       <div className={styles.wrapper}>
         <section className={styles.album}>
           <div
@@ -87,6 +76,7 @@ function Album() {
             ))}
           </section>
         )}
+        <Button setAside={setAside} setAllPhotos={setAllPhotos} />
       </div>
     </>
   );
