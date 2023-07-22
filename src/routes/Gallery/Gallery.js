@@ -1,34 +1,19 @@
 import { useState, useEffect } from "react";
 import Photo from "../../components/Photo/Photo";
 import styles from "./Gallery.module.css";
-
-const generateURL = (url, options) => {
-  let _url = url + "?";
-
-  Object.keys(options).forEach((key) => {
-    const query = "&" + key + "=" + options[key];
-
-    _url += query;
-  });
-
-  return _url;
-};
-
-const options = {
-  per_page: 30,
-  client_id: "lArlrouEq1MxqzfJJyG0mFKIJ31zpffw6H0jUH88z8k",
-};
+import Header from "../../components/Header";
+import callAlbum from "../../api/Album/callAlbum";
 
 function Gallery() {
   const [loading, setLoading] = useState(true);
   const [photos, setPhotos] = useState([]);
 
-  const url = generateURL("https://api.unsplash.com/photos", options);
-
   const getPhotos = async () => {
-    const response = await fetch(url);
-    const json = await response.json();
-    setPhotos(json);
+    callAlbum()
+      .then((res) => res.json())
+      .then((body) => {
+        setPhotos(body);
+      });
     setLoading(false);
   };
 
@@ -36,7 +21,8 @@ function Gallery() {
     getPhotos();
   }, []);
   return (
-    <div>
+    <div className={styles.gallery}>
+      <Header />
       {loading ? (
         <h1>LOADING...</h1>
       ) : (

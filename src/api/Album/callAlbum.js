@@ -15,12 +15,6 @@ const options = {
   client_id: "lArlrouEq1MxqzfJJyG0mFKIJ31zpffw6H0jUH88z8k",
 };
 
-// const callAlbum = async () => {
-//   const url = generateURL("https://api.unsplash.com/photos", options);
-//   const response = await fetch(url);
-//   const json = await response.json();
-//   return json;
-// };
 const callAlbum = () => {
   const url = generateURL("https://api.unsplash.com/photos", options);
   return fetch(url);
