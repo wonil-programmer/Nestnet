@@ -1,20 +1,29 @@
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header({ scrollToIndex }) {
   return (
-    <div className={styles.navbar}>
-      <h1>
-        <Link to="/">Nestnet</Link>
-      </h1>
-      <nav>
+    <>
+      <div className={styles.header}>
+        <h1>
+          <Link to="/">Nestnet</Link>
+        </h1>
         <ul className={styles.menu}>
-          <li>친목</li>
-          <li>동아리</li>
-          <li>성과</li>
+          <li onClick={() => scrollToIndex(0)} className={styles.menu__item}>
+            Nest
+          </li>
+          <li onClick={() => scrollToIndex(1)} className={styles.menu__item}>
+            Net
+          </li>
+          <li onClick={() => scrollToIndex(2)} className={styles.menu__item}>
+            Next
+          </li>
         </ul>
-      </nav>
-    </div>
+        <Link to="/profile">
+          <div className={styles.profile}>원일</div>
+        </Link>
+      </div>
+    </>
   );
 }
 

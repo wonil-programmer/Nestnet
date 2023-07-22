@@ -1,4 +1,4 @@
-import NavBar from "../components/Header";
+import Header from "../components/Header";
 import styles from "./Home.module.css";
 import { useRef } from "react";
 
@@ -14,10 +14,7 @@ function Home() {
   }
   return (
     <>
-      <NavBar />
-      <button onClick={() => scrollToIndex(0)}>Nest</button>
-      <button onClick={() => scrollToIndex(1)}>Net</button>
-      <button onClick={() => scrollToIndex(2)}>Next</button>
+      <Header scrollToIndex={scrollToIndex} />
       <div ref={sectionRef}>
         <section className={styles.sec1}>
           <div id="mainTitle">Nest</div>
