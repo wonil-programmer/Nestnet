@@ -3,7 +3,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+.gallery {
+  position: relative;
+  top: 4rem;
+}
 .photos {
+  top: 100rem;
   width: calc(100% - 2.5rem);
   margin: 1.5rem auto;
   columns: 4;

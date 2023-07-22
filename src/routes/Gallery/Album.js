@@ -2,9 +2,9 @@ import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./Album.module.css";
 import Comments from "../../components/Comments/Comments";
-import callAlbum from "../../api/Album/callAlbum";
 import Photo from "../../components/Photo/Photo";
 import Button from "../../components/Button";
+import Header from "../../components/Header";
 
 function Album() {
   const { id } = useParams();
@@ -41,6 +41,7 @@ function Album() {
   }, [swapImages]);
   return (
     <>
+      <Header />
       <div className={styles.wrapper}>
         <section className={styles.album}>
           <div

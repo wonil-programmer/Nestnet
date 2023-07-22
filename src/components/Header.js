@@ -5,8 +5,7 @@ function Header() {
   return (
     <div className={styles.navbar}>
       <h1>
-        {/* <Link to="/">Nestnet</Link> */}
-        Nestnet
+        <Link to="/">Nestnet</Link>
       </h1>
       <nav>
         <ul className={styles.menu}>
