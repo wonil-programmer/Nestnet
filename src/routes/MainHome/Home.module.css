@@ -1,19 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+.sectionRef {
+  position: relative;
+  top: 4.5rem;
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  max-width: 75rem;
+  margin: 3rem auto;
+  height: 100vh;
+}
 
-.sec1 {
-  width: 100%;
-  height: 80vh;
-  background-color: black;
-}
-.sec2 {
-  width: 100%;
-  height: 80vh;
-  background-color: white;
-}
-.sec3 {
-  width: 100%;
-  height: 80vh;
-  background-color: green;
-}
 /* Home */
 #home {
   /* background: center
@@ -107,11 +107,7 @@
 .advantage__link:hover {
   opacity: 0.8;
 }
-.advantage__title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 1rem 0;
-}
+
 .advantage__description {
   width: 100%;
 }

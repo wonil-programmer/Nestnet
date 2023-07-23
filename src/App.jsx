@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Album from "./routes/Gallery/Album";
-import Home from "./routes/Home";
+import Home from "./routes/MainHome/Home";
 import Gallery from "./routes/Gallery/Gallery";
 
 function App() {
