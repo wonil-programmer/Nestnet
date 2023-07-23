@@ -1,16 +1,9 @@
-import AboutImgArr from "../../images/MainHome/AboutImg";
+import AboutImgArr from "../../../images/MainHome/AboutImg";
 import { Link } from "react-router-dom";
 import styles from "./About.module.css";
 function About() {
   return (
     <>
-      <h2 className={styles.mainTitle}>About Us</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-        voluptatum, expedita provident quaerat earum voluptatem iure deserunt
-        dicta numquam pariatur harum a beatae delectus exercitationem, dolore
-        natus eaque quam facilis!
-      </p>
       <ul className={styles.items}>
         <li className={styles.item}>
           <div className={styles.imgWrapper}>

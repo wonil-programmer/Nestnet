@@ -5,6 +5,11 @@
   position: relative;
   top: 4.5rem;
 }
+.mainTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
 .section {
   display: flex;
   flex-direction: column;
@@ -12,6 +17,9 @@
   max-width: 75rem;
   margin: 3rem auto;
   height: 100vh;
+}
+.secDescription {
+  font-size: 1.5rem;
 }
 
 /* Home */

@@ -1,0 +1,53 @@
+.studyCard {
+  position: relative;
+  width: 22rem;
+  height: 12rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.period {
+  position: absolute;
+  top: 1.3rem;
+  right: 1rem;
+  padding: 0.3rem 0.8rem;
+  color: white;
+  background-color: blue;
+  line-height: 110%;
+  border-radius: 1rem;
+  font-weight: bold;
+}
+.top {
+  text-align: left;
+}
+.icons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 2.8rem;
+}
+.icon {
+  background-color: black;
+  border-radius: 100%;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.2rem;
+  /* background: url("https://cdn.icon-icons.com/icons2/2415/PNG/512/mysql_original_wordmark_logo_icon_146417.png"); */
+}
+.btm {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+.btn {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
