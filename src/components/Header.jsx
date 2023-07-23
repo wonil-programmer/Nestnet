@@ -5,7 +5,7 @@ function Header({ scrollToIndex }) {
   return (
     <>
       <div className={styles.header}>
-        <h1>
+        <h1 className={styles.logo}>
           <Link to="/">Nestnet</Link>
         </h1>
         <ul className={styles.menu}>
