@@ -1,7 +1,7 @@
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
 
-function Header({ scrollToIndex }) {
+function Header() {
   return (
     <>
       <div className={styles.header}>
@@ -9,18 +9,12 @@ function Header({ scrollToIndex }) {
           <Link to="/">Nestnet</Link>
         </h1>
         <ul className={styles.menu}>
-          <li onClick={() => scrollToIndex(0)} className={styles.menu__item}>
-            Nest
-          </li>
-          <li onClick={() => scrollToIndex(1)} className={styles.menu__item}>
-            Net
-          </li>
-          <li onClick={() => scrollToIndex(2)} className={styles.menu__item}>
-            Next
-          </li>
+          <li className={styles.menu__item}>Nest</li>
+          <li className={styles.menu__item}>Net</li>
+          <li className={styles.menu__item}>Next</li>
         </ul>
         <Link to="/profile">
-          <div className={styles.profile}>원일</div>
+          <div className={styles.profile}></div>
         </Link>
       </div>
     </>
