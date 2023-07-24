@@ -15,8 +15,8 @@
   flex-direction: column;
   text-align: center;
   max-width: 75rem;
-  margin: 3rem auto;
-  height: 100vh;
+  margin: 2rem auto;
+  height: 100%;
 }
 .secDescription {
   font-size: 1.5rem;

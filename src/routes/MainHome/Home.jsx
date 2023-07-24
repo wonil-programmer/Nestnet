@@ -1,9 +1,9 @@
 import Header from "../../components/Header";
 import styles from "./Home.module.css";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
 import About from "./About/About";
 import Study from "./Study/Study";
+import Achievements from "./Achievements/Achievements";
 
 function Home() {
   const sectionRef = useRef(null);
@@ -20,10 +20,7 @@ function Home() {
     <>
       <Header scrollToIndex={scrollToIndex} />
       <div className={styles.sectionRef} ref={sectionRef}>
-        <section
-          id="mainSection"
-          className={[styles.section, styles.maxContainer].join(" ")}
-        >
+        <section id="mainSection" className={styles.section}>
           <h2 className={styles.mainTitle}>About Us</h2>
           <p className={styles.secDescription}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
@@ -33,19 +30,17 @@ function Home() {
           </p>
           <About />
         </section>
-        <section
-          id="mainSection"
-          className={[styles.section, styles.maxContainer].join(" ")}
-        >
+        <section id="mainSection" className={styles.section}>
           <h2 className={styles.mainTitle}>Study</h2>
           <p className={styles.secDescription}>진행 중인 스터디</p>
           <Study />
         </section>
-        <section
-          id="mainSection"
-          className={[styles.section, styles.maxContainer].join(" ")}
-        >
-          <h2 className={styles.mainTitle}>About Us</h2>
+        <section id="mainSection" className={styles.section}>
+          <h2 className={styles.mainTitle}>History</h2>
+          <p className={styles.secDescription}>
+            더 나은 내일을 위해 정진하는 우리
+          </p>
+          <Achievements />
         </section>
       </div>
     </>
