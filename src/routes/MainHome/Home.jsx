@@ -1,6 +1,5 @@
 import Header from "../../components/Header";
 import styles from "./Home.module.css";
-import { SectionsContainer, Section } from "react-fullpage";
 import Advantage from "./Advantages/Advantage";
 import ImgAdvantages from "../../images/MainHome/ImgAdvantages";
 import Study from "./Study/Study";
@@ -32,10 +31,6 @@ const SectAdvs = [
   ),
 ];
 function Home() {
-  let options = {
-    anchors: ["Adv1", "Adv2", "Adv3", "Study", "History"],
-    sectionPaddingTop: "5rem",
-  };
   const [advantages, setAdvantages] = useState([]);
   useEffect(() => {
     setAdvantages(SectAdvs);
@@ -43,28 +38,26 @@ function Home() {
   return (
     <>
       <Header />
-      <SectionsContainer {...options}>
-        {advantages.map((ele, idx) => (
-          <Section key={idx} className={styles.section}>
-            <Advantage
-              title={ele.title}
-              description={ele.description}
-              imgSrc={ele.imgSrc}
-            ></Advantage>
-          </Section>
-        ))}
-        <Section id="mainSection" className={styles.section}>
-          <p className={styles.mainTitle}>진행 중인 스터디</p>
-          <Study />
-        </Section>
-        <Section id="mainSection" className={styles.section}>
-          <h2 className={styles.mainTitle}>History</h2>
-          <p className={styles.secDescription}>
-            더 나은 내일을 위해 정진하는 우리
-          </p>
-          <Achievements />
-        </Section>
-      </SectionsContainer>
+      {advantages.map((ele, idx) => (
+        <section key={idx} className={styles.section}>
+          <Advantage
+            title={ele.title}
+            description={ele.description}
+            imgSrc={ele.imgSrc}
+          ></Advantage>
+        </section>
+      ))}
+      <section id="mainSection" className={styles.section}>
+        <p className={styles.mainTitle}>진행 중인 스터디</p>
+        <Study />
+      </section>
+      <section id="mainSection" className={styles.section}>
+        <h2 className={styles.mainTitle}>History</h2>
+        <p className={styles.secDescription}>
+          더 나은 내일을 위해 정진하는 우리
+        </p>
+        <Achievements />
+      </section>
     </>
   );
 }

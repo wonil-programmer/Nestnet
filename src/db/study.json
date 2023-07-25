@@ -1,0 +1,70 @@
+{
+  "studies": [
+    {
+      "id": 1,
+      "name": "SQLD 자격증",
+      "period": "23학년도 2학기",
+      "image": [
+        { "id": 1, "src": "" },
+        { "id": 2, "src": "" }
+      ],
+      "applicantsNum": "11명",
+      "end": false
+    },
+    {
+      "id": 2,
+      "name": "AWS 자격증",
+      "period": "23학년도 2학기",
+      "image": [
+        { "id": 1, "src": "" },
+        { "id": 2, "src": "" }
+      ],
+      "applicantsNum": "2명",
+      "end": false
+    },
+    {
+      "id": 3,
+      "name": "JAVA",
+      "period": "23학년도 2학기",
+      "image": [
+        { "id": 1, "src": "" },
+        { "id": 2, "src": "" }
+      ],
+      "applicantsNum": "5명",
+      "end": false
+    },
+    {
+      "id": 4,
+      "name": "SQLD 자격증",
+      "period": "23학년도 2학기",
+      "image": [
+        { "id": 1, "src": "" },
+        { "id": 2, "src": "" }
+      ],
+      "applicantsNum": "11명",
+      "end": false
+    },
+    {
+      "id": 5,
+      "name": "SQLD 자격증",
+      "period": "23학년도 2학기",
+      "image": [
+        { "id": 1, "src": "" },
+        { "id": 2, "src": "" }
+      ],
+      "applicantsNum": "11명",
+      "end": true
+    },
+    {
+      "id": 6,
+      "name": "SQLD 자격증",
+      "period": "23학년도 2학기",
+      "image": [
+        { "id": 1, "src": "" },
+        { "id": 2, "src": "" }
+      ],
+      "applicantsNum": "11명",
+      "end": true
+    }
+  ]
+}
