@@ -1,16 +1,9 @@
 import { useState, useEffect } from "react";
-import StudyCard from "./StudyCard";
+import StudyCard from "./StudyCard.tsx";
 import styles from "./Study.module.css";
+import useFetch from "../../../hooks/useFetch.js";
 function Study() {
-  const [studies, setStudies] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3001/studies")
-      .then((res) => res.json())
-      .then((data) => {
-        setStudies(data);
-      });
-  }, []);
+  const studies = useFetch("http://localhost:3001/studies");
   return (
     <div>
       <ul className={styles.studyList}>

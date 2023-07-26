@@ -35,6 +35,7 @@ function StudyCard({ study }: Iprops) {
       setIsEnrolled(!isEnrolled);
     });
   };
+
   return (
     <div className={isEnrolled ? styles.off : styles.on}>
       <div className={styles.top}>
