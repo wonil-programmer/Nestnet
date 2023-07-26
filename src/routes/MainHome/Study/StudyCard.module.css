@@ -1,4 +1,4 @@
-.studyCard {
+.on {
   position: relative;
   width: 22rem;
   height: 12rem;
@@ -6,7 +6,20 @@
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding: 1.25rem;
+  padding: 1.4rem;
+  border-radius: 0.5rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.off {
+  position: relative;
+  width: 22rem;
+  height: 12rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: lightgrey;
+  padding: 1.4rem;
   border-radius: 0.5rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -14,11 +27,12 @@
 
 .period {
   position: absolute;
-  top: 1.3rem;
-  right: 1rem;
+  top: 1.4rem;
+  right: 1.25rem;
+  width: 10.5rem;
   padding: 0.3rem 0.8rem;
   color: white;
-  background-color: blue;
+  background-color: palevioletred;
   line-height: 110%;
   border-radius: 1rem;
   font-weight: bold;
@@ -26,19 +40,23 @@
 .top {
   text-align: left;
 }
+.name {
+  margin-left: 0.2rem;
+}
 .icons {
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding-top: 2.8rem;
+  padding-top: 2rem;
 }
 .icon {
-  background-color: black;
+  background-color: white;
   border-radius: 100%;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3rem;
+  height: 3rem;
   margin-right: 0.2rem;
-  /* background: url("https://cdn.icon-icons.com/icons2/2415/PNG/512/mysql_original_wordmark_logo_icon_146417.png"); */
+  box-shadow: rgba(216, 112, 147, 0.25) 0px 6px 12px -2px,
+    rgba(216, 112, 147, 0.3) 0px 3px 7px -3px;
 }
 .btm {
   display: flex;
@@ -46,6 +64,7 @@
   margin-top: auto;
 }
 .btn {
+  margin-right: 0.3rem;
   border: none;
   outline: none;
   background: none;

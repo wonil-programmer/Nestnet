@@ -1,12 +1,20 @@
+import { useState, useEffect } from "react";
 import StudyCard from "./StudyCard";
 import styles from "./Study.module.css";
-import data from "../../../db/study.json";
 function Study() {
-  const validStudies = data.studies.filter((study) => study.end === false);
+  const [studies, setStudies] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/studies")
+      .then((res) => res.json())
+      .then((data) => {
+        setStudies(data);
+      });
+  }, []);
   return (
     <div>
-      <ul class={styles.studyList}>
-        {validStudies.map((study, idx) => (
+      <ul className={styles.studyList}>
+        {studies.map((study, idx) => (
           <li key={idx}>
             <StudyCard study={study}></StudyCard>
           </li>
