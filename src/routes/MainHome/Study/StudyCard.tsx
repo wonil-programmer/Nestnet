@@ -1,6 +1,25 @@
 import styles from "./StudyCard.module.css";
 import { useState } from "react";
-function StudyCard({ study }) {
+import React from "react";
+
+interface Iprops {
+  study: IStudy;
+}
+interface IIcon {
+  id: number;
+  src: string;
+}
+interface IStudy {
+  id: number;
+  name: string;
+  period: string;
+  icons: IIcon[];
+  applicantsNum: number;
+  end: boolean;
+  isEnrolled: boolean;
+}
+
+function StudyCard({ study }: Iprops) {
   const [isEnrolled, setIsEnrolled] = useState(study.isEnrolled);
   const toggleEnrolled = () => {
     fetch(`http://localhost:3001/studies/${study.id}`, {
@@ -35,7 +54,7 @@ function StudyCard({ study }) {
       <div className={styles.btm}>
         <span>{study.applicantsNum}명</span>
         <button className={styles.btn} onClick={toggleEnrolled}>
-          참가하기
+          자세히보기
         </button>
       </div>
     </div>
