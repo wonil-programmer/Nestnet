@@ -48,7 +48,7 @@ function Home() {
         </section>
       ))}
       <section id="mainSection" className={styles.section}>
-        <p className={styles.mainTitle}>진행 중인 스터디</p>
+        <p className={styles.mainTitle}>Study</p>
         <Study />
       </section>
       <section id="mainSection" className={styles.section}>
