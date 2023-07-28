@@ -1,7 +1,10 @@
-.photo {
-  position: relative;
-  break-inside: avoid;
-  cursor: pointer;
+.photos {
+  top: 100rem;
+  width: calc(100% - 2.5rem);
+  margin: 1.5rem auto;
+  columns: 1;
+  column-width: 18rem;
+  column-gap: 1.2rem;
 }
 .image {
   width: 100%;

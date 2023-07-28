@@ -8,38 +8,38 @@ import useFetch from "../../hooks/useFetch";
 import AsidePhoto from "./AsidePhoto";
 
 function Album() {
+  const { id } = useParams();
   const album = useFetch(`http://localhost:3001/galleries?id=${id}`);
 
-  const { id } = useParams();
+  // useEffect(() => {
+  //   if (album.length > 0) {
+  //     setLoading(false);
+  //   }
+  // }, [album]);
+  // const [clickedImage, setClickedImage] = useState("");
 
-  const [mainImage, setMainImage] = useState("");
-  const [clickedImage, setClickedImage] = useState("");
-
-  const handleImageClick = (imagePath) => {
-    setClickedImage(imagePath);
-  };
-  const swapImages = useCallback(() => {
-    if (clickedImage) {
-      setMainImage(clickedImage);
-    }
-  }, [clickedImage]);
+  // const handleImageClick = (imagePath) => {
+  //   setClickedImage(imagePath);
+  // };
+  // const swapImages = useCallback(() => {
+  //   if (clickedImage) {
+  //     setMainImage(clickedImage);
+  //   }
+  // }, [clickedImage]);
 
   // useEffect(() => {
-  //   getPhoto();
-  // }, [getPhoto]);
-
-  useEffect(() => {
-    swapImages();
-  }, [swapImages]);
+  //   swapImages();
+  // }, [swapImages]);
   return (
     <>
       <Header />
+
       <div className={styles.wrapper}>
         <section className={styles.album}>
           <div className={styles.centerContainer}>
             <img
               className={styles.centerPhoto}
-              src={mainImage}
+              src={`${process.env.PUBLIC_URL}/assets/${album[0].imgs[0].src}`}
               alt="img__main"
             />
             <div className={styles.detailCenter}>
@@ -48,15 +48,11 @@ function Album() {
           </div>
         </section>
         <section className={styles.allPhotos}>
-          {album.imgs.map((photo) => (
+          {album.map((photos) => (
             <AsidePhoto
-              id={photo.id}
-              key={photo.id}
-              coverImg={photo.src}
-              alt={photo.alt}
-              // likes={photo.likes}
+              photos={photos}
               onClick={() => {
-                handleImageClick(photo.src);
+                // handleImageClick(photo.src);
               }}
             />
           ))}

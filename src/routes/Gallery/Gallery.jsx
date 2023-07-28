@@ -6,6 +6,7 @@ import useFetch from "../../hooks/useFetch";
 
 function Gallery() {
   const albums = useFetch("http://localhost:3001/galleries");
+  console.log(albums);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
