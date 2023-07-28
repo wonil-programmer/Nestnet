@@ -1,7 +1,6 @@
 import Header from "../../components/Header";
 import styles from "./Home.module.css";
 import Advantage from "./Advantages/Advantage";
-import ImgAdvantages from "../../images/MainHome/ImgAdvantages";
 import Study from "./Study/Study";
 import Achievements from "./Achievements/Achievements";
 import { useEffect, useState } from "react";
@@ -16,18 +15,15 @@ class SectAdv {
 const SectAdvs = [
   new SectAdv(
     "웬만한 건 다 있을 걸",
-    "소프트웨어학부 학술 동아리 중 가장 많은 시험 정보 보유!",
-    ImgAdvantages[0]
+    "소프트웨어학부 학술 동아리 중 가장 많은 시험 정보 보유!"
   ),
   new SectAdv(
     "웬만한 건 다 있을 걸",
-    "소프트웨어학부 학술 동아리 중 가장 많은 시험 정보 보유!",
-    ImgAdvantages[1]
+    "소프트웨어학부 학술 동아리 중 가장 많은 시험 정보 보유!"
   ),
   new SectAdv(
     "웬만한 건 다 있을 걸",
-    "소프트웨어학부 학술 동아리 중 가장 많은 시험 정보 보유!",
-    ImgAdvantages[2]
+    "소프트웨어학부 학술 동아리 중 가장 많은 시험 정보 보유!"
   ),
 ];
 function Home() {

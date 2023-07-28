@@ -1,0 +1,27 @@
+.photo {
+  position: relative;
+  break-inside: avoid;
+  cursor: pointer;
+}
+.image {
+  width: 100%;
+  max-width: 100%;
+  /* margin-bottom: 0.8rem; */
+  border-radius: 0.8rem;
+}
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* transition: all 250ms ease-in; */
+}
+.cover:hover {
+  opacity: 0.8;
+}

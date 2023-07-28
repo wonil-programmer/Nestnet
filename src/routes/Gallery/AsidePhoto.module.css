@@ -1,0 +1,11 @@
+.photo {
+  position: relative;
+  break-inside: avoid;
+  cursor: pointer;
+}
+.image {
+  width: 100%;
+  max-width: 100%;
+  /* margin-bottom: 0.8rem; */
+  border-radius: 0.8rem;
+}

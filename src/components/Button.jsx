@@ -2,16 +2,12 @@ import { useState } from "react";
 import styles from "./Button.module.css";
 import callAlbum from "../api/Album/callAlbum";
 
-function Button({ setAside, setAllPhotos }) {
+function Button({ photos, setAside, setAllPhotos }) {
   const [visible, setVisible] = useState(true);
   const toggleAllPhotos = () => {
     setAside((aside) => !aside);
     setVisible(!visible);
-    callAlbum()
-      .then((res) => res.json())
-      .then((body) => {
-        setAllPhotos(body);
-      });
+    setAllPhotos(photos)
   };
   return (
     <>
