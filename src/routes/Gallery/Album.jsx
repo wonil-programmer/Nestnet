@@ -8,14 +8,10 @@ import AsidePhotos from "./AsidePhotos";
 
 function Album() {
   const { id } = useParams();
-  const photos = useFetch(`http://localhost:3001/album${id}`);
-  const { mainImage, setMainImage } = useState(
-    photos.length > 0 ? photos[0].src : ""
+  const { data: photos, isLoading } = useFetch(
+    `http://localhost:3001/album${id}`
   );
-
-  useEffect(() => {
-    console.log(mainImage);
-  }, [mainImage]);
+  // const { mainImage, setMainImage } = useState("");
 
   // useEffect(() => {
   //   if (album.length > 0) {
@@ -36,21 +32,23 @@ function Album() {
   return (
     <>
       <Header />
-      <div className={styles.wrapper}>
-        <div className={styles.mainContainer}>
-          <img
-            className={styles.mainPhoto}
-            src={
-              mainImage ? `${process.env.PUBLIC_URL}/assets/${mainImage}` : ""
-            }
-            alt="img__main"
-          />
-          <div className={styles.metadata}>
-            <Comments />
+      {isLoading ? (
+        <h1>Loading</h1>
+      ) : (
+        <div className={styles.wrapper}>
+          <div className={styles.mainContainer}>
+            <img
+              className={styles.mainPhoto}
+              src={`${process.env.PUBLIC_URL}/assets/${photos[0].src}`}
+              alt="img__main"
+            />
+            <div className={styles.metadata}>
+              <Comments />
+            </div>
           </div>
+          <AsidePhotos photos={photos} className={styles.asidelPhotos} />
         </div>
-        <AsidePhotos photos={photos} className={styles.asidelPhotos} />
-      </div>
+      )}
     </>
   );
 }

@@ -2,7 +2,6 @@ import styles from "./AsidePhotos.module.css";
 export default function AsidePhotos({ photos }) {
   return (
     <div className={styles.asidePhotos}>
-      <div>test</div>
       {photos.map((photo) => (
         <div>
           <img
