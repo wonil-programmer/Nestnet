@@ -1,11 +1,10 @@
 .asidePhotos {
   /* top: 100rem; */
-  width: calc(100% - 2.5rem);
-  margin: 1.5rem auto;
+  width: 15rem;
+  /* margin: 0.5rem auto; */
+  margin
   columns: 1;
-  column-width: 18rem;
-  column-gap: 1.2rem;
+  column-width: 12rem;
 
   /* position: relative; */
-  margin: 1.5rem;
 }

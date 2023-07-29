@@ -11,23 +11,13 @@ function Album() {
   const { data: photos, isLoading } = useFetch(
     `http://localhost:3001/album${id}`
   );
-  // const { mainImage, setMainImage } = useState("");
+  const [mainImage, setMainImage] = useState("");
 
-  // useEffect(() => {
-  //   if (album.length > 0) {
-  //     setLoading(false);
-  //   }
-  // }, [album]);
-  // const [clickedImage, setClickedImage] = useState("");
-
-  // const handleImageClick = (imagePath) => {
-  //   setClickedImage(imagePath);
-  // };
-  // const swapImages = useCallback(() => {
-  //   if (clickedImage) {
-  //     setMainImage(clickedImage);
-  //   }
-  // }, [clickedImage]);
+  useEffect(() => {
+    if (!isLoading) {
+      setMainImage(photos[0].src);
+    }
+  }, [photos, isLoading]);
 
   return (
     <>
@@ -36,17 +26,25 @@ function Album() {
         <h1>Loading</h1>
       ) : (
         <div className={styles.wrapper}>
-          <div className={styles.mainContainer}>
-            <img
-              className={styles.mainPhoto}
-              src={`${process.env.PUBLIC_URL}/assets/${photos[0].src}`}
-              alt="img__main"
-            />
-            <div className={styles.metadata}>
-              <Comments />
+          <div>
+            <div className={styles.mainContainer}>
+              <img
+                className={styles.mainPhoto}
+                src={`${process.env.PUBLIC_URL}/assets/${mainImage}`}
+                alt="img__main"
+              />
+              <div className={styles.metadata}>
+                <Comments />
+              </div>
             </div>
           </div>
-          <AsidePhotos photos={photos} className={styles.asidelPhotos} />
+          <div>
+            <AsidePhotos
+              photos={photos}
+              className={styles.asidelPhotos}
+              setMainImage={setMainImage}
+            />
+          </div>
         </div>
       )}
     </>
