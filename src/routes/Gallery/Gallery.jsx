@@ -5,17 +5,14 @@ import Header from "../../components/Header";
 import useFetch from "../../hooks/useFetch";
 
 function Gallery() {
-  const albums = useFetch("http://localhost:3002/galleries");
-  console.log(albums);
-  const [loading, setLoading] = useState(true);
+  const { data: albums, isLoading } = useFetch(
+    "http://localhost:3002/galleries"
+  );
 
-  useEffect(() => {
-    setLoading(false);
-  }, [loading]);
   return (
     <div className={styles.gallery}>
       <Header />
-      {loading ? (
+      {isLoading ? (
         <h1>LOADING...</h1>
       ) : (
         <div className={styles.albums}>
