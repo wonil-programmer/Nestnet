@@ -1,15 +1,21 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./Album.module.css";
 import Comments from "../../components/Comments/Comments";
-import Button from "../../components/Button";
 import Header from "../../components/Header";
 import useFetch from "../../hooks/useFetch";
-import AsidePhoto from "./AsidePhoto";
+import AsidePhotos from "./AsidePhotos";
 
 function Album() {
   const { id } = useParams();
-  const album = useFetch(`http://localhost:3001/galleries?id=${id}`);
+  const photos = useFetch(`http://localhost:3001/album${id}`);
+  const { mainImage, setMainImage } = useState(
+    photos.length > 0 ? photos[0].src : ""
+  );
+
+  useEffect(() => {
+    console.log(mainImage);
+  }, [mainImage]);
 
   // useEffect(() => {
   //   if (album.length > 0) {
@@ -27,36 +33,23 @@ function Album() {
   //   }
   // }, [clickedImage]);
 
-  // useEffect(() => {
-  //   swapImages();
-  // }, [swapImages]);
   return (
     <>
       <Header />
-
       <div className={styles.wrapper}>
-        <section className={styles.album}>
-          <div className={styles.centerContainer}>
-            <img
-              className={styles.centerPhoto}
-              src={`${process.env.PUBLIC_URL}/assets/${album[0].imgs[0].src}`}
-              alt="img__main"
-            />
-            <div className={styles.detailCenter}>
-              <Comments />
-            </div>
+        <div className={styles.mainContainer}>
+          <img
+            className={styles.mainPhoto}
+            src={
+              mainImage ? `${process.env.PUBLIC_URL}/assets/${mainImage}` : ""
+            }
+            alt="img__main"
+          />
+          <div className={styles.metadata}>
+            <Comments />
           </div>
-        </section>
-        <section className={styles.allPhotos}>
-          {album.map((photos) => (
-            <AsidePhoto
-              photos={photos}
-              onClick={() => {
-                // handleImageClick(photo.src);
-              }}
-            />
-          ))}
-        </section>
+        </div>
+        <AsidePhotos photos={photos} className={styles.asidelPhotos} />
       </div>
     </>
   );

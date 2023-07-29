@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import useFetch from "../../hooks/useFetch";
 
 function Gallery() {
-  const albums = useFetch("http://localhost:3001/galleries");
+  const albums = useFetch("http://localhost:3002/galleries");
   console.log(albums);
   const [loading, setLoading] = useState(true);
 
@@ -23,7 +23,7 @@ function Gallery() {
             <AlbumThumb
               id={album.id}
               key={album.id}
-              coverImg={album.imgs[0].src}
+              coverImg={album.thumbnail}
               // title={photo.title}
               // likes={photo.likes}
               // onClick={}

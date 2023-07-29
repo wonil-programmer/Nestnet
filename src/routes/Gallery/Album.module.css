@@ -10,13 +10,10 @@
   position: relative;
   top: 6rem;
 }
-.album {
-  width: 100%;
+.mainContainer {
+  width: 120rem;
   margin: auto;
-}
-.centerContainer {
-  width: 60rem;
-  margin: auto;
+  /* position: fixed; */
   display: flex;
   flex-direction: row;
   border-radius: 2rem;
@@ -26,53 +23,15 @@
     0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12);
 }
-.leftContainer {
-  width: 30rem;
-  margin: 1.5rem auto;
-  flex-direction: column;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -27%);
-  overflow-y: auto;
-}
 
-.centerPhoto {
+.mainPhoto {
   width: 50%;
 }
-.leftPhoto {
-  width: 100%;
-}
-
-/* Right section */
-.detailCenter {
+.metadata {
   width: 50%;
   display: flex;
   flex-direction: column;
 }
-.detailLeft {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
 
-/* Aside all photos */
-.allPhotos {
-  position: relative;
-  margin: 1.5rem;
-  margin-left: auto;
-  columns: 1;
-  column-width: 11rem;
-  column-gap: rem;
-}
 @media (max-width: 1000px) {
-  .centerContainer {
-    flex-direction: column;
-  }
-  .centerPhoto {
-    width: 100%;
-  }
-  .detailCenter {
-    width: 100%;
-  }
 }
