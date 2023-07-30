@@ -1,8 +1,51 @@
+.wrapper {
+  /* background-color: black; */
+  position: relative;
+  display: flex;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+}
 .image {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 1rem;
-  border-radius: 1rem;
+  /* margin-bottom: 1rem; */
   box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
     rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+
+.cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: black;
+  opacity: 0;
+  color: white;
+}
+.cover:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+.btn {
+  font-size: 3rem;
+  margin: auto;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  background-color: lightgrey;
+}
+.btnLike {
+  font-size: 3rem;
+  margin: auto;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: pink;
 }

@@ -40,6 +40,7 @@ function Album() {
           </div>
           <div>
             <AsidePhotos
+              albumID={id}
               photos={photos}
               className={styles.asidelPhotos}
               setMainImage={setMainImage}
