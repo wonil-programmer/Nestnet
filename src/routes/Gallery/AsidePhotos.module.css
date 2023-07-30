@@ -1,7 +1,7 @@
 .asidePhotos {
-  width: 13rem;
-  columns: 1;
-  column-width: 12rem;
+  display: flex;
+  flex-direction: column;
+  width: 12rem;
 
   /* position: relative; */
 }

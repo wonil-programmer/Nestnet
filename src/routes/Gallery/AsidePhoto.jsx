@@ -2,7 +2,7 @@ import styles from "./AsidePhoto.module.css";
 
 export default function AsidePhoto({ photo, onClick }) {
   return (
-    <div>
+    <>
       <img
         className={styles.image}
         key={photo.id}
@@ -11,6 +11,6 @@ export default function AsidePhoto({ photo, onClick }) {
         onClick={onClick}
       />
       <div className={styles.cover}></div>
-    </div>
+    </>
   );
 }
