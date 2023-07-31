@@ -37,6 +37,7 @@ export default function AsidePhoto({ albumID, photo, onClick }) {
         >
           LIKE
         </button>
+        <button onClick={onClick}>돋보기</button>
       </div>
     </div>
   );
