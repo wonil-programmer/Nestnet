@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CommentForm from "./CommentForm";
 import styles from "./Comments.module.css";
+import Comment from "./Comment";
 
 function Comments() {
   const [comments, setComments] = useState([]);
@@ -14,11 +15,13 @@ function Comments() {
         </div>
       </div>
       <div className={styles.comments}>
-        <h3 className={styles.comments__title}>댓글</h3>
+        <h3 className={styles.comments__title}>
+          댓글 <span>4개</span>
+        </h3>
         <div className={styles.comments__list}>
           <ul>
             {comments.map((item, index) => (
-              <li key={index}>{item}</li>
+              <Comment comment={item} key={index} />
             ))}
           </ul>
         </div>

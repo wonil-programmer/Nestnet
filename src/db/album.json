@@ -4,7 +4,8 @@
       "id": 1,
       "src": "a1.jpg",
       "alt": "23년 전정대 체육대회",
-      "likes": false
+      "likes": false,
+      "isLiked": true
     },
     {
       "id": 2,
@@ -56,13 +57,15 @@
       "id": 1,
       "src": "b1.png",
       "alt": "23년 네스트넷 친해지길바라",
-      "likes": false
+      "likes": false,
+      "isLiked": true
     },
     {
       "id": 2,
       "src": "b2.jpg",
       "alt": "23년 네스트넷 친해지길바라",
-      "likes": false
+      "likes": false,
+      "isLiked": true
     },
     {
       "id": 3,
@@ -76,7 +79,7 @@
       "src": "b4.png",
       "alt": "23년 네스트넷 친해지길바라",
       "likes": false,
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": 5,
