@@ -6,29 +6,43 @@
 .wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
   position: relative;
-  top: 6rem;
+  top: 5rem;
+}
+.lView {
+  width: 15%;
+}
+.ctrView {
+  width: 70%;
+  padding: 0 17rem;
+}
+
+.rView {
+  width: 15%;
+  padding: 0 2rem;
+  /* overflow-y: scroll; */
+  /* height: 100vh; */
+  /* overflow-y: scroll; */
 }
 .mainContainer {
-  width: 60rem;
+  width: 34rem;
   margin: auto;
   position: sticky;
-  top: 6rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   border-radius: 1.8rem;
-  overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  overflow: hidden;
 }
 
 .mainPhoto {
-  width: 50%;
+  border-bottom: 0.1rem solid rgba(239, 239, 239);
+  object-fit: scale-down;
 }
 .metadata {
-  width: 50%;
   display: flex;
   flex-direction: column;
+  border-top: 0.1rem solid rgba(239, 239, 239);
 }
 
 @media (max-width: 1000px) {

@@ -12,7 +12,7 @@
       "src": "a2.jpg",
       "alt": "23년 전정대 체육대회",
       "likes": false,
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": 3,
@@ -65,7 +65,7 @@
       "src": "b2.jpg",
       "alt": "23년 네스트넷 친해지길바라",
       "likes": false,
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": 3,

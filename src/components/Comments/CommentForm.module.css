@@ -4,7 +4,7 @@
   padding: 0.8rem 2rem 0;
   margin-top: auto;
   border-top: 1px solid rgba(239, 239, 239);
-  position: sticky;
+  /* position: sticky; */
 }
 .like {
   padding: 0.8rem 0;

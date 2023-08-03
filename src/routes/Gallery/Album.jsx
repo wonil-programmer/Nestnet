@@ -26,6 +26,7 @@ function Album() {
         <h1>Loading</h1>
       ) : (
         <div className={styles.wrapper}>
+          <div className={styles.lView}></div>
           <div className={styles.ctrView}>
             <div className={styles.mainContainer}>
               <img
@@ -38,7 +39,7 @@ function Album() {
               </div>
             </div>
           </div>
-          <div className={styles.asideView}>
+          <div className={styles.rView}>
             <AsidePhotos
               albumID={id}
               photos={photos}

@@ -8,12 +8,6 @@ function Comments() {
 
   return (
     <>
-      <div>
-        <h1 className={styles.title}>23학년도 1학기 개강총회</h1>
-        <div className={styles.divider}>
-          <div className={styles.divider__shadow}></div>
-        </div>
-      </div>
       <div className={styles.comments}>
         <h3 className={styles.comments__title}>
           댓글 <span>4개</span>
