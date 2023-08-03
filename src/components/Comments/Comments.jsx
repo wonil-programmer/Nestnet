@@ -9,11 +9,11 @@ function Comments() {
   return (
     <>
       <div className={styles.comments}>
-        <h3 className={styles.comments__title}>
+        <h3 className={styles.cnt}>
           댓글 <span>4개</span>
         </h3>
-        <div className={styles.comments__list}>
-          <ul>
+        <div>
+          <ul className={styles.comments__list}>
             {comments.map((item, index) => (
               <Comment comment={item} key={index} />
             ))}

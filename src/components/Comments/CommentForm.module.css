@@ -1,16 +1,19 @@
 .container {
-  height: 10rem;
+  height: 9rem;
   width: 100%;
-  padding: 0.8rem 2rem 0;
+  padding: 0.5rem 2rem 0 2rem;
   margin-top: auto;
   border-top: 1px solid rgba(239, 239, 239);
   /* position: sticky; */
 }
-.like {
-  padding: 0.8rem 0;
+.data {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  padding: 0.6rem 0;
+  text-align: right;
+}
+.likes {
+  margin-left: auto;
 }
 .comment {
   padding: 1rem 0;
@@ -25,6 +28,7 @@
   border-radius: 100%;
 }
 .form {
+  margin-top: 0.8rem;
   display: flex;
   flex-direction: row;
 }

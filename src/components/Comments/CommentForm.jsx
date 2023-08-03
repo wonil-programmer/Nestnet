@@ -17,8 +17,9 @@ function CommentFooter({ setComments }) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.like}>
-        <div>16 하트</div>
+      <div className={styles.data}>
+        <div className={styles.visits}>조회 수 100회</div>
+        <div className={styles.likes}>좋아요 16개</div>
       </div>
       <div className={styles.form}>
         <div className={styles.profile}></div>
