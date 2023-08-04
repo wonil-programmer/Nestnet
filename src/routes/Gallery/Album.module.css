@@ -34,14 +34,12 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
   overflow: hidden;
 }
-
-.mainPhoto {
-  border-bottom: 0.1rem solid rgba(239, 239, 239);
-  object-fit: scale-down;
-}
-.metadata {
+.visualContent {
   display: flex;
   flex-direction: column;
+  border-bottom: 0.1rem solid rgba(239, 239, 239);
+}
+.description {
   border-top: 0.1rem solid rgba(239, 239, 239);
 }
 
