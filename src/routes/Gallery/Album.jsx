@@ -5,6 +5,7 @@ import Comments from "../../components/Comments/Comments";
 import Header from "../../components/Header";
 import useFetch from "../../hooks/useFetch";
 import AsidePhotos from "./AsidePhotos";
+import MainPhoto from "./MainPhoto";
 
 function Album() {
   const { id } = useParams();
@@ -29,12 +30,10 @@ function Album() {
           <div className={styles.lView}></div>
           <div className={styles.ctrView}>
             <div className={styles.mainContainer}>
-              <img
-                className={styles.mainPhoto}
-                src={`${process.env.PUBLIC_URL}/assets/${mainImage}`}
-                alt="img__main"
-              />
-              <div className={styles.metadata}>
+              <div className={styles.visualContent}>
+                <MainPhoto mainImage={mainImage} />
+              </div>
+              <div className={styles.description}>
                 <Comments />
               </div>
             </div>
