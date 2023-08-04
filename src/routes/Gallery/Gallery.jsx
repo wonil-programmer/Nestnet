@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import AlbumThumb from "../../components/Thumbnail/AlbumThumb";
+import AlbumThumb from "./AlbumThumb";
 import styles from "./Gallery.module.css";
 import Header from "../../components/Header";
 import useFetch from "../../hooks/useFetch";
@@ -15,18 +15,13 @@ function Gallery() {
       {isLoading ? (
         <h1>LOADING...</h1>
       ) : (
-        <div className={styles.albums}>
-          {albums.map((album) => (
-            <AlbumThumb
-              id={album.id}
-              key={album.id}
-              coverImg={album.thumbnail}
-              // title={photo.title}
-              // likes={photo.likes}
-              // onClick={}
-            />
-          ))}
-        </div>
+        <>
+          <section className={styles.albums}>
+            {albums.map((album) => (
+              <AlbumThumb key={album.id} id={album.id} album={album} />
+            ))}
+          </section>
+        </>
       )}
     </div>
   );

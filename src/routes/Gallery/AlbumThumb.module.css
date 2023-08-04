@@ -1,0 +1,43 @@
+img {
+  vertical-align: bottom;
+  /* display: block; */
+}
+.album {
+  /* display: flex; */
+  /* flex-direction: column; */
+}
+.wrapper {
+  position: relative;
+  display: flex;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+.image {
+  width: 100%;
+  max-width: 100%;
+  /* margin-bottom: 0.8rem; */
+  border-radius: 0.8rem;
+  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+.cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  background-color: black;
+  color: white;
+}
+
+.cover:hover {
+  cursor: zoom-in;
+  opacity: 0.3;
+}

@@ -13,13 +13,13 @@ export default function AsidePhotos({ albumID, photos, setMainImage }) {
     if (clickedImage) {
       setMainImage(clickedImage);
     }
-  }, [clickedImage]);
+  }, [clickedImage, setMainImage]);
 
   return (
     <div className={styles.asidePhotos}>
       {photos.map((photo) => (
         <AsidePhoto
-          albumID={albumID}
+          // albumID={albumID}
           photo={photo}
           onClick={() => {
             handleImageClick(photo.src);

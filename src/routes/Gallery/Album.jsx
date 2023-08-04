@@ -31,7 +31,7 @@ function Album() {
           <div className={styles.ctrView}>
             <div className={styles.mainContainer}>
               <div className={styles.visualContent}>
-                <MainPhoto mainImage={mainImage} />
+                <MainPhoto mainImage={mainImage} albumID={id} />
               </div>
               <div className={styles.description}>
                 <Comments />
