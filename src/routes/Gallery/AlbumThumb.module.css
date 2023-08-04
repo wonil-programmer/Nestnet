@@ -3,9 +3,7 @@ img {
   display: inline;
 }
 .album {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 1rem;
 }
 .wrapper {
   position: relative;
@@ -23,17 +21,30 @@ img {
   align-items: center;
   width: 100%;
   height: 3rem;
-  padding-bottom: 0.2rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  color: white;
+  /* line-height: 80%; */
+  font-size: 1.6rem;
   font-weight: bold;
   /* text-align: center; */
+}
+.metadata {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+.visits {
+  margin-right: 0.5rem;
+}
+.likes {
+  margin-left: 0.5rem;
 }
 .image {
   width: 100%;
   max-width: 100%;
-  /* margin-bottom: 0.8rem; */
-  border-radius: 0.8rem 0 0;
-  /* box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px; */
+  border-radius: 0.8rem;
   border-bottom: 1px solid rgba(239, 239, 239);
 }
 .cover {
@@ -44,7 +55,7 @@ img {
   top: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
   text-align: center;
   opacity: 0;
   background-color: black;
@@ -53,5 +64,5 @@ img {
 
 .cover:hover {
   cursor: zoom-in;
-  opacity: 0.3;
+  opacity: 0.5;
 }
