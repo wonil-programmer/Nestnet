@@ -17,6 +17,7 @@ function Comments() {
         </div>
         <div>
           <ul className={styles.comments__list}>
+            {/* api 호출 후 댓글 0개 일 때, 대체 텍스트 작성 */}
             {comments.map((item, index) => (
               <Comment comment={item} key={index} />
             ))}

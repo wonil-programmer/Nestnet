@@ -6,7 +6,7 @@ import useFetch from "../../hooks/useFetch";
 
 function Gallery() {
   const { data: albums, isLoading } = useFetch(
-    "http://localhost:3002/galleries"
+    "http://localhost:3001/galleries"
   );
 
   return (

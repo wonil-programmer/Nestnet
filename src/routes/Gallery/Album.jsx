@@ -11,11 +11,12 @@ import MainPhotoCover from "./MainPhotoCover";
 function Album() {
   // eslint-disable-next-line no-restricted-globals
   const location = useLocation();
+  // albumData: 상위 Gallery.jsx에서 Link로 넘겨준 props
   const albumData = location.state.data;
   console.log(albumData);
   const { id } = useParams();
   const { data: photos, isLoading } = useFetch(
-    `http://localhost:3001/album${id}`
+    `http://localhost:3002/album${id}`
   );
   const [mainImage, setMainImage] = useState("");
 
