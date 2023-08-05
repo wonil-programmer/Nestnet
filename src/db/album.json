@@ -3,95 +3,74 @@
     {
       "id": 1,
       "src": "a1.jpg",
-      "alt": "23년 전정대 체육대회",
-      "likes": false,
-      "isLiked": true
+      "alt": "23년 전정대 체육대회"
     },
     {
       "id": 2,
       "src": "a2.jpg",
-      "alt": "23년 전정대 체육대회",
-      "likes": false,
-      "isLiked": false
+      "alt": "23년 전정대 체육대회"
     },
     {
       "id": 3,
       "src": "a3.jpg",
-      "alt": "23년 전정대 체육대회",
-      "likes": 0,
-      "isLiked": true
+      "alt": "23년 전정대 체육대회"
     },
     {
       "id": 4,
       "src": "a4.jpg",
-      "alt": "23년 전정대 체육대회",
-      "likes": false
+      "alt": "23년 전정대 체육대회"
     },
     {
       "id": 5,
       "src": "a5.jpg",
-      "alt": "23년 전정대 체육대회",
-      "likes": false
+      "alt": "23년 전정대 체육대회"
     },
     {
       "id": 6,
       "src": "a6.jpg",
-      "alt": "23년 전정대 체육대회",
-      "likes": false
+      "alt": "23년 전정대 체육대회"
     },
     {
       "id": 7,
       "src": "a7.jpg",
-      "alt": "23년 전정대 체육대회",
-      "likes": false
+      "alt": "23년 전정대 체육대회"
     },
     {
       "id": 8,
       "src": "a8.jpg",
-      "alt": "23년 전정대 체육대회",
-      "likes": false
+      "alt": "23년 전정대 체육대회"
     }
   ],
   "album2": [
     {
       "id": 1,
       "src": "b1.png",
-      "alt": "23년 네스트넷 친해지길바라",
-      "likes": false,
-      "isLiked": true
+      "alt": "23년 네스트넷 친해지길바라"
     },
     {
       "id": 2,
       "src": "b2.jpg",
-      "alt": "23년 네스트넷 친해지길바라",
-      "likes": false,
-      "isLiked": false
+      "alt": "23년 네스트넷 친해지길바라"
     },
     {
       "id": 3,
       "src": "b3.jpg",
-      "alt": "23년 네스트넷 친해지길바라",
-      "likes": false,
-      "isLiked": true
+      "alt": "23년 네스트넷 친해지길바라"
     },
     {
       "id": 4,
       "src": "b4.png",
-      "alt": "23년 네스트넷 친해지길바라",
-      "likes": false,
-      "isLiked": false
+      "alt": "23년 네스트넷 친해지길바라"
     },
     {
       "id": 5,
       "src": "b5.png",
-      "alt": "23년 네스트넷 친해지길바라",
-      "likes": false
+      "alt": "23년 네스트넷 친해지길바라"
     },
     {
       "id": 6,
       "src": "b6.jpg",
-      "alt": "23년 네스트넷 친해지길바라",
-      "likes": false
+      "alt": "23년 네스트넷 친해지길바라"
     }
   ]
 }
