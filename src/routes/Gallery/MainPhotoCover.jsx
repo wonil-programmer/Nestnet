@@ -1,13 +1,13 @@
 import styles from "./MainPhotoCover.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowsUpDownLeftRight,
+  faHeart,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function PhotoCover({ albumData }) {
   return (
     <div className={styles.mainPhotoCover}>
-      <div className={styles.top}>
-        <div>저장하기</div>
-      </div>
       <div className={styles.metadata}>
         <div className={styles.title}>{albumData.title}</div>
         <div className={styles.likes}>
@@ -16,7 +16,12 @@ export default function PhotoCover({ albumData }) {
         </div>
       </div>
       <div className={styles.btm}>
-        <div>자세히보기</div>
+        <div>
+          <FontAwesomeIcon
+            className={styles.enlarge}
+            icon={faArrowsUpDownLeftRight}
+          />
+        </div>
       </div>
     </div>
   );
