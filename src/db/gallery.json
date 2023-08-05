@@ -4,6 +4,7 @@
       "id": 1,
       "title": "23년 전정대 체육대회",
       "thumbnail": "a1.jpg",
+      "visits": 0,
       "likes": 0,
       "isLiked": false
     },
@@ -11,8 +12,9 @@
       "id": 2,
       "title": "23년 네스트넷 친해지길바라",
       "thumbnail": "b1.png",
+      "visits": 0,
       "likes": 0,
-      "isLiked": false
+      "isLiked": true
     }
   ]
 }

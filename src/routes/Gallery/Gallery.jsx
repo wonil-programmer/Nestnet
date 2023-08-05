@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import AlbumThumb from "./AlbumThumb";
 import styles from "./Gallery.module.css";
 import Header from "../../components/Header";

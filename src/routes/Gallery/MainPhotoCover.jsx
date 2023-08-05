@@ -29,11 +29,20 @@ export default function PhotoCover({ albumData }) {
       <div className={styles.metadata}>
         <div className={styles.title}>{albumData.title}</div>
         <div className={styles.likes}>
-          <FontAwesomeIcon
-            className={styles.iconHeart}
-            icon={faHeart}
-            onClick={toggleLike}
-          />
+          {isLiked ? (
+            <FontAwesomeIcon
+              className={styles.iconHeartFilled}
+              icon={faHeart}
+              onClick={toggleLike}
+            />
+          ) : (
+            <FontAwesomeIcon
+              className={styles.iconHeart}
+              icon={faHeart}
+              onClick={toggleLike}
+            />
+          )}
+
           <span className={styles.likesCnt}>{albumData.likes}</span>
         </div>
       </div>

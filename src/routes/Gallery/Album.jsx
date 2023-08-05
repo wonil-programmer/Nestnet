@@ -13,7 +13,6 @@ function Album() {
   const location = useLocation();
   // albumData: 상위 Gallery.jsx에서 Link로 넘겨준 props
   const albumData = location.state.data;
-  console.log(albumData);
   const { id } = useParams();
   const { data: photos, isLoading } = useFetch(
     `http://localhost:3002/album${id}`

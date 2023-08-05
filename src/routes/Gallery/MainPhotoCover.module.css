@@ -37,6 +37,17 @@
   margin-bottom: 0.5rem;
   transition: all 200ms ease-out;
 }
+.iconHeartFilled {
+  color: red;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  transition: all 200ms ease-out;
+}
+.iconHeart {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  transition: all 200ms ease-out;
+}
 .iconHeart:hover {
   transform: scale(1.1);
 }
