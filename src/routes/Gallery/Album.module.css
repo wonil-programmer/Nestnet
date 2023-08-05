@@ -37,6 +37,11 @@
 .visualContent {
   display: flex;
   flex-direction: column;
+
+  position: relative;
+  /* border-radius: 1rem; */
+  overflow: hidden;
+
   border-bottom: 0.1rem solid rgba(239, 239, 239);
 }
 .description {

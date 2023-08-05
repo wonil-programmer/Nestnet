@@ -9,7 +9,7 @@ export default function AlbumThumb({ album }) {
     <>
       <div className={styles.album}>
         <div className={styles.wrapper}>
-          <Link to={`${album.id}`}>
+          <Link to={`${album.id}`} state={{ data: album }}>
             <img
               className={styles.image}
               src={`${process.env.PUBLIC_URL}/assets/${album.thumbnail}`}
@@ -19,10 +19,10 @@ export default function AlbumThumb({ album }) {
               <div className={styles.title}>{album.title}</div>
               <div className={styles.metadata}>
                 <div className={styles.visits}>
-                  <FontAwesomeIcon icon={faEye} /> <span>222</span>
+                  <FontAwesomeIcon icon={faEye} /> <span>{album.visits}</span>
                 </div>
                 <div className={styles.likes}>
-                  <FontAwesomeIcon icon={faHeart} /> <span>222</span>
+                  <FontAwesomeIcon icon={faHeart} /> <span>{album.likes}</span>
                 </div>
               </div>
             </div>

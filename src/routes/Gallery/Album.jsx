@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import styles from "./Album.module.css";
 import Comments from "../../components/Comments/Comments";
 import Header from "../../components/Header";
 import useFetch from "../../hooks/useFetch";
 import AsidePhotos from "./AsidePhotos";
 import MainPhoto from "./MainPhoto";
+import MainPhotoCover from "./MainPhotoCover";
 
 function Album() {
+  // eslint-disable-next-line no-restricted-globals
+  const location = useLocation();
+  const albumData = location.state.data;
+  console.log(albumData);
   const { id } = useParams();
   const { data: photos, isLoading } = useFetch(
     `http://localhost:3001/album${id}`
@@ -32,6 +37,7 @@ function Album() {
             <div className={styles.mainContainer}>
               <div className={styles.visualContent}>
                 <MainPhoto mainImage={mainImage} albumID={id} />
+                <MainPhotoCover albumData={albumData} />
               </div>
               <div className={styles.description}>
                 <Comments />
@@ -42,7 +48,7 @@ function Album() {
             <AsidePhotos
               albumID={id}
               photos={photos}
-              className={styles.asidelPhotos}
+              className={styles.asidePhotos}
               setMainImage={setMainImage}
             />
           </div>
