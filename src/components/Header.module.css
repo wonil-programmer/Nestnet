@@ -16,6 +16,8 @@
   top: 1rem;
   left: 2rem;
   font-size: 1.8rem;
+  line-height: 2.6rem;
+  color: coral;
 }
 a {
   text-decoration: none;

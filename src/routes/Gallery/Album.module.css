@@ -8,6 +8,8 @@
   flex-direction: row;
   position: relative;
   top: 4.7rem;
+  height: 100%;
+  background-color: #f7f8f9;
 }
 .lView {
   width: 15%;

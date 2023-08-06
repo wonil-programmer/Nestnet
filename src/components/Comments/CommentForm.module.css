@@ -54,4 +54,5 @@ form {
   border-radius: 2rem;
   background-color: rgba(239, 239, 239);
   padding: 0 1.5rem;
+  outline-color: coral;
 }

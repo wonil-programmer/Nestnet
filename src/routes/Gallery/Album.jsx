@@ -7,6 +7,7 @@ import useFetch from "../../hooks/useFetch";
 import AsidePhotos from "./AsidePhotos";
 import MainPhoto from "./MainPhoto";
 import MainPhotoCover from "./MainPhotoCover";
+import SideBar from "../../components/SideBar";
 
 function Album() {
   // eslint-disable-next-line no-restricted-globals
@@ -33,7 +34,9 @@ function Album() {
         <h1>Loading</h1>
       ) : (
         <div className={styles.wrapper}>
-          <div className={styles.lView}></div>
+          <div className={styles.lView}>
+            <SideBar />
+          </div>
           <div className={styles.ctrView}>
             <div className={styles.mainContainer}>
               <div className={styles.visualContent}>

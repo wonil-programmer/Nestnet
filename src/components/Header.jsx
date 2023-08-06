@@ -5,9 +5,9 @@ function Header() {
   return (
     <>
       <div className={styles.header}>
-        <h1 className={styles.logo}>
-          <Link to="/">Nestnet</Link>
-        </h1>
+        <Link to="/">
+          <h1 className={styles.logo}>Nestnet</h1>
+        </Link>
         <ul className={styles.menu}>
           <li className={styles.menu__item}>Nest</li>
           <li className={styles.menu__item}>Net</li>
