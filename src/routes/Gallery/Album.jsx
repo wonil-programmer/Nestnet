@@ -28,14 +28,14 @@ function Album() {
   }, [photos, isLoading]);
 
   return (
-    <>
+    <div>
       <Header />
       {isLoading ? (
         <h1>Loading</h1>
       ) : (
         <div className={styles.wrapper}>
           <div className={styles.lView}>
-            <SideBar />
+            <SideBar className={styles.sideBar} />
           </div>
           <div className={styles.ctrView}>
             <div className={styles.mainContainer}>
@@ -58,7 +58,7 @@ function Album() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

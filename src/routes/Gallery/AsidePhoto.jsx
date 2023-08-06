@@ -1,24 +1,6 @@
 import styles from "./AsidePhoto.module.css";
 
-export default function AsidePhoto({ albumID, photo, onClick }) {
-  // const [isLiked, setIsLiked] = useState(photo.isLiked);
-  // const toggleLike = () => {
-  //   fetch(`http://localhost:3001/album${albumID}/${photo.id}`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       ...photo,
-  //       isLiked: !isLiked,
-  //     }),
-  //   }).then((res) => {
-  //     if (res.ok) {
-  //       console.log("clicked");
-  //       setIsLiked(!isLiked);
-  //     }
-  //   });
-  // };
+export default function AsidePhoto({ photo, onClick }) {
   return (
     <div className={styles.wrapper}>
       <img
