@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./CommentForm.module.css";
 
-function CommentFooter({ setComments }) {
+function CommentFooter({ setComments, albumData }) {
   const [comment, setComment] = useState("");
   const onChange = (event) => {
     setComment(event.target.value);
@@ -18,8 +18,14 @@ function CommentFooter({ setComments }) {
   return (
     <div className={styles.container}>
       <div className={styles.data}>
-        <div className={styles.visits}>조회 수 100회</div>
-        <div className={styles.likes}>좋아요 16개</div>
+        <div className={styles.visits}>
+          조회수
+          <span className={styles.visitsCnt}>{albumData.visits}</span>
+        </div>
+        <div className={styles.likes}>
+          좋아요
+          <span className={styles.likesCnt}>{albumData.likes}</span>
+        </div>
       </div>
       <div className={styles.form}>
         <div className={styles.profile}></div>

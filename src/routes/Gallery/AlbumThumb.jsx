@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 
+// album : 개별 앨범에 대한 정보
 export default function AlbumThumb({ album }) {
   return (
     <>

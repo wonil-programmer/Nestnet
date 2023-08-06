@@ -11,7 +11,8 @@ import MainPhotoCover from "./MainPhotoCover";
 function Album() {
   // eslint-disable-next-line no-restricted-globals
   const location = useLocation();
-  // albumData: 상위 Gallery.jsx에서 Link로 넘겨준 props
+  // albumData: 상위 AlbumThumb.jsx에서 Link로 넘겨준 props
+  // => 갤러리 내 각 앨범에 대한 정보 (title, visits 등)
   const albumData = location.state.data;
   const { id } = useParams();
   const { data: photos, isLoading } = useFetch(
@@ -40,7 +41,7 @@ function Album() {
                 <MainPhotoCover albumData={albumData} />
               </div>
               <div className={styles.description}>
-                <Comments />
+                <Comments albumData={albumData} />
               </div>
             </div>
           </div>

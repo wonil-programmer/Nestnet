@@ -1,3 +1,8 @@
+* {
+  font-family: "Open Sans", sans-serif;
+  font-family: "Pacifico", cursive;
+  font-family: "REM", sans-serif;
+}
 ul {
   list-style: none;
 }
@@ -13,16 +18,13 @@ ul {
 .title {
   padding: 1rem 2rem 1rem;
   text-align: center;
-  font-family: "Open Sans", sans-serif;
-  font-family: "Pacifico", cursive;
-  font-family: "REM", sans-serif;
 }
 .cnt {
   line-height: 2rem;
   text-align: center;
-  font-family: "Open Sans", sans-serif;
-  font-family: "Pacifico", cursive;
-  font-family: "REM", sans-serif;
+}
+.commentsCnt {
+  margin-left: 0.5rem;
 }
 .btnDownld {
   background-color: coral;
@@ -33,9 +35,11 @@ ul {
   border-radius: 1rem;
   text-align: center;
   font-weight: bold;
-  font-family: "Open Sans", sans-serif;
-  font-family: "Pacifico", cursive;
-  font-family: "REM", sans-serif;
+  cursor: pointer;
+}
+.body {
+  padding: 1rem 1.5rem 1rem;
+  font-weight: bold;
 }
 .comments__list {
   padding: 1rem 1.5rem 1rem;

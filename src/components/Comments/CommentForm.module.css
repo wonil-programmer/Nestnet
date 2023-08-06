@@ -10,10 +10,22 @@
   display: flex;
   flex-direction: row;
   padding: 0.6rem 0;
-  text-align: right;
+  font-family: "Open Sans", sans-serif;
+  font-family: "Pacifico", cursive;
+  font-family: "REM", sans-serif;
+}
+.visits {
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
+.visitsCnt {
+  margin-left: 0.5rem;
 }
 .likes {
-  margin-left: auto;
+  margin-right: 0.5rem;
+}
+.likesCnt {
+  margin-left: 0.5rem;
 }
 .comment {
   padding: 1rem 0;
