@@ -2,7 +2,8 @@
   /* background-color: black; */
   position: relative;
   display: flex;
-  margin-bottom: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,

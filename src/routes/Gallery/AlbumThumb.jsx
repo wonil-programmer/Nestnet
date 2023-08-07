@@ -34,8 +34,8 @@ export default function AlbumThumb({ album }) {
   );
 }
 
-AlbumThumb.propTypes = {
-  coverImg: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  likes: PropTypes.number.isRequired,
-};
+// AlbumThumb.propTypes = {
+//   coverImg: PropTypes.string.isRequired,
+//   title: PropTypes.string,
+//   likes: PropTypes.number.isRequired,
+// };

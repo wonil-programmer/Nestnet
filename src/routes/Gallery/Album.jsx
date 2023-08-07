@@ -28,7 +28,7 @@ function Album() {
   }, [photos, isLoading]);
 
   return (
-    <div>
+    <>
       <Header />
       {isLoading ? (
         <h1>Loading</h1>
@@ -38,14 +38,12 @@ function Album() {
             <SideBar className={styles.sideBar} />
           </div>
           <div className={styles.ctrView}>
-            <div className={styles.mainContainer}>
-              <div className={styles.visualContent}>
-                <MainPhoto mainImage={mainImage} albumID={id} />
-                <MainPhotoCover albumData={albumData} />
-              </div>
-              <div className={styles.description}>
-                <Comments albumData={albumData} />
-              </div>
+            <div className={styles.visualContent}>
+              <MainPhoto mainImage={mainImage} albumID={id} />
+              {/* <MainPhotoCover albumData={albumData} /> */}
+            </div>
+            <div className={styles.description}>
+              <Comments albumData={albumData} />
             </div>
           </div>
           <div className={styles.rView}>
@@ -58,7 +56,7 @@ function Album() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
