@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import StudyCard from "./StudyCard.tsx";
 import styles from "./Study.module.css";
 import useFetch from "../../../hooks/useFetch.js";

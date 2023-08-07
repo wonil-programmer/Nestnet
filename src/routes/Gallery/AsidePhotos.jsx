@@ -1,8 +1,8 @@
 import styles from "./AsidePhotos.module.css";
 import AsidePhoto from "./AsidePhoto";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
-export default function AsidePhotos({ albumID, photos, setMainImage }) {
+export default function AsidePhotos({ photos, setMainImage }) {
   const [clickedImage, setClickedImage] = useState("");
 
   const handleImageClick = (imagePath) => {
@@ -19,7 +19,6 @@ export default function AsidePhotos({ albumID, photos, setMainImage }) {
     <div className={styles.asidePhotos}>
       {photos.map((photo) => (
         <AsidePhoto
-          // albumID={albumID}
           photo={photo}
           onClick={() => {
             handleImageClick(photo.src);

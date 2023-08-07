@@ -1,11 +1,6 @@
 import styles from "./MainPhoto.module.css";
 
-export default function MainPhoto({ mainImage, albumID }) {
-  //   const [isLiked, setIsLiked] = useState(photo.isLiked);
-
-  const toggleLike = () => {
-    fetch(`http://localhost:3001/album${albumID}`);
-  };
+export default function MainPhoto({ mainImage }) {
   return (
     <>
       <img
