@@ -38,9 +38,11 @@ function Album() {
             <SideBar className={styles.sideBar} />
           </div>
           <div className={styles.ctrView}>
-            <div className={styles.visualContent}>
-              <MainPhoto mainImage={mainImage} albumID={id} />
-              {/* <MainPhotoCover albumData={albumData} /> */}
+            <div className={styles.top}>
+              <div className={styles.visualContent}>
+                <MainPhoto mainImage={mainImage} albumID={id} />
+                {/* <MainPhotoCover albumData={albumData} /> */}
+              </div>
             </div>
             <div className={styles.description}>
               <Comments albumData={albumData} />
