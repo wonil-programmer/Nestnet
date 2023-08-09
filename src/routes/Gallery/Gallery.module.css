@@ -10,7 +10,7 @@
 .albums {
   top: 100rem;
   width: calc(100% - 2.5rem);
-  height: 100vh;
+  height: 100%;
   margin: 1.5rem auto;
   columns: 4;
   column-width: 18rem;
