@@ -11,8 +11,12 @@
   top: 100rem;
   width: calc(100% - 2.5rem);
   height: 100%;
-  margin: 1.5rem auto;
-  columns: 4;
+  /* margin: 1.5rem auto; */
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(auto, max-content);
+  grid-gap: 10px;
   column-width: 18rem;
   column-gap: 1.2rem;
 }
