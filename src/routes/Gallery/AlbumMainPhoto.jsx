@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./MainPhoto.module.css";
+import styles from "./AlbumMainPhoto.module.css";
 import { useImageSize } from "react-image-size";
 
 export default function MainPhoto({ mainImage }) {

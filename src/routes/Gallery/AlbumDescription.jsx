@@ -1,7 +1,7 @@
 import { useState } from "react";
-import CommentForm from "./CommentForm";
-import styles from "./Comments.module.css";
-import Comment from "./Comment";
+import styles from "./AlbumDescription.module.css";
+import CommentForm from "../../components/Comments/CommentForm";
+import Comment from "../../components/Comments/Comment";
 
 function Comments({ albumData }) {
   const [comments, setComments] = useState([]);

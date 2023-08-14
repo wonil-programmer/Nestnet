@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import styles from "./Album.module.css";
-import Comments from "../../components/Comments/Comments";
+import AlbumDescription from "./AlbumDescription";
 import Header from "../../components/Header";
 import useFetch from "../../hooks/useFetch";
 import AsidePhotos from "./AsidePhotos";
-import MainPhoto from "./MainPhoto";
+import AlbumMainPhoto from "./AlbumMainPhoto";
 import SideBar from "../../components/SideBar";
 
 function Album() {
@@ -47,12 +47,12 @@ function Album() {
           <div className={styles.ctrView}>
             <div className={styles.top}>
               <div className={styles.visualContent}>
-                <MainPhoto mainImage={mainImage} albumID={id} />
+                <AlbumMainPhoto mainImage={mainImage} albumID={id} />
               </div>
             </div>
             <div className={styles.description}>
               {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
-              <Comments albumData={albumData} />
+              <AlbumDescription albumData={albumData} />
             </div>
           </div>
           <div className={styles.rView}>
