@@ -15,7 +15,13 @@ function Album() {
   // => 갤러리 내 각 앨범에 대한 정보 (title, visits 등)
   const albumData = location.state.data;
   const { id } = useParams();
+  // 실제 경로id
+  // const { postId } = useParams();
+
   const { data: photos, isLoading } = useFetch(
+    // data: album
+    // 실제 경로
+    // `~/${postId}`
     `http://localhost:3002/album${id}`
   );
   const [mainImage, setMainImage] = useState("");
@@ -23,6 +29,8 @@ function Album() {
   useEffect(() => {
     if (!isLoading) {
       setMainImage(photos[0].src);
+      // 실제 메인이미지 경로
+      // setMainImage(photos.file-data[0].filePath);
     }
   }, [photos, isLoading]);
 
@@ -49,8 +57,11 @@ function Album() {
           <div className={styles.rView}>
             <AsidePhotos
               albumID={id}
+              // 실제 photos props
+              // photos={album.file-data}
               photos={photos}
               className={styles.asidePhotos}
+              // 메인이미지를 변경할 수 있게 함
               setMainImage={setMainImage}
             />
           </div>

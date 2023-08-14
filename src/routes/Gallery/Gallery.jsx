@@ -57,6 +57,7 @@ function Gallery() {
             {albums &&
               albums.map((album) => (
                 <GalleryThumb key={album.id} id={album.id} album={album} />
+                // <GalleryThumb key={album.postId} id={album.postId} album={album} />
               ))}
           </section>
         </>

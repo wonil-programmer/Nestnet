@@ -21,6 +21,8 @@ export default function AsidePhotos({ photos, setMainImage }) {
         <AsidePhoto
           photo={photo}
           onClick={() => {
+            // 실제 이벤트클릭 함수
+            // handleImageClick(photo.saveFileName);
             handleImageClick(photo.src);
           }}
         />

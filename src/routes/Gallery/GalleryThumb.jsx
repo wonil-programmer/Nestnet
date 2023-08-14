@@ -7,6 +7,9 @@ import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 // GalleryThumb : 갤러리 페이지의 각각의 앨범 썸네일
 // album : 개별 앨범에 대한 정보
 export default function GalleryThumb({ album }) {
+  // const saveFilePath = album.saveFilePath;
+  // const saveFileName = album.saveFileName;
+  // const thumbPath = saveFilePath + "/" + saveFileName;
   return (
     <div className={styles.album}>
       <div className={styles.wrapper}>
@@ -16,7 +19,7 @@ export default function GalleryThumb({ album }) {
             className={styles.image}
             src={`${process.env.PUBLIC_URL}/assets/${album.thumbnail}`}
             // 실제 경로
-            // src={album.saveFilePath}
+            // src={thumbPath}
             alt={"album thumbnail"}
           />
           <div className={styles.cover}>
