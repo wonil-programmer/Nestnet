@@ -51,6 +51,7 @@ function Album() {
               </div>
             </div>
             <div className={styles.description}>
+              {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
               <Comments albumData={albumData} />
             </div>
           </div>
