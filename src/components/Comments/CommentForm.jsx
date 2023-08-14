@@ -1,7 +1,8 @@
 import { useState } from "react";
 import styles from "./CommentForm.module.css";
+import LikeBtn from "../Button/LikeBtn";
 
-function CommentFooter({ setComments, albumData }) {
+export default function CommentForm({ setComments, albumData }) {
   const [comment, setComment] = useState("");
   const onChange = (event) => {
     setComment(event.target.value);
@@ -27,7 +28,7 @@ function CommentFooter({ setComments, albumData }) {
           <span className={styles.likesCnt}>{albumData.likes}</span>
         </div>
       </div>
-      <div className={styles.form}>
+      <div className={styles.formContainer}>
         <div className={styles.profile}></div>
         <form onSubmit={onSubmit}>
           <input
@@ -38,9 +39,8 @@ function CommentFooter({ setComments, albumData }) {
             placeholder="댓글 추가"
           />
         </form>
+        <LikeBtn albumData={albumData} />
       </div>
     </div>
   );
 }
-
-export default CommentFooter;

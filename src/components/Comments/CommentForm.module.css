@@ -36,16 +36,17 @@
   background-color: black;
   width: 3rem;
   height: 3rem;
-  margin-right: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
   border-radius: 100%;
 }
-.form {
+.formContainer {
   margin-top: 0.8rem;
   display: flex;
   flex-direction: row;
 }
 form {
-  flex: 1;
+  flex: 0.98;
 }
 .input {
   width: 100%;
