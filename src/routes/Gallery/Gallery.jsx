@@ -1,7 +1,6 @@
-import AlbumThumb from "./AlbumThumb";
+import GalleryThumb from "./GalleryThumb";
 import styles from "./Gallery.module.css";
 import Header from "../../components/Header";
-// import useFetch from "../../hooks/useFetch";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -57,7 +56,7 @@ function Gallery() {
           <section className={styles.albums}>
             {albums &&
               albums.map((album) => (
-                <AlbumThumb key={album.id} id={album.id} album={album} />
+                <GalleryThumb key={album.id} id={album.id} album={album} />
               ))}
           </section>
         </>
