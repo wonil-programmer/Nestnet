@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Header() {
   return (
     <>
-      <div className={"flex bg-"}>
+      <div className={styles.header}>
         <Link to="/">
           <h1 className={styles.logo}>Nestnet</h1>
         </Link>

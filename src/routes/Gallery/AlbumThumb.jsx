@@ -4,15 +4,19 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 
+// AlbumThumb : 갤러리 페이지의 각각의 앨범 썸네일
 // album : 개별 앨범에 대한 정보
 export default function AlbumThumb({ album }) {
   return (
     <div className={styles.album}>
       <div className={styles.wrapper}>
+        {/* <Link to={`${album.postId}`} */}
         <Link to={`${album.id}`} state={{ data: album }}>
           <img
             className={styles.image}
             src={`${process.env.PUBLIC_URL}/assets/${album.thumbnail}`}
+            // 실제 경로
+            // src={album.saveFilePath}
             alt={"album thumbnail"}
           />
           <div className={styles.cover}>

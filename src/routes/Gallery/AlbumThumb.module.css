@@ -2,10 +2,11 @@ img {
   vertical-align: bottom;
   display: inline;
 }
-.album {
+/* .album {
   margin-bottom: 1rem;
   border: 1px solid #ccc;
-}
+  object-fit: fill;
+} */
 .wrapper {
   position: relative;
   display: flex;
