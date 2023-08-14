@@ -6,7 +6,6 @@ import Header from "../../components/Header";
 import useFetch from "../../hooks/useFetch";
 import AsidePhotos from "./AsidePhotos";
 import MainPhoto from "./MainPhoto";
-import MainPhotoCover from "./MainPhotoCover";
 import SideBar from "../../components/SideBar";
 
 function Album() {
@@ -41,7 +40,6 @@ function Album() {
             <div className={styles.top}>
               <div className={styles.visualContent}>
                 <MainPhoto mainImage={mainImage} albumID={id} />
-                {/* <MainPhotoCover albumData={albumData} /> */}
               </div>
             </div>
             <div className={styles.description}>
