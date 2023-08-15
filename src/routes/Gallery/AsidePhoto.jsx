@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import styles from "./AsidePhoto.module.css";
 
 export default function AsidePhoto({ photo, onClick }) {
@@ -14,8 +16,8 @@ export default function AsidePhoto({ photo, onClick }) {
         src={`${process.env.PUBLIC_URL}/assets/${photo.src}`}
         alt={photo.alt}
       />
-      <div className={styles.cover}>
-        <button onClick={onClick}>돋보기</button>
+      <div className={styles.cover} onClick={onClick}>
+        <FontAwesomeIcon className={styles.icon} icon={faMagnifyingGlass} />
       </div>
     </div>
   );

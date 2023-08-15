@@ -1,5 +1,4 @@
 .wrapper {
-  /* background-color: black; */
   position: relative;
   display: flex;
   margin-top: 1rem;
@@ -27,25 +26,14 @@
   background-color: black;
   opacity: 0;
   color: white;
+  transition: all 300ms ease-out;
 }
 .cover:hover {
   opacity: 0.75;
   cursor: pointer;
+  transform: scale(1.1);
 }
-.btn {
-  font-size: 3rem;
+.icon {
   margin: auto;
-  border: none;
-  outline: none;
-  cursor: pointer;
-
-  background-color: lightgrey;
-}
-.btnLike {
-  font-size: 3rem;
-  margin: auto;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  background-color: pink;
+  font-size: 1.8rem;
 }
