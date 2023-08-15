@@ -4,14 +4,15 @@ import CommentForm from "../../components/Comments/CommentForm";
 import Comment from "../../components/Comments/Comment";
 import DownloadBtn from "../../components/Button/DownloadBtn";
 
-function Comments({ albumData, mainImage }) {
+export default function AlbumDescription({ albumData, mainImage }) {
   const [comments, setComments] = useState([]);
   return (
     <>
       <div className={styles.comments}>
         <div className={styles.top}>
-          <h3 className={styles.cnt}>
-            댓글<span className={styles.commentsCnt}>{albumData.comments}</span>
+          <h3 className={styles.commentsCnt}>
+            댓글
+            <span className={styles.commentsCntNum}>{albumData.comments}</span>
           </h3>
           <DownloadBtn mainImage={mainImage} />
         </div>
@@ -29,5 +30,3 @@ function Comments({ albumData, mainImage }) {
     </>
   );
 }
-
-export default Comments;
