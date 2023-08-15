@@ -11,9 +11,17 @@ import SideBar from "../../components/SideBar";
 function Album() {
   // eslint-disable-next-line no-restricted-globals
   const location = useLocation();
-  // albumData: 상위 AlbumThumb.jsx에서 Link로 넘겨준 props
+  // albumData: 상위 GalleryThumb.jsx에서 Link로 넘겨준 props
   // => 갤러리 내 각 앨범에 대한 정보 (title, visits 등)
-  const albumData = location.state.data;
+  const albumData = location.state.albumData;
+
+  // @@@@@@@@@@@@실제 로직에 추가
+  // mainPhotoPath: 상위 GalleryThumb.jsx에서 Link로 넘겨준 props
+  // const mainPhotoPath = location.state.mainPhotoPath
+  // @@@@@@@@@@@@실제 로직에 추가
+  // 실제 메인이미지 경로
+  // setMainImage(mainPhotoPath);
+
   const { id } = useParams();
   // 실제 경로id
   // const { postId } = useParams();
@@ -29,11 +37,13 @@ function Album() {
   useEffect(() => {
     if (!isLoading) {
       setMainImage(photos[0].src);
-      // 실제 메인이미지 경로
-      // setMainImage(photos.file-data[0].filePath);
     }
   }, [photos, isLoading]);
+  // @@@@@@@@@@@@실제 로직에 추가
+  // useEffect(() => {
+  //   setMainImage(albumData.thumb);
 
+  // }, [])
   return (
     <>
       <Header />
@@ -47,12 +57,12 @@ function Album() {
           <div className={styles.ctrView}>
             <div className={styles.top}>
               <div className={styles.visualContent}>
-                <AlbumMainPhoto mainImage={mainImage} albumID={id} />
+                <AlbumMainPhoto mainImage={mainImage} />
               </div>
             </div>
             <div className={styles.description}>
               {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
-              <AlbumDescription albumData={albumData} />
+              <AlbumDescription albumData={albumData} mainImage={mainImage} />
             </div>
           </div>
           <div className={styles.rView}>

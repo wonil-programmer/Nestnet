@@ -6,10 +6,18 @@
   rgba(255, 255, 255, 0.08) 0px 1px 0px inset; */
   border-radius: 1.8rem;
   margin: auto;
-  width: 90%;
+  width: 85%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .reSize {
   object-fit: scale-down;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 97%;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
   border-radius: 1.8rem;

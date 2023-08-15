@@ -26,17 +26,7 @@ ul {
 .commentsCnt {
   margin-left: 0.5rem;
 }
-.btnDownld {
-  background-color: coral;
-  color: white;
-  width: 4rem;
-  height: 2rem;
-  line-height: 2rem;
-  border-radius: 1rem;
-  text-align: center;
-  font-weight: bold;
-  cursor: pointer;
-}
+
 .body {
   padding: 1rem 1.5rem 1rem;
   font-weight: bold;

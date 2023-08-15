@@ -5,16 +5,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 // GalleryThumb : 갤러리 페이지의 각각의 앨범 썸네일
-// album : 개별 앨범에 대한 정보
+// album : 개별 앨범에 대한 정보(album.json)
 export default function GalleryThumb({ album }) {
+  // @@@@@@@@@@@@실제 로직에 추가
   // const saveFilePath = album.saveFilePath;
   // const saveFileName = album.saveFileName;
   // const thumbPath = saveFilePath + "/" + saveFileName;
   return (
     <div className={styles.album}>
       <div className={styles.wrapper}>
-        {/* <Link to={`${album.postId}`} */}
-        <Link to={`${album.id}`} state={{ data: album }}>
+        {/* @@@@@@@@@@@@실제 로직에 추가 */}
+        {/* <Link to={`${album.postId}` state={{ data: album, mainPhotoPath: thumbPath}} */}
+        <Link to={`${album.id}`} state={{ albumData: album }}>
           <img
             className={styles.image}
             src={`${process.env.PUBLIC_URL}/assets/${album.thumbnail}`}

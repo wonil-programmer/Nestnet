@@ -2,10 +2,10 @@ import { useState } from "react";
 import styles from "./AlbumDescription.module.css";
 import CommentForm from "../../components/Comments/CommentForm";
 import Comment from "../../components/Comments/Comment";
+import DownloadBtn from "../../components/Button/DownloadBtn";
 
-function Comments({ albumData }) {
+function Comments({ albumData, mainImage }) {
   const [comments, setComments] = useState([]);
-
   return (
     <>
       <div className={styles.comments}>
@@ -13,7 +13,7 @@ function Comments({ albumData }) {
           <h3 className={styles.cnt}>
             댓글<span className={styles.commentsCnt}>{albumData.comments}</span>
           </h3>
-          <div className={styles.btnDownld}>저장</div>
+          <DownloadBtn mainImage={mainImage} />
         </div>
         <div>
           <div className={styles.body}>{albumData.body}</div>
