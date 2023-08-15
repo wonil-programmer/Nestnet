@@ -1,0 +1,12 @@
+.btnDownld {
+  background-color: coral;
+  color: white;
+  width: 2.3rem;
+  height: 2.3rem;
+  line-height: 2rem;
+  border-radius: 2rem;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+}
