@@ -6,7 +6,7 @@ export default function DownloadBtn({ mainImage }) {
   const downldPath = `${process.env.PUBLIC_URL}/assets/${mainImage}`;
 
   return (
-    <a download={mainImage} href={downldPath} title="imageName">
+    <a download={mainImage} href={downldPath}>
       <div className={styles.btnDownld}>
         <FontAwesomeIcon className={styles.iconDownld} icon={faDownload} />
       </div>
