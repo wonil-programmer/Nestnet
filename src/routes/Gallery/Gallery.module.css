@@ -5,7 +5,10 @@
 }
 .gallery {
   position: relative;
-  top: 4.5rem;
+  top: 5rem;
+}
+.thumbContainer {
+  margin: 0.5rem;
 }
 .my-masonry-grid {
   display: -webkit-box; /* Not needed if autoprefixing */

@@ -10,12 +10,11 @@ import { Flex } from "@chakra-ui/react";
 
 function Gallery() {
   const [albums, setAlbums] = useState([]);
-  // const [offset, setOffset] = useState(0);
-  // const limit = 5;
   const [isLoading, setIsLoading] = useState(false);
-
   const [hasMore, setHasMore] = useState(false);
   const [page, setPage] = useState(1);
+
+  // 스크롤이 끝지점에 다다르면 다음 페이지 호출
   const fetchNextAlbums =
     ({ page, setAlbums, setPage, setHasMore }) =>
     async () => {
@@ -24,23 +23,23 @@ function Gallery() {
         setHasMore,
         page,
       });
-
       setAlbums((prev) => prev.concat(nextAlbums));
     };
 
+  // 초기 갤러리 화면 불러오기
   const initGallery = async () => {
     const initAlbums = await fetchAlbums({ setPage, setHasMore });
-    console.log(initAlbums);
     setAlbums(initAlbums);
   };
 
+  // 초기 화면 렌더링
   useEffect(() => {
     setIsLoading(true);
     initGallery();
-
     setIsLoading(false);
   }, []);
 
+  // Masonary 레이아웃 열 갯수 (반응형)
   const breakpointColumnsObj = {
     default: 3,
     1500: 2,
@@ -50,9 +49,7 @@ function Gallery() {
   return (
     <div className={styles.gallery}>
       <Header />
-      {isLoading ? (
-        <h1>LOADING...</h1>
-      ) : (
+      <div className={styles.thumbContainer}>
         <InfiniteScroll
           dataLength={albums.length}
           hasMore={hasMore}
@@ -71,7 +68,7 @@ function Gallery() {
               ))}
           </Flex>
         </InfiniteScroll>
-      )}
+      </div>
     </div>
   );
 }

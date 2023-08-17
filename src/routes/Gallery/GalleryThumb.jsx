@@ -12,7 +12,7 @@ export default function GalleryThumb({ album }) {
   // const saveFileName = album.saveFileName;
   // const thumbPath = saveFilePath + "/" + saveFileName;
   return (
-    <div className={styles.album}>
+    <div className={styles.thumb}>
       <div className={styles.wrapper}>
         {/* @@@@@@@@@@@@실제 로직에 추가 */}
         {/* <Link to={`${album.postId}` state={{ data: album, mainPhotoPath: thumbPath}} */}

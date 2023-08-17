@@ -2,19 +2,16 @@ img {
   vertical-align: bottom;
   display: inline;
 }
-/* .album {
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  object-fit: fill;
-} */
+.thumb {
+  padding: 0 0.5rem 1.5rem 0.5rem;
+}
 .wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
   border-radius: 1rem;
   overflow: hidden;
-  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 }
 .title {
   display: flex;
@@ -26,10 +23,8 @@ img {
   padding: 0.5rem;
   margin-bottom: 1rem;
   color: white;
-  /* line-height: 80%; */
   font-size: 1.6rem;
   font-weight: bold;
-  /* text-align: center; */
 }
 .metadata {
   display: flex;
