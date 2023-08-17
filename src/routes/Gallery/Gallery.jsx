@@ -10,7 +10,6 @@ import { Flex } from "@chakra-ui/react";
 
 function Gallery() {
   const [albums, setAlbums] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(false);
   const [page, setPage] = useState(1);
 
@@ -34,9 +33,7 @@ function Gallery() {
 
   // 초기 화면 렌더링
   useEffect(() => {
-    setIsLoading(true);
     initGallery();
-    setIsLoading(false);
   }, []);
 
   // Masonary 레이아웃 열 갯수 (반응형)
