@@ -7,32 +7,14 @@
   position: relative;
   top: 4.5rem;
 }
-.albums {
-  top: 100rem;
-  height: 100%;
-  text-align: center;
-  display: grid;
-  padding: 1rem;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(auto, 20rem);
-  grid-gap: 1rem;
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex !important;
+  margin-left: -30px; /* gutter size offset */
+  width: auto;
 }
-@media (max-width: 1200px) {
-  .photos {
-    width: calc(100% - 2.5rem);
-    columns: 3;
-    column-width: 20rem;
-  }
-}
-@media (max-width: 768px) {
-  .photos {
-    columns: 2;
-    column-width: 20rem;
-  }
-}
-@media (max-width: 480px) {
-  .photos {
-    columns: 1;
-    column-width: 20rem;
-  }
+.my-masonry-grid_column {
+  padding-left: 30px; /* gutter size */
+  background-clip: padding-box;
 }
