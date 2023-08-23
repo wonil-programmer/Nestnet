@@ -10,6 +10,10 @@ module.exports = {
       colors: {
         "home-primary": "#f43f5e",
       },
+      width: {
+        menus: "75rem",
+        menu: "22.5rem",
+      },
     },
   },
   plugins: [],
