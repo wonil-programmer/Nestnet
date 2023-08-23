@@ -36,7 +36,7 @@ export default function PhotoZone() {
   }, []);
 
   return (
-    <section class="photoZone relative bg-white w-screen h-screen">
+    <section class="photoZone relative bg-white w-full h-screen">
       <div class="absolute top-48 left-64">
         <div class="text-home-primary text-4xl mb-4 font-semibold">포토존</div>
         <div>우리의 일상의 이야기를 들려주세요.</div>
