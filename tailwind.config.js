@@ -9,6 +9,8 @@ module.exports = {
       },
       colors: {
         "home-primary": "#f43f5e",
+        "home-secondary": "#E45F84",
+        "home-background": "#f7f8f9",
       },
       width: {
         menus: "75rem",
