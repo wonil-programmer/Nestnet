@@ -1,5 +1,4 @@
 import GalleryThumb from "./GalleryThumb";
-import styles from "./Gallery.module.css";
 import Header from "../../components/Header";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -44,9 +43,9 @@ function Gallery() {
   };
 
   return (
-    <div className={styles.gallery}>
+    <div class="relative top-20">
       <Header />
-      <div className={styles.thumbContainer}>
+      <div class="m-4">
         <InfiniteScroll
           dataLength={albums.length}
           hasMore={hasMore}
