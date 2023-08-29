@@ -1,4 +1,4 @@
-import MenuCard from "./Menu";
+import MenuCard from "./MenuCard";
 
 export default function Menus() {
   class Service {
