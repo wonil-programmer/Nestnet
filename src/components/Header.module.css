@@ -44,12 +44,13 @@ a {
 .profile {
   width: 3rem;
   height: 3rem;
-  background-color: black;
+  background-color: orangered;
+  font-weight: bold;
   color: white;
   top: 0.8rem;
   right: 2rem;
   position: absolute;
   text-align: center;
-  line-height: 100%;
+  line-height: 300%;
   border-radius: 100%;
 }
