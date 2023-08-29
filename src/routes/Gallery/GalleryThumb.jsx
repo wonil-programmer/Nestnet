@@ -12,31 +12,31 @@ export default function GalleryThumb({ album }) {
   // const saveFileName = album.saveFileName;
   // const thumbPath = saveFilePath + "/" + saveFileName;
   return (
-    <div className={styles.thumb}>
-      <div className={styles.wrapper}>
-        {/* @@@@@@@@@@@@실제 로직에 추가 */}
-        {/* <Link to={`${album.postId}` state={{ data: album, mainPhotoPath: thumbPath}} */}
-        <Link to={`${album.id}`} state={{ albumData: album }}>
+    <div class="pt-0 px-2 pb-6">
+      <Link to={`${album.id}`} state={{ albumData: album }}>
+        <div class="relative flex-col rounded-2xl overflow-hidden shadow-md shadow-pink-200 duration-300 hover:cursor-zoom-in hover:-translate-y-2 hover:ease-in-out hover:shadow-pink-300 hover:shadow-lg">
+          {/* @@@@@@@@@@@@실제 로직에 추가 */}
+          {/* <Link to={`${album.postId}` state={{ data: album, mainPhotoPath: thumbPath}} */}
           <img
-            className={styles.image}
+            class="w-full max-w-full brightness-95"
             src={`${process.env.PUBLIC_URL}/assets/${album.thumbnail}`}
             // 실제 경로
             // src={thumbPath}
             alt={"album thumbnail"}
           />
-          <div className={styles.cover}>
-            <div className={styles.title}>{album.title}</div>
-            <div className={styles.metadata}>
-              <div className={styles.visits}>
-                <FontAwesomeIcon icon={faEye} /> <span>{album.visits}</span>
-              </div>
-              <div className={styles.likes}>
-                <FontAwesomeIcon icon={faHeart} /> <span>{album.likes}</span>
-              </div>
+          <div class="title m-4 mb-0 text-slate-800 text-2xl text-center font-bold">
+            {album.title}
+          </div>
+          <div class="metadata flex justify-center my-4">
+            <div class="visits mr-2">
+              <FontAwesomeIcon icon={faEye} /> <span>{album.visits}</span>
+            </div>
+            <div class="likes ml-2">
+              <FontAwesomeIcon icon={faHeart} /> <span>{album.likes}</span>
             </div>
           </div>
-        </Link>
-      </div>
+        </div>
+      </Link>
     </div>
   );
 }
