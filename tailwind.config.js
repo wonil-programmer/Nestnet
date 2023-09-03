@@ -16,6 +16,22 @@ module.exports = {
         menus: "75rem",
         menu: "22.5rem",
       },
+      keyframes: {
+        fadeout: {
+          "0%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
+          "100%": { opacity: "0", visibility: "hidden" },
+        },
+        fadein: {
+          "0%": { opacity: "0" },
+          "50%": { opacity: "0.5" },
+          "100%": { opacity: "1" },
+        },
+      },
+      animation: {
+        fadeout: "fadeout 1s ease-out forwards",
+        fadein: "fadein 1s ease-in forwards",
+      },
     },
   },
   plugins: [],

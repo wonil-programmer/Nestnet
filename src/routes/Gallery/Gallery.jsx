@@ -43,7 +43,7 @@ function Gallery() {
   };
 
   return (
-    <div class="">
+    <div>
       <Header />
       <div class="relative top-16 m-4">
         <InfiniteScroll
