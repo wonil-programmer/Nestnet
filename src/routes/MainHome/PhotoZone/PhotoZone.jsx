@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { AiFillFile } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
+import Masonry from "react-masonry-css";
+import { Flex } from "@chakra-ui/react";
 
 export default function PhotoZone() {
   const [image, setImage] = useState(null);
@@ -32,20 +34,85 @@ export default function PhotoZone() {
       });
   }, []);
 
+  const breakpointColumnsObj = {
+    default: 5,
+    1100: 3,
+    700: 4,
+    500: 3,
+  };
+
   return (
-    <section class="photoZone relative bg-white w-full h-screen">
-      <div class="absolute top-48 left-64">
+    <section class="photoZone relative bg-white w-full h-screen overflow-hidden">
+      <div class="w-4/6 float-right opacity-90 rotate-6">
+        <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b1.png`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b2.jpg`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b3.jpg`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b4.png`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b5.png`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b2.jpg`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b5.png`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b3.jpg`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b1.png`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b4.png`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b1.png`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b4.png`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b5.png`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b3.jpg`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b3.jpg`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b1.png`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b1.png`} class="w-48" />
+          </div>
+          <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
+            <img src={`${process.env.PUBLIC_URL}/assets/b4.png`} class="w-48" />
+          </div>
+        </Flex>
+      </div>
+      <div class="uploadArea absolute top-48 left-48">
         <div class="text-home-primary text-4xl mb-4 font-semibold">포토존</div>
         <div>우리의 일상의 이야기를 들려주세요.</div>
         {/* 사진 업로드하는 폼 */}
         <form
-          class="w-72 h-72 mt-6 flex-col justify-center border-2 border-dashed border-red-500 rounded-xl overflow-hidden cursor-pointer"
+          class="w-72 h-72 mt-6 flex-col justify-center items-center border-2 border-dashed border-red-500 rounded-xl overflow-hidden cursor-pointer"
           onClick={() => {
             document.querySelector(".inputField").click();
           }}
         >
           <input
-            class="inputField hidden"
+            class="inputField hidden w-full h-full"
             type="file"
             accept="image/*"
             onChange={({ target: { files } }) => {
@@ -64,8 +131,11 @@ export default function PhotoZone() {
             <img src={image} class="w-full h-full" alt={fileName} />
           ) : (
             <>
-              <FaCloudUploadAlt color="text-red-600" size={50} />
-              <p>사진 찾아보기</p>
+              <FaCloudUploadAlt
+                style={{}}
+                size={50}
+                class="text-home-primary m-auto"
+              />
             </>
           )}
         </form>
