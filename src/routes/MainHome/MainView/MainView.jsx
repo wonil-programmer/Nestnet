@@ -1,4 +1,4 @@
-import mVImg from "../../../assets/images/mainview.jpg";
+import { FaArrowDown } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
 export default function MainView() {
@@ -32,6 +32,7 @@ export default function MainView() {
           {isLoaded ? "" : "소프트웨어학부 1등 학술동아리"}
         </div>
       </div>
+      <FaArrowDown class="absolute bottom-6 left-2/4 -translate-x-2/4 text-3xl text-stone-800 animate-bounce" />
     </div>
   );
 }
