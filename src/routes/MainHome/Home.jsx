@@ -8,7 +8,7 @@ function Home() {
   return (
     <>
       <Header />
-      <div class="bg-home-background">
+      <div className="bg-home-background">
         <main>
           <MainView></MainView>
           <PhotoZone></PhotoZone>
