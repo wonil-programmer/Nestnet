@@ -11,10 +11,13 @@ module.exports = {
         "home-primary": "#f43f5e",
         "home-secondary": "#E45F84",
         "home-background": "#f7f8f9",
+        "border-primary": "#efefef",
       },
       width: {
         menus: "75rem",
         menu: "22.5rem",
+        "album-visWth": "66.25rem",
+        "album-desWth": "46.25rem",
       },
       keyframes: {
         fadeout: {
