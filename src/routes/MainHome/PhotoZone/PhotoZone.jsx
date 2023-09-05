@@ -137,7 +137,8 @@ export default function PhotoZone() {
               <MdDelete
                 size={25}
                 class="absolute right-4 bottom-4 text-home-secondary "
-                onClick={() => {
+                onClick={(event) => {
+                  event.stopPropagation();
                   setFileName("No selected file");
                   setImage(null);
                 }}
