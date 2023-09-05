@@ -49,14 +49,14 @@ function Album() {
       {isLoading ? (
         <h1>Loading</h1>
       ) : (
-        <div class="wrapper relative top-16 w-full h-full flex bg-home-background">
-          <SideBar class="fixed top-48" />
-          <div class="ctrView flex-col m-auto">
-            <div class="w-album-visWth h-screen m-auto flex flex-col justify-center">
+        <div className="wrapper relative top-16 w-full h-full flex bg-home-background">
+          <SideBar className="fixed top-48" />
+          <div className="ctrView flex-col m-auto">
+            <div className="w-album-visWth h-screen m-auto flex flex-col justify-center">
               <AlbumMainPhoto mainImage={mainImage} />
             </div>
-            <div class="h-screen pt-32">
-              <div class="w-album-desWth m-auto mb-4 rounded-2xl shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] ">
+            <div className="h-screen pt-32">
+              <div className="w-album-desWth m-auto mb-4 rounded-2xl shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] ">
                 {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
                 <AlbumDescription albumData={albumData} mainImage={mainImage} />
               </div>

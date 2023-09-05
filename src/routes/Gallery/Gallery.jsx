@@ -45,7 +45,7 @@ function Gallery() {
   return (
     <div>
       <Header />
-      <div class="relative top-16 m-4">
+      <div className="relative top-16 m-4">
         <InfiniteScroll
           style={{ paddingTop: "1rem" }}
           dataLength={albums.length}

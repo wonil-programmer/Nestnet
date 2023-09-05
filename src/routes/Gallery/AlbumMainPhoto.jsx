@@ -19,10 +19,10 @@ export default function MainPhoto({ mainImage }) {
   return (
     <>
       {isLoading ? (
-        <div class="w-11 h-11 bg-slate-400"></div>
+        <div className="w-11 h-11 bg-slate-400"></div>
       ) : (
         <img
-          class={`${
+          className={`${
             resize ? "w-2/5" : "w-4/5"
           } rounded-3xl m-auto my-6 shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px]`}
           src={imgPath}
