@@ -35,18 +35,21 @@ export default function PhotoZone() {
   }, []);
 
   const breakpointColumnsObj = {
-    default: 5,
-    1100: 3,
-    700: 4,
-    500: 3,
+    default: 6,
+    1200: 5,
+    1000: 4,
+    800: 3,
   };
 
   return (
     <section class="photoZone relative bg-white w-full h-screen overflow-hidden">
-      <div class="w-4/6 float-right opacity-90 rotate-6">
+      <div class="w-5/6 float-right opacity-90 rotate-6">
         <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
           <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
-            <img src={`${process.env.PUBLIC_URL}/assets/b1.png`} class="w-48" />
+            <img
+              src={`${process.env.PUBLIC_URL}/assets/b1.png`}
+              class="w-48 hover:scale-125 hover:-rotate-6"
+            />
           </div>
           <div class="relative w-48 mt-2 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]">
             <img src={`${process.env.PUBLIC_URL}/assets/b2.jpg`} class="w-48" />
@@ -101,12 +104,13 @@ export default function PhotoZone() {
           </div>
         </Flex>
       </div>
-      <div class="uploadArea absolute top-48 left-48">
-        <div class="text-home-primary text-4xl mb-4 font-semibold">포토존</div>
-        <div>우리의 일상의 이야기를 들려주세요.</div>
+      <div class="uploadArea absolute top-32 left-16">
+        <div class="text-home-primary text-4xl ml-4 mb-4 font-semibold">
+          포토존
+        </div>
         {/* 사진 업로드하는 폼 */}
         <form
-          class="w-72 h-72 mt-6 flex-col justify-center items-center border-2 border-dashed border-red-500 rounded-xl overflow-hidden cursor-pointer"
+          class="w-36 h-32 mt-6 flex-col justify-center items-center border-2 border-dashed border-red-500 rounded-xl overflow-hidden cursor-pointer"
           onClick={() => {
             document.querySelector(".inputField").click();
           }}
@@ -128,29 +132,26 @@ export default function PhotoZone() {
             }}
           />
           {image ? (
-            <img src={image} class="w-full h-full" alt={fileName} />
+            <>
+              <img src={image} class="w-full h-full" alt={fileName} />
+              <MdDelete
+                size={25}
+                class="absolute right-4 bottom-4 text-home-secondary "
+                onClick={() => {
+                  setFileName("No selected file");
+                  setImage(null);
+                }}
+              />
+            </>
           ) : (
             <>
               <FaCloudUploadAlt
-                style={{}}
-                size={50}
-                class="text-home-primary m-auto"
+                size={60}
+                class="absolute top-32 left-1/2 -translate-x-1/2 -translate-y-1/2 text-home-primary m-auto ease-in-out duration-200 hover:scale-110"
               />
             </>
           )}
         </form>
-        <section class="uploaded-row">
-          <AiFillFile color="text-black" />
-          <span class="upload-content">
-            {fileName} -
-            <MdDelete
-              onClick={() => {
-                setFileName("No selected file");
-                setImage(null);
-              }}
-            />
-          </span>
-        </section>
       </div>
     </section>
   );
