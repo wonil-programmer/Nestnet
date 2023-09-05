@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styles from "./AlbumMainPhoto.module.css";
 import { useImageSize } from "react-image-size";
 
 export default function MainPhoto({ mainImage }) {
@@ -20,10 +19,12 @@ export default function MainPhoto({ mainImage }) {
   return (
     <>
       {isLoading ? (
-        <h2>Loading...</h2>
+        <div class="w-11 h-11 bg-slate-400"></div>
       ) : (
         <img
-          className={resize ? styles.reSize : styles.sameSize}
+          class={`${
+            resize ? "w-2/5" : "w-4/5"
+          } rounded-3xl m-auto my-6 shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px]`}
           src={imgPath}
           alt="img__main"
         />
