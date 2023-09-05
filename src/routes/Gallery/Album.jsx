@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import styles from "./Album.module.css";
 import AlbumDescription from "./AlbumDescription";
 import Header from "../../components/Header";
 import useFetch from "../../hooks/useFetch";
@@ -50,32 +49,27 @@ function Album() {
       {isLoading ? (
         <h1>Loading</h1>
       ) : (
-        <div className={styles.wrapper}>
-          <div className={styles.lView}>
-            <SideBar className={styles.sideBar} />
-          </div>
-          <div className={styles.ctrView}>
-            <div className={styles.top}>
-              <div className={styles.visualContent}>
-                <AlbumMainPhoto mainImage={mainImage} />
+        <div class="wrapper relative top-16 w-full h-full flex bg-home-background">
+          <SideBar class="fixed top-48" />
+          <div class="ctrView flex-col m-auto">
+            <div class="w-album-visWth h-screen m-auto">
+              <AlbumMainPhoto mainImage={mainImage} />
+            </div>
+            <div class="h-screen pt-32">
+              <div class="w-album-desWth m-auto mb-4 rounded-2xl shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] ">
+                {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
+                <AlbumDescription albumData={albumData} mainImage={mainImage} />
               </div>
             </div>
-            <div className={styles.description}>
-              {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
-              <AlbumDescription albumData={albumData} mainImage={mainImage} />
-            </div>
           </div>
-          <div className={styles.rView}>
-            <AsidePhotos
-              albumID={id}
-              // 실제 photos props
-              // photos={album.file-data}
-              photos={photos}
-              className={styles.asidePhotos}
-              // 메인이미지를 변경할 수 있게 함
-              setMainImage={setMainImage}
-            />
-          </div>
+          <AsidePhotos
+            albumID={id}
+            // 실제 photos props
+            // photos={album.file-data}
+            photos={photos}
+            // 메인이미지를 변경할 수 있게 함
+            setMainImage={setMainImage}
+          />
         </div>
       )}
     </>
