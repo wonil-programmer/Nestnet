@@ -51,8 +51,8 @@ function Album() {
       ) : (
         <div className="wrapper relative top-16 w-full h-full flex bg-home-background">
           <SideBar className="fixed top-48" />
-          <div className="ctrView flex-col m-auto">
-            <div className="w-album-visWth h-screen m-auto flex flex-col justify-center">
+          <div className="ctrView flex flex-col m-auto">
+            <div className="relative -top-8 w-album-visWth h-screen  flex flex-col justify-center">
               <AlbumMainPhoto mainImage={mainImage} />
             </div>
             <div className="h-screen pt-32">

@@ -1,10 +1,22 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import CommentForm from "../../components/Comments/CommentForm";
 import Comment from "../../components/Comments/Comment";
 import DownloadBtn from "../../components/Button/DownloadBtn";
+import useFetch from "../../hooks/useFetch";
+import { useEffect } from "react";
 
 export default function AlbumDescription({ albumData, mainImage }) {
+  const { id } = useParams();
+  // 댓글목록 api 호출
+  const { data, isLoading } = useFetch(`http://localhost:3004/album${id}`);
+
   const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    setComments(data);
+  }, [data]);
+
   return (
     <>
       <div>
@@ -21,9 +33,16 @@ export default function AlbumDescription({ albumData, mainImage }) {
           </div>
           <ul className="commentsList w-full py-4 px-12 max-h-96 overflow-auto">
             {/* api 호출 후 댓글 0개 일 때, 대체 텍스트 작성 */}
-            {comments.map((item, index) => (
-              <Comment comment={item} key={index} />
-            ))}
+            {isLoading ? (
+              <div>Loading...</div>
+            ) : (
+              <>
+                {comments &&
+                  comments.map((comment) => (
+                    <Comment comment={comment} key={comment.id} />
+                  ))}
+              </>
+            )}
           </ul>
         </div>
       </div>
