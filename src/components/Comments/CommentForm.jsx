@@ -1,18 +1,51 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import styles from "./CommentForm.module.css";
 import LikeBtn from "../Button/LikeBtn";
 
 export default function CommentForm({ setComments, albumData }) {
+  const { id } = useParams();
+  let albumName = `album${id}`;
+
   const [comment, setComment] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(isLoading);
   const onChange = (event) => {
     setComment(event.target.value);
   };
+
   const onSubmit = (event) => {
     event.preventDefault();
+    // 입력값 없는 경우 처리
     if (comment === "") {
       return;
     }
-    setComments((currentInput) => [comment, ...currentInput]);
+
+    setIsLoading(true);
+    fetch(`http://localhost:3004/${albumName}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: 1234,
+        body: comment,
+        period: "1초 전",
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        // POST 요청이 성공적으로 완료될 때, 데이터를 다시 가져오고 setComments를 호출하여 업데이트
+        fetch(`http://localhost:3004/${albumName}`)
+          .then((response) => response.json())
+          .then((newData) => {
+            setComments(newData);
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            console.error("데이터를 다시 가져오는 중 오류 발생:", error);
+          });
+      }
+    });
     setComment("");
   };
 
@@ -31,13 +64,17 @@ export default function CommentForm({ setComments, albumData }) {
       <div className={styles.formContainer}>
         <div className={styles.profile}></div>
         <form onSubmit={onSubmit}>
-          <input
-            onChange={onChange}
-            className={styles.input}
-            value={comment}
-            type="text"
-            placeholder="댓글 추가"
-          />
+          {isLoading ? (
+            <div>새로고침중...</div>
+          ) : (
+            <input
+              onChange={onChange}
+              className={styles.input}
+              value={comment}
+              type="text"
+              placeholder="댓글 추가"
+            />
+          )}
         </form>
         <LikeBtn albumData={albumData} />
       </div>
