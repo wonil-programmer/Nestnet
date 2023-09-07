@@ -49,7 +49,7 @@ export default function CommentForm({ setComments, albumData }) {
   };
 
   return (
-    <div className="w-full h-36 pt-2 pb-0 px-8 mt-auto border-t">
+    <div className="w-full h-36 pt-2 pb-0 px-8 mt-auto border-t border-border-primary">
       <div className="flex py-[0.6rem] px-0">
         <div className="visit mr-2 ml-auto">
           조회수

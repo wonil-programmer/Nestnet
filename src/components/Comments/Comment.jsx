@@ -1,20 +1,20 @@
-import styles from "./Comment.module.css";
 const Comment = ({ comment, key: id }) => {
   return (
     <>
-      <li className={styles.item} key={id}>
-        <div className={styles.cmtBox}>
-          <div className={styles.profile}>
-            <div className={styles.imgWrapper}>
-              <div>{comment.userId}</div>
-              <img className={styles.img} src="" alt="" />
+      <li className="w-full" key={id}>
+        <div className="w-full flex pb-4">
+          <div className="profile flex flex-col justify-center mr-6">
+            <div className="w-[2.3rem] h-[2.3rem] rounded-3xl bg-slate-900">
+              {/* <div>{comment.userId}</div> 넘겨받은 유저아이디 */}
+              <img className="" src="" alt="" />
             </div>
           </div>
-          <div className={styles.content}>
-            <div className={styles.comment}>{comment.body}</div>
-            <div className={styles.ex}>
-              <span className={styles.period}>{comment.period}</span>
-              <div className={styles.replies}>답글</div>
+          <div className="w-full break-all">
+            <div className="w-full whitespace-normal">{comment.body}</div>
+            <div className="flex mt-2 pr-8 text-[0.9rem]">
+              <span className="mr-4">{comment.period}</span>
+              {/* 답글 로직 처리 필요 */}
+              <div className="">답글</div>
             </div>
           </div>
         </div>
