@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { useParams } from "react-router-dom";
 import CommentForm from "../../components/Comments/CommentForm";
 import Comment from "../../components/Comments/Comment";
@@ -37,10 +38,15 @@ export default function AlbumDescription({ albumData, mainImage }) {
               <div>Loading...</div>
             ) : (
               <>
-                {comments &&
+                {comments && comments.length !== 0 ? (
                   comments.map((comment) => (
                     <Comment comment={comment} key={comment.id} />
-                  ))}
+                  ))
+                ) : (
+                  <p class="text-base text-gray-600">
+                    아직 댓글이 없습니다! 가장 먼저 댓글을 작성해보세요.
+                  </p>
+                )}
               </>
             )}
           </ul>
