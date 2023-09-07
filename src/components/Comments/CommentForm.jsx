@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import styles from "./CommentForm.module.css";
 import LikeBtn from "../Button/LikeBtn";
 import { Oval } from "react-loader-spinner";
 
@@ -50,20 +49,20 @@ export default function CommentForm({ setComments, albumData }) {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.data}>
-        <div className={styles.visits}>
+    <div className="w-full h-36 pt-2 pb-0 px-8 mt-auto border-t">
+      <div className="flex py-[0.6rem] px-0">
+        <div className="visit mr-2 ml-auto">
           조회수
-          <span className={styles.visitsCnt}>{albumData.visits}</span>
+          <span className="visitCnt ml-2">{albumData.visits}</span>
         </div>
-        <div className={styles.likes}>
+        <div className="likes mr-2">
           좋아요
-          <span className={styles.likesCnt}>{albumData.likes}</span>
+          <span className="likesCnt ml-2">{albumData.likes}</span>
         </div>
       </div>
-      <div className={styles.formContainer}>
-        <div className={styles.profile}></div>
-        <form onSubmit={onSubmit}>
+      <div className="mt-[0.8rem] flex">
+        <div className="profile bg-slate-950 w-12 h-12 ml-4 mr-8 rounded-3xl"></div>
+        <form className="flex-auto mr-2" onSubmit={onSubmit}>
           {isLoading ? (
             <div class="w-full h-full pt-2 pb-1 flex justify-center">
               <Oval
@@ -82,7 +81,7 @@ export default function CommentForm({ setComments, albumData }) {
           ) : (
             <input
               onChange={onChange}
-              className={styles.input}
+              className="flex w-full h-full py-0 px-6 bg-[#efefef] border-none rounded-3xl outline-4 outline-[#ff9d50]"
               value={comment}
               type="text"
               placeholder="댓글 추가"
