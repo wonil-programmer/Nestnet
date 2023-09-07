@@ -24,7 +24,7 @@ export default function AlbumDescription({ albumData, mainImage }) {
         <div className="top px-8 py-5 text-center flex justify-between border-b border-border-primary">
           <h3 className="text-center leading-9">
             댓글
-            <span className="ml-2">{albumData.comments}</span>
+            <span className="ml-2">{comments.length}</span>
           </h3>
           <DownloadBtn mainImage={mainImage} />
         </div>
@@ -38,9 +38,11 @@ export default function AlbumDescription({ albumData, mainImage }) {
             ) : (
               <>
                 {comments && comments.length !== 0 ? (
-                  comments.map((comment) => (
-                    <Comment comment={comment} key={comment.id} />
-                  ))
+                  comments
+                    .reverse()
+                    .map((comment) => (
+                      <Comment comment={comment} key={comment.id} />
+                    ))
                 ) : (
                   <p class="text-base text-gray-600">
                     아직 댓글이 없습니다! 가장 먼저 댓글을 작성해보세요.
