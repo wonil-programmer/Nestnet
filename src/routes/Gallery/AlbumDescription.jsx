@@ -33,7 +33,6 @@ export default function AlbumDescription({ albumData, mainImage }) {
             {albumData.body}
           </div>
           <ul className="commentsList w-full py-4 px-12 max-h-96 overflow-auto">
-            {/* api 호출 후 댓글 0개 일 때, 대체 텍스트 작성 */}
             {isLoading ? (
               <div>Loading...</div>
             ) : (
