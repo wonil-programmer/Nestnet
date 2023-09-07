@@ -30,10 +30,20 @@ module.exports = {
           "50%": { opacity: "0.5" },
           "100%": { opacity: "1" },
         },
+        blink: {
+          "0%": { color: "red" },
+          "50%": { color: "blue" },
+          "100%": { color: "black" },
+        },
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-5deg)" },
+          "50%": { transform: "rotate(5deg)" },
+        },
       },
       animation: {
         fadeout: "fadeout 1s ease-out forwards",
         fadein: "fadein 1s ease-in forwards",
+        blink: "blink 2s ease-in-out infinite",
       },
     },
   },

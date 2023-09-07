@@ -18,6 +18,7 @@ export default function AsidePhotos({ photos, setMainImage }) {
     <div className="w-56 h-screen fixed right-0.5 pb-16 overflow-y-scroll">
       {photos.map((photo) => (
         <AsidePhoto
+          key={photo.id}
           photo={photo}
           onClick={() => {
             // 실제 이벤트클릭 함수

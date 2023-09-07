@@ -45,7 +45,7 @@ function Album() {
 
   // }, [])
 
-  const scrollToBtm = () => {
+  const scrollToDescription = () => {
     window.scroll({
       top: document.body.scrollHeight,
       behavior: "smooth",
@@ -65,8 +65,8 @@ function Album() {
               <AlbumMainPhoto mainImage={mainImage} />
               <div className="absolute bottom-16 left-2/4 -translate-x-2/4">
                 <FiChevronDown
-                  className="text-3xl cursor-pointer"
-                  onClick={scrollToBtm}
+                  className="text-4xl text-stone-500 cursor-pointer hover:animate-[wiggle_1s_ease-in-out_infinite] hover:text-stone-600"
+                  onClick={scrollToDescription}
                 />
               </div>
             </div>
@@ -78,7 +78,6 @@ function Album() {
             </div>
           </div>
           <AsidePhotos
-            albumID={id}
             // 실제 photos props
             // photos={album.file-data}
             photos={photos}
