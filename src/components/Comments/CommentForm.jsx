@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./CommentForm.module.css";
 import LikeBtn from "../Button/LikeBtn";
+import { Oval } from "react-loader-spinner";
 
 export default function CommentForm({ setComments, albumData }) {
   const { id } = useParams();
@@ -9,7 +10,6 @@ export default function CommentForm({ setComments, albumData }) {
 
   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  console.log(isLoading);
   const onChange = (event) => {
     setComment(event.target.value);
   };
@@ -65,7 +65,20 @@ export default function CommentForm({ setComments, albumData }) {
         <div className={styles.profile}></div>
         <form onSubmit={onSubmit}>
           {isLoading ? (
-            <div>새로고침중...</div>
+            <div class="w-full h-full pt-2 pb-1 flex justify-center">
+              <Oval
+                height={30}
+                width={30}
+                color="gray"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                ariaLabel="oval-loading"
+                secondaryColor="gray"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+              />
+            </div>
           ) : (
             <input
               onChange={onChange}
