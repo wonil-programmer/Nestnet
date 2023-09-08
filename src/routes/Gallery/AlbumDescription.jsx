@@ -3,19 +3,30 @@ import { useParams } from "react-router-dom";
 import CommentForm from "../../components/Comments/CommentForm";
 import Comment from "../../components/Comments/Comment";
 import DownloadBtn from "../../components/Button/DownloadBtn";
-import useFetch from "../../hooks/useFetch";
 import { useEffect } from "react";
+import axios from "axios";
 
 export default function AlbumDescription({ albumData, mainImage }) {
   const { id } = useParams();
-  // 댓글목록 api 호출
-  const { data, isLoading } = useFetch(`http://localhost:3004/album${id}`);
+  const url = `http://localhost:3004/album${id}`;
+  const [isLoading, setIsLoading] = useState(true);
 
+  // 댓글목록 api 호출
+  useEffect(() => {
+    const fetchComments = () => {
+      console.log("fetchComments");
+      axios?.get(url)?.then((res) => {
+        setComments(res.data);
+        setIsLoading(false);
+      });
+    };
+    fetchComments();
+  }, [url]);
   const [comments, setComments] = useState([]);
 
-  useEffect(() => {
-    setComments(data);
-  }, [data]);
+  // useEffect(() => {
+  //   setComments(data);
+  // }, [data]);
 
   return (
     <>

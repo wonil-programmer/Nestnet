@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import AlbumDescription from "./AlbumDescription";
 import Header from "../../components/Header";
-import useFetch from "../../hooks/useFetch";
 import AsidePhotos from "./AsidePhotos";
 import AlbumMainPhoto from "./AlbumMainPhoto";
 import SideBar from "../../components/SideBar";
@@ -31,11 +30,12 @@ function Album() {
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // 앨범 api 호출
   useEffect(() => {
     // 실제 경로
     // `~/${postId}`
     const fetchPhotos = () => {
-      console.log("fetch");
+      console.log("fetchAlbum");
       axios?.get(url)?.then((res) => {
         setPhotos(res.data);
         setIsLoading(false);
