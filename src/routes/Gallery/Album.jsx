@@ -7,6 +7,7 @@ import AsidePhotos from "./AsidePhotos";
 import AlbumMainPhoto from "./AlbumMainPhoto";
 import SideBar from "../../components/SideBar";
 import { FiChevronDown } from "react-icons/fi";
+import axios from "axios";
 
 function Album() {
   // eslint-disable-next-line no-restricted-globals
@@ -22,22 +23,30 @@ function Album() {
   // 실제 메인이미지 경로
   // setMainImage(mainPhotoPath);
 
-  const { id } = useParams();
   // 실제 경로id
   // const { postId } = useParams();
+  const { id } = useParams();
+  const url = `http://localhost:3002/album${id}`;
 
-  const { data: photos, isLoading } = useFetch(
-    // data: album
+  const [photos, setPhotos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
     // 실제 경로
     // `~/${postId}`
-    `http://localhost:3002/album${id}`
-  );
+    const fetchPhotos = () => {
+      console.log("fetch");
+      axios?.get(url)?.then((res) => {
+        setPhotos(res.data);
+        setIsLoading(false);
+      });
+    };
+    fetchPhotos();
+  }, [url]);
   const [mainImage, setMainImage] = useState("");
 
   useEffect(() => {
-    if (!isLoading) {
-      setMainImage(photos[0].src);
-    }
+    setMainImage(!isLoading && photos ? photos[0].src : null);
   }, [photos, isLoading]);
   // @@@@@@@@@@@@실제 로직에 추가
   // useEffect(() => {
@@ -55,7 +64,7 @@ function Album() {
   return (
     <>
       <Header />
-      {isLoading ? (
+      {isLoading || !photos ? (
         <h1>Loading</h1>
       ) : (
         <div className="wrapper relative top-16 w-full h-full flex bg-home-background">
