@@ -9,6 +9,7 @@ import { FiChevronDown } from "react-icons/fi";
 import axios from "axios";
 
 function Album() {
+  console.log("앨범");
   // eslint-disable-next-line no-restricted-globals
   const location = useLocation();
   // albumData: 상위 GalleryThumb.jsx에서 Link로 넘겨준 props
@@ -35,7 +36,6 @@ function Album() {
     // 실제 경로
     // `~/${postId}`
     const fetchPhotos = () => {
-      console.log("fetchAlbum");
       axios?.get(url)?.then((res) => {
         setPhotos(res.data);
         setIsLoading(false);

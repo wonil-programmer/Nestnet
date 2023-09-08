@@ -1,9 +1,10 @@
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
-export default function AsidePhoto({ photo, onClick }) {
+export default function AsidePhoto({ photo, setMainImage }) {
   // const filePath = filePath;
   // const saveFileName = saveFileName;
   // const photoPath = filePath + "/" + saveFileName;
+
   return (
     <div className="wrapper relative my-4 rounded-xl overflow-hidden shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
       {/* boxshadow 사이트의 Warm테마 */}
@@ -17,7 +18,11 @@ export default function AsidePhoto({ photo, onClick }) {
       />
       <div
         className="cover absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center text-center text-sm bg-black opacity-0 text-white duration-300 ease-in-out hover:opacity-75 hover:cursor-pointer"
-        onClick={onClick}
+        onClick={() => {
+          // 실제 이벤트클릭 함수
+          // handleImageClick(photo.saveFileName);
+          setMainImage(photo.src);
+        }}
       >
         <FaMagnifyingGlass className={"text-4xl"} />
       </div>
