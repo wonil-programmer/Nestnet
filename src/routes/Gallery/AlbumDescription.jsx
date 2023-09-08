@@ -14,7 +14,6 @@ export default function AlbumDescription({ albumData, mainImage }) {
   // 댓글목록 api 호출
   useEffect(() => {
     const fetchComments = () => {
-      console.log("fetchComments");
       axios?.get(url)?.then((res) => {
         setComments(res.data);
         setIsLoading(false);
@@ -59,7 +58,12 @@ export default function AlbumDescription({ albumData, mainImage }) {
                   comments
                     .reverse()
                     .map((comment) => (
-                      <Comment comment={comment} key={comment.id} />
+                      <Comment
+                        commentKey={comment.id}
+                        body={comment.body}
+                        period={comment.period}
+                        userId={comment.userId}
+                      />
                     ))
                 ) : (
                   <p class="text-base text-gray-600">
