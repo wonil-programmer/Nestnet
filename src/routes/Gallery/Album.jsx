@@ -43,11 +43,10 @@ function Album() {
     };
     fetchPhotos();
   }, [url]);
-  const [mainImage, setMainImage] = useState("");
 
-  useEffect(() => {
-    setMainImage(!isLoading && photos ? photos[0].src : null);
-  }, [photos, isLoading]);
+  // useEffect(() => {
+  //   setMainImage(!isLoading && photos ? photos[0].src : null);
+  // }, [photos, isLoading]);
   // @@@@@@@@@@@@실제 로직에 추가
   // useEffect(() => {
   //   setMainImage(albumData.thumb);
@@ -71,7 +70,7 @@ function Album() {
           <SideBar className="fixed top-48" />
           <div className="ctrView flex flex-col m-auto">
             <div className="relative -top-8 w-album-visWth h-screen  flex flex-col justify-center">
-              <AlbumMainPhoto mainImage={mainImage} />
+              <AlbumMainPhoto />
               <div className="absolute bottom-16 left-2/4 -translate-x-2/4">
                 <FiChevronDown
                   className="text-4xl text-stone-500 cursor-pointer hover:animate-[wiggle_1s_ease-in-out_infinite] hover:text-stone-600"
@@ -82,7 +81,7 @@ function Album() {
             <div className="h-screen pt-32">
               <div className="w-album-desWth m-auto mb-4 rounded-2xl shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] ">
                 {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
-                <AlbumDescription albumData={albumData} mainImage={mainImage} />
+                <AlbumDescription albumData={albumData} />
               </div>
             </div>
           </div>
@@ -91,7 +90,6 @@ function Album() {
             // photos={album.file-data}
             photos={photos}
             // 메인이미지를 변경할 수 있게 함
-            setMainImage={setMainImage}
           />
         </div>
       )}

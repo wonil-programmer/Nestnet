@@ -6,7 +6,7 @@ import DownloadBtn from "../../components/Button/DownloadBtn";
 import { useEffect } from "react";
 import axios from "axios";
 
-export default function AlbumDescription({ albumData, mainImage }) {
+export default function AlbumDescription({ albumData }) {
   const { id } = useParams();
   const url = `http://localhost:3004/album${id}`;
   const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +35,7 @@ export default function AlbumDescription({ albumData, mainImage }) {
             댓글
             <span className="ml-2">{comments.length}</span>
           </h3>
-          <DownloadBtn mainImage={mainImage} />
+          <DownloadBtn />
         </div>
         <div>
           <div className="body w-full py-4 px-6 font-semibold overflow-auto">
