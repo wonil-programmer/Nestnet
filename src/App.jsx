@@ -2,8 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Album from "./routes/Gallery/Album";
 import Home from "./routes/MainHome/Home";
 import Gallery from "./routes/Gallery/Gallery";
+import { useState } from "react";
+import { MainPhotoContext } from "./context/MainPhotoContext";
 
 function App() {
+  const [mainImage, setMainImage] = useState("");
+
   return (
     <BrowserRouter>
       <Routes>
@@ -14,7 +18,11 @@ function App() {
         />
         <Route
           path={`${process.env.PUBLIC_URL}/gallery/:id`}
-          element={<Album />}
+          element={
+            <MainPhotoContext.Provider value={{ mainImage, setMainImage }}>
+              <Album />
+            </MainPhotoContext.Provider>
+          }
         />
       </Routes>
     </BrowserRouter>

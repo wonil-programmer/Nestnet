@@ -1,9 +1,13 @@
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { useContext } from "react";
+import { MainPhotoContext } from "../../context/MainPhotoContext";
 
-export default function AsidePhoto({ photo, setMainImage }) {
+export default function AsidePhoto({ photo }) {
   // const filePath = filePath;
   // const saveFileName = saveFileName;
   // const photoPath = filePath + "/" + saveFileName;
+
+  const { setMainImage } = useContext(MainPhotoContext);
 
   return (
     <div className="wrapper relative my-4 rounded-xl overflow-hidden shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
