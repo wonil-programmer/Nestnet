@@ -12,7 +12,7 @@ export default function AsidePhoto({ photo, setMainImage }) {
         className="w-full"
         key={photo.id}
         // 실제 photo src
-        // src={photoPath}
+        // src={photo.photoPath}
         src={`${process.env.PUBLIC_URL}/assets/${photo.src}`}
         alt={photo.alt}
       />
@@ -20,7 +20,7 @@ export default function AsidePhoto({ photo, setMainImage }) {
         className="cover absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center text-center text-sm bg-black opacity-0 text-white duration-300 ease-in-out hover:opacity-75 hover:cursor-pointer"
         onClick={() => {
           // 실제 이벤트클릭 함수
-          // handleImageClick(photo.saveFileName);
+          // setMainImage(photo.photoPath);
           setMainImage(photo.src);
         }}
       >
