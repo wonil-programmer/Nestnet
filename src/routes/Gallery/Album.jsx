@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import AsidePhotos from "./AsidePhotos";
 import AlbumMainPhoto from "./AlbumMainPhoto";
 import SideBar from "../../components/SideBar";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import axios from "axios";
 
 function Album() {
@@ -59,6 +59,12 @@ function Album() {
       behavior: "smooth",
     });
   };
+  const scrollToMainPhoto = () => {
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <>
@@ -71,7 +77,8 @@ function Album() {
           <div className="ctrView flex flex-col m-auto">
             <div className="relative -top-8 w-album-visWth h-screen  flex flex-col justify-center">
               <AlbumMainPhoto />
-              <div className="absolute bottom-16 left-2/4 -translate-x-2/4">
+              {/* AlbumDescription으로 이동하는 화살표 버튼 */}
+              <div className="absolute bottom-8 left-2/4 -translate-x-2/4">
                 <FiChevronDown
                   className="text-4xl text-stone-500 cursor-pointer hover:animate-[wiggle_1s_ease-in-out_infinite] hover:text-stone-600"
                   onClick={scrollToDescription}
@@ -82,6 +89,13 @@ function Album() {
               <div className="w-album-desWth m-auto mb-4 rounded-2xl shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] ">
                 {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
                 <AlbumDescription albumData={albumData} />
+                {/* AlbumMainPhoto으로 이동하는 화살표 버튼 */}
+                <div className="absolute bottom-2 left-2/4 -translate-x-2/4">
+                  <FiChevronUp
+                    className="text-4xl text-stone-500 cursor-pointer hover:animate-[wiggle_1s_ease-in-out_infinite] hover:text-stone-600"
+                    onClick={scrollToMainPhoto}
+                  />
+                </div>
               </div>
             </div>
           </div>
