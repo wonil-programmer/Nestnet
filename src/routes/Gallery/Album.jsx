@@ -7,6 +7,8 @@ import AlbumMainPhoto from "./AlbumMainPhoto";
 import SideBar from "../../components/SideBar";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import axios from "axios";
+import { MainPhotoContext } from "../../context/MainPhotoContext";
+import { useContext } from "react";
 
 function Album() {
   console.log("앨범");
@@ -30,6 +32,7 @@ function Album() {
 
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { setMainImage } = useContext(MainPhotoContext);
 
   // 앨범 api 호출
   useEffect(() => {
@@ -39,6 +42,7 @@ function Album() {
       axios?.get(url)?.then((res) => {
         setPhotos(res.data);
         setIsLoading(false);
+        setMainImage(res.data[0].src);
       });
     };
     fetchPhotos();
