@@ -13,7 +13,7 @@ const fetchAlbums = async ({ setPage, setHasMore, page = 1 }) => {
   //       page,
   //     },
   //   });
-  setPage((prev) => prev + 1);
+  setPage((prev) => (page !== 1 ? prev + 1 : prev));
   if (data.length < 10) {
     setHasMore(false);
   } else {

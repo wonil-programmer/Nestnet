@@ -1,16 +1,17 @@
 import GalleryThumb from "./GalleryThumb";
 import Header from "../../components/Header";
-import { useEffect } from "react";
-import { useState } from "react";
+import fetchAlbums from "./fetchAlbums";
+import { useEffect, useState } from "react";
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "react-infinite-scroll-component";
-import fetchAlbums from "./fetchAlbums";
 import { Flex } from "@chakra-ui/react";
 
 function Gallery() {
+  console.log("갤러리");
   const [albums, setAlbums] = useState([]);
-  const [hasMore, setHasMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   // 스크롤이 끝지점에 다다르면 다음 페이지 호출
   const fetchNextAlbums =
@@ -23,11 +24,13 @@ function Gallery() {
       });
       setAlbums((prev) => prev.concat(nextAlbums));
     };
+  console.log(albums);
 
   // 초기 갤러리 화면 불러오기
   const initGallery = async () => {
     const initAlbums = await fetchAlbums({ setPage, setHasMore });
     setAlbums(initAlbums);
+    setIsLoading(false);
   };
 
   // 초기 화면 렌더링
@@ -43,30 +46,34 @@ function Gallery() {
   };
 
   return (
-    <div>
+    <>
       <Header />
-      <div className="relative top-16 m-4">
-        <InfiniteScroll
-          style={{ paddingTop: "1rem" }}
-          dataLength={albums.length}
-          hasMore={hasMore}
-          next={fetchNextAlbums({
-            page,
-            setAlbums,
-            setPage,
-            setHasMore,
-          })}
-        >
-          <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
-            {albums &&
-              albums.map((album) => (
-                <GalleryThumb key={album.id} id={album.id} album={album} />
-                // <GalleryThumb key={album.postId} id={album.postId} album={album} />
-              ))}
-          </Flex>
-        </InfiniteScroll>
-      </div>
-    </div>
+      {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <div className="relative top-16 m-4">
+          <InfiniteScroll
+            style={{ paddingTop: "1rem" }}
+            dataLength={albums.length}
+            hasMore={hasMore}
+            next={fetchNextAlbums({
+              page,
+              setAlbums,
+              setPage,
+              setHasMore,
+            })}
+          >
+            <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
+              {albums &&
+                albums.map((album) => (
+                  <GalleryThumb key={album.id} id={album.id} album={album} />
+                  // <GalleryThumb key={album.postId} id={album.postId} album={album} />
+                ))}
+            </Flex>
+          </InfiniteScroll>
+        </div>
+      )}
+    </>
   );
 }
 
