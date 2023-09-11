@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as faHeartsolid } from "@fortawesome/free-solid-svg-icons";
-import styles from "./LikeBtn.module.css";
+import { FaHeart } from "react-icons/fa";
 
 // 좋아요 여부를 받아와 처리
 export default function LikeBtn({ albumData }) {
@@ -61,17 +58,15 @@ export default function LikeBtn({ albumData }) {
   };
 
   return (
-    <div className={styles.likeBtn}>
+    <div className="mt-1.5 mr-3 ml-5 mb-1">
       {isLiked ? (
-        <FontAwesomeIcon
-          className={styles.iconHeartFilled}
-          icon={faHeartsolid}
+        <FaHeart
+          className="text-[2.3rem] text-red-400 ease-in-out cursor-pointer duration-300 hover:scale-110"
           onClick={toggleLike}
         />
       ) : (
-        <FontAwesomeIcon
-          className={styles.iconHeart}
-          icon={faHeart}
+        <FaHeart
+          className="text-[2.3rem] text-slate-300 ease-in-out cursor-pointer duration-300 hover:scale-110"
           onClick={toggleLike}
         />
       )}
