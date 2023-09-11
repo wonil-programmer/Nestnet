@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
 import AlbumDescription from "./AlbumDescription";
 import Header from "../../components/Header";
 import AsidePhotos from "./AsidePhotos";
 import AlbumMainPhoto from "./AlbumMainPhoto";
 import SideBar from "../../components/SideBar";
+import { useState, useEffect, useContext } from "react";
+import { MainPhotoContext } from "../../context/MainPhotoContext";
+import { useParams, useLocation } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import axios from "axios";
-import { MainPhotoContext } from "../../context/MainPhotoContext";
-import { useContext } from "react";
 
 function Album() {
   console.log("앨범");
@@ -90,16 +89,14 @@ function Album() {
               </div>
             </div>
             <div className="h-screen pt-32">
-              <div className="w-album-desWth m-auto mb-4 rounded-2xl shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] ">
-                {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
-                <AlbumDescription albumData={albumData} />
-                {/* AlbumMainPhoto으로 이동하는 화살표 버튼 */}
-                <div className="absolute bottom-2 left-2/4 -translate-x-2/4">
-                  <FiChevronUp
-                    className="text-4xl text-stone-500 cursor-pointer hover:animate-[wiggle_1s_ease-in-out_infinite] hover:text-stone-600"
-                    onClick={scrollToMainPhoto}
-                  />
-                </div>
+              {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
+              <AlbumDescription albumData={albumData} />
+              {/* AlbumMainPhoto으로 이동하는 화살표 버튼 */}
+              <div className="absolute bottom-2 left-2/4 -translate-x-2/4">
+                <FiChevronUp
+                  className="text-4xl text-stone-500 cursor-pointer hover:animate-[wiggle_1s_ease-in-out_infinite] hover:text-stone-600"
+                  onClick={scrollToMainPhoto}
+                />
               </div>
             </div>
           </div>

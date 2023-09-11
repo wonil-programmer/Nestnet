@@ -2,24 +2,27 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import LikeBtn from "../Button/LikeBtn";
 import { Oval } from "react-loader-spinner";
+import { useRef } from "react";
 
 export default function CommentForm({ setComments, albumData }) {
+  console.log("댓글입력창");
   const { id } = useParams();
   let albumName = `album${id}`;
 
   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const inputRef = useRef(null);
   const onChange = (event) => {
     setComment(event.target.value);
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
-    // 입력값 없는 경우 처리
+
     if (comment === "") {
       return;
     }
-
+    // 댓글 입력 post 요청
     setIsLoading(true);
     fetch(`http://localhost:3004/${albumName}`, {
       method: "POST",
@@ -29,7 +32,7 @@ export default function CommentForm({ setComments, albumData }) {
       body: JSON.stringify({
         userId: 1234,
         body: comment,
-        period: "1초 전",
+        period: "방금",
       }),
     }).then((res) => {
       if (res.ok) {
@@ -39,6 +42,7 @@ export default function CommentForm({ setComments, albumData }) {
           .then((newData) => {
             setComments(newData);
             setIsLoading(false);
+            inputRef.current.focus();
           })
           .catch((error) => {
             console.error("데이터를 다시 가져오는 중 오류 발생:", error);
@@ -81,10 +85,11 @@ export default function CommentForm({ setComments, albumData }) {
           ) : (
             <input
               onChange={onChange}
-              className="flex w-full h-full py-0 px-6 bg-[#efefef] border-none rounded-3xl outline-4 outline-[#ff9d50]"
+              className="flex w-full h-full py-0 px-6 bg-[#efefef] border-none rounded-3xl outline-4 outline-red-300"
               value={comment}
               type="text"
               placeholder="댓글 추가"
+              ref={inputRef}
             />
           )}
         </form>

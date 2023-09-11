@@ -5,14 +5,11 @@ export default function MainPhoto() {
   const { mainImage } = useContext(MainPhotoContext);
   const imgPath = `${process.env.PUBLIC_URL}/assets/${mainImage}`;
 
-  window.addEventListener("load", function (event) {
-    console.log("All resources finished loading!");
-  });
   return (
     <>
       {
         <div
-          className="w-4/5 h-5/6 rounded-3xl m-auto my-6  bg-center bg-contain bg-no-repeat "
+          className="w-4/5 h-5/6 rounded-3xl m-auto my-6  bg-center bg-contain bg-no-repeat"
           style={{
             backgroundImage: `url(${imgPath})`,
           }}

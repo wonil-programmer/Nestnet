@@ -10,7 +10,7 @@ export default function AsidePhoto({ photo }) {
   const { setMainImage } = useContext(MainPhotoContext);
 
   return (
-    <div className="wrapper relative my-4 rounded-xl overflow-hidden shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
+    <div className="wrapper relative my-4 rounded-md overflow-hidden shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
       {/* boxshadow 사이트의 Warm테마 */}
       <img
         className="w-full"
