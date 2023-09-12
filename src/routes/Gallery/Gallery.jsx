@@ -1,4 +1,4 @@
-import GalleryThumb from "./GalleryThumb";
+import GalleryThumbnail from "./GalleryThumbnail";
 import Header from "../../components/Header";
 import fetchAlbums from "./fetchAlbums";
 import { useEffect, useState } from "react";
@@ -66,8 +66,12 @@ function Gallery() {
             <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
               {albums &&
                 albums.map((album) => (
-                  <GalleryThumb key={album.id} id={album.id} album={album} />
-                  // <GalleryThumb key={album.postId} id={album.postId} album={album} />
+                  <GalleryThumbnail
+                    key={album.id}
+                    id={album.id}
+                    album={album}
+                  />
+                  // <GalleryThumbnail key={album.postId} id={album.postId} album={album} />
                 ))}
             </Flex>
           </InfiniteScroll>

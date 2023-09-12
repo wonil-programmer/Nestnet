@@ -1,7 +1,7 @@
 import AlbumDescription from "./AlbumDescription";
 import Header from "../../components/Header";
 import AsidePhotos from "./AsidePhotos";
-import AlbumMainPhoto from "./AlbumMainPhoto";
+import PhotoSelected from "./PhotoSelected";
 import SideBar from "../../components/SideBar";
 import { useState, useEffect, useContext } from "react";
 import { MainPhotoContext } from "../../context/MainPhotoContext";
@@ -79,7 +79,7 @@ function Album() {
           <SideBar className="fixed top-48" />
           <div className="ctrView flex flex-col m-auto">
             <div className="relative -top-8 w-album-visWth h-screen  flex flex-col justify-center">
-              <AlbumMainPhoto />
+              <PhotoSelected />
               {/* AlbumDescription으로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-8 left-2/4 -translate-x-2/4">
                 <FiChevronDown

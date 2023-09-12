@@ -1,7 +1,7 @@
-const Comment = ({ commentKey, body, period, userId }) => {
+const Comment = ({ commentKey: commentId, body, period, userId, dispatch }) => {
   return (
     <>
-      <li className="w-full" key={commentKey}>
+      <li className="w-full" key={commentId}>
         <div className="w-full flex pb-4">
           <div className="profile flex flex-col justify-center mr-6">
             <div className="w-[2.3rem] h-[2.3rem] rounded-3xl bg-slate-900">
@@ -15,6 +15,13 @@ const Comment = ({ commentKey, body, period, userId }) => {
               <span className="mr-4">{period}</span>
               {/* 답글 로직 처리 필요 */}
               <div className="">답글</div>
+              <button
+                onClick={() => {
+                  dispatch({ type: "delete-comment", payload: { commentId } });
+                }}
+              >
+                삭제
+              </button>
             </div>
           </div>
         </div>

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import LikeBtn from "../Button/LikeBtn";
 import { Oval } from "react-loader-spinner";
 import { useRef } from "react";
 
-export default function CommentForm({ setComments, albumData }) {
+export default function CommentForm({ dispatch, albumData }) {
   console.log("댓글입력창");
   const { id } = useParams();
   let albumName = `album${id}`;
@@ -13,15 +13,17 @@ export default function CommentForm({ setComments, albumData }) {
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef(null);
   const onChange = (event) => {
-    setComment(event.target.value);
+    setComment(inputRef.current.value);
   };
+  const memoizedComment = useMemo(() => comment, [comment]);
 
   const onSubmit = (event) => {
     event.preventDefault();
 
-    if (comment === "") {
+    if (memoizedComment === "") {
       return;
     }
+
     // 댓글 입력 post 요청
     setIsLoading(true);
     fetch(`http://localhost:3004/${albumName}`, {
@@ -31,18 +33,17 @@ export default function CommentForm({ setComments, albumData }) {
       },
       body: JSON.stringify({
         userId: 1234,
-        body: comment,
+        body: memoizedComment,
         period: "방금",
       }),
     }).then((res) => {
       if (res.ok) {
-        // POST 요청이 성공적으로 완료될 때, 데이터를 다시 가져오고 setComments를 호출하여 업데이트
+        // POST 요청이 성공적으로 완료될 때, 데이터를 다시 가져오고 dispatch를 호출하여 업데이트
         fetch(`http://localhost:3004/${albumName}`)
           .then((response) => response.json())
           .then((newData) => {
-            setComments(newData);
+            dispatch({ type: "add-comment", payload: { memoizedComment } });
             setIsLoading(false);
-            inputRef.current.focus();
           })
           .catch((error) => {
             console.error("데이터를 다시 가져오는 중 오류 발생:", error);
@@ -86,7 +87,7 @@ export default function CommentForm({ setComments, albumData }) {
             <input
               onChange={onChange}
               className="flex w-full h-full py-0 px-6 bg-[#efefef] border-none rounded-3xl outline-4 outline-red-300"
-              value={comment}
+              value={memoizedComment}
               type="text"
               placeholder="댓글 추가"
               ref={inputRef}

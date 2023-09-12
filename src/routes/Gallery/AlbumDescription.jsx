@@ -1,39 +1,66 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { useParams } from "react-router-dom";
 import CommentForm from "../../components/Comments/CommentForm";
 import Comment from "../../components/Comments/Comment";
-import DownloadBtn from "../../components/Button/DownloadBtn";
+import DownloadBtn from "./DownloadBtn";
 import { useEffect } from "react";
 import axios from "axios";
+import { useReducer } from "react";
 
-export default function AlbumDescription({ albumData }) {
+const AlbumDescription = ({ albumData }) => {
   const { id } = useParams();
   const url = `http://localhost:3004/album${id}`;
+
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("앨범하단");
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "add-comment":
+        const body = action.payload.memoizedComment;
+        const newComment = {
+          id: Date.now(),
+          userId: "1234",
+          body,
+          period: Date.now(),
+        };
+        return {
+          count: state.count + 1,
+          comments: [...state.comments, newComment],
+        };
+      case "delete-comment":
+        return {
+          count: state.count - 1,
+          comments: state.comments.filter(
+            (comment) => comment.id !== action.payload.id
+          ),
+        };
+      default:
+        return state;
+    }
+  };
+  const initialState = {
+    count: 0,
+    comments: [],
+  };
+  const [commentsInfo, dispatch] = useReducer(reducer, initialState);
+
   // 댓글목록 api 호출
   useEffect(() => {
     const fetchComments = () => {
       axios?.get(url)?.then((res) => {
-        setComments(res.data);
+        initialState.comments = res.data;
         setIsLoading(false);
       });
     };
     fetchComments();
   }, [url]);
-  const [comments, setComments] = useState([]);
-
-  // useEffect(() => {
-  //   setComments(data);
-  // }, [data]);
 
   return (
     <div className="w-album-desWth m-auto mb-4 rounded-xl shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] ">
       <div className="top px-8 pt-4 pb-2.5 text-center flex justify-between border-b border-border-primary">
         <h3 className="text-center pt-2.5">
           댓글
-          <span className="ml-2">{comments.length}</span>
+          <span className="ml-2">{commentsInfo.count}</span>
         </h3>
         <DownloadBtn />
       </div>
@@ -52,19 +79,18 @@ export default function AlbumDescription({ albumData }) {
               </div>
             </div>
           ) : (
-            // 댓글이 있을 경우 댓글 최신순으로 출력
+            // 댓글이 있을 경우 댓글 출력
             <>
-              {comments && comments.length !== 0 ? (
-                comments
-                  .reverse()
-                  .map((comment) => (
-                    <Comment
-                      commentKey={comment.id}
-                      body={comment.body}
-                      period={comment.period}
-                      userId={comment.userId}
-                    />
-                  ))
+              {commentsInfo.comments && commentsInfo.comments.length !== 0 ? (
+                commentsInfo.comments.map((comment) => (
+                  <Comment
+                    commentKey={comment.id}
+                    userId={comment.userId}
+                    body={comment.body}
+                    period={comment.period}
+                    dispatch={dispatch}
+                  />
+                ))
               ) : (
                 <p class="text-base text-gray-600">
                   아직 댓글이 없습니다! 가장 먼저 댓글을 작성해보세요.
@@ -74,7 +100,9 @@ export default function AlbumDescription({ albumData }) {
           )}
         </ul>
       </div>
-      <CommentForm setComments={setComments} albumData={albumData} />
+      <CommentForm dispatch={dispatch} albumData={albumData} />
     </div>
   );
-}
+};
+
+export default memo(AlbumDescription);
