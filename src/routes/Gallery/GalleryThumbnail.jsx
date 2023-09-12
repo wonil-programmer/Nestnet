@@ -6,7 +6,7 @@ import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 // GalleryThumb : 갤러리 페이지의 각각의 앨범 썸네일
 // album : 개별 앨범에 대한 정보(album.json)
-const GalleryThumb = ({ album }) => {
+const GalleryThumbnail = ({ album }) => {
   // @@@@@@@@@@@@실제 로직에 추가
   // const saveFilePath = album.saveFilePath;
   // const saveFileName = album.saveFileName;
@@ -47,4 +47,4 @@ const GalleryThumb = ({ album }) => {
 //   title: PropTypes.string,
 //   likes: PropTypes.number.isRequired,
 // };
-export default memo(GalleryThumb);
+export default memo(GalleryThumbnail);
