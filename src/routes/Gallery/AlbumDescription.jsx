@@ -38,7 +38,6 @@ const AlbumDescription = ({ albumId, albumData }) => {
       axios?.get(url)?.then((res) => {
         initialState.comments = res.data;
         initialState.count = res.data.length;
-        setIsLoading(false);
       });
     };
     fetchComments();
