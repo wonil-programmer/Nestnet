@@ -8,24 +8,22 @@ import axios from "axios";
 import { useReducer } from "react";
 
 const AlbumDescription = ({ albumData }) => {
+  console.log("앨범 댓글창");
   const { id } = useParams();
+  // const id = 1;
   const url = `http://localhost:3004/album${id}`;
 
   const [isLoading, setIsLoading] = useState(true);
 
   const reducer = (state, action) => {
     switch (action.type) {
-      case "add-comment":
-        const body = action.payload.memoizedComment;
-        const newComment = {
-          id: Date.now(),
-          userId: "1234",
-          body,
-          period: Date.now(),
-        };
+      case "SET_COMMENT_INPUT":
+        return { ...state, newComment: action.payload };
+      case "SET_COMMENTS":
         return {
-          count: state.count + 1,
-          comments: [...state.comments, newComment],
+          count: action.payload.commentsData.length,
+          comments: action.payload.commentsData,
+          newComment: "",
         };
       case "delete-comment":
         return {
@@ -41,6 +39,7 @@ const AlbumDescription = ({ albumData }) => {
   const initialState = {
     count: 0,
     comments: [],
+    newComment: "",
   };
   const [commentsInfo, dispatch] = useReducer(reducer, initialState);
 
@@ -49,6 +48,7 @@ const AlbumDescription = ({ albumData }) => {
     const fetchComments = () => {
       axios?.get(url)?.then((res) => {
         initialState.comments = res.data;
+        initialState.count = res.data.length;
         setIsLoading(false);
       });
     };
@@ -62,11 +62,11 @@ const AlbumDescription = ({ albumData }) => {
           댓글
           <span className="ml-2">{commentsInfo.count}</span>
         </h3>
-        <DownloadBtn />
+        {/* <DownloadBtn /> */}
       </div>
       <div>
         <div className="body w-full py-4 px-6 font-semibold overflow-auto">
-          {albumData.body}
+          {/* {albumData.body} */}
         </div>
         <ul className="commentsList w-full py-4 px-12 max-h-96 overflow-auto">
           {isLoading ? (
@@ -88,7 +88,7 @@ const AlbumDescription = ({ albumData }) => {
                     userId={comment.userId}
                     body={comment.body}
                     period={comment.period}
-                    dispatch={dispatch}
+                    // dispatch={dispatch}
                   />
                 ))
               ) : (
@@ -100,7 +100,11 @@ const AlbumDescription = ({ albumData }) => {
           )}
         </ul>
       </div>
-      <CommentForm dispatch={dispatch} albumData={albumData} />
+      <CommentForm
+        dispatch={dispatch}
+        commentEntered={commentsInfo.newComment}
+        albumData={albumData}
+      />
     </div>
   );
 };
