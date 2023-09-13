@@ -7,11 +7,9 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useReducer } from "react";
 
-const AlbumDescription = ({ albumData }) => {
+const AlbumDescription = ({ albumId, albumData }) => {
   console.log("앨범 댓글창");
-  const { id } = useParams();
-  // const id = 1;
-  const url = `http://localhost:3004/album${id}`;
+  const url = `http://localhost:3004/album${albumId}`;
 
   const [isLoading, setIsLoading] = useState(true);
 

@@ -90,7 +90,7 @@ function Album() {
             </div>
             <div className="h-screen pt-32">
               {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
-              <AlbumDescription albumData={albumData} />
+              <AlbumDescription albumId={id} albumData={albumData} />
               {/* AlbumMainPhoto으로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-2 left-2/4 -translate-x-2/4">
                 <FiChevronUp
