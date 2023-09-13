@@ -1,7 +1,6 @@
-import { useState, memo } from "react";
+import { memo } from "react";
 import CommentForm from "../../components/Comments/CommentForm";
 import Comments from "./Comments";
-import CommentsLoadingPulse from "../../components/Comments/CommentsLoadingPulse";
 import DownloadBtn from "./DownloadBtn";
 import { useEffect } from "react";
 import axios from "axios";
@@ -11,7 +10,6 @@ const AlbumDescription = ({ albumId, albumData }) => {
   console.log("앨범 댓글창");
 
   const url = `http://localhost:3004/album${albumId}`;
-  const [isLoading, setIsLoading] = useState(true);
 
   const reducer = (state, action) => {
     switch (action.type) {
@@ -60,13 +58,7 @@ const AlbumDescription = ({ albumId, albumData }) => {
           {albumData.body}
         </div>
         <ul className="commentsList w-full py-4 px-12 max-h-96 overflow-auto">
-          {isLoading ? (
-            // 댓글 로딩시 스켈레톤 효과
-            <CommentsLoadingPulse></CommentsLoadingPulse>
-          ) : (
-            // 댓글이 있을 경우 댓글 출력
-            <Comments commentsInfo={commentsInfo} />
-          )}
+          <Comments commentsInfo={commentsInfo} />
         </ul>
       </div>
       <CommentForm
