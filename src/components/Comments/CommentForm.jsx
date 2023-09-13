@@ -43,7 +43,7 @@ export default function CommentForm({ dispatch, commentEntered, albumData }) {
           .then((commentsData) => {
             dispatch({ type: "SET_COMMENTS", payload: { commentsData } });
             setIsLoading(false);
-            inputRef.current.focus();
+            // inputRef.current.focus();
           })
           .catch((error) => {
             console.error("데이터를 다시 가져오는 중 오류 발생:", error);

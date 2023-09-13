@@ -1,7 +1,7 @@
 import { useState, memo } from "react";
-import { useParams } from "react-router-dom";
 import CommentForm from "../../components/Comments/CommentForm";
-import Comment from "../../components/Comments/Comment";
+import Comments from "./Comments";
+import CommentsLoadingPulse from "../../components/Comments/CommentsLoadingPulse";
 import DownloadBtn from "./DownloadBtn";
 import { useEffect } from "react";
 import axios from "axios";
@@ -9,8 +9,8 @@ import { useReducer } from "react";
 
 const AlbumDescription = ({ albumId, albumData }) => {
   console.log("앨범 댓글창");
-  const url = `http://localhost:3004/album${albumId}`;
 
+  const url = `http://localhost:3004/album${albumId}`;
   const [isLoading, setIsLoading] = useState(true);
 
   const reducer = (state, action) => {
@@ -22,13 +22,6 @@ const AlbumDescription = ({ albumId, albumData }) => {
           count: action.payload.commentsData.length,
           comments: action.payload.commentsData,
           newComment: "",
-        };
-      case "delete-comment":
-        return {
-          count: state.count - 1,
-          comments: state.comments.filter(
-            (comment) => comment.id !== action.payload.id
-          ),
         };
       default:
         return state;
@@ -60,41 +53,19 @@ const AlbumDescription = ({ albumId, albumData }) => {
           댓글
           <span className="ml-2">{commentsInfo.count}</span>
         </h3>
-        {/* <DownloadBtn /> */}
+        <DownloadBtn />
       </div>
       <div>
         <div className="body w-full py-4 px-6 font-semibold overflow-auto">
-          {/* {albumData.body} */}
+          {albumData.body}
         </div>
         <ul className="commentsList w-full py-4 px-12 max-h-96 overflow-auto">
           {isLoading ? (
             // 댓글 로딩시 스켈레톤 효과
-            <div className="animate-pulse flex space-x-4">
-              <div className="rounded-full w-[2.3rem] h-[2.3rem] bg-slate-800 mr-6"></div>
-              <div className="flex-1 space-y-4">
-                <div className="w-96 h-2 bg-slate-800 rounded"></div>
-                <div className="w-12 h-2 bg-slate-800 rounded"></div>
-              </div>
-            </div>
+            <CommentsLoadingPulse></CommentsLoadingPulse>
           ) : (
             // 댓글이 있을 경우 댓글 출력
-            <>
-              {commentsInfo.comments && commentsInfo.comments.length !== 0 ? (
-                commentsInfo.comments.map((comment) => (
-                  <Comment
-                    commentKey={comment.id}
-                    userId={comment.userId}
-                    body={comment.body}
-                    period={comment.period}
-                    // dispatch={dispatch}
-                  />
-                ))
-              ) : (
-                <p class="text-base text-gray-600">
-                  아직 댓글이 없습니다! 가장 먼저 댓글을 작성해보세요.
-                </p>
-              )}
-            </>
+            <Comments commentsInfo={commentsInfo} />
           )}
         </ul>
       </div>
