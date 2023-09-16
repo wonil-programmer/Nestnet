@@ -9,7 +9,9 @@ import { useParams, useLocation } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import axios from "axios";
 
-function Album() {
+import Test from "./Test";
+
+const Album = () => {
   console.log("앨범");
   // eslint-disable-next-line no-restricted-globals
   const location = useLocation();
@@ -37,14 +39,11 @@ function Album() {
   useEffect(() => {
     // 실제 경로
     // `~/${postId}`
-    const fetchPhotos = () => {
-      axios?.get(url)?.then((res) => {
-        setPhotos(res.data);
-        setIsLoading(false);
-        setMainImage(res.data[0].src);
-      });
-    };
-    fetchPhotos();
+    axios?.get(url)?.then((res) => {
+      setPhotos(res.data);
+      setIsLoading(false);
+      setMainImage(res.data[0].src);
+    });
   }, [url]);
 
   // useEffect(() => {
@@ -89,6 +88,7 @@ function Album() {
               </div>
             </div>
             <div className="h-screen pt-32">
+              {/* <Test /> */}
               {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
               <AlbumDescription albumId={id} albumData={albumData} />
               {/* AlbumMainPhoto으로 이동하는 화살표 버튼 */}
@@ -110,6 +110,6 @@ function Album() {
       )}
     </>
   );
-}
+};
 
 export default Album;

@@ -4,7 +4,7 @@ import LikeBtn from "../Button/LikeBtn";
 import { Oval } from "react-loader-spinner";
 import { useRef } from "react";
 
-export default function CommentForm({ dispatch, commentEntered, albumData }) {
+const CommentForm = ({ dispatch, commentEntered, albumData }) => {
   const { id } = useParams();
   let albumName = `album${id}`;
 
@@ -96,4 +96,6 @@ export default function CommentForm({ dispatch, commentEntered, albumData }) {
       </div>
     </div>
   );
-}
+};
+
+export default CommentForm;
