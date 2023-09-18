@@ -1,7 +1,7 @@
 import { MainPhotoContext } from "../../context/MainPhotoContext";
 import { useContext } from "react";
 
-const PhotoSelected = () => {
+const PhotoClicked = () => {
   const { mainImage } = useContext(MainPhotoContext);
   const imgPath = `${process.env.PUBLIC_URL}/assets/${mainImage}`;
 
@@ -19,4 +19,4 @@ const PhotoSelected = () => {
   );
 };
 
-export default PhotoSelected;
+export default PhotoClicked;
