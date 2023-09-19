@@ -11,7 +11,7 @@ const AlbumDescription = ({ albumId, albumData }) => {
 
   const url = `http://localhost:3004/album${albumId}`;
 
-  const reducer = (state, action) => {
+  const commentReducer = (state, action) => {
     switch (action.type) {
       case "SET_COMMENT_INPUT":
         return { ...state, newComment: action.payload };
@@ -30,7 +30,7 @@ const AlbumDescription = ({ albumId, albumData }) => {
     comments: [],
     newComment: "",
   };
-  const [commentsInfo, dispatch] = useReducer(reducer, initialState);
+  const [commentsInfo, dispatch] = useReducer(commentReducer, initialState);
 
   // 댓글목록 api 호출
   useEffect(() => {

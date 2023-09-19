@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const fetchAlbums = async ({ setPage, page }) => {
-  console.log(page);
   const res = await fetch(`http://localhost:3001/galleries?_page=${page}`, {
     method: "GET",
     headers: {
