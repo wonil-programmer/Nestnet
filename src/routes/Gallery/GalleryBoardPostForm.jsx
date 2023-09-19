@@ -102,32 +102,51 @@ const GalleryBoardPostForm = () => {
   }, [isPostBtnDisabled, formState]);
 
   return (
-    <>
+    <div className={"min-h-screen bg-home-background"}>
       <Header />
-      <form
-        onSubmit={handleFormSubmit}
-        className={"w-[50rem] mt-24 mx-auto flex flex-col p-5"}
-      >
-        <div>
-          <BoardPostButton isPostBtnDisabled={isPostBtnDisabled} />
+      <div className={"fixed w-full h-[calc(100vh-4.6rem)] top-[4.6rem]"}>
+        <div className={"h-full border-4 border-transparent overflow-auto"}>
+          <div className={"h-full py-4 flex justify-center"}>
+            <div className={"py-11"}>
+              <div
+                className={"formWrapper w-[36rem] p-12 rounded-3xl bg-white"}
+              >
+                <form onSubmit={handleFormSubmit} className={"flex flex-col"}>
+                  <div className={"mb-2"}>
+                    <div className={"flex justify-end"}>
+                      <BoardPostButton isPostBtnDisabled={isPostBtnDisabled} />
+                    </div>
+                  </div>
+                  <div className={"flex flex-col justify-between"}>
+                    <div className={"mb-2"}>
+                      <FileInput
+                        fileInformation={formState.fileInfo}
+                        onFileInformationChange={handleFileInfoChange}
+                        onFileDelete={handleFileDelete}
+                      />
+                    </div>
+                    <div className={"mb-2 flex flex-col"}>
+                      <TitleInput
+                        title={formState.title}
+                        onTitleChange={handleTitleChange}
+                        ref={titleInputRef}
+                      />
+                    </div>
+                    <div className={"mb-2 flex flex-col"}>
+                      <DescriptionInput
+                        description={formState.description}
+                        onDescriptionChange={handleDescriptionChange}
+                        ref={descriptionInputRef}
+                      />
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <FileInput
-          fileInformation={formState.fileInfo}
-          onFileInformationChange={handleFileInfoChange}
-          onFileDelete={handleFileDelete}
-        />
-        <TitleInput
-          title={formState.title}
-          onTitleChange={handleTitleChange}
-          ref={titleInputRef}
-        />
-        <DescriptionInput
-          description={formState.description}
-          onDescriptionChange={handleDescriptionChange}
-          ref={descriptionInputRef}
-        />
-      </form>
-    </>
+      </div>
+    </div>
   );
 };
 

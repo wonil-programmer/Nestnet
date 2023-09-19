@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 
 const DescriptionInput = ({ description, onDescriptionChange }, ref) => {
   return (
-    <div>
+    <>
       <label htmlFor="descriptionInput">설명</label>
       <input
         id={"descriptionInput"}
@@ -16,7 +16,7 @@ const DescriptionInput = ({ description, onDescriptionChange }, ref) => {
         autoComplete={"off"}
         ref={ref}
       />
-    </div>
+    </>
   );
 };
 

@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 
 const TitleInput = ({ title, onTitleChange }, ref) => {
   return (
-    <div>
+    <>
       <label htmlFor="titleInput">제목</label>
       <input
         id={"titleInput"}
@@ -16,7 +16,7 @@ const TitleInput = ({ title, onTitleChange }, ref) => {
         ref={ref}
         className={"title"}
       />
-    </div>
+    </>
   );
 };
 
