@@ -1,10 +1,9 @@
-const BoardPostButton = ({ isPostButtonDisabled }) => {
-  console.log(isPostButtonDisabled);
+const BoardPostButton = ({ isPostBtnDisabled }) => {
   return (
     <button
-      type={isPostButtonDisabled ? "button" : "submit"}
+      type={isPostBtnDisabled ? "button" : "submit"}
       className={`px-4 py-3 bg-blue-500 text-white text-lg font-bold rounded-3xl ${
-        isPostButtonDisabled
+        isPostBtnDisabled
           ? "cursor-default opacity-75"
           : "opacity-100 hover:scale-110"
       } duration-300`}

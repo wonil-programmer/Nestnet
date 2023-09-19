@@ -32,6 +32,7 @@ const GalleryBoardPostForm = () => {
     fileInfo: [],
     title: "",
     description: "",
+    isPostBtnDisabled: true,
   };
   const [formState, dispatch] = useReducer(formReducer, initialFormState);
 
@@ -98,8 +99,7 @@ const GalleryBoardPostForm = () => {
         title.trim().length === 0 ||
         description.trim().length === 0
     );
-    console.log(isPostBtnDisabled);
-  });
+  }, [isPostBtnDisabled, formState]);
 
   return (
     <>
