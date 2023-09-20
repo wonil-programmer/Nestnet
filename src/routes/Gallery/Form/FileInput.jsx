@@ -13,10 +13,9 @@ const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
         className={"hidden"}
         ref={inputFileRef}
         onChange={onFileInfoChange}
-        accept="image/*"
+        accept=".gif, .jpg, .jpeg, .png"
         multiple={true}
       />
-
       <div
         className={
           "filesContainer w-full h-fit overflow-x-auto whitespace-nowrap"
