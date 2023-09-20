@@ -109,36 +109,36 @@ const GalleryBoardPostForm = () => {
           <div className={"h-full py-4 flex justify-center"}>
             <div className={"py-11"}>
               <div
-                className={"formWrapper w-[36rem] p-12 rounded-3xl bg-white"}
+                className={
+                  "formWrapper w-[36rem] px-10 py-8 rounded-3xl bg-white"
+                }
               >
                 <form onSubmit={handleFormSubmit} className={"flex flex-col"}>
-                  <div className={"mb-2"}>
-                    <div className={"flex justify-end"}>
-                      <BoardPostButton isPostBtnDisabled={isPostBtnDisabled} />
-                    </div>
-                  </div>
                   <div className={"flex flex-col justify-between"}>
-                    <div className={"mb-2"}>
+                    <div className={"my-6"}>
                       <FileInput
                         fileInformation={formState.fileInfo}
-                        onFileInformationChange={handleFileInfoChange}
+                        onFileInfoChange={handleFileInfoChange}
                         onFileDelete={handleFileDelete}
                       />
                     </div>
-                    <div className={"mb-2 flex flex-col"}>
+                    <div className={"flex flex-col mb-[0.15rem]"}>
                       <TitleInput
                         title={formState.title}
                         onTitleChange={handleTitleChange}
                         ref={titleInputRef}
                       />
                     </div>
-                    <div className={"mb-2 flex flex-col"}>
+                    <div className={"flex flex-col mb-6"}>
                       <DescriptionInput
                         description={formState.description}
                         onDescriptionChange={handleDescriptionChange}
                         ref={descriptionInputRef}
                       />
                     </div>
+                  </div>
+                  <div className={"flex justify-end"}>
+                    <BoardPostButton isPostBtnDisabled={isPostBtnDisabled} />
                   </div>
                 </form>
               </div>

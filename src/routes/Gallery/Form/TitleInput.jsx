@@ -8,13 +8,13 @@ const TitleInput = ({ title, onTitleChange }, ref) => {
         type={"text"}
         value={title}
         minLength={4}
-        maxLength={20}
+        maxLength={30}
         onChange={onTitleChange}
         placeholder={"제목 추가"}
         autoComplete={"off"}
         ref={ref}
         className={
-          "title placeholder:text-stone-500 font-semibold bg-slate-200 pl-6 py-3 rounded-3xl focus:placeholder:text-slate-400 focus:font-medium"
+          "title placeholder:text-stone-500 placeholder:font-medium text-black font-medium bg-slate-100 pl-6 py-3 rounded-3xl focus:placeholder:text-slate-400 focus:font-medium outline-red-400"
         }
       />
     </>
