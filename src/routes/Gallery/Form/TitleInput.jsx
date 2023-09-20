@@ -3,7 +3,6 @@ import { forwardRef } from "react";
 const TitleInput = ({ title, onTitleChange }, ref) => {
   return (
     <>
-      <label htmlFor="titleInput">제목</label>
       <input
         id={"titleInput"}
         type={"text"}
@@ -14,7 +13,9 @@ const TitleInput = ({ title, onTitleChange }, ref) => {
         placeholder={"제목 추가"}
         autoComplete={"off"}
         ref={ref}
-        className={"title"}
+        className={
+          "title placeholder:text-stone-500 font-semibold bg-slate-200 pl-6 py-3 rounded-3xl focus:placeholder:text-slate-400 focus:font-medium"
+        }
       />
     </>
   );

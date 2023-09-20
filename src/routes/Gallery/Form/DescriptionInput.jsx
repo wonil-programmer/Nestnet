@@ -3,7 +3,6 @@ import { forwardRef } from "react";
 const DescriptionInput = ({ description, onDescriptionChange }, ref) => {
   return (
     <>
-      <label htmlFor="descriptionInput">설명</label>
       <input
         id={"descriptionInput"}
         type={"text"}
@@ -12,7 +11,9 @@ const DescriptionInput = ({ description, onDescriptionChange }, ref) => {
         value={description}
         placeholder={"사진들에 대한 상세 설명을 작성하세요."}
         onChange={onDescriptionChange}
-        className={"description"}
+        className={
+          "description placeholder:text-stone-500 font-semibold bg-slate-200 pl-6 py-3 rounded-3xl focus:placeholder:text-slate-400 focus:font-medium"
+        }
         autoComplete={"off"}
         ref={ref}
       />
