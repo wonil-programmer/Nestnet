@@ -75,13 +75,13 @@ const GalleryBoardPostForm = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
-    // const blob = new Blob([JSON.stringify(formState)], {
-    //   type: "application/json",
-    // });
-
-    // formData.append("data", blob);
+    const blob = new Blob([JSON.stringify(formState)], {
+      type: "application/json",
+    });
+    console.log(blob);
+    formData.append("data", blob);
     formState.fileInfo.forEach((fileInfo) =>
-      formData.append("src", fileInfo.file.name)
+      formData.append("file", fileInfo.file)
     );
 
     axios
@@ -91,6 +91,20 @@ const GalleryBoardPostForm = () => {
       ?.then((response) => console.log(response))
       ?.catch(() => console.log("post fail"));
   };
+  // const handleFormSubmit = event =>
+  // {
+  //     event.preventDefault();
+  //     const formData = new FormData();
+  //     const blob = new Blob([JSON.stringify(formValues)], { type: "application/json"});
+  //     console.log(blob);
+
+  //     formData.append("data", blob);
+  //     fileInformation.forEach(fileInfo => formData.append("file", fileInfo.file));
+
+  //     axios?.post("http://192.168.45.212:8080/unified-post/post", formData, { withCredentials: true, headers: { "Content-Type": "multipart/form-data", }})
+  //         ?.then(response => console.log(response))
+  //         ?.catch(() => console.log("post fail"));
+  // };
 
   useEffect(() => {
     const { fileInfo, title, description } = formState;
