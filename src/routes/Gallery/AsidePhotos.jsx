@@ -3,7 +3,7 @@ import { memo } from "react";
 
 const AsidePhotos = ({ photos }) => {
   return (
-    <div className="w-56 h-screen fixed right-0.5 pb-16 overflow-y-scroll">
+    <div className="w-56 h-[calc(100vh-4.6rem)] fixed right-0  overflow-y-scroll">
       {photos.map((photo) => (
         <AsidePhoto key={photo.id} photo={photo} />
       ))}

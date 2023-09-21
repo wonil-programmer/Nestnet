@@ -75,9 +75,12 @@ const GalleryBoardPostForm = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
-    const blob = new Blob([JSON.stringify(formState)], {
-      type: "application/json",
-    });
+    const blob = new Blob(
+      [JSON.stringify(formState, ["title", "description"])],
+      {
+        type: "application/json",
+      }
+    );
     console.log(blob);
     formData.append("data", blob);
     formState.fileInfo.forEach((fileInfo) =>
