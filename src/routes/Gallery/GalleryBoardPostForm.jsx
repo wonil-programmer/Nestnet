@@ -23,16 +23,16 @@ const GalleryBoardPostForm = () => {
       case "SET_TITLE_INPUT":
         return { ...state, title: action.payload };
       case "SET_DESCRIPTION_INPUT":
-        return { ...state, description: action.payload };
+        return { ...state, bodyContent: action.payload };
       default:
         return state;
     }
   };
+
   const initialFormState = {
     fileInfo: [],
     title: "",
-    description: "",
-    isPostBtnDisabled: true,
+    bodyContent: "",
   };
   const [formState, dispatch] = useReducer(formReducer, initialFormState);
 
@@ -48,7 +48,7 @@ const GalleryBoardPostForm = () => {
   };
 
   const handleDescriptionChange = () => {
-    // setFormValues({ ...formValues, description: event.target.value });
+    // setFormValues({ ...formValues, bodyContent: event.target.value });
     let descriptionInputData = descriptionInputRef.current.value;
     dispatch({ type: "SET_DESCRIPTION_INPUT", payload: descriptionInputData });
   };
@@ -75,46 +75,31 @@ const GalleryBoardPostForm = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
-    const blob = new Blob(
-      [JSON.stringify(formState, ["title", "description"])],
-      {
-        type: "application/json",
-      }
-    );
+    const blob = new Blob([JSON.stringify(formState)], {
+      type: "application/json",
+    });
     console.log(blob);
+
     formData.append("data", blob);
     formState.fileInfo.forEach((fileInfo) =>
-      formData.append("file", fileInfo.file)
+      formData.append("photo-file", fileInfo.file)
     );
 
     axios
-      ?.post("http://localhost:3002/album1", formData, {
-        headers: { "Content-Type": "application/json" },
+      ?.post("http://172.20.10.8:8080/photo-post/post", formData, {
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
       })
       ?.then((response) => console.log(response))
       ?.catch(() => console.log("post fail"));
   };
-  // const handleFormSubmit = event =>
-  // {
-  //     event.preventDefault();
-  //     const formData = new FormData();
-  //     const blob = new Blob([JSON.stringify(formValues)], { type: "application/json"});
-  //     console.log(blob);
-
-  //     formData.append("data", blob);
-  //     fileInformation.forEach(fileInfo => formData.append("file", fileInfo.file));
-
-  //     axios?.post("http://192.168.45.212:8080/unified-post/post", formData, { withCredentials: true, headers: { "Content-Type": "multipart/form-data", }})
-  //         ?.then(response => console.log(response))
-  //         ?.catch(() => console.log("post fail"));
-  // };
 
   useEffect(() => {
-    const { fileInfo, title, description } = formState;
+    const { fileInfo, title, bodyContent } = formState;
     setIsPostBtnDisabled(
       fileInfo.length === 0 ||
         title.trim().length === 0 ||
-        description.trim().length === 0
+        bodyContent.trim().length === 0
     );
   }, [isPostBtnDisabled, formState]);
 
@@ -148,7 +133,7 @@ const GalleryBoardPostForm = () => {
                     </div>
                     <div className={"flex flex-col mb-6"}>
                       <DescriptionInput
-                        description={formState.description}
+                        bodyContent={formState.bodyContent}
                         onDescriptionChange={handleDescriptionChange}
                         ref={descriptionInputRef}
                       />
