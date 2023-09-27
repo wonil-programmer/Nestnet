@@ -12,23 +12,17 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={`${process.env.PUBLIC_URL}/`} element={<Home />} />
+        <Route path={"/"} element={<Home />} />
+        <Route path={`gallery`} element={<Gallery />} />
         <Route
-          path={`${process.env.PUBLIC_URL}/gallery`}
-          element={<Gallery />}
-        />
-        <Route
-          path={`${process.env.PUBLIC_URL}/gallery/:id`}
+          path={"gallery/:postId"}
           element={
             <MainPhotoContext.Provider value={{ mainImage, setMainImage }}>
               <Album />
             </MainPhotoContext.Provider>
           }
         />
-        <Route
-          path={`${process.env.PUBLIC_URL}/gallery/form`}
-          element={<GalleryBoardPostForm />}
-        />
+        <Route path={"gallery/form"} element={<GalleryBoardPostForm />} />
       </Routes>
     </BrowserRouter>
   );

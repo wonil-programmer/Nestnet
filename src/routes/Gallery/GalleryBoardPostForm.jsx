@@ -7,93 +7,102 @@ import BoardPostButton from "./Form/BoardPostButton";
 import { useState, useEffect, useRef } from "react";
 import { v4 } from "uuid";
 import { useReducer } from "react";
+import {
+  setFileInfo,
+  deleteFile,
+  setTitle,
+  setDescription,
+} from "./Form/formReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 const GalleryBoardPostForm = () => {
   const [isPostBtnDisabled, setIsPostBtnDisabled] = useState(true);
 
-  const formReducer = (state, action) => {
-    switch (action.type) {
-      case "SET_FILEINFO":
-        return { ...state, fileInfo: action.payload };
-      case "FILE_DELETE":
-        return {
-          ...state,
-          fileInfo: action.payload,
-        };
-      case "SET_TITLE_INPUT":
-        return { ...state, title: action.payload };
-      case "SET_DESCRIPTION_INPUT":
-        return { ...state, description: action.payload };
-      default:
-        return state;
-    }
-  };
-  const initialFormState = {
-    fileInfo: [],
-    title: "",
-    description: "",
-    isPostBtnDisabled: true,
-  };
-  const [formState, dispatch] = useReducer(formReducer, initialFormState);
+  const formStates = useSelector((state) => state.form);
+  const formDispatch = useDispatch();
+
+  // const formReducer = (state, action) => {
+  //   switch (action.type) {
+  //     case "SET_FILEINFO":
+  //       return { ...state, fileInfo: action.payload };
+  //     case "FILE_DELETE":
+  //       return {
+  //         ...state,
+  //         fileInfo: action.payload,
+  //       };
+  //     case "SET_TITLE_INPUT":
+  //       return { ...state, title: action.payload };
+  //     case "SET_DESCRIPTION_INPUT":
+  //       return { ...state, description: action.payload };
+  //     default:
+  //       return state;
+  //   }
+  // };
+  // const initialFormState = {
+  //   fileInfo: [],
+  //   title: "",
+  //   description: "",
+  //   isPostBtnDisabled: true,
+  // };
+  // const [formState, dispatch] = useReducer(formReducer, initialFormState);
 
   const titleInputRef = useRef(null);
   const descriptionInputRef = useRef(null);
 
   const handleTitleChange = () => {
     let titleInputData = titleInputRef.current.value;
-    dispatch({ type: "SET_TITLE_INPUT", payload: titleInputData });
-    // const key = event.target.id.replace("Input", "");
-    // const value = event.target.value;
-    // setFormValues({ ...formValues, [key]: value });
+    formDispatch(setTitle(titleInputData));
   };
+  // const key = event.target.id.replace("Input", "");
+  // const value = event.target.value;
+  // setFormValues({ ...formValues, [key]: value });
 
   const handleDescriptionChange = () => {
-    // setFormValues({ ...formValues, description: event.target.value });
     let descriptionInputData = descriptionInputRef.current.value;
-    dispatch({ type: "SET_DESCRIPTION_INPUT", payload: descriptionInputData });
+    formDispatch(setDescription(descriptionInputData));
   };
 
-  const handleFileInfoChange = (event) => {
-    dispatch({
-      type: "SET_FILEINFO",
-      payload: [
-        ...formState.fileInfo,
-        ...Array.from(event.target.files).map((file) => ({ id: v4(), file })),
-      ],
-    });
-  };
+  // const handleFileInfoChange = (event) => {
+  //   dispatch({
+  //     type: "SET_FILEINFO",
+  //     payload: [
+  //       ...formState.fileInfo,
+  //       ...Array.from(event.target.files).map((file) => ({ id: v4(), file })),
+  //     ],
+  //   });
+  // };
 
-  const handleFileDelete = (targetFileInfo) => {
-    dispatch({
-      type: "FILE_DELETE",
-      payload: formState.fileInfo.filter(
-        (fileInfo) => fileInfo?.id !== targetFileInfo?.id
-      ),
-    });
-  };
+  // const handleFileDelete = (targetFileInfo) => {
+  //   dispatch({
+  //     type: "FILE_DELETE",
+  //     payload: formStates.fileInfo.filter(
+  //       (fileInfo) => fileInfo?.id !== targetFileInfo?.id
+  //     ),
+  //   });
+  // };
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    const blob = new Blob(
-      [JSON.stringify(formState, ["title", "description"])],
-      {
-        type: "application/json",
-      }
-    );
-    console.log(blob);
-    formData.append("data", blob);
-    formState.fileInfo.forEach((fileInfo) =>
-      formData.append("file", fileInfo.file)
-    );
+  // const handleFormSubmit = (event) => {
+  //   event.preventDefault();
+  //   const formData = new FormData();
+  //   const blob = new Blob(
+  //     [JSON.stringify(formState, ["title", "description"])],
+  //     {
+  //       type: "application/json",
+  //     }
+  //   );
+  //   console.log(blob);
+  //   formData.append("data", blob);
+  //   formState.fileInfo.forEach((fileInfo) =>
+  //     formData.append("file", fileInfo.file)
+  //   );
 
-    axios
-      ?.post("http://localhost:3002/album1", formData, {
-        headers: { "Content-Type": "application/json" },
-      })
-      ?.then((response) => console.log(response))
-      ?.catch(() => console.log("post fail"));
-  };
+  //   axios
+  //     ?.post("http://localhost:3002/album1", formData, {
+  //       headers: { "Content-Type": "application/json" },
+  //     })
+  //     ?.then((response) => console.log(response))
+  //     ?.catch(() => console.log("post fail"));
+  // };
   // const handleFormSubmit = event =>
   // {
   //     event.preventDefault();
@@ -110,13 +119,13 @@ const GalleryBoardPostForm = () => {
   // };
 
   useEffect(() => {
-    const { fileInfo, title, description } = formState;
+    const { fileInfo, title, description } = formStates;
     setIsPostBtnDisabled(
-      fileInfo.length === 0 ||
-        title.trim().length === 0 ||
-        description.trim().length === 0
+      // fileInfo.length === 0 ||
+      title?.trim().length === 0 || description?.trim().length === 0
     );
-  }, [isPostBtnDisabled, formState]);
+    console.log(isPostBtnDisabled);
+  }, [isPostBtnDisabled, formStates]);
 
   return (
     <div className={"min-h-screen bg-home-background"}>
@@ -130,25 +139,25 @@ const GalleryBoardPostForm = () => {
                   "formWrapper w-[36rem] px-10 py-8 rounded-3xl bg-white"
                 }
               >
-                <form onSubmit={handleFormSubmit} className={"flex flex-col"}>
+                <form className={"flex flex-col"}>
                   <div className={"flex flex-col justify-between"}>
                     <div className={"my-6"}>
-                      <FileInput
-                        fileInformation={formState.fileInfo}
+                      {/* <FileInput
+                        fileInformation={formStates.fileInfo}
                         onFileInfoChange={handleFileInfoChange}
                         onFileDelete={handleFileDelete}
-                      />
+                      /> */}
                     </div>
                     <div className={"flex flex-col mb-[0.15rem]"}>
                       <TitleInput
-                        title={formState.title}
+                        title={formStates.title}
                         onTitleChange={handleTitleChange}
                         ref={titleInputRef}
                       />
                     </div>
                     <div className={"flex flex-col mb-6"}>
                       <DescriptionInput
-                        description={formState.description}
+                        description={formStates.description}
                         onDescriptionChange={handleDescriptionChange}
                         ref={descriptionInputRef}
                       />
