@@ -21,15 +21,14 @@ const Album = () => {
 
   // @@@@@@@@@@@@실제 로직에 추가
   // mainPhotoPath: 상위 GalleryThumb.jsx에서 Link로 넘겨준 props
-  // const mainPhotoPath = location.state.mainPhotoPath
+  // const mainPhotoPath = location.state.mainPhotoPath;
   // @@@@@@@@@@@@실제 로직에 추가
   // 실제 메인이미지 경로
   // setMainImage(mainPhotoPath);
 
-  // 실제 경로id
-  // const { postId } = useParams();
-  const { id } = useParams();
-  const url = `http://localhost:3002/album${id}`;
+  const { postId } = useParams();
+  console.log(postId);
+  const url = `http://172.20.10.8:8080/photo-post/${postId}`;
 
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -40,9 +39,9 @@ const Album = () => {
     // 실제 경로
     // `~/${postId}`
     axios?.get(url)?.then((res) => {
-      setPhotos(res.data);
+      setPhotos(res.data.response["file-data"]);
       setIsLoading(false);
-      setMainImage(res.data[0].src);
+      // setMainImage(res.data[0].src);
     });
   }, [url]);
 
@@ -90,7 +89,7 @@ const Album = () => {
             <div className="h-screen pt-32">
               {/* <Test /> */}
               {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
-              <AlbumDescription albumId={id} albumData={albumData} />
+              {/* <AlbumDescription albumId={id} albumData={albumData} /> */}
               {/* AlbumMainPhoto으로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-2 left-2/4 -translate-x-2/4">
                 <FiChevronUp

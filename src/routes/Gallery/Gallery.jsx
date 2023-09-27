@@ -7,9 +7,11 @@ import Masonry from "react-masonry-css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { Flex } from "@chakra-ui/react";
+import axios from "axios";
 
 const ALBUM_NUMS_PER_PAGE = 10;
 function Gallery() {
+  console.log("갤러리");
   const [albums, setAlbums] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
@@ -19,10 +21,7 @@ function Gallery() {
   const fetchNextAlbums =
     ({ setAlbums, setHasMore }) =>
     async () => {
-      const nextAlbums = await fetchAlbums({
-        setPage,
-        page,
-      });
+      const nextAlbums = await fetchAlbums();
       setAlbums((prevAlbums) => prevAlbums.concat(nextAlbums));
       // api 호출시 page 당 데이터 개수: 10개
       nextAlbums.length < ALBUM_NUMS_PER_PAGE
@@ -31,15 +30,27 @@ function Gallery() {
     };
 
   // 초기 갤러리 화면 불러오기
-  const initGallery = async () => {
-    const initAlbums = await fetchAlbums({ setPage, page });
-    setAlbums(initAlbums);
-    setIsLoading(false);
-  };
+  // const fetchInitAlbums = useCallback(async () => {
+  //   const data = await fetchAlbums();
+  //   console.log(data);
+  //   setAlbums(data);
+  // }, []);
   // 초기 화면 렌더링
+  const url = "http://172.20.10.8:8080/photo-post";
+
+  const offset = 0;
+  const limit = 10;
+  const queryParams = `?offset=${offset}&limit=${limit}`;
+  const requestUrl = url + queryParams;
+
   useEffect(() => {
-    initGallery();
-  }, []);
+    const getInitAlbums = async () => {
+      const res = await axios?.get(requestUrl);
+      setAlbums(res.data.response);
+    };
+    getInitAlbums();
+    setIsLoading(false);
+  }, [requestUrl]);
 
   // Masonary 레이아웃 열 갯수 (반응형)
   const breakpointColumnsObj = {
@@ -68,8 +79,7 @@ function Gallery() {
               <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
                 {albums &&
                   albums.map((album) => (
-                    <Thumbnail key={album.id} id={album.id} album={album} />
-                    // <Thumbnail key={album.postId} id={album.postId} album={album} />
+                    <Thumbnail key={album.postId} album={album} />
                   ))}
               </Flex>
             </InfiniteScroll>

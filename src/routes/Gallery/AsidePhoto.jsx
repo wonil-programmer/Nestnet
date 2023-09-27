@@ -3,9 +3,10 @@ import { useContext } from "react";
 import { MainPhotoContext } from "../../context/MainPhotoContext";
 
 export default function AsidePhoto({ photo }) {
-  // const filePath = filePath;
-  // const saveFileName = saveFileName;
-  // const photoPath = filePath + "/" + saveFileName;
+  const imageRootPath = "http://172.20.10.8:8080/image";
+  let saveFilePath = photo.saveFilePath;
+  let saveFileName = photo.saveFileName;
+  let photoPath = imageRootPath + "/" + saveFilePath + "/" + saveFileName;
 
   const { setMainImage } = useContext(MainPhotoContext);
 
@@ -16,8 +17,7 @@ export default function AsidePhoto({ photo }) {
         className="w-full"
         key={photo.id}
         // 실제 photo src
-        // src={photo.photoPath}
-        src={`${process.env.PUBLIC_URL}/assets/${photo.src}`}
+        src={photoPath}
         alt={photo.alt}
       />
       <div
