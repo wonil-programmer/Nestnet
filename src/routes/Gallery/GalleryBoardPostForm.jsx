@@ -6,82 +6,59 @@ import FileInput from "./Form/FileInput";
 import BoardPostButton from "./Form/BoardPostButton";
 import { useState, useEffect, useRef } from "react";
 import { v4 } from "uuid";
-import { useReducer } from "react";
+import {
+  setFileInfo,
+  deleteFile,
+  setTitle,
+  setDescription,
+} from "./Form/formReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 const GalleryBoardPostForm = () => {
   const [isPostBtnDisabled, setIsPostBtnDisabled] = useState(true);
 
-  const formReducer = (state, action) => {
-    switch (action.type) {
-      case "SET_FILEINFO":
-        return { ...state, fileInfo: action.payload };
-      case "FILE_DELETE":
-        return {
-          ...state,
-          fileInfo: action.payload,
-        };
-      case "SET_TITLE_INPUT":
-        return { ...state, title: action.payload };
-      case "SET_DESCRIPTION_INPUT":
-        return { ...state, bodyContent: action.payload };
-      default:
-        return state;
-    }
-  };
-
-  const initialFormState = {
-    fileInfo: [],
-    title: "",
-    bodyContent: "",
-  };
-  const [formState, dispatch] = useReducer(formReducer, initialFormState);
+  const formStates = useSelector((state) => state.form);
+  const formDispatch = useDispatch();
 
   const titleInputRef = useRef(null);
   const descriptionInputRef = useRef(null);
 
+  // 게시물 제목
   const handleTitleChange = () => {
-    let titleInputData = titleInputRef.current.value;
-    dispatch({ type: "SET_TITLE_INPUT", payload: titleInputData });
-    // const key = event.target.id.replace("Input", "");
-    // const value = event.target.value;
-    // setFormValues({ ...formValues, [key]: value });
+    let titleInputValue = titleInputRef.current.value;
+    formDispatch(setTitle(titleInputValue));
   };
 
-  const handleDescriptionChange = () => {
-    // setFormValues({ ...formValues, bodyContent: event.target.value });
-    let descriptionInputData = descriptionInputRef.current.value;
-    dispatch({ type: "SET_DESCRIPTION_INPUT", payload: descriptionInputData });
+  // 게시물 본문
+  const handleBodyContentChange = () => {
+    let bodyContentInput = descriptionInputRef.current.value;
+    formDispatch(setDescription(bodyContentInput));
   };
 
+  // 첨부 파일 추가
   const handleFileInfoChange = (event) => {
-    dispatch({
-      type: "SET_FILEINFO",
-      payload: [
-        ...formState.fileInfo,
-        ...Array.from(event.target.files).map((file) => ({ id: v4(), file })),
-      ],
-    });
+    formDispatch(
+      setFileInfo(
+        Array.from(event.target.files).map((file) => ({ id: v4(), file }))
+      )
+    );
   };
 
-  const handleFileDelete = (targetFileInfo) => {
-    dispatch({
-      type: "FILE_DELETE",
-      payload: formState.fileInfo.filter(
-        (fileInfo) => fileInfo?.id !== targetFileInfo?.id
-      ),
-    });
+  // 첨부 파일 삭제
+  const handleFileDelete = (targetFileId) => {
+    formDispatch(deleteFile(targetFileId));
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
-    const blob = new Blob([JSON.stringify(formState)], {
+    const blob = new Blob([JSON.stringify(formStates)], {
       type: "application/json",
     });
     console.log(blob);
 
     formData.append("data", blob);
-    formState.fileInfo.forEach((fileInfo) =>
+    formStates.fileInfo.forEach((fileInfo) =>
       formData.append("photo-file", fileInfo.file)
     );
 
@@ -95,13 +72,14 @@ const GalleryBoardPostForm = () => {
   };
 
   useEffect(() => {
-    const { fileInfo, title, bodyContent } = formState;
+    const { fileInfo, title, bodyContent } = formStates;
+    console.log(fileInfo, title, bodyContent);
     setIsPostBtnDisabled(
-      fileInfo.length === 0 ||
-        title.trim().length === 0 ||
-        bodyContent.trim().length === 0
+      fileInfo?.length === 0 ||
+        title?.trim().length === 0 ||
+        bodyContent?.trim().length === 0
     );
-  }, [isPostBtnDisabled, formState]);
+  }, [isPostBtnDisabled, formStates]);
 
   return (
     <div className={"min-h-screen bg-home-background"}>
@@ -119,22 +97,22 @@ const GalleryBoardPostForm = () => {
                   <div className={"flex flex-col justify-between"}>
                     <div className={"my-6"}>
                       <FileInput
-                        fileInformation={formState.fileInfo}
+                        fileInformation={formStates.fileInfo}
                         onFileInfoChange={handleFileInfoChange}
                         onFileDelete={handleFileDelete}
                       />
                     </div>
                     <div className={"flex flex-col mb-[0.15rem]"}>
                       <TitleInput
-                        title={formState.title}
+                        title={formStates.title}
                         onTitleChange={handleTitleChange}
                         ref={titleInputRef}
                       />
                     </div>
                     <div className={"flex flex-col mb-6"}>
                       <DescriptionInput
-                        bodyContent={formState.bodyContent}
-                        onDescriptionChange={handleDescriptionChange}
+                        bodyContent={formStates.bodyContent}
+                        onDescriptionChange={handleBodyContentChange}
                         ref={descriptionInputRef}
                       />
                     </div>
