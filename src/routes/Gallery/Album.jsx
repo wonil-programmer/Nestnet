@@ -8,6 +8,8 @@ import { MainPhotoContext } from "../../context/MainPhotoContext";
 import { useParams, useLocation } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import axios from "axios";
+import { setPhotoInfo, setSelectedPhoto } from "./albumReducer";
+import { useSelector, useDispatch } from "react-redux";
 
 import Test from "./Test";
 
