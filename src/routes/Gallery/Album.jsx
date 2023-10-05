@@ -1,17 +1,14 @@
 import AlbumDescription from "./AlbumDescription";
 import Header from "../../components/Header";
 import AsidePhotos from "./AsidePhotos";
-import PhotoClicked from "./PhotoClicked";
+import SelectedPhoto from "./SelectedPhoto";
 import SideBar from "../../components/SideBar";
-import { useState, useEffect, useContext } from "react";
-import { MainPhotoContext } from "../../context/MainPhotoContext";
+import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import axios from "axios";
 import { setPhotoInfo, setSelectedPhoto } from "./albumReducer";
 import { useSelector, useDispatch } from "react-redux";
-
-import Test from "./Test";
 
 const Album = () => {
   console.log("앨범");
@@ -20,41 +17,26 @@ const Album = () => {
   // albumData: 상위 GalleryThumb.jsx에서 Link로 넘겨준 props
   // => 갤러리 내 각 앨범에 대한 정보 (title, visits 등)
   const albumData = location.state.albumData;
-
-  // @@@@@@@@@@@@실제 로직에 추가
-  // mainPhotoPath: 상위 GalleryThumb.jsx에서 Link로 넘겨준 props
-  // const mainPhotoPath = location.state.mainPhotoPath;
-  // @@@@@@@@@@@@실제 로직에 추가
-  // 실제 메인이미지 경로
-  // setMainImage(mainPhotoPath);
+  const selectedPhotoPath = location.state.selectedPhotoPath;
 
   const { postId } = useParams();
-  console.log(postId);
   const url = `http://172.20.10.8:8080/photo-post/${postId}`;
 
-  const [photos, setPhotos] = useState([]);
+  const albumStates = useSelector((state) => state.album);
+  const albumDispatch = useDispatch();
+
+  // const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { setMainImage } = useContext(MainPhotoContext);
 
   // 앨범 api 호출
   useEffect(() => {
-    // 실제 경로
-    // `~/${postId}`
     axios?.get(url)?.then((res) => {
-      setPhotos(res.data.response["file-data"]);
+      albumDispatch(setPhotoInfo(res.data.response["file-data"]));
+      console.log("썸네일사진", selectedPhotoPath);
+      albumDispatch(setSelectedPhoto(selectedPhotoPath));
       setIsLoading(false);
-      // setMainImage(res.data[0].src);
     });
   }, [url]);
-
-  // useEffect(() => {
-  //   setMainImage(!isLoading && photos ? photos[0].src : null);
-  // }, [photos, isLoading]);
-  // @@@@@@@@@@@@실제 로직에 추가
-  // useEffect(() => {
-  //   setMainImage(albumData.thumb);
-
-  // }, [])
 
   const scrollToDescription = () => {
     window.scroll({
@@ -72,14 +54,14 @@ const Album = () => {
   return (
     <>
       <Header />
-      {isLoading || !photos ? (
+      {isLoading || !albumStates.photoInfo ? (
         <h1>Loading</h1>
       ) : (
         <div className="wrapper relative top-[4.6rem] w-full h-full flex bg-home-background">
           <SideBar className="fixed top-48" />
           <div className="ctrView flex flex-col m-auto">
             <div className="relative -top-8 w-album-visWth h-screen  flex flex-col justify-center">
-              <PhotoClicked />
+              <SelectedPhoto />
               {/* AlbumDescription으로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-8 left-2/4 -translate-x-2/4">
                 <FiChevronDown
@@ -89,7 +71,6 @@ const Album = () => {
               </div>
             </div>
             <div className="h-screen pt-32">
-              {/* <Test /> */}
               {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
               {/* <AlbumDescription albumId={id} albumData={albumData} /> */}
               {/* AlbumMainPhoto으로 이동하는 화살표 버튼 */}
@@ -101,12 +82,7 @@ const Album = () => {
               </div>
             </div>
           </div>
-          <AsidePhotos
-            // 실제 photos props
-            // photos={album.file-data}
-            photos={photos}
-            // 메인이미지를 변경할 수 있게 함
-          />
+          <AsidePhotos photos={albumStates.photoInfo} />
         </div>
       )}
     </>

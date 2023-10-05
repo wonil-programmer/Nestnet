@@ -11,6 +11,7 @@ const albumSlice = createSlice({
   reducers: {
     setPhotoInfo: (state, action) => {
       state.photoInfo = [...state.photoInfo, ...action.payload];
+      // state.photoInfo = [...action.payload];
     },
     setSelectedPhoto: (state, action) => {
       state.selectedPhoto = action.payload;

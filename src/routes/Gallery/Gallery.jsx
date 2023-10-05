@@ -1,6 +1,5 @@
 import Thumbnail from "./Thumbnail";
 import Header from "../../components/Header";
-import fetchAlbums from "./fetchAlbums";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Masonry from "react-masonry-css";
@@ -14,14 +13,16 @@ function Gallery() {
   console.log("갤러리");
   const [albums, setAlbums] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   // 스크롤이 끝지점에 다다르면 다음 페이지 호출
   const fetchNextAlbums =
     ({ setAlbums, setHasMore }) =>
     async () => {
-      const nextAlbums = await fetchAlbums();
+      setPage((page) => page + 1);
+      console.log(page);
+      const nextAlbums = await axios?.get(requestUrl);
       setAlbums((prevAlbums) => prevAlbums.concat(nextAlbums));
       // api 호출시 page 당 데이터 개수: 10개
       nextAlbums.length < ALBUM_NUMS_PER_PAGE
@@ -29,16 +30,12 @@ function Gallery() {
         : setHasMore(true);
     };
 
-  // 초기 갤러리 화면 불러오기
-  // const fetchInitAlbums = useCallback(async () => {
-  //   const data = await fetchAlbums();
-  //   console.log(data);
-  //   setAlbums(data);
-  // }, []);
   // 초기 화면 렌더링
-  const url = "http://172.20.10.8:8080/photo-post";
+  // const url = "http://172.20.10.8:8080/photo-post";
+  // test url
+  const url = "http://localhost:3001/photo-post";
 
-  const offset = 0;
+  const offset = page * 10;
   const limit = 10;
   const queryParams = `?offset=${offset}&limit=${limit}`;
   const requestUrl = url + queryParams;
