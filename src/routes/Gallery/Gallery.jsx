@@ -32,21 +32,28 @@ function Gallery() {
 
   // 초기 화면 렌더링
   // const url = "http://172.20.10.8:8080/photo-post";
-  // test url
+  // 테스트 url
   const url = "http://localhost:3001/photo-post";
 
-  const offset = page * 10;
+  // const offset = page * 10;
+  const offset = 0;
   const limit = 10;
   const queryParams = `?offset=${offset}&limit=${limit}`;
   const requestUrl = url + queryParams;
 
+  // useEffect(() => {
+  //   axios?.get(requestUrl)?.then((res) => {
+  //     setAlbums(res.data.response);
+  //     setIsLoading(false);
+  //   });
+  // }, [requestUrl]);
+
+  // 테스트
   useEffect(() => {
-    const getInitAlbums = async () => {
-      const res = await axios?.get(requestUrl);
-      setAlbums(res.data.response);
-    };
-    getInitAlbums();
-    setIsLoading(false);
+    axios?.get(requestUrl)?.then((res) => {
+      setAlbums(res.data);
+      setIsLoading(false);
+    });
   }, [requestUrl]);
 
   // Masonary 레이아웃 열 갯수 (반응형)
@@ -59,7 +66,7 @@ function Gallery() {
   return (
     <>
       <Header />
-      {isLoading ? (
+      {isLoading || !albums ? (
         <h1>Loading...</h1>
       ) : (
         <div>
@@ -74,10 +81,9 @@ function Gallery() {
               })}
             >
               <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
-                {albums &&
-                  albums.map((album) => (
-                    <Thumbnail key={album.postId} album={album} />
-                  ))}
+                {albums.map((album) => (
+                  <Thumbnail key={album.postId} album={album} />
+                ))}
               </Flex>
             </InfiniteScroll>
           </div>
