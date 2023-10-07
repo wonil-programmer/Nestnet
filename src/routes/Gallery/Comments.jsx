@@ -1,16 +1,19 @@
 import { memo } from "react";
 import Comment from "../../components/Comments/Comment";
+import { useSelector } from "react-redux";
 
-const Comments = ({ commentsInfo }) => {
+const Comments = () => {
+  // commentReducer(RTK)
+  const comments = useSelector((state) => state.comment.comments);
   return (
     <>
-      {commentsInfo.comments && commentsInfo.comments.length !== 0 ? (
-        commentsInfo.comments.map((comment) => (
+      {comments && comments.length !== 0 ? (
+        comments.map((comment) => (
           <Comment
             commentKey={comment.id}
-            userId={comment.userId}
-            body={comment.body}
-            period={comment.period}
+            userName={comment.userName}
+            content={comment.content}
+            createdTime={comment.createdTime}
           />
         ))
       ) : (

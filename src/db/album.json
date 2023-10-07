@@ -1,76 +1,81 @@
 {
-  "album1": [
-    {
-      "id": 1,
-      "src": "a2.jpg",
-      "alt": "23년 전정대 체육대회"
-    },
-    {
-      "id": 2,
-      "src": "a1.jpg",
-      "alt": "23년 전정대 체육대회"
-    },
-    {
-      "id": 3,
-      "src": "a3.jpg",
-      "alt": "23년 전정대 체육대회"
-    },
-    {
-      "id": 4,
-      "src": "a4.jpg",
-      "alt": "23년 전정대 체육대회"
-    },
-    {
-      "id": 5,
-      "src": "a5.jpg",
-      "alt": "23년 전정대 체육대회"
-    },
-    {
-      "id": 6,
-      "src": "a6.jpg",
-      "alt": "23년 전정대 체육대회"
-    },
-    {
-      "id": 7,
-      "src": "a7.jpg",
-      "alt": "23년 전정대 체육대회"
-    },
-    {
-      "id": 8,
-      "src": "a8.jpg",
-      "alt": "23년 전정대 체육대회"
+  "61": {
+    "is-member-liked": false,
+    "file-data": [
+      {
+        "id": 1,
+        "originalFileName": "사진게시판샘플1.jpg",
+        "saveFileName": "466ac4f2-7610-4367-af22-7a8b48700da7_사진게시판샘플1.jpg",
+        "filePath": "C:\\nestnetFile\\PHOTO\\2023AUGUST7_23 체육대회"
+      },
+      {
+        "id": 2,
+        "originalFileName": "사진게시판샘플2.jpg",
+        "saveFileName": "8a7a1c94-78c9-4815-9fa5-1d884a1b75e2_사진게시판샘플2.jpg",
+        "filePath": "C:\\nestnetFile\\PHOTO\\2023AUGUST7_23 체육대회"
+      }
+    ],
+    "comment-data": [
+      {
+        "id": 6,
+        "username": "테스트1",
+        "content": "테스트로 작성한 댓글1",
+        "createdTime": "2023-08-07T14:48:05.723787"
+      },
+      {
+        "id": 7,
+        "username": "테스트2",
+        "content": "테스트로 작성한 댓글2",
+        "createdTime": "2023-08-07T14:57:43.075462"
+      }
+    ],
+    "post-data": {
+      "id": 61,
+      "title": "23 체육대회",
+      "bodyContent": "test",
+      "viewCount": 1,
+      "likeCount": 0,
+      "username": "테스트"
     }
-  ],
-  "album2": [
-    {
-      "id": 1,
-      "src": "b1.png",
-      "alt": "23년 네스트넷 친해지길바라"
-    },
-    {
-      "id": 2,
-      "src": "b2.jpg",
-      "alt": "23년 네스트넷 친해지길바라"
-    },
-    {
-      "id": 3,
-      "src": "b3.jpg",
-      "alt": "23년 네스트넷 친해지길바라"
-    },
-    {
-      "id": 4,
-      "src": "b4.png",
-      "alt": "23년 네스트넷 친해지길바라"
-    },
-    {
-      "id": 5,
-      "src": "b5.png",
-      "alt": "23년 네스트넷 친해지길바라"
-    },
-    {
-      "id": 6,
-      "src": "b6.jpg",
-      "alt": "23년 네스트넷 친해지길바라"
+  },
+  "62": {
+    "is-member-liked": false,
+    "file-data": [
+      {
+        "originalFileName": "사진게시판샘플1.jpg",
+        "saveFileName": "466ac4f2-7610-4367-af22-7a8b48700da7_사진게시판샘플1.jpg",
+        "filePath": "C:\\nestnetFile\\PHOTO\\2023AUGUST7_23 체육대회"
+      },
+      {
+        "originalFileName": "사진게시판샘플2.jpg",
+        "saveFileName": "8a7a1c94-78c9-4815-9fa5-1d884a1b75e2_사진게시판샘플2.jpg",
+        "filePath": "C:\\nestnetFile\\PHOTO\\2023AUGUST7_23 체육대회"
+      }
+    ],
+    "comment-data": [
+      {
+        "id": 6,
+        "username": "테스트3",
+        "content": "테스트로 작성한 댓글3",
+        "createdTime": "2023-08-07T14:48:05.723787"
+      },
+      {
+        "id": 7,
+        "username": "테스트4",
+        "content": "테스트로 작성한 댓글4",
+        "createdTime": "2023-08-07T14:57:43.075462"
+      }
+    ],
+    "post-data": {
+      "id": 61,
+      "title": "23 체육대회",
+      "bodyContent": "test",
+      "viewCount": 1,
+      "likeCount": 0,
+      "username": "테스트",
+      "createdTime": [2023, 9, 26, 14, 31, 9, 493590000],
+      "modifiedTime": null,
+      "memberWritten": true
     }
-  ]
+  }
 }

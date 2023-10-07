@@ -7,12 +7,12 @@ import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import axios from "axios";
-import { setPhotoInfo, setSelectedPhoto } from "./albumReducer";
+import { setPhotoInfo, setSelectedPhoto, setMetadata } from "./albumReducer";
+import { setCommentInput, setComments } from "./commentReducer";
 import { useSelector, useDispatch } from "react-redux";
 
 const Album = () => {
   console.log("앨범");
-  // eslint-disable-next-line no-restricted-globals
   const location = useLocation();
   // albumData: 상위 GalleryThumb.jsx에서 Link로 넘겨준 props
   // => 갤러리 내 각 앨범에 대한 정보 (title, visits 등)
@@ -20,20 +20,35 @@ const Album = () => {
   const selectedPhotoPath = location.state.selectedPhotoPath;
 
   const { postId } = useParams();
-  const url = `http://172.20.10.8:8080/photo-post/${postId}`;
+  // const url = `http://172.20.10.8:8080/photo-post/${postId}`;
+  // 테스트 url
+  const url = `http://localhost:3002/${postId}`;
 
+  // 앨범 데이터 관련 state, reducer (RTK 문법)
   const albumStates = useSelector((state) => state.album);
   const albumDispatch = useDispatch();
+  // 댓글 데이터 관련 reducer (RTK 문법)
+  const commentDispatch = useDispatch();
 
-  // const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // 앨범 api 호출
+  // 실제 앨범 api 호출
+  // useEffect(() => {
+  //   axios?.get(url)?.then((res) => {
+  //     albumDispatch(setPhotoInfo(res.data.response["file-data"]));
+  //     console.log("썸네일사진", selectedPhotoPath);
+  //     albumDispatch(setSelectedPhoto(selectedPhotoPath));
+  //     setIsLoading(false);
+  //   });
+  // }, [url]);
+
+  // 테스트 url
   useEffect(() => {
     axios?.get(url)?.then((res) => {
-      albumDispatch(setPhotoInfo(res.data.response["file-data"]));
-      console.log("썸네일사진", selectedPhotoPath);
+      albumDispatch(setPhotoInfo(res.data["file-data"]));
+      albumDispatch(setMetadata(res.data["post-data"]));
       albumDispatch(setSelectedPhoto(selectedPhotoPath));
+      commentDispatch(setComments(res.data["comment-data"]));
       setIsLoading(false);
     });
   }, [url]);
@@ -54,7 +69,7 @@ const Album = () => {
   return (
     <>
       <Header />
-      {isLoading || !albumStates.photoInfo ? (
+      {isLoading || !albumStates.photoInfo || !albumStates.selectedPhoto ? (
         <h1>Loading</h1>
       ) : (
         <div className="wrapper relative top-[4.6rem] w-full h-full flex bg-home-background">
@@ -72,7 +87,7 @@ const Album = () => {
             </div>
             <div className="h-screen pt-32">
               {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
-              {/* <AlbumDescription albumId={id} albumData={albumData} /> */}
+              <AlbumDescription albumData={albumData} />
               {/* AlbumMainPhoto으로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-2 left-2/4 -translate-x-2/4">
                 <FiChevronUp

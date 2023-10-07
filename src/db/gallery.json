@@ -2,11 +2,17 @@
   "photo-post": [
     {
       "postId": 61,
+      "title": "test title",
+      "viewCount": 100,
+      "likeCount": 200,
       "saveFileName": "information.png",
       "saveFilePath": "C:\\Users\\wonza\\Pictures"
     },
     {
       "postId": 62,
+      "title": "test title2",
+      "viewCount": 0,
+      "likeCount": 0,
       "saveFileName": "information.png",
       "saveFilePath": "C:\\Users\\wonza\\Pictures"
     }
