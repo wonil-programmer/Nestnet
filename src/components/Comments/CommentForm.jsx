@@ -14,7 +14,7 @@ const CommentForm = () => {
   const commentsDispatch = useDispatch();
   const newCommentDispatch = useDispatch();
 
-  const { id } = useParams();
+  const { postId } = useParams();
 
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef(null);
@@ -32,7 +32,7 @@ const CommentForm = () => {
 
     // 댓글 입력 POST 요청
     setIsLoading(true);
-    fetch(`http://localhost:3002/${id}`, {
+    fetch(`http://localhost:3002/${postId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const CommentForm = () => {
     }).then((res) => {
       if (res.ok) {
         // POST 요청이 성공적으로 완료될 때, 데이터를 다시 가져오고 dispatch를 호출하여 업데이트
-        fetch(`http://localhost:3002/${id}`)
+        fetch(`http://localhost:3002/${postId}`)
           .then((response) => response.json())
           .then((commentsData) => {
             commentsDispatch(setComments(commentsData));
@@ -99,7 +99,7 @@ const CommentForm = () => {
             />
           )}
         </form>
-        {/* <LikeBtn albumData={albumData} /> */}
+        <LikeBtn />
       </div>
     </div>
   );

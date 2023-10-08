@@ -7,21 +7,6 @@ import { useSelector } from "react-redux";
 const AlbumDescription = () => {
   console.log("앨범 댓글창");
 
-  // const commentReducer = (state, action) => {
-  //   switch (action.type) {
-  //     case "SET_COMMENT_INPUT":
-  //       return { ...state, newComment: action.payload };
-  //     case "SET_COMMENTS":
-  //       return {
-  //         count: action.payload.commentsData.length,
-  //         comments: action.payload.commentsData,
-  //         newComment: "",
-  //       };
-  //     default:
-  //       return state;
-  //   }
-  // };
-
   const bodyContent = useSelector((state) => state.album.bodyContent);
   const commentsCount = useSelector((state) => state.comment.count);
 

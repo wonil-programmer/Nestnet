@@ -7,8 +7,13 @@ import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import axios from "axios";
-import { setPhotoInfo, setSelectedPhoto, setMetadata } from "./albumReducer";
-import { setCommentInput, setComments } from "./commentReducer";
+import {
+  setPhotoInfo,
+  setSelectedPhoto,
+  setMetadata,
+  setIsMemberLiked,
+} from "./albumReducer";
+import { setComments } from "./commentReducer";
 import { useSelector, useDispatch } from "react-redux";
 
 const Album = () => {
@@ -44,10 +49,12 @@ const Album = () => {
 
   // 테스트 url
   useEffect(() => {
+    console.log("앨범 api호출");
     axios?.get(url)?.then((res) => {
       albumDispatch(setPhotoInfo(res.data["file-data"]));
-      albumDispatch(setMetadata(res.data["post-data"]));
       albumDispatch(setSelectedPhoto(selectedPhotoPath));
+      albumDispatch(setMetadata(res.data["post-data"]));
+      albumDispatch(setIsMemberLiked(res.data["is-member-liked"]));
       commentDispatch(setComments(res.data["comment-data"]));
       setIsLoading(false);
     });

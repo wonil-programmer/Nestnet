@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { memo } from "react";
 import { MdZoomOutMap } from "react-icons/md";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
@@ -41,4 +42,4 @@ const SelectedPhoto = () => {
   );
 };
 
-export default SelectedPhoto;
+export default memo(SelectedPhoto);

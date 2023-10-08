@@ -7,6 +7,7 @@ const initialAlbumState = {
   bodyContent: "",
   viewCount: "",
   likeCount: "",
+  isMemberLiked: false,
 };
 
 const albumSlice = createSlice({
@@ -26,9 +27,12 @@ const albumSlice = createSlice({
       state.viewCount = action.payload.viewCount;
       state.likeCount = action.payload.likeCount;
     },
+    setIsMemberLiked: (state, action) => {
+      state.isMemberLiked = action.payload;
+    },
   },
 });
 
-export const { setPhotoInfo, setSelectedPhoto, setMetadata } =
+export const { setPhotoInfo, setSelectedPhoto, setMetadata, setIsMemberLiked } =
   albumSlice.actions;
 export default albumSlice.reducer;
