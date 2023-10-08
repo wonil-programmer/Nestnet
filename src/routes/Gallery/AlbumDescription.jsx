@@ -5,8 +5,6 @@ import DownloadBtn from "./DownloadBtn";
 import { useSelector } from "react-redux";
 
 const AlbumDescription = () => {
-  console.log("앨범 댓글창");
-
   const bodyContent = useSelector((state) => state.album.bodyContent);
   const commentsCount = useSelector((state) => state.comment.count);
 
