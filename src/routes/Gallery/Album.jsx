@@ -41,6 +41,10 @@ const Album = () => {
   // useEffect(() => {
   //   axios?.get(url)?.then((res) => {
   //     albumDispatch(setPhotoInfo(res.data.response["file-data"]));
+  //     albumDispatch(setSelectedPhoto(selectedPhotoPath));
+  //     albumDispatch(setMetadata(res.data.response["post-data"]));
+  //     albumDispatch(setIsMemberLiked(res.data.response["is-member-liked"]));
+  //     commentDispatch(setComments(res.data.response["comment-data"]));
   //     console.log("썸네일사진", selectedPhotoPath);
   //     albumDispatch(setSelectedPhoto(selectedPhotoPath));
   //     setIsLoading(false);
@@ -75,11 +79,12 @@ const Album = () => {
 
   return (
     <>
+      {/* <div className={"min-w-screen min-h-screen bg-home-background"}> */}
       <Header />
       {isLoading || !albumStates.photoInfo || !albumStates.selectedPhoto ? (
         <h1>Loading</h1>
       ) : (
-        <div className="wrapper relative top-[4.6rem] w-full h-full flex bg-home-background">
+        <div className="wrapper relative top-[4.6rem] h-full flex bg-home-background">
           <SideBar className="fixed top-48" />
           <div className="ctrView flex flex-col m-auto">
             <div className="relative -top-8 w-album-visWth h-screen  flex flex-col justify-center">
@@ -107,6 +112,7 @@ const Album = () => {
           <AsidePhotos photos={albumStates.photoInfo} />
         </div>
       )}
+      {/* </div> */}
     </>
   );
 };
