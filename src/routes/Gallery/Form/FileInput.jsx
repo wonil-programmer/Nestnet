@@ -49,7 +49,7 @@ const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
                       type={"button"}
                       onClick={() => {
                         inputFileRef.current.value = null;
-                        onFileDelete(fileInfo);
+                        onFileDelete(fileInfo.id);
                       }}
                       className={
                         "absolute w-8 h-8 bg-white bottom-3 right-3 rounded-full duration-300"
