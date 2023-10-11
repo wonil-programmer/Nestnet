@@ -17,8 +17,15 @@ const commentSlice = createSlice({
       state.comments = action.payload;
       state.newComment = "";
     },
+    deleteComment: (state, action) => {
+      state.comments.splice(
+        state.comments.findIndex((comment) => comment.id === action.payload),
+        1
+      );
+    },
   },
 });
 
-export const { setCommentInput, setComments } = commentSlice.actions;
+export const { setCommentInput, setComments, deleteComment } =
+  commentSlice.actions;
 export default commentSlice.reducer;

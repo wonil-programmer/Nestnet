@@ -1,5 +1,11 @@
-const Comment = ({ commentKey: commentId, userName, content, createdTime }) => {
-  const handleDeleteBtnClick = () => {};
+import { useDispatch } from "react-redux";
+import { deleteComment } from "../../routes/Gallery/commentReducer";
+
+const Comment = ({ commentId, userName, content, createdTime }) => {
+  const commentDispatch = useDispatch();
+  const onCommentDelete = (commentId) => {
+    commentDispatch(deleteComment(commentId));
+  };
   return (
     <>
       <li className="w-full" key={commentId}>
@@ -14,7 +20,7 @@ const Comment = ({ commentKey: commentId, userName, content, createdTime }) => {
             <div className="w-full whitespace-normal">{content}</div>
             <div className="flex mt-2 pr-8 text-[0.9rem]">
               <span className="mr-4">{createdTime}</span>
-              <button onClick={handleDeleteBtnClick}>삭제</button>
+              <button onClick={() => onCommentDelete(commentId)}>삭제</button>
             </div>
           </div>
         </div>

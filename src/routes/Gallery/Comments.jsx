@@ -10,8 +10,9 @@ const Comments = () => {
       {comments && comments.length !== 0 ? (
         comments.map((comment) => (
           <Comment
-            commentKey={comment.id}
-            userName={comment.userName}
+            key={comment.id}
+            commentId={comment.id}
+            userName={comment.username}
             content={comment.content}
             createdTime={comment.createdTime}
           />
