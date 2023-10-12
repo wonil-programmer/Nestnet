@@ -5,18 +5,25 @@ import { useSelector } from "react-redux";
 const Comments = () => {
   // commentReducer(RTK)
   const comments = useSelector((state) => state.comment.comments);
+  const selectedCommentId = useSelector(
+    (state) => state.comment.selectedCommentId
+  );
+
   return (
     <>
       {comments && comments.length !== 0 ? (
-        comments.map((comment) => (
-          <Comment
-            key={comment.id}
-            commentId={comment.id}
-            userName={comment.username}
-            content={comment.content}
-            createdTime={comment.createdTime}
-          />
-        ))
+        comments.map((comment) => {
+          return (
+            <Comment
+              key={comment.id}
+              commentId={comment.id}
+              userName={comment.username}
+              content={comment.content}
+              createdTime={comment.createdTime}
+              isEditing={selectedCommentId === comment.id ? true : false}
+            />
+          );
+        })
       ) : (
         <p class="text-base text-gray-600">
           아직 댓글이 없습니다! 가장 먼저 댓글을 작성해보세요.
