@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialFormState = {
+  isEditing: false,
   fileInfo: [],
   title: "",
-  description: "",
+  bodyContent: "",
 };
 
 const formSlice = createSlice({
   name: "formReducer",
   initialState: initialFormState,
   reducers: {
+    setIsEditing: (state, action) => {
+      state.isEditing = action.payload;
+    },
     setFileInfo: (state, action) => {
       //   action.payload.forEach((file) => {
       //     state.fileInfo.push(file);
@@ -28,12 +32,17 @@ const formSlice = createSlice({
     setTitle: (state, action) => {
       state.title = action.payload;
     },
-    setDescription: (state, action) => {
-      state.description = action.payload;
+    setBodyContent: (state, action) => {
+      state.bodyContent = action.payload;
     },
   },
 });
 
-export const { setFileInfo, deleteFile, setTitle, setDescription } =
-  formSlice.actions;
+export const {
+  setIsEditing,
+  setFileInfo,
+  deleteFile,
+  setTitle,
+  setBodyContent,
+} = formSlice.actions;
 export default formSlice.reducer;
