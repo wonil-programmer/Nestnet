@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-const DescriptionInput = ({ description, onDescriptionChange }, ref) => {
+const DescriptionInput = ({ bodyContent, onDescriptionChange }, ref) => {
   return (
     <>
       <input
@@ -8,7 +8,7 @@ const DescriptionInput = ({ description, onDescriptionChange }, ref) => {
         type={"text"}
         minLength={4}
         maxLength={50}
-        value={description}
+        value={bodyContent}
         placeholder={"사진들에 대한 상세 설명을 작성하세요."}
         onChange={onDescriptionChange}
         className={
