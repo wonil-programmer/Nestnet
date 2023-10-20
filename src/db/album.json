@@ -5,14 +5,14 @@
       {
         "id": 1,
         "originalFileName": "사진게시판샘플1.jpg",
-        "saveFileName": "466ac4f2-7610-4367-af22-7a8b48700da7_사진게시판샘플1.jpg",
-        "filePath": "C:\\nestnetFile\\PHOTO\\2023AUGUST7_23 체육대회"
+        "saveFileName": "information.png",
+        "filePath": "file:///C:/Users/wonza/Pictures"
       },
       {
         "id": 2,
         "originalFileName": "사진게시판샘플2.jpg",
-        "saveFileName": "8a7a1c94-78c9-4815-9fa5-1d884a1b75e2_사진게시판샘플2.jpg",
-        "filePath": "C:\\nestnetFile\\PHOTO\\2023AUGUST7_23 체육대회"
+        "saveFileName": "party.png",
+        "filePath": "file:///C:/Users/wonza/Pictures"
       }
     ],
     "comment-data": [
@@ -32,7 +32,7 @@
     "post-data": {
       "id": 61,
       "title": "23 체육대회",
-      "bodyContent": "test",
+      "bodyContent": "테스트본문1",
       "viewCount": 1,
       "likeCount": 0,
       "username": "테스트"
