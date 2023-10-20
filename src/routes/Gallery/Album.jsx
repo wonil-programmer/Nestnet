@@ -7,8 +7,6 @@ import { useState, useEffect } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { Dialog, DialogContent, Button, IconButton } from "@mui/material";
-import { FiEdit3 } from "react-icons/fi";
-import { MdDelete } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
 import axios from "axios";
 import {
@@ -18,31 +16,31 @@ import {
   setIsMemberLiked,
 } from "./albumReducer";
 import { setComments } from "./commentReducer";
+import { setIsEditing } from "./Form/formReducer";
 import { useSelector, useDispatch } from "react-redux";
 
 const Album = () => {
   console.log("앨범");
+
+  const navigate = useNavigate();
+  const { postId } = useParams();
   const location = useLocation();
-  // albumData: 상위 GalleryThumb.jsx에서 Link로 넘겨준 props
-  // => 갤러리 내 각 앨범에 대한 정보 (title, visits 등)
-  const albumData = location.state.albumData;
   const selectedPhotoPath = location.state.selectedPhotoPath;
 
-  const { postId } = useParams();
   // const url = `http://172.20.10.8:8080/photo-post/${postId}`;
   // 테스트 url
   const url = `http://localhost:3002/${postId}`;
+  const [isLoading, setIsLoading] = useState(true);
 
   // 앨범 데이터 관련 state, reducer (RTK 문법)
   const albumStates = useSelector((state) => state.album);
   const albumDispatch = useDispatch();
   // 댓글 데이터 관련 reducer (RTK 문법)
   const commentDispatch = useDispatch();
+  // 수정 여부 관련 reducer (RTK 문법)
+  const isEditingDispatch = useDispatch();
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  const navigate = useNavigate();
-  // 모달창 가시여부
+  // 삭제 버튼 클릭시의 모달창 가시여부
   const [modalVisible, setModalVisible] = useState(false);
 
   // 실제 앨범 api 호출
@@ -101,6 +99,7 @@ const Album = () => {
               color="error"
               onClick={() => {
                 setModalVisible(true);
+                // 앨범 삭제 로직 추가
               }}
             >
               삭제
@@ -109,7 +108,17 @@ const Album = () => {
               style={{ height: "48px", margin: "6px" }}
               variant="outlined"
               onClick={() => {
-                navigate(`/edit-board/${postId}`);
+                let photoInfo = albumStates.photoInfo;
+                let title = albumStates.title;
+                let bodyContent = albumStates.bodyContent;
+                let prevData = { photoInfo, title, bodyContent };
+                console.log(prevData);
+                isEditingDispatch(setIsEditing(true));
+                navigate(`/gallery/${postId}/edit`, {
+                  state: {
+                    metaData: prevData,
+                  },
+                });
               }}
             >
               수정
@@ -128,7 +137,7 @@ const Album = () => {
             </div>
             <div className="h-screen pt-32">
               {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
-              <AlbumDescription albumData={albumData} />
+              <AlbumDescription />
               {/* AlbumMainPhoto으로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-2 left-2/4 -translate-x-2/4">
                 <FiChevronUp

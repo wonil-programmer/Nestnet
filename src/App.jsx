@@ -12,6 +12,10 @@ function App() {
         <Route path={`gallery`} element={<Gallery />} />
         <Route path={"gallery/:postId"} element={<Album />} />
         <Route path={"gallery/form"} element={<GalleryBoardPostForm />} />
+        <Route
+          path={"gallery/:postId/edit"}
+          element={<GalleryBoardPostForm />}
+        />
       </Routes>
     </BrowserRouter>
   );
