@@ -14,7 +14,7 @@ function App() {
         <Route path={"gallery/form"} element={<GalleryBoardPostForm />} />
         <Route
           path={"gallery/:postId/edit"}
-          element={<GalleryBoardPostForm />}
+          element={<GalleryBoardPostForm isModifying={true} />}
         />
       </Routes>
     </BrowserRouter>
