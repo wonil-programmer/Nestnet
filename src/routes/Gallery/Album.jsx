@@ -9,52 +9,38 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { Dialog, DialogContent, Button, IconButton } from "@mui/material";
 import { TiDelete } from "react-icons/ti";
 import axios from "axios";
-import { setComments } from "./commentReducer";
-import { useDispatch } from "react-redux";
 
 const Album = () => {
-  console.log("앨범");
   const navigate = useNavigate();
   const { postId } = useParams();
   const location = useLocation();
-  const selectedPhotoPath = location.state.selectedPhotoPath;
-  const title = location.state.title;
-  const viewCount = location.state.viewCount;
-  const likeCount = location.state.likeCount;
+  const { selectedPhotoPath, title, viewCount, likeCount } = location.state;
 
   const [photoInfo, setPhotoInfo] = useState([]);
   const [selectedPhoto, setSelectedPhoto] = useState("");
   const [isMemberLiked, setIsMemberLiked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [metaData, setMetadata] = useState({
     title: "",
     bodyContent: "",
-    viewCount: 1,
-    likeCount: 1,
+    viewCount: 0,
+    likeCount: 0,
   });
+  const [comments, setComments] = useState([]);
   setMetadata((prevState) => {
     return {
       ...prevState,
-      title: title,
-      viewCount: viewCount,
-      likeCount: likeCount,
+      title,
+      viewCount,
+      likeCount,
     };
   });
   setSelectedPhoto(selectedPhotoPath);
 
-  const url = `http://172.30.17.126:8080/photo-post/${postId}`;
-  // const url = `http://172.20.10.8:8080/photo-post/${postId}`;
-  // // 테스트 url
-  // const url = `http://localhost:3002/${postId}`;
-  const [isLoading, setIsLoading] = useState(true);
-
-  // 댓글 데이터 관련 reducer (RTK 문법)
-  const commentDispatch = useDispatch();
-
-  // 삭제 버튼 클릭시의 모달창 가시여부
-  const [modalVisible, setModalVisible] = useState(false);
-
+  const albumUrl = `${process.env.REACT_APP_SERVER}/photo-post/${postId}`;
   useEffect(() => {
-    axios?.get(url)?.then((res) => {
+    axios?.get(albumUrl)?.then((res) => {
       setPhotoInfo(res.data.response["file-data"]);
       setMetadata((prevState) => {
         return {
@@ -63,10 +49,10 @@ const Album = () => {
         };
       });
       setIsMemberLiked(res.data.response["is-member-liked"]);
-      commentDispatch(setComments(res.data.response["comment-data"]));
+      setComments(res.data.response["comment-data"]);
       setIsLoading(false);
     });
-  }, [url]);
+  }, [albumUrl]);
 
   const scrollToDescription = () => {
     window.scroll({
@@ -96,7 +82,7 @@ const Album = () => {
               variant="outlined"
               color="error"
               onClick={() => {
-                setModalVisible(true);
+                setDeleteModalVisible(true);
                 // 앨범 삭제 로직 추가
               }}
             >
@@ -124,7 +110,7 @@ const Album = () => {
           <div className="ctrView flex flex-col m-auto">
             <div className="relative -top-8 w-album-visWth h-screen  flex flex-col justify-center">
               <SelectedPhoto photo={selectedPhoto} />
-              {/* AlbumDescription으로 이동하는 화살표 버튼 */}
+              {/* 하단뷰로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-8 left-2/4 -translate-x-2/4">
                 <FiChevronDown
                   className="text-4xl text-stone-500 cursor-pointer hover:animate-[wiggle_1s_ease-in-out_infinite] hover:text-stone-600"
@@ -134,8 +120,12 @@ const Album = () => {
             </div>
             <div className="h-screen pt-32">
               {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
-              <AlbumDescription metaData={metaData} />
-              {/* AlbumMainPhoto으로 이동하는 화살표 버튼 */}
+              <AlbumDescription
+                metaData={metaData}
+                comments={comments}
+                isMemberLiked={isMemberLiked}
+              />
+              {/* 상단뷰로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-2 left-2/4 -translate-x-2/4">
                 <FiChevronUp
                   className="text-4xl text-stone-500 cursor-pointer hover:animate-[wiggle_1s_ease-in-out_infinite] hover:text-stone-600"
@@ -144,14 +134,14 @@ const Album = () => {
               </div>
             </div>
           </div>
-          <AsidePhotos photos={photoInfo} />
+          <AsidePhotos photos={photoInfo} setSelectedPhoto={setSelectedPhoto} />
         </div>
       )}
-      <Dialog open={modalVisible}>
+      <Dialog open={deleteModalVisible}>
         <DialogContent className={"relative w-[23rem] h-[10rem]"}>
           <IconButton
             style={{ position: "absolute", top: "0", right: "0" }}
-            onClick={() => setModalVisible(false)}
+            onClick={() => setDeleteModalVisible(false)}
           >
             <TiDelete />
           </IconButton>
@@ -186,7 +176,7 @@ const Album = () => {
                 variant="outlined"
                 color="primary"
                 onClick={() => {
-                  setModalVisible(false);
+                  setDeleteModalVisible(false);
                 }}
               >
                 아니오
