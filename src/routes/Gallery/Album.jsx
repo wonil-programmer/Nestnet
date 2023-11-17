@@ -9,63 +9,61 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { Dialog, DialogContent, Button, IconButton } from "@mui/material";
 import { TiDelete } from "react-icons/ti";
 import axios from "axios";
-import {
-  setPhotoInfo,
-  setSelectedPhoto,
-  setMetadata,
-  setIsMemberLiked,
-} from "./albumReducer";
 import { setComments } from "./commentReducer";
-import { setIsEditing } from "./Form/formReducer";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Album = () => {
   console.log("앨범");
-
   const navigate = useNavigate();
   const { postId } = useParams();
   const location = useLocation();
   const selectedPhotoPath = location.state.selectedPhotoPath;
+  const title = location.state.title;
+  const viewCount = location.state.viewCount;
+  const likeCount = location.state.likeCount;
 
+  const [photoInfo, setPhotoInfo] = useState([]);
+  const [selectedPhoto, setSelectedPhoto] = useState("");
+  const [isMemberLiked, setIsMemberLiked] = useState(false);
+  const [metaData, setMetadata] = useState({
+    title: "",
+    bodyContent: "",
+    viewCount: 1,
+    likeCount: 1,
+  });
+  setMetadata((prevState) => {
+    return {
+      ...prevState,
+      title: title,
+      viewCount: viewCount,
+      likeCount: likeCount,
+    };
+  });
+  setSelectedPhoto(selectedPhotoPath);
+
+  const url = `http://172.30.17.126:8080/photo-post/${postId}`;
   // const url = `http://172.20.10.8:8080/photo-post/${postId}`;
-  // 테스트 url
-  const url = `http://localhost:3002/${postId}`;
+  // // 테스트 url
+  // const url = `http://localhost:3002/${postId}`;
   const [isLoading, setIsLoading] = useState(true);
 
-  // 앨범 데이터 관련 state, reducer (RTK 문법)
-  const albumStates = useSelector((state) => state.album);
-  const albumDispatch = useDispatch();
   // 댓글 데이터 관련 reducer (RTK 문법)
   const commentDispatch = useDispatch();
-  // 수정 여부 관련 reducer (RTK 문법)
-  const isEditingDispatch = useDispatch();
 
   // 삭제 버튼 클릭시의 모달창 가시여부
   const [modalVisible, setModalVisible] = useState(false);
 
-  // 실제 앨범 api 호출
-  // useEffect(() => {
-  //   axios?.get(url)?.then((res) => {
-  //     albumDispatch(setPhotoInfo(res.data.response["file-data"]));
-  //     albumDispatch(setSelectedPhoto(selectedPhotoPath));
-  //     albumDispatch(setMetadata(res.data.response["post-data"]));
-  //     albumDispatch(setIsMemberLiked(res.data.response["is-member-liked"]));
-  //     commentDispatch(setComments(res.data.response["comment-data"]));
-  //     console.log("썸네일사진", selectedPhotoPath);
-  //     albumDispatch(setSelectedPhoto(selectedPhotoPath));
-  //     setIsLoading(false);
-  //   });
-  // }, [url]);
-
-  // 테스트 url
   useEffect(() => {
-    console.log("앨범 api호출");
     axios?.get(url)?.then((res) => {
-      albumDispatch(setPhotoInfo(res.data["file-data"]));
-      albumDispatch(setSelectedPhoto(selectedPhotoPath));
-      albumDispatch(setMetadata(res.data["post-data"]));
-      albumDispatch(setIsMemberLiked(res.data["is-member-liked"]));
-      commentDispatch(setComments(res.data["comment-data"]));
+      setPhotoInfo(res.data.response["file-data"]);
+      setMetadata((prevState) => {
+        return {
+          ...prevState,
+          bodyContent: res.data.response["post-data"].bodyContent,
+        };
+      });
+      setIsMemberLiked(res.data.response["is-member-liked"]);
+      commentDispatch(setComments(res.data.response["comment-data"]));
       setIsLoading(false);
     });
   }, [url]);
@@ -87,7 +85,7 @@ const Album = () => {
     <>
       {/* <div className={"min-w-screen min-h-screen bg-home-background"}> */}
       <Header />
-      {isLoading || !albumStates.photoInfo || !albumStates.selectedPhoto ? (
+      {isLoading || !photoInfo || !selectedPhoto ? (
         <h1>Loading</h1>
       ) : (
         <div className="wrapper relative top-[4.6rem] h-full flex bg-home-background">
@@ -108,12 +106,11 @@ const Album = () => {
               style={{ height: "48px", margin: "6px" }}
               variant="outlined"
               onClick={() => {
-                let photoInfo = albumStates.photoInfo;
-                let title = albumStates.title;
-                let bodyContent = albumStates.bodyContent;
-                let prevData = { photoInfo, title, bodyContent };
-                console.log(prevData);
-                isEditingDispatch(setIsEditing(true));
+                let prevData = {
+                  photoInfo,
+                  title,
+                  bodyContent: metaData.bodyContent,
+                };
                 navigate(`/gallery/${postId}/edit`, {
                   state: {
                     metaData: prevData,
@@ -126,7 +123,7 @@ const Album = () => {
           </div>
           <div className="ctrView flex flex-col m-auto">
             <div className="relative -top-8 w-album-visWth h-screen  flex flex-col justify-center">
-              <SelectedPhoto />
+              <SelectedPhoto photo={selectedPhoto} />
               {/* AlbumDescription으로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-8 left-2/4 -translate-x-2/4">
                 <FiChevronDown
@@ -137,7 +134,7 @@ const Album = () => {
             </div>
             <div className="h-screen pt-32">
               {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
-              <AlbumDescription />
+              <AlbumDescription metaData={metaData} />
               {/* AlbumMainPhoto으로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-2 left-2/4 -translate-x-2/4">
                 <FiChevronUp
@@ -147,7 +144,7 @@ const Album = () => {
               </div>
             </div>
           </div>
-          <AsidePhotos photos={albumStates.photoInfo} />
+          <AsidePhotos photos={photoInfo} />
         </div>
       )}
       <Dialog open={modalVisible}>
@@ -170,7 +167,8 @@ const Album = () => {
                 justifyContent: "space-evenly",
               }}
             >
-              <Button
+              {/* 게시물 삭제 구현 필요 */}
+              {/* <Button
                 className={"w-[4.5rem]"}
                 variant="outlined"
                 color="error"
@@ -182,9 +180,8 @@ const Album = () => {
                   alert("게시물이 성공적으로 삭제되었습니다.");
                   window.location.href = "/gallery";
                 }}
-              >
-                예
-              </Button>
+              > */}
+              {/* </Button> */}
               <Button
                 variant="outlined"
                 color="primary"
