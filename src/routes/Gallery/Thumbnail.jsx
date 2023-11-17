@@ -3,28 +3,32 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 
-// Thumbnail : 갤러리 페이지의 각각의 앨범 썸네일
+/**
+ *
+ * @param {album} album - Gallery.jsx로부터 넘어온 하나의 앨범에 대한 객체
+ * @returns
+ */
 const Thumbnail = ({ album }) => {
-  // const imageRootPath = "http://172.20.10.8:8080/image";
+  const imageRootPath = `${process.env.REACT_APP_SERVER}/image`;
   let saveFilePath = album.saveFilePath;
   let saveFileName = album.saveFileName;
-  let thumbPath = saveFilePath + "/" + saveFileName;
+  let thumbnailPath = imageRootPath + "/" + saveFilePath + "/" + saveFileName;
 
   return (
     <div className="pt-0 px-2 pb-6">
       <Link
         to={`${album.postId}`}
         state={{
-          selectedPhotoPath: thumbPath,
+          selectedPhotoPath: thumbnailPath,
+          title: album.title,
+          viewCount: album.viewCount,
+          likeCount: album.likeCount,
         }}
       >
         <div className="relative flex-col rounded-2xl overflow-hidden shadow-md shadow-pink-200 duration-300 hover:cursor-zoom-in hover:-translate-y-2 hover:ease-in-out hover:shadow-pink-300 hover:shadow-lg">
           <img
             className="w-full max-w-full brightness-95"
-            // 실제 src
-            // src={thumbPath}
-            // test src
-            src={`${process.env.PUBLIC_URL}/${thumbPath}`}
+            src={thumbnailPath}
             alt={"album thumbnail"}
           />
           <div className="title m-4 mb-0 text-slate-800 text-2xl text-center font-bold">
