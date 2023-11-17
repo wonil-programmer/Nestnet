@@ -22,6 +22,8 @@ function Gallery() {
 
   /**
    * 스크롤이 끝지점에 다다르면 다음 페이지 호출
+   * @param {setAlbums, setHasMore} - 새로운 앨범 저장, 더 가져올건지 결정
+   * @returns
    */
   const fetchNextAlbums =
     ({ setAlbums, setHasMore }) =>
