@@ -1,32 +1,47 @@
+import { useContext } from "react";
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
-import {
-  deleteComment,
-  editComment,
-  editCommentDispatch,
-  setSelectedCommentId,
-} from "../../routes/Gallery/commentReducer";
 import { useState } from "react";
+import { CommentContext } from "../../context/CommentContext";
 
-const Comment = ({ commentId, userName, content, createdTime, isEditing }) => {
-  const [editValue, setEditValue] = useState(content);
+/**
+ * 단건 댓글
+ * @param { comment, setSelectedCommentId, isEditing } param0
+ * @returns
+ */
+const Comment = ({ comment, setSelectedCommentId, isEditing }) => {
+  const { id: commentId, username, content, createdTime } = comment;
+
+  const { comments, setComments } = useContext(CommentContext);
+
+  const [editValue, setEditValue] = useState(comment.content);
   const editInputRef = useRef(null);
 
-  const deleteCommentDispatch = useDispatch();
-  const editCommentDispatch = useDispatch();
-  const onCommentDelete = (commentId) => {
-    deleteCommentDispatch(deleteComment(commentId));
-  };
-  const handleCommentEdit = (commentId) => {
-    editCommentDispatch(setSelectedCommentId(commentId));
-  };
-  const handleEditComplete = () => {
-    editCommentDispatch(
-      editComment({ targetIndex: commentId, newContent: editValue })
+  const editComment = ({ editTargetId, newContent }) => {
+    setComments((prevComments) =>
+      prevComments.map((comment) =>
+        comment.id === editTargetId
+          ? { ...comment, content: newContent }
+          : comment
+      )
     );
-    editCommentDispatch(setSelectedCommentId(0));
   };
 
+  const handleCommentEdit = (commentIdToEdit) => {
+    setSelectedCommentId(commentIdToEdit);
+  };
+
+  const handleEditComplete = () => {
+    editComment({ editTargetId: commentId, newContent: editValue });
+    setSelectedCommentId(0);
+  };
+
+  const onCommentDelete = (commentIdToDelete) => {
+    setComments(comments.filter((comment) => comment.id !== commentIdToDelete));
+  };
+
+  /**
+   * 수정 중인 댓글 컴포넌트
+   */
   const editInput = (
     <input
       onChange={() => setEditValue(editInputRef.current.value)}
@@ -37,13 +52,14 @@ const Comment = ({ commentId, userName, content, createdTime, isEditing }) => {
       onKeyDown={(e) => (e.key === "Enter" ? handleEditComplete() : null)}
     />
   );
+
   return (
     <>
       <li className="w-full" key={commentId}>
         <div className="w-full flex pb-4">
           <div className="profile flex flex-col justify-center mr-6">
             <div className="w-[2.3rem] h-[2.3rem] rounded-3xl bg-slate-900">
-              <div>{userName}</div>
+              <div>{username}</div>
               <img className="" src="" alt="" />
             </div>
           </div>
