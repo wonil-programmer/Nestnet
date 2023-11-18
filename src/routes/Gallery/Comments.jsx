@@ -1,13 +1,14 @@
 import { memo } from "react";
-import Comment from "../../components/Comments/Comment";
-import { useSelector } from "react-redux";
+import Comment from "./Comment";
+import { useContext } from "react";
+import { CommentContext } from "../../context/CommentContext";
 
+/**
+ * 댓글 데이터
+ */
 const Comments = () => {
-  // commentReducer(RTK)
-  const comments = useSelector((state) => state.comment.comments);
-  const selectedCommentId = useSelector(
-    (state) => state.comment.selectedCommentId
-  );
+  const [selectedCommentId, setSelectedCommentId] = 0;
+  const comments = useContext(CommentContext);
 
   return (
     <>
@@ -16,10 +17,8 @@ const Comments = () => {
           return (
             <Comment
               key={comment.id}
-              commentId={comment.id}
-              userName={comment.username}
-              content={comment.content}
-              createdTime={comment.createdTime}
+              comment={comment}
+              setSelectedCommentId={setSelectedCommentId}
               isEditing={selectedCommentId === comment.id ? true : false}
             />
           );
