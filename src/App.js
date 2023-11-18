@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path={"/"} element={<Home />} />
         <Route path={`gallery`} element={<Gallery />} />
-        <CommentContext.Provider value={(comments, setComments)}>
+        <CommentContext.Provider value={{ comments, setComments }}>
           <Route path={"gallery/:postId"} element={<Album />} />
         </CommentContext.Provider>
         <Route path={"gallery/form"} element={<GalleryBoardPostForm />} />
