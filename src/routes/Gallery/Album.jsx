@@ -9,16 +9,24 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { Dialog, DialogContent, Button, IconButton } from "@mui/material";
 import { TiDelete } from "react-icons/ti";
 import axios from "axios";
+import { useContext } from "react";
+import { CommentContext } from "../../context/CommentContext";
+import { IsAlbumLikeContext } from "../../context/IsAlbumLikeContext";
 
+/**
+ * 앨범 단건 컴포넌트
+ */
 const Album = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
   const location = useLocation();
   const { selectedPhotoPath, title, viewCount, likeCount } = location.state;
 
+  const { comments, setComments } = useContext(CommentContext);
+  const setIsAlbumLike = useContext(IsAlbumLikeContext);
+
   const [photoInfo, setPhotoInfo] = useState([]);
   const [selectedPhoto, setSelectedPhoto] = useState("");
-  const [isMemberLiked, setIsMemberLiked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [metaData, setMetadata] = useState({
@@ -27,17 +35,17 @@ const Album = () => {
     viewCount: 0,
     likeCount: 0,
   });
-  const [comments, setComments] = useState([]);
-  setMetadata((prevState) => {
-    return {
-      ...prevState,
-      title,
-      viewCount,
-      likeCount,
-    };
-  });
+
+  // 갤러리의 썸네일에서 받아온 앨범 단건에 대한 메타데이터(제목, 조회수, 좋아요수) 주입
+  setMetadata((prevState) => ({
+    ...prevState,
+    title,
+    viewCount,
+    likeCount,
+  }));
   setSelectedPhoto(selectedPhotoPath);
 
+  // 앨범 단건 조회시 api 요청 url
   const albumUrl = `${process.env.REACT_APP_SERVER}/photo-post/${postId}`;
   useEffect(() => {
     axios?.get(albumUrl)?.then((res) => {
@@ -48,7 +56,7 @@ const Album = () => {
           bodyContent: res.data.response["post-data"].bodyContent,
         };
       });
-      setIsMemberLiked(res.data.response["is-member-liked"]);
+      setIsAlbumLike(res.data.response["is-member-liked"]);
       setComments(res.data.response["comment-data"]);
       setIsLoading(false);
     });
@@ -122,8 +130,7 @@ const Album = () => {
               {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
               <AlbumDescription
                 metaData={metaData}
-                comments={comments}
-                isMemberLiked={isMemberLiked}
+                commentsCount={comments.length}
               />
               {/* 상단뷰로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-2 left-2/4 -translate-x-2/4">
