@@ -1,8 +1,15 @@
-import { useRef } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
 import { AiFillFileImage } from "react-icons/ai";
 
+const imageRootPath = `${process.env.REACT_APP_SERVER}/image`;
+
+/**
+ * 앨범 사진 파일 추가 input
+ * @param {fileInformation, onFileInfoChange, onFileDelete}
+ * @returns
+ */
 const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
   const inputFileRef = useRef(null);
 
@@ -41,10 +48,24 @@ const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
                       "relative w-[12rem] mx-1 inline-block bg-gray-100 rounded-xl brightness-95 shadow-md overflow-hidden"
                     }
                   >
-                    <img
-                      src={URL.createObjectURL(fileInfo.file)}
-                      alt="업로드된사진"
-                    />
+                    {/* 기존 사진 파일인 경우와 새로 업로드하는 파일 src 구분 */}
+                    {"originalFileName" in fileInfo ? (
+                      <img
+                        src={
+                          imageRootPath +
+                          "/" +
+                          fileInfo.saveFilePath +
+                          "/" +
+                          fileInfo.saveFileName
+                        }
+                        alt="업로드된사진"
+                      />
+                    ) : (
+                      <img
+                        src={URL.createObjectURL(fileInfo.file)}
+                        alt="업로드된 사진"
+                      />
+                    )}
                     <button
                       type={"button"}
                       onClick={() => {
@@ -76,4 +97,4 @@ const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
     </div>
   );
 };
-export default FileInput;
+export default memo(FileInput);

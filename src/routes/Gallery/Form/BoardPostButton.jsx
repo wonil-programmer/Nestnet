@@ -1,4 +1,4 @@
-const BoardPostButton = ({ isPostBtnDisabled }) => {
+const BoardPostButton = ({ isPostBtnDisabled, isModifying }) => {
   return (
     <button
       type={isPostBtnDisabled ? "button" : "submit"}
@@ -8,7 +8,7 @@ const BoardPostButton = ({ isPostBtnDisabled }) => {
           : "opacity-100 hover:scale-105"
       } duration-200`}
     >
-      저장
+      {isModifying ? "수정" : "저장"}
     </button>
   );
 };
