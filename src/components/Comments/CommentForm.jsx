@@ -1,6 +1,5 @@
-import { useState, useRef, useContext } from "react";
-import { CommentContext } from "../../context/CommentContext";
-import { useParams } from "react-router-dom";
+import { useState, useRef } from "react";
+import { useParams, redirect } from "react-router-dom";
 import LikeBtn from "../Button/LikeBtn";
 import axios from "axios";
 import LoadingSpinner from "../LoadingSpinner";
@@ -11,7 +10,6 @@ import LoadingSpinner from "../LoadingSpinner";
 const CommentForm = ({ viewCount, likeCount }) => {
   const { postId } = useParams();
 
-  const setComments = useContext(CommentContext);
   const [isLoading, setIsLoading] = useState(false);
   const [newComment, setNewComment] = useState("");
 
@@ -46,21 +44,11 @@ const CommentForm = ({ viewCount, likeCount }) => {
       )
       .then((res) => {
         if (res.status === 200) {
-          // POST 요청이 성공적으로 완료될 때, 데이터를 다시 가져와 주입
-          axios
-            .get(`${process.env.REACT_APP_SERVER}/`)
-            .then((response) => {
-              const commentsData = response.data;
-              setComments(commentsData);
-              setIsLoading(false);
-            })
-            .catch((error) => {
-              console.error("데이터를 다시 가져오는 중 오류 발생:", error);
-            });
+          return redirect(`/gallery/${postId}`);
         }
       })
       .catch((error) => {
-        console.error("POST 요청 중 오류 발생:", error);
+        console.error("post fail", error);
       });
   };
 
