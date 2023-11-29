@@ -3,14 +3,12 @@ import Header from "../../components/Header";
 import AsidePhotos from "./AsidePhotos";
 import SelectedPhoto from "./SelectedPhoto";
 import SideBar from "../../components/SideBar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { Dialog, DialogContent, Button, IconButton } from "@mui/material";
 import { TiDelete } from "react-icons/ti";
 import axios from "axios";
-import { useContext } from "react";
-import { CommentContext } from "../../context/CommentContext";
 import { IsAlbumLikeContext } from "../../context/IsAlbumLikeContext";
 
 /**
@@ -22,7 +20,7 @@ const Album = () => {
   const location = useLocation();
   const { selectedPhotoPath, title, viewCount, likeCount } = location.state;
 
-  const { comments, setComments } = useContext(CommentContext);
+  const { comments, setComments } = useState([]);
   const setIsAlbumLike = useContext(IsAlbumLikeContext);
 
   const [photoInfo, setPhotoInfo] = useState([]);
@@ -100,14 +98,13 @@ const Album = () => {
               style={{ height: "48px", margin: "6px" }}
               variant="outlined"
               onClick={() => {
-                let prevData = {
-                  photoInfo,
-                  title,
-                  bodyContent: metaData.bodyContent,
-                };
                 navigate(`/gallery/${postId}/edit`, {
                   state: {
-                    metaData: prevData,
+                    metaData: {
+                      photoInfo,
+                      title,
+                      bodyContent: metaData.bodyContent,
+                    },
                   },
                 });
               }}
@@ -131,6 +128,7 @@ const Album = () => {
               <AlbumDescription
                 metaData={metaData}
                 commentsCount={comments.length}
+                comments={comments}
               />
               {/* 상단뷰로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-2 left-2/4 -translate-x-2/4">

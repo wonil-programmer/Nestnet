@@ -5,10 +5,10 @@ import DownloadBtn from "./DownloadBtn";
 
 /**
  * 앨범 하단뷰 - 앨범정보, 댓글창, 댓글입력창
- * @param {metaData, commentsCount, isMemberLiked}
+ * @param {metaData, commentsCount, comments}
  * @returns
  */
-const AlbumDescription = ({ metaData, commentsCount }) => {
+const AlbumDescription = ({ metaData, commentsCount, comments }) => {
   return (
     <div className="w-album-desWth m-auto mb-4 rounded-xl shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] ">
       <div className="top px-8 pt-4 pb-2.5 text-center flex justify-between border-b border-border-primary">
@@ -23,7 +23,7 @@ const AlbumDescription = ({ metaData, commentsCount }) => {
           {metaData.bodyContent}
         </div>
         <ul className="commentsList w-full py-4 px-12 max-h-96 overflow-auto">
-          <Comments />
+          <Comments comments={comments} />
         </ul>
       </div>
       <CommentForm
