@@ -1,7 +1,7 @@
 const BoardPostButton = ({ isPostBtnDisabled, isModifying }) => {
   return (
     <button
-      type={isPostBtnDisabled ? "button" : "submit"}
+      disabled={isPostBtnDisabled}
       className={`px-4 py-3 bg-red-500 text-white text-lg font-bold rounded-3xl ${
         isPostBtnDisabled
           ? "cursor-default opacity-75"
