@@ -3,7 +3,7 @@ import Album from "./routes/Gallery/Album";
 import Home from "./routes/MainHome/Home";
 import Gallery from "./routes/Gallery/Gallery";
 import GalleryBoardPostForm from "./routes/Gallery/GalleryBoardPostForm";
-import { CommentContext } from "./context/CommentContext";
+import { CommentsContext } from "./context/CommentsContext";
 import { useState } from "react";
 
 function App() {
@@ -11,18 +11,18 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path={"/"} element={<Home />} />
-        <Route path={`gallery`} element={<Gallery />} />
-        <CommentContext.Provider value={{ comments, setComments }}>
+      <CommentsContext.Provider value={{ comments, setComments }}>
+        <Routes>
+          <Route path={"/"} element={<Home />} />
+          <Route path={`gallery`} element={<Gallery />} />
           <Route path={"gallery/:postId"} element={<Album />} />
-        </CommentContext.Provider>
-        <Route path={"gallery/form"} element={<GalleryBoardPostForm />} />
-        <Route
-          path={"gallery/:postId/edit"}
-          element={<GalleryBoardPostForm isModifying={true} />}
-        />
-      </Routes>
+          <Route path={"gallery/form"} element={<GalleryBoardPostForm />} />
+          <Route
+            path={"gallery/:postId/edit"}
+            element={<GalleryBoardPostForm isModifying={true} />}
+          />
+        </Routes>
+      </CommentsContext.Provider>
     </BrowserRouter>
   );
 }

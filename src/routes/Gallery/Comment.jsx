@@ -1,7 +1,5 @@
-import { useContext } from "react";
-import { useRef } from "react";
-import { useState } from "react";
-import { CommentContext } from "../../context/CommentContext";
+import { useContext, useRef, useState } from "react";
+import { CommentsContext } from "../../context/CommentsContext";
 
 /**
  * 단건 댓글
@@ -11,7 +9,7 @@ import { CommentContext } from "../../context/CommentContext";
 const Comment = ({ comment, setSelectedCommentId, isEditing }) => {
   const { id: commentId, username, content, createdTime } = comment;
 
-  const { comments, setComments } = useContext(CommentContext);
+  const { comments, setComments } = useContext(CommentsContext);
 
   const [editValue, setEditValue] = useState(comment.content);
   const editInputRef = useRef(null);

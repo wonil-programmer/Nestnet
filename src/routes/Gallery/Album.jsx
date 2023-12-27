@@ -10,6 +10,7 @@ import { Dialog, DialogContent, Button, IconButton } from "@mui/material";
 import { TiDelete } from "react-icons/ti";
 import axios from "axios";
 import { IsAlbumLikeContext } from "../../context/IsAlbumLikeContext";
+import { CommentsContext } from "../../context/CommentsContext";
 
 /**
  * 앨범 단건 컴포넌트
@@ -20,8 +21,8 @@ const Album = () => {
   const location = useLocation();
   const { selectedPhotoPath, title, viewCount, likeCount } = location.state;
 
-  const { comments, setComments } = useState([]);
-  const setIsAlbumLike = useContext(IsAlbumLikeContext);
+  const { setComments } = useContext(CommentsContext);
+  const { setIsAlbumLike } = useContext(IsAlbumLikeContext);
 
   const [photoInfo, setPhotoInfo] = useState([]);
   const [selectedPhoto, setSelectedPhoto] = useState("");
@@ -125,11 +126,7 @@ const Album = () => {
             </div>
             <div className="h-screen pt-32">
               {/* 개별 앨범에 대한 정보(조회수, 좋아요 수)를 인자로 넘김 */}
-              <AlbumDescription
-                metaData={metaData}
-                commentsCount={comments.length}
-                comments={comments}
-              />
+              <AlbumDescription metaData={metaData} />
               {/* 상단뷰로 이동하는 화살표 버튼 */}
               <div className="absolute bottom-2 left-2/4 -translate-x-2/4">
                 <FiChevronUp
