@@ -3,7 +3,10 @@ import Album from "./routes/Gallery/Album";
 import Home from "./routes/MainHome/Home";
 import Gallery from "./routes/Gallery/Gallery";
 import GalleryBoardPostForm from "./routes/Gallery/GalleryBoardPostForm";
+import AdminHome from "./routes/Admin/AdminHome";
+import MembersMainView from "./routes/Admin/Members/MembersMainView";
 import { CommentsContext } from "./context/CommentsContext";
+import AdminNavBar from "./routes/Admin/AdminNavbar";
 import { useState } from "react";
 
 function App() {
@@ -21,6 +24,10 @@ function App() {
             path={"gallery/:postId/edit"}
             element={<GalleryBoardPostForm isModifying={true} />}
           />
+          <Route path={"admin/"} element={<AdminNavBar />}>
+            <Route path={"home"} element={<AdminHome />} />
+            <Route path={"users"} element={<MembersMainView />} />
+          </Route>
         </Routes>
       </CommentsContext.Provider>
     </BrowserRouter>
