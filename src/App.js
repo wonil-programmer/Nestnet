@@ -8,29 +8,36 @@ import MembersMainView from "./routes/Admin/Members/MembersMainView";
 import { CommentsContext } from "./context/CommentsContext";
 import AdminNavBar from "./routes/Admin/AdminNavbar";
 import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
   const [comments, setComments] = useState([]);
 
+  const queryClient = new QueryClient();
+
   return (
-    <BrowserRouter>
-      <CommentsContext.Provider value={{ comments, setComments }}>
-        <Routes>
-          <Route path={"/"} element={<Home />} />
-          <Route path={`gallery`} element={<Gallery />} />
-          <Route path={"gallery/:postId"} element={<Album />} />
-          <Route path={"gallery/form"} element={<GalleryBoardPostForm />} />
-          <Route
-            path={"gallery/:postId/edit"}
-            element={<GalleryBoardPostForm isModifying={true} />}
-          />
-          <Route path={"admin/"} element={<AdminNavBar />}>
-            <Route path={"home"} element={<AdminHome />} />
-            <Route path={"users"} element={<MembersMainView />} />
-          </Route>
-        </Routes>
-      </CommentsContext.Provider>
-    </BrowserRouter>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <CommentsContext.Provider value={{ comments, setComments }}>
+            <Routes>
+              <Route path={"/"} element={<Home />} />
+              <Route path={`gallery`} element={<Gallery />} />
+              <Route path={"gallery/:postId"} element={<Album />} />
+              <Route path={"gallery/form"} element={<GalleryBoardPostForm />} />
+              <Route
+                path={"gallery/:postId/edit"}
+                element={<GalleryBoardPostForm isModifying={true} />}
+              />
+              <Route path={"admin/"} element={<AdminNavBar />}>
+                <Route path={"home"} element={<AdminHome />} />
+                <Route path={"users"} element={<MembersMainView />} />
+              </Route>
+            </Routes>
+          </CommentsContext.Provider>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </>
   );
 }
 
