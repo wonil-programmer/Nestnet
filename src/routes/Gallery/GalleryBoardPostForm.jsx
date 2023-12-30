@@ -119,7 +119,7 @@ const GalleryBoardPostForm = ({ isModifying }) => {
         title?.trim().length === 0 ||
         bodyContent?.trim().length === 0
     );
-  }, [isPostBtnDisabled]);
+  }, [isPostBtnDisabled, photoFileList, title, bodyContent]);
 
   /**
    * 앨범 수정시 기존 사진 파일 정보를 photoFileList state에 주입
