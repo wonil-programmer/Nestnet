@@ -1,28 +1,57 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   MaterialReactTable,
-  // createRow,
   useMaterialReactTable,
 } from "material-react-table";
-import { Box, Button, IconButton, Tooltip } from "@mui/material";
+import { Box, IconButton, Tooltip } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import EditIcon from "@mui/icons-material/Edit";
 import { FaHandshakeSimple, FaHandshakeSimpleSlash } from "react-icons/fa6";
-import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 
-const SignupList = () => {
+const SignupReqList = () => {
   const columns = useMemo(
     () => [
       {
         accessorKey: "name",
         header: "성명",
         enableEditing: false,
+        size: 50,
+        maxSize: 50,
+      },
+      {
+        accessorKey: "loginId",
+        header: "아이디",
+        enableEditing: false,
+        size: 50,
+        maxSize: 50,
+      },
+      {
+        accessorKey: "studentId",
+        header: "학번",
+        enableEditing: false,
+        size: 50,
+        maxSize: 50,
+      },
+      {
+        accessorKey: "grade",
+        header: "학년",
+        enableEditing: false,
+        size: 50,
+        maxSize: 50,
+      },
+      {
+        accessorKey: "graduateYear",
+        header: "졸업년도",
+        enableEditing: false,
+        size: 50,
+        maxSize: 50,
       },
       {
         accessorKey: "memberAuthority",
         header: "권한",
         enableEditing: false,
+        size: 50,
+        maxSize: 50,
       },
     ],
     []
@@ -101,7 +130,31 @@ const SignupList = () => {
   );
 };
 
-// GET: 회원가입 목록 불러오기 api 요청
+function convertAuthorityToKorean(permission) {
+  switch (permission) {
+    case "PRESIDENT":
+      return "회장";
+    case "VICE_PRESIDENT":
+      return "부회장";
+    case "MANAGER":
+      return "관리자";
+    case "GENERAL_MEMBER":
+      return "일반";
+    case "ON_LEAVE_MEMBER":
+      return "휴학";
+    case "GRADUATED_MEMBER":
+      return "졸업";
+    case "WAITING_FOR_APPROVAL":
+      return "승인대기";
+    case "WITHDRAWN_MEMBER":
+      return "탈퇴";
+
+    default:
+      return "알 수 없음";
+  }
+}
+
+// GET: 회원가입 목록 조회 api
 function useGetSignupReqs() {
   return useQuery({
     queryKey: ["signups"],
@@ -109,34 +162,53 @@ function useGetSignupReqs() {
       //   const allSignupReqsURL = `${process.env.REACT_APP_SERVER}/manager/signup-request`;
       //   const response = await axios.get(allSignupReqsURL);
       //   const users = response.data;
+
+      // dummy
       const users = [
         {
           id: 1,
-          name: "복학생",
-          memberAuthority: "ADMIN",
+          name: "김진짜",
+          loginId: "real",
+          studentId: "2023036068",
+          grade: 1,
+          graduateYear: 2027,
+          memberAuthority: "GENERAL_MEMEBER",
         },
         {
           id: 2,
-          name: "청년",
-          memberAuthority: "PRESIDENT",
+          name: "김진짜",
+          loginId: "real",
+          studentId: "2023036068",
+          grade: 1,
+          graduateYear: 2027,
+          memberAuthority: "GENERAL_MEMEBER",
         },
         {
           id: 3,
-          name: "이상한",
-          memberAuthority: "VICE_PRESIDENT",
+          name: "김진짜",
+          loginId: "real",
+          studentId: "2023036068",
+          grade: 1,
+          graduateYear: 2027,
+          memberAuthority: "GENERAL_MEMEBER",
         },
         {
           id: 4,
-          name: "아무개",
-          memberAuthority: "MANAGER",
-        },
-        {
-          id: 5,
-          name: "홍길동",
-          memberAuthority: "GRADUATED_MEMBER",
+          name: "김진짜",
+          loginId: "real",
+          studentId: "2023036068",
+          grade: 1,
+          graduateYear: 2027,
+          memberAuthority: "GENERAL_MEMEBER",
         },
       ];
-      return users;
+
+      const transformedUsers = users.map((user) => ({
+        ...user,
+        memberAuthority: convertAuthorityToKorean(user.memberAuthority),
+      }));
+
+      return transformedUsers;
     },
     refetchOnWindowFocus: false,
   });
@@ -194,4 +266,4 @@ function useWithdrawReq() {
   });
 }
 
-export default SignupList;
+export default SignupReqList;
