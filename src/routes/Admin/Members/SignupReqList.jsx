@@ -90,6 +90,7 @@ const SignupReqList = () => {
     initialState: { density: "compact" },
     enableFilters: false,
     enableHiding: false,
+    positionActionsColumn: "last",
     muiToolbarAlertBannerProps: isLoadingSignupReqsError
       ? {
           color: "error",
