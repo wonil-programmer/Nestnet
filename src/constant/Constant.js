@@ -2,9 +2,9 @@ export const AVAIL_AUTHORITY = [
   "회장",
   "부회장",
   "관리자",
-  "일반",
+  "재학생",
   "휴학",
-  "졸업",
+  "졸업생",
 ];
 
 export const AUTHORITY_ENG_TO_KOR = Object.freeze({
