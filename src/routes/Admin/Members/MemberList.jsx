@@ -335,17 +335,17 @@ function useUpdateUser() {
   return useMutation({
     mutationFn: async (user) => {
       const authorityChangeURL = `${process.env.REACT_APP_SERVER}/manager/change-authority`;
-      //   axios
-      //     .post(authorityChangeURL, {
-      //       id: user.id,
-      //       memberAuthority: user.memberAuthority,
-      //     })
-      //     .then(function (response) {
-      //       console.log(response);
-      //     })
-      //     .catch(function (error) {
-      //       console.log(error);
-      //     });
+      // return await axios
+      //   .post(authorityChangeURL, {
+      //     id: user.id,
+      //     memberAuthority: user.memberAuthority,
+      //   })
+      //   .then(function (response) {
+      //     console.log(response);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
     },
     // 클라이언트 업데이트
     onMutate: (newUserInfo) => {
@@ -365,14 +365,14 @@ function useDeleteUser() {
   return useMutation({
     mutationFn: async (user) => {
       const deleteUserURL = `${process.env.REACT_APP_SERVER}/manager/member-withdraw/${user["member-id"]}`;
-      //   axios
-      //     .get(deleteUserURL)
-      //     .then((response) => {
-      //       console.log(response);
-      //     })
-      //     .catch((error) => {
-      //       console.error(error);
-      //     });
+      // return await axios
+      //   .get(deleteUserURL)
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
     },
     // 클라이언트 업데이트
     onMutate: (user) => {

@@ -201,17 +201,17 @@ function useApproveReq() {
   return useMutation({
     mutationFn: async (signupReq) => {
       const approveReqURL = `${process.env.REACT_APP_SERVER}/manager/approve-signup`;
-      //   axios
-      //     .post(approveReqURL, {
-      //       loginId: signupReq.loginId,
-      //       memberAuthority: signupReq.memberAuthority,
-      //     })
-      //     .then(function (response) {
-      //       console.log(response);
-      //     })
-      //     .catch(function (error) {
-      //       console.log(error);
-      //     });
+      // return await axios
+      //   .post(approveReqURL, {
+      //     loginId: signupReq.loginId,
+      //     memberAuthority: signupReq.memberAuthority,
+      //   })
+      //   .then(function (response) {
+      //     console.log(response);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
     },
     // 클라이언트 업데이트
     onMutate: (signupReq) => {
@@ -231,14 +231,14 @@ function useDisapproveReq() {
   return useMutation({
     mutationFn: async (signupReq) => {
       const disapproveReqURL = `${process.env.REACT_APP_SERVER}/`;
-      //   axios
-      //     .post(disapproveReqURL)
-      //     .then((response) => {
-      //       console.log(response);
-      //     })
-      //     .catch((error) => {
-      //       console.error(error);
-      //     });
+      // return await axios
+      //   .post(disapproveReqURL)
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
     },
     // 클라이언트 업데이트
     onMutate: (signupReq) => {
