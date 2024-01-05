@@ -1,53 +1,42 @@
 import Thumbnail from "./Thumbnail";
 import Header from "../../components/Header";
-import { useEffect, useState, memo } from "react";
+import { useEffect, memo } from "react";
 import { Link } from "react-router-dom";
-import Masonry from "react-masonry-css";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { Flex } from "@chakra-ui/react";
+import Masonry from "react-masonry-css";
 import axios from "axios";
-
-const ALBUM_NUMS_PER_PAGE = 10;
-const LIMIT = 10;
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteScroll } from "../../hooks/useInfiniteScroll";
+import { useInView } from "react-intersection-observer";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 function Gallery() {
-  const [albums, setAlbums] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
+  const { ref: observeBtmRef, inView } = useInView();
 
-  const offset = (page - 1) * LIMIT;
-  let requestUrl = `${process.env.REACT_APP_SERVER}/photo-post?offset=${offset}&limit=${LIMIT}`;
+  const {
+    data,
+    status,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["albums"],
+    queryFn: getMoreAlbums,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.length ? allPages.length + 1 : undefined,
+    // select: (data) => ({
+    //   pages: data?.pages.flatMap((page) => page.data),
+    //   pageParams: data.pageParams,
+    // }),
+  });
 
-  /**
-   * 스크롤이 끝지점에 다다르면 다음 페이지 호출
-   * @param {setAlbums, setHasMore} - 새로운 앨범 저장, 더 가져올건지 결정
-   * @returns
-   */
-  const fetchNextAlbums =
-    ({ setAlbums, setHasMore }) =>
-    async () => {
-      setPage((page) => page + 1);
-      await axios?.get(requestUrl)?.then((res) => {
-        let nextAlbums = [...res.data.response];
-        setAlbums((prevAlbums) => prevAlbums.concat(nextAlbums));
-        // 마지막 페이지 처리
-        nextAlbums.length < ALBUM_NUMS_PER_PAGE
-          ? setHasMore(false)
-          : setHasMore(true);
-      });
-    };
-
-  /**
-   * 초기 마운트
-   */
-  useEffect(() => {
-    axios?.get(requestUrl)?.then((res) => {
-      setAlbums(res.data.response);
-      setIsLoading(false);
-    });
-  }, [requestUrl]);
+  // const { setTarget } = useInfiniteScroll({
+  //   hasNextPage,
+  //   fetchNextPage,
+  // });
 
   // Masonary 레이아웃 열 갯수 (반응형)
   const breakpointColumnsObj = {
@@ -56,39 +45,60 @@ function Gallery() {
     800: 1,
   };
 
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, fetchNextPage]);
+
+  if (status === "pending") return <h1>Loading...</h1>;
+  if (status === "error") return <h1>Error: {error.message}</h1>;
+
   return (
     <>
       <Header />
-      {isLoading || !albums ? (
-        <h1>Loading...</h1>
-      ) : (
-        <div>
-          <div className="relative top-16 m-4">
-            <InfiniteScroll
-              style={{ paddingTop: "1rem" }}
-              dataLength={albums.length}
-              hasMore={hasMore}
-              next={fetchNextAlbums({
-                setAlbums,
-                setHasMore,
-              })}
-            >
-              <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
-                {albums.map((album) => (
-                  <Thumbnail key={album.postId} album={album} />
-                ))}
-              </Flex>
-            </InfiniteScroll>
-          </div>
-          <button className="fixed right-10 bottom-8">
-            <Link to="/gallery/form">
-              <AiFillPlusCircle className="w-12 h-12 text-home-primary" />
-            </Link>
-          </button>
+      <div>
+        <div className="relative top-16 m-4">
+          <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
+            {data?.pages.map((albums) =>
+              albums.map((album, idx) => {
+                if (albums.length === idx + 1) {
+                  return (
+                    <Thumbnail
+                      ref={observeBtmRef}
+                      key={album.postId}
+                      album={album}
+                    />
+                  );
+                } else {
+                  return <Thumbnail key={album.postId} album={album} />;
+                }
+              })
+            )}
+          </Flex>
+          {isFetchingNextPage && (
+            <div class="w-screen h-5 pt-2 pb-1 flex justify-center">
+              <LoadingSpinner />
+            </div>
+          )}
         </div>
-      )}
+        {/* 글 작성 버튼 */}
+        <button className="fixed right-10 bottom-8">
+          <Link to="/gallery/form">
+            <AiFillPlusCircle className="w-12 h-12 text-home-primary" />
+          </Link>
+        </button>
+      </div>
     </>
   );
 }
+
+const getMoreAlbums = async ({ pageParam }) => {
+  // const albumsURL = `${process.env.REACT_APP_SERVER}/photo-post?page=${pageParam}`;
+  // test: json-server
+  const albumsURL = `${process.env.REACT_APP_SERVER}/photo-post?_page=${pageParam}`;
+
+  return await axios.get(albumsURL).then((res) => res.data);
+};
 
 export default memo(Gallery);
