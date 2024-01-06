@@ -17,7 +17,10 @@ const Thumbnail = forwardRef(({ album }, ref) => {
 
   return (
     <>
-      <div className="pt-0 px-2 pb-6" ref={ref}>
+      <div
+        className="pt-0 px-2 pb-6 min-w-[22.65rem] max-w-[22.65rem]"
+        ref={ref}
+      >
         <Link
           to={`${album.postId}`}
           state={{
@@ -27,17 +30,17 @@ const Thumbnail = forwardRef(({ album }, ref) => {
             likeCount: album.likeCount,
           }}
         >
-          <div className="relative flex-col rounded-2xl overflow-hidden shadow-md shadow-pink-200 duration-300 hover:cursor-zoom-in hover:-translate-y-2 hover:ease-in-out hover:shadow-pink-300 hover:shadow-lg">
+          <div className="relative flex-col rounded-2xl overflow-hidden duration-300 hover:cursor-zoom-in hover:-translate-y-2 hover:ease-in-out shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
             <img
               className="w-full max-w-full brightness-95"
               // src={thumbnailPath}
               src={`/${thumbnailPath}`}
               alt={"album thumbnail"}
             />
-            <div className="title m-4 mb-0 text-slate-800 text-2xl text-center font-bold">
+            <div className="title mt-3 mb-0 text-slate-800 text-2xl text-center font-bold">
               {album.title}
             </div>
-            <div className="metadata flex justify-center my-4">
+            <div className="metadata flex justify-center my-4 text-[#666666]">
               <div className="visits mr-2">
                 <FontAwesomeIcon icon={faEye} /> <span>{album.viewCount}</span>
               </div>

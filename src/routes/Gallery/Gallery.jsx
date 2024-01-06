@@ -41,8 +41,8 @@ function Gallery() {
   // Masonary 레이아웃 열 갯수 (반응형)
   const breakpointColumnsObj = {
     default: 3,
-    1500: 3,
-    800: 1,
+    1500: 2,
+    1000: 1,
   };
 
   useEffect(() => {
@@ -51,36 +51,38 @@ function Gallery() {
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  if (status === "pending") return <h1>Loading...</h1>;
+  if (status === "pending") return <></>;
   if (status === "error") return <h1>Error: {error.message}</h1>;
 
   return (
     <>
       <Header />
       <div>
-        <div className="relative top-16 m-4">
+        <div className="relative top-[6rem] flex justify-center">
           <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
-            {data?.pages.map((albums) =>
-              albums.map((album, idx) => {
-                if (albums.length === idx + 1) {
-                  return (
-                    <Thumbnail
-                      ref={observeBtmRef}
-                      key={album.postId}
-                      album={album}
-                    />
-                  );
-                } else {
-                  return <Thumbnail key={album.postId} album={album} />;
-                }
-              })
+            {status === "pending" ? (
+              <></>
+            ) : (
+              <>
+                {data?.pages.map((albums) =>
+                  albums.map((album, idx) => {
+                    if (albums.length === idx + 1) {
+                      return (
+                        <Thumbnail
+                          ref={observeBtmRef}
+                          key={album.postId}
+                          album={album}
+                        />
+                      );
+                    } else {
+                      return <Thumbnail key={album.postId} album={album} />;
+                    }
+                  })
+                )}
+              </>
             )}
           </Flex>
-          {isFetchingNextPage && (
-            <div class="w-screen h-5 pt-2 pb-1 flex justify-center">
-              <LoadingSpinner />
-            </div>
-          )}
+          {isFetchingNextPage && <LoadingSpinner />}
         </div>
         {/* 글 작성 버튼 */}
         <button className="fixed right-10 bottom-8">
