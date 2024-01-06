@@ -1,5 +1,6 @@
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 function Header() {
   return (
@@ -19,6 +20,7 @@ function Header() {
           </div>
         </Link>
       </div>
+      <Outlet />
     </>
   );
 }
