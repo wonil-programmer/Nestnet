@@ -10,6 +10,8 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInfiniteScroll } from "../../hooks/useInfiniteScroll";
 import { useInView } from "react-intersection-observer";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import Skeleton from "@mui/material/Skeleton";
+import Box from "@mui/material/Box";
 
 function Gallery() {
   const { ref: observeBtmRef, inView } = useInView();
@@ -27,16 +29,7 @@ function Gallery() {
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) =>
       lastPage.length ? allPages.length + 1 : undefined,
-    // select: (data) => ({
-    //   pages: data?.pages.flatMap((page) => page.data),
-    //   pageParams: data.pageParams,
-    // }),
   });
-
-  // const { setTarget } = useInfiniteScroll({
-  //   hasNextPage,
-  //   fetchNextPage,
-  // });
 
   // Masonary 레이아웃 열 갯수 (반응형)
   const breakpointColumnsObj = {
@@ -51,7 +44,6 @@ function Gallery() {
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  if (status === "pending") return <></>;
   if (status === "error") return <h1>Error: {error.message}</h1>;
 
   return (
@@ -60,27 +52,43 @@ function Gallery() {
       <div>
         <div className="relative top-[6rem] flex justify-center">
           <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
-            {status === "pending" ? (
-              <></>
-            ) : (
-              <>
-                {data?.pages.map((albums) =>
-                  albums.map((album, idx) => {
-                    if (albums.length === idx + 1) {
-                      return (
-                        <Thumbnail
-                          ref={observeBtmRef}
-                          key={album.postId}
-                          album={album}
-                        />
-                      );
-                    } else {
-                      return <Thumbnail key={album.postId} album={album} />;
-                    }
-                  })
-                )}
-              </>
-            )}
+            {status === "pending" &&
+              Array.from(new Array(9)).map((_, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    margin: "1rem",
+                    minWidth: "22.65rem",
+                    maxWidth: "22.65rem",
+                    height: "25rem",
+                  }}
+                >
+                  <Skeleton variant="rounded" height="100%" />
+                </Box>
+              ))}
+            {status !== "pending" &&
+              data?.pages.map((albums) =>
+                albums.map((album, idx) => {
+                  if (albums.length === idx + 1) {
+                    return (
+                      <Thumbnail
+                        ref={observeBtmRef}
+                        key={album.postId}
+                        album={album}
+                        isFetchingNextPage={isFetchingNextPage}
+                      />
+                    );
+                  } else {
+                    return (
+                      <Thumbnail
+                        key={album.postId}
+                        album={album}
+                        isFetchingNextPage={isFetchingNextPage}
+                      />
+                    );
+                  }
+                })
+              )}
           </Flex>
           {isFetchingNextPage && <LoadingSpinner />}
         </div>
