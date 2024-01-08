@@ -5,6 +5,7 @@ import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const Thumbnail = forwardRef(({ album }, ref) => {
   const [thumbnailPath, setThumbnailPath] = useState("");
+
   const getImagePath = (album) => {
     const imageRootPath = `${process.env.REACT_APP_SERVER}/image`;
     let saveFilePath = album.saveFilePath;

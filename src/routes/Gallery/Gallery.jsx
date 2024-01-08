@@ -7,7 +7,6 @@ import { Flex } from "@chakra-ui/react";
 import Masonry from "react-masonry-css";
 import axios from "axios";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useInfiniteScroll } from "../../hooks/useInfiniteScroll";
 import { useInView } from "react-intersection-observer";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import Skeleton from "@mui/material/Skeleton";
