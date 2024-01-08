@@ -2,20 +2,10 @@ import { memo, forwardRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { getImagePath } from "../../utils/getImagePath";
 
 const Thumbnail = forwardRef(({ album }, ref) => {
   const [thumbnailPath, setThumbnailPath] = useState("");
-
-  const getImagePath = (album) => {
-    const imageRootPath = `${process.env.REACT_APP_SERVER}/image`;
-    let saveFilePath = album.saveFilePath;
-    let saveFileName = album.saveFileName;
-    // let thumbnailPath = imageRootPath + "/" + saveFilePath + "/" + saveFileName;
-    // test: json-server
-    let thumbnailPath = saveFilePath + "/" + saveFileName;
-
-    return thumbnailPath;
-  };
 
   useEffect(() => {
     setThumbnailPath(getImagePath(album));
