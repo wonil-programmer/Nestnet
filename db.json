@@ -225,13 +225,37 @@
         {
           "id": 1,
           "originalFileName": "사진게시판샘플1.jpg",
-          "saveFileName": "a2.jpg",
+          "saveFileName": "a1.jpg",
           "filePath": "assets"
         },
         {
           "id": 2,
           "originalFileName": "사진게시판샘플2.jpg",
-          "saveFileName": "a1.jpg",
+          "saveFileName": "a2.jpg",
+          "filePath": "assets"
+        },
+        {
+          "id": 3,
+          "originalFileName": "사진게시판샘플2.jpg",
+          "saveFileName": "a3.jpg",
+          "filePath": "assets"
+        },
+        {
+          "id": 4,
+          "originalFileName": "사진게시판샘플2.jpg",
+          "saveFileName": "a4.jpg",
+          "filePath": "assets"
+        },
+        {
+          "id": 5,
+          "originalFileName": "사진게시판샘플2.jpg",
+          "saveFileName": "a5.jpg",
+          "filePath": "assets"
+        },
+        {
+          "id": 6,
+          "originalFileName": "사진게시판샘플2.jpg",
+          "saveFileName": "a6.jpg",
           "filePath": "assets"
         }
       ],

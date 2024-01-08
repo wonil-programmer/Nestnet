@@ -24,7 +24,7 @@ const SelectedPhoto = ({ selectedPhoto }) => {
     <>
       <div
         className={
-          "relative max-w-max h-max m-auto my-6 text-center rounded-xl overflow-hidden"
+          "relative max-w-max h-max m-auto my-6 text-center rounded-xl overflow-hidden shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]"
         }
       >
         <img src={selectedPhoto} alt="thumbnail" ref={selectedPhotoRef} />

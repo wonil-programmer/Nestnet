@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
 const UnselectedPhotos = ({ photos, setSelectedPhoto }) => {
@@ -24,7 +24,7 @@ const UnselectedPhotos = ({ photos, setSelectedPhoto }) => {
         const photoPath = getPhotoPath(photo);
 
         return (
-          <div className="wrapper relative my-4 rounded-md overflow-hidden shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
+          <div className="wrapper relative mb-4 rounded-md overflow-hidden shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
             {/* boxshadow 사이트의 Warm테마 */}
             <img
               className="w-full"
