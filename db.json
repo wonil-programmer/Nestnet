@@ -2,7 +2,7 @@
   "photo-post": [
     {
       "postId": 61,
-      "title": "test title",
+      "title": "23 체육대회",
       "viewCount": 100,
       "likeCount": 200,
       "saveFileName": "son.png",
@@ -225,14 +225,14 @@
         {
           "id": 1,
           "originalFileName": "사진게시판샘플1.jpg",
-          "saveFileName": "information.png",
-          "filePath": "file:///C:/Users/wonza/Pictures"
+          "saveFileName": "a2.jpg",
+          "filePath": "assets"
         },
         {
           "id": 2,
           "originalFileName": "사진게시판샘플2.jpg",
-          "saveFileName": "party.png",
-          "filePath": "file:///C:/Users/wonza/Pictures"
+          "saveFileName": "a1.jpg",
+          "filePath": "assets"
         }
       ],
       "comment-data": [
@@ -264,13 +264,13 @@
       "file-data": [
         {
           "originalFileName": "사진게시판샘플1.jpg",
-          "saveFileName": "466ac4f2-7610-4367-af22-7a8b48700da7_사진게시판샘플1.jpg",
-          "filePath": "C:\\nestnetFile\\PHOTO\\2023AUGUST7_23 체육대회"
+          "saveFileName": "b1.png",
+          "filePath": "assets"
         },
         {
           "originalFileName": "사진게시판샘플2.jpg",
-          "saveFileName": "8a7a1c94-78c9-4815-9fa5-1d884a1b75e2_사진게시판샘플2.jpg",
-          "filePath": "C:\\nestnetFile\\PHOTO\\2023AUGUST7_23 체육대회"
+          "saveFileName": "b2.png",
+          "filePath": "assets"
         }
       ],
       "comment-data": [
