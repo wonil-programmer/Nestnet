@@ -47,9 +47,8 @@ function Gallery() {
 
   return (
     <>
-      <Header />
       <div>
-        <div className="relative top-[6rem] flex justify-center">
+        <div className="relative flex justify-center">
           <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
             {status === "pending" &&
               Array.from(new Array(9)).map((_, index) => (

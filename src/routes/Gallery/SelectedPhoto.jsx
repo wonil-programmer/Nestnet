@@ -1,10 +1,8 @@
 import { useRef } from "react";
 import { memo } from "react";
 import { MdZoomOutMap } from "react-icons/md";
-import { useSelector } from "react-redux/es/hooks/useSelector";
 
-const SelectedPhoto = () => {
-  const selectedPhotoUrl = useSelector((state) => state.album.selectedPhoto);
+const SelectedPhoto = ({ selectedPhoto }) => {
   const selectedPhotoRef = useRef();
   // 각 브라우저에 대한 처리
   const triggerFull = () => {
@@ -25,19 +23,19 @@ const SelectedPhoto = () => {
   return (
     <>
       <div
-        ref={selectedPhotoRef}
-        className={"w-5/6 h-5/6 m-auto my-6  bg-center bg-contain bg-no-repeat"}
-        style={{
-          backgroundImage: `url(${selectedPhotoUrl})`,
-        }}
-      ></div>
-      <button onClick={triggerFull} className={"absolute right-28 bottom-10"}>
-        <MdZoomOutMap
-          className={
-            "text-2xl text-stone-500 cursor-pointer hover:scale-105 hover:text-stone-600 duration-200 ease-in-out"
-          }
-        />
-      </button>
+        className={
+          "relative max-w-max h-max m-auto my-6 text-center rounded-xl overflow-hidden"
+        }
+      >
+        <img src={selectedPhoto} alt="thumbnail" ref={selectedPhotoRef} />
+        <button onClick={triggerFull} className={"absolute right-8 bottom-8"}>
+          <MdZoomOutMap
+            className={
+              "text-2xl text-stone-500 cursor-pointer hover:scale-105 hover:text-stone-600 duration-200 ease-in-out"
+            }
+          />
+        </button>
+      </div>
     </>
   );
 };
