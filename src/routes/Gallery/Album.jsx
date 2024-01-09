@@ -53,9 +53,13 @@ const Album = () => {
       <div className="mainView flex flex-row justify-between">
         <div className="leftSideView w-1/3 min-w-[12rem] bg-gray-800"></div>
         <div className="centerView w-1/3 min-w-[40rem] h-[calc(100vh-4.7rem)] px-10 overflow-y-auto">
-          {/* <div className="w-full h-[calc(100vh-4.5rem)] px-10 scroll-y"> */}
-          <SelectedPhoto selectedPhoto={selectedPhoto} />
-          {/* </div> */}
+          <div
+            className={
+              "relative max-w-max h-max m-auto my-4 text-center rounded-xl overflow-hidden shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] cursor-zoom-in"
+            }
+          >
+            <SelectedPhoto selectedPhoto={selectedPhoto} />
+          </div>
           <div className="">{/* <Comments></Comments> */}</div>
         </div>
         <div className="relative w-1/3">
