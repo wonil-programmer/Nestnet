@@ -43,7 +43,7 @@ const Comment = ({ comment, setSelectedCommentId, isEditing }) => {
   const editInput = (
     <input
       onChange={() => setEditValue(editInputRef.current.value)}
-      className="flex w-full h-full py-0 px-6 bg-[#efefef] border-none rounded-3xl outline-4 outline-red-300"
+      className="flex w-full h-[2rem] px-6 border-b border-red-300 focus:outline-none focus:border-red-500"
       type="text"
       value={editValue}
       ref={editInputRef}
@@ -67,9 +67,13 @@ const Comment = ({ comment, setSelectedCommentId, isEditing }) => {
             ) : (
               <div className="w-full whitespace-normal">{content}</div>
             )}
-            <div className="flex mt-2 pr-8 text-[0.9rem]">
-              <span className="mr-4">{createdTime}</span>
-              <button onClick={() => onCommentDelete(commentId)}>삭제</button>
+            <div className="flex flex-row justify-end mt-2 pr-4 text-[0.8rem]">
+              <button
+                className="mr-2"
+                onClick={() => onCommentDelete(commentId)}
+              >
+                삭제
+              </button>
               <button onClick={() => handleCommentEdit(commentId)}>수정</button>
             </div>
           </div>

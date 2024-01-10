@@ -4,7 +4,7 @@ import Comments from "./Comments";
 const AlbumDescription = ({ isAlbumLoading, metaData, commentData }) => {
   console.log(commentData);
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col bg-white">
       <div className="flex flex-row w-full h-[5rem] p-6 border-y border-border-primary">
         {isAlbumLoading ? (
           <div>Loading...</div>
