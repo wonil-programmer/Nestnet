@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
-const UnselectedPhotos = ({ photos, setSelectedPhoto }) => {
+const UnselectedPhotos = ({ isAlbumLoading, photos, setSelectedPhoto }) => {
   const getPhotoPath = (photo) => {
     const photoRootPath = `${process.env.REACT_APP_SERVER}/image`;
     let filePath = photo.filePath;
@@ -16,6 +16,8 @@ const UnselectedPhotos = ({ photos, setSelectedPhoto }) => {
   const handleClickedPhoto = (photoPath) => {
     setSelectedPhoto(photoPath);
   };
+
+  if (isAlbumLoading) return <div>Loading...</div>;
 
   return (
     <>

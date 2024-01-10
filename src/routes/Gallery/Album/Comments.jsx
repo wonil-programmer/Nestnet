@@ -1,17 +1,14 @@
-import { memo, useContext } from "react";
+import { memo, useState, useContext } from "react";
 import Comment from "./Comment";
 import { CommentsContext } from "../../../context/CommentsContext";
 
-/**
- * 댓글 데이터
- */
-const Comments = () => {
-  const { comments } = useContext(CommentsContext);
-  const [selectedCommentId, setSelectedCommentId] = 0;
+const Comments = ({ comments }) => {
+  // const { comments } = useContext(CommentsContext);
+  const [selectedCommentId, setSelectedCommentId] = useState(0);
 
   return (
     <>
-      {comments && comments.length !== 0 ? (
+      {comments ? (
         comments.map((comment) => {
           return (
             <Comment
