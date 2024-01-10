@@ -1,0 +1,26 @@
+.sideBar {
+  position: fixed;
+  top: 14rem;
+  width: 14rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: 6rem;
+}
+.content {
+  height: 2.4rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  line-height: 1.3rem;
+}
+.btn {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  border: 1px solid rgba(128, 128, 128, 0.8);
+  border-radius: 2rem;
+  padding: 0.5rem 0.9rem;
+  color: rgb(0, 0, 0, 0.7);
+  font-size: 0.9rem;
+  font-weight: bold;
+}
