@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { memo } from "react";
-import { triggerFullscreen } from "../../utils/triggerFullScreen";
+import { triggerFullscreen } from "../../../utils/triggerFullScreen";
 
 const SelectedPhoto = ({ selectedPhoto, isCommentVisible }) => {
   const selectedPhotoRef = useRef();

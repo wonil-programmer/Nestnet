@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react";
-import { CommentsContext } from "../../context/CommentsContext";
+import { CommentsContext } from "../../../context/CommentsContext";
 
 /**
  * 단건 댓글

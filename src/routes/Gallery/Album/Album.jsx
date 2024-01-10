@@ -2,8 +2,8 @@ import AlbumDescription from "./AlbumDescription";
 import UnselectedPhotos from "./UnselectedPhotos";
 import SelectedPhoto from "./SelectedPhoto";
 import DownloadBtn from "./DownloadBtn";
-import SideBar from "../../components/SideBar";
-import AlbumActions from "./AlbumActions";
+import SideBar from "../../../components/SideBar";
+import AlbumActionBanner from "./AlbumActionBanner";
 import { useState, useEffect, useRef } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, Button, IconButton } from "@mui/material";
@@ -62,20 +62,22 @@ const Album = () => {
           <div className="relative flex flex-col m-auto items-center w-4/5">
             <div
               className={
-                "selectedPhotoContainer relative z-10 max-w-max h-max m-auto my-4 text-center rounded-xl shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] cursor-zoom-in"
+                "selectedPhotoContainer relative z-10 max-w-max h-max m-auto my-4 text-center rounded-xl shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]"
               }
             >
-              <div className="flex flex-row justify-end absolute top-0 left-0 w-[calc(100%+4rem)] h-full">
-                <AlbumActions
+              <div className="cursor-zoom-in">
+                <SelectedPhoto
+                  selectedPhoto={selectedPhoto}
+                  isCommentVisible={isCommentVisible}
+                />
+              </div>
+              <div className="flex flex-row justify-end absolute top-0 left-0 w-[calc(100%+4.5rem)] h-full">
+                <AlbumActionBanner
                   selectedPhoto={selectedPhoto}
                   setIsCommentVisible={setIsCommentVisible}
                 />
               </div>
-              <SelectedPhoto
-                selectedPhoto={selectedPhoto}
-                isCommentVisible={isCommentVisible}
-              />
-              {/* <AlbumDescription metaData={metaData} /> */}
+              <AlbumDescription metaData={metaData} />
             </div>
             <div className="absolute top-4 right-4"></div>
           </div>

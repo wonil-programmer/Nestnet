@@ -1,6 +1,6 @@
 import { memo, useContext } from "react";
 import Comment from "./Comment";
-import { CommentsContext } from "../../context/CommentsContext";
+import { CommentsContext } from "../../../context/CommentsContext";
 
 /**
  * 댓글 데이터

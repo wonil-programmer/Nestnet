@@ -1,8 +1,8 @@
 import { memo, useContext } from "react";
-import CommentForm from "../../components/Comments/CommentForm";
+import CommentForm from "../../../components/Comments/CommentForm";
 import Comments from "./Comments";
 import DownloadBtn from "./DownloadBtn";
-import { CommentsContext } from "../../context/CommentsContext";
+import { CommentsContext } from "../../../context/CommentsContext";
 
 /**
  * 앨범 하단뷰 - 앨범정보, 댓글창, 댓글입력창

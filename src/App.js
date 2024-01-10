@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Album from "./routes/Gallery/Album";
+import Album from "./routes/Gallery/Album/Album";
 import Home from "./routes/MainHome/Home";
 import Gallery from "./routes/Gallery/Gallery";
 import GalleryBoardPostForm from "./routes/Gallery/GalleryBoardPostForm";

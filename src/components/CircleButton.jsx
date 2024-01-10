@@ -1,12 +1,14 @@
-const CircleButton = ({ onClick }) => {
+const CircleButton = ({ onClick, content }) => {
   return (
     <>
       <button
         onClick={onClick}
-        className="flex flex-col items-center box-content p-1 w-[2.3rem] h-[2.3rem] rounded-full hover:bg-gray-200 hover:scale-105 duration-300"
-      ></button>
+        className="flex flex-col items-center box-content p-2 w-[2.3rem] h-[2.3rem] rounded-full bg-gray-200 hover:bg-gray-300 duration-300"
+      >
+        {content}
+      </button>
     </>
   );
 };
 
-export default CircleButton;
+export { CircleButton };
