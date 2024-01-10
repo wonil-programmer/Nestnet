@@ -19,20 +19,19 @@ const AlbumDescription = ({ metaData }) => {
           댓글
           <span className="ml-2">{comments.length}</span>
         </h3>
-        <DownloadBtn />
       </div>
       <div>
         <div className="body w-full py-4 px-6 font-semibold overflow-auto">
           {metaData.bodyContent}
         </div>
         <ul className="commentsList w-full py-4 px-12 max-h-96 overflow-auto">
-          <Comments />
+          {/* <Comments /> */}
         </ul>
       </div>
-      <CommentForm
+      {/* <CommentForm
         viewCount={metaData.viewCount}
         likeCount={metaData.likeCount}
-      />
+      /> */}
     </div>
   );
 };
