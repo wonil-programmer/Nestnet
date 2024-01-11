@@ -29,17 +29,15 @@ const Album = () => {
   });
 
   const {
-    data: albumData = {},
+    data: {
+      photoPostDto: postData,
+      fileDtoList: fileData,
+      commentResponseList: commentData,
+      memberLiked: isMemberLiked,
+    } = {},
     isLoading: isAlbumLoading,
     status,
   } = useGetAlbum();
-  const {
-    "comment-data": commentData,
-    "file-data": fileData,
-    "is-member-liked": isMemberLiked,
-    "post-data": postData,
-    postId,
-  } = albumData;
 
   useEffect(() => {
     if (status === "success") {

@@ -2,22 +2,16 @@ import { memo, forwardRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
-import { getImagePath } from "../../utils/getImagePath";
+import StringCombinator from "../../utils/Combinator/StringCombinator";
 
 const Thumbnail = forwardRef(({ album }, ref) => {
-  const [thumbnailPath, setThumbnailPath] = useState("");
-
-  useEffect(() => {
-    setThumbnailPath(getImagePath(album));
-  }, [album]);
-
   return (
     <>
       <div className="m-4 min-w-[22.65rem] max-w-[22.65rem] h-min" ref={ref}>
         <Link
           to={`${album.postId}`}
           state={{
-            selectedPhotoPath: thumbnailPath,
+            selectedPhotoPath: StringCombinator.getImagePath(album),
             title: album.title,
             viewCount: album.viewCount,
             likeCount: album.likeCount,
@@ -25,7 +19,7 @@ const Thumbnail = forwardRef(({ album }, ref) => {
         >
           <div className="relative album flex flex-col w-full h-min rounded-xl overflow-hidden shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
             <img
-              src={getImagePath(album)}
+              src={StringCombinator.getImagePath(album)}
               alt="thumbnail"
               className="rounded-xl"
             />

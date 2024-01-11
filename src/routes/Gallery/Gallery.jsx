@@ -47,56 +47,54 @@ function Gallery() {
 
   return (
     <>
-      <div>
-        <div className="relative flex justify-center">
-          <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
-            {status === "pending" &&
-              Array.from(new Array(9)).map((_, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    margin: "1rem",
-                    minWidth: "22.65rem",
-                    maxWidth: "22.65rem",
-                    height: "25rem",
-                  }}
-                >
-                  <Skeleton variant="rounded" height="100%" />
-                </Box>
-              ))}
-            {status !== "pending" &&
-              data?.pages.map((albums) =>
-                albums.map((album, idx) => {
-                  if (albums.length === idx + 1) {
-                    return (
-                      <Thumbnail
-                        ref={observeBtmRef}
-                        key={album.postId}
-                        album={album}
-                        isFetchingNextPage={isFetchingNextPage}
-                      />
-                    );
-                  } else {
-                    return (
-                      <Thumbnail
-                        key={album.postId}
-                        album={album}
-                        isFetchingNextPage={isFetchingNextPage}
-                      />
-                    );
-                  }
-                })
-              )}
-          </Flex>
-          {isFetchingNextPage && <LoadingSpinner />}
-        </div>
-        {/* 글 작성 버튼 */}
-        <button className="fixed right-10 bottom-8">
-          <Link to="/gallery/form">
-            <AiFillPlusCircle className="w-12 h-12 text-home-primary" />
-          </Link>
-        </button>
+      <div className="relative flex justify-center">
+        <Flex as={Masonry} breakpointCols={breakpointColumnsObj}>
+          {status === "pending" &&
+            Array.from(new Array(9)).map((_, index) => (
+              <Box
+                key={index}
+                sx={{
+                  margin: "1rem",
+                  minWidth: "22.65rem",
+                  maxWidth: "22.65rem",
+                  height: "25rem",
+                }}
+              >
+                <Skeleton variant="rounded" height="100%" />
+              </Box>
+            ))}
+          {status !== "pending" &&
+            data?.pages.map((albums) =>
+              albums.map((album, idx) => {
+                if (albums.length === idx + 1) {
+                  return (
+                    <Thumbnail
+                      ref={observeBtmRef}
+                      key={album.postId}
+                      album={album}
+                      isFetchingNextPage={isFetchingNextPage}
+                    />
+                  );
+                } else {
+                  return (
+                    <Thumbnail
+                      key={album.postId}
+                      album={album}
+                      isFetchingNextPage={isFetchingNextPage}
+                    />
+                  );
+                }
+              })
+            )}
+        </Flex>
+        {isFetchingNextPage && <LoadingSpinner />}
       </div>
+      {/* 글 작성 버튼 */}
+      <button className="fixed right-10 bottom-8">
+        <Link to="/gallery/form">
+          <AiFillPlusCircle className="w-12 h-12 text-home-primary" />
+        </Link>
+      </button>
     </>
   );
 }

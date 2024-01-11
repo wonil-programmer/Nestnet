@@ -219,47 +219,56 @@
   ],
   "album": [
     {
-      "postId": "61",
-      "is-member-liked": false,
-      "file-data": [
+      "photoPostDto": {
+        "id": 61,
+        "title": "23 체육대회",
+        "bodyContent": "테스트본문1",
+        "viewCount": 1,
+        "likeCount": 0,
+        "username": "wonil",
+        "createdTime": "2024-01-01T04:03:47.827Z",
+        "modifiedTime": "2024-01-01T04:03:47.827Z",
+        "memberWritten": true
+      },
+      "fileDtoList": [
         {
           "id": 1,
           "originalFileName": "사진게시판샘플1.jpg",
           "saveFileName": "a1.jpg",
-          "filePath": "assets"
+          "saveFilePath": "assets"
         },
         {
           "id": 2,
           "originalFileName": "사진게시판샘플2.jpg",
           "saveFileName": "a2.jpg",
-          "filePath": "assets"
+          "saveFilePath": "assets"
         },
         {
           "id": 3,
           "originalFileName": "사진게시판샘플2.jpg",
           "saveFileName": "a3.jpg",
-          "filePath": "assets"
+          "saveFilePath": "assets"
         },
         {
           "id": 4,
           "originalFileName": "사진게시판샘플2.jpg",
           "saveFileName": "a4.jpg",
-          "filePath": "assets"
+          "saveFilePath": "assets"
         },
         {
           "id": 5,
           "originalFileName": "사진게시판샘플2.jpg",
           "saveFileName": "a5.jpg",
-          "filePath": "assets"
+          "saveFilePath": "assets"
         },
         {
           "id": 6,
           "originalFileName": "사진게시판샘플2.jpg",
           "saveFileName": "a6.jpg",
-          "filePath": "assets"
+          "saveFilePath": "assets"
         }
       ],
-      "comment-data": [
+      "commentResponseList": [
         {
           "id": 6,
           "username": "테스트1",
@@ -273,55 +282,53 @@
           "createdTime": "2023-08-07T14:57:43.075462"
         }
       ],
-      "post-data": {
-        "id": 61,
-        "title": "23 체육대회",
-        "bodyContent": "테스트본문1",
-        "viewCount": 1,
-        "likeCount": 0,
-        "username": "테스트"
-      }
+      "memberLiked": false
     },
     {
-      "postId": "62",
-      "is-member-liked": false,
-      "file-data": [
-        {
-          "originalFileName": "사진게시판샘플1.jpg",
-          "saveFileName": "b1.png",
-          "filePath": "assets"
-        },
-        {
-          "originalFileName": "사진게시판샘플2.jpg",
-          "saveFileName": "b2.png",
-          "filePath": "assets"
-        }
-      ],
-      "comment-data": [
-        {
-          "id": 6,
-          "username": "테스트3",
-          "content": "테스트로 작성한 댓글3",
-          "createdTime": "2023-08-07T14:48:05.723787"
-        },
-        {
-          "id": 7,
-          "username": "테스트4",
-          "content": "테스트로 작성한 댓글4",
-          "createdTime": "2023-08-07T14:57:43.075462"
-        }
-      ],
-      "post-data": {
+      "photoPostDto": {
         "id": 61,
         "title": "23 체육대회",
         "bodyContent": "test",
         "viewCount": 1,
         "likeCount": 0,
-        "username": "테스트",
-        "createdTime": [2023, 9, 26, 14, 31, 9, 493590000],
-        "modifiedTime": null,
+        "username": "seongho",
+        "createdTime": "2024-01-01T04:03:47.827Z",
+        "modifiedTime": "2024-01-01T04:03:47.827Z",
         "memberWritten": true
-      }
+      },
+      "fileDtoList": [
+        {
+          "id": 3,
+          "originalFileName": "사진게시판샘플1.jpg",
+          "saveFileName": "b1.png",
+          "saveFilePath": "assets"
+        },
+        {
+          "id": 4,
+          "originalFileName": "사진게시판샘플2.jpg",
+          "saveFileName": "b2.png",
+          "saveFilePath": "assets"
+        }
+      ],
+      "commentResponseList": [
+        {
+          "id": 6,
+          "username": "테스트3",
+          "content": "테스트로 작성한 댓글3",
+          "createdTime": "2023-08-07T14:48:05.723787",
+          "modifiedTime": "2023-08-07T14:48:05.723787",
+          "memberWritten": true
+        },
+        {
+          "id": 7,
+          "username": "테스트4",
+          "content": "테스트로 작성한 댓글4",
+          "createdTime": "2023-08-07T14:57:43.075462",
+          "modifiedTime": "2023-08-07T14:48:05.723787",
+          "memberWritten": false
+        }
+      ],
+      "memberLiked": false
     }
   ],
   "study": [
