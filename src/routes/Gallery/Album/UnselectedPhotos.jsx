@@ -1,32 +1,31 @@
 import { memo } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import StringCombinator from "../../../utils/Combinator/StringCombinator";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
 const UnselectedPhotos = ({ isAlbumLoading, photos, setSelectedPhoto }) => {
-  const getPhotoPath = (photo) => {
-    const photoRootPath = `${process.env.REACT_APP_SERVER}/image`;
-    let filePath = photo.filePath;
-    let saveFileName = photo.saveFileName;
-    // let photoPath = photoRootPath + "/" + filePath + "/" + saveFileName;
-    // test: json-server
-    let photoPath = "/" + filePath + "/" + saveFileName;
-
-    return photoPath;
-  };
-
   const handleClickedPhoto = (photoPath) => {
     setSelectedPhoto(photoPath);
   };
 
-  if (isAlbumLoading) return <div>Loading...</div>;
+  if (isAlbumLoading)
+    return (
+      <div className="flex flex-col justify-center items-center w-full h-screen">
+        {/* 로딩 스피너 위치 */}
+        Loading...
+      </div>
+    );
 
   return (
     <>
       {photos?.map((photo) => {
-        const photoPath = getPhotoPath(photo);
+        const photoPath = StringCombinator.getImagePath(photo);
 
         return (
-          <div className="wrapper relative mb-4 rounded-md overflow-hidden shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
-            {/* boxshadow 사이트의 Warm테마 */}
+          <div
+            key={photo.id}
+            className="wrapper relative mb-4 rounded-md overflow-hidden shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]"
+          >
             <img
               className="w-full"
               // key={photo.id}
