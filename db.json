@@ -219,15 +219,16 @@
   ],
   "album": [
     {
+      "id": 61,
       "photoPostDto": {
         "id": 61,
         "title": "23 체육대회",
-        "bodyContent": "테스트본문1",
-        "viewCount": 1,
-        "likeCount": 0,
+        "bodyContent": "2023년도 소프트웨어학과 체육대회",
+        "viewCount": 123,
+        "likeCount": 22,
         "username": "wonil",
-        "createdTime": "2024-01-01T04:03:47.827Z",
-        "modifiedTime": "2024-01-01T04:03:47.827Z",
+        "createdTime": "2024-01-01T04:03:47",
+        "modifiedTime": "2024-01-01T04:03:47",
         "memberWritten": true
       },
       "fileDtoList": [
@@ -271,22 +272,27 @@
       "commentResponseList": [
         {
           "id": 6,
-          "username": "테스트1",
-          "content": "테스트로 작성한 댓글1",
-          "createdTime": "2023-08-07T14:48:05.723787"
+          "username": "성호",
+          "content": "가나다라마바사 아자차카타파하",
+          "createdTime": "2023-08-07T14:48:05",
+          "modifiedTime": "2024-01-11T04:03:47",
+          "memberWritten": false
         },
         {
           "id": 7,
-          "username": "테스트2",
-          "content": "테스트로 작성한 댓글2",
-          "createdTime": "2023-08-07T14:57:43.075462"
+          "username": "원일",
+          "content": "가나다라마바사 아자차카타파하 가나다라마바사 아자차카타파하 가나다라마바사 아자차카타파하",
+          "createdTime": "2023-08-07T14:57:43",
+          "modifiedTime": "2024-01-11T04:03:47",
+          "memberWritten": true
         }
       ],
-      "memberLiked": false
+      "memberLiked": true
     },
     {
+      "id": 62,
       "photoPostDto": {
-        "id": 61,
+        "id": 6,
         "title": "23 체육대회",
         "bodyContent": "test",
         "viewCount": 1,
@@ -312,20 +318,20 @@
       ],
       "commentResponseList": [
         {
-          "id": 6,
-          "username": "테스트3",
-          "content": "테스트로 작성한 댓글3",
-          "createdTime": "2023-08-07T14:48:05.723787",
-          "modifiedTime": "2023-08-07T14:48:05.723787",
-          "memberWritten": true
+          "id": 1,
+          "username": "성호",
+          "content": "가나다라마바사 아자차카타파하",
+          "createdTime": "2023-08-07T14:48:05",
+          "modifiedTime": "2024-01-11T04:03:47",
+          "memberWritten": false
         },
         {
-          "id": 7,
-          "username": "테스트4",
-          "content": "테스트로 작성한 댓글4",
-          "createdTime": "2023-08-07T14:57:43.075462",
-          "modifiedTime": "2023-08-07T14:48:05.723787",
-          "memberWritten": false
+          "id": 2,
+          "username": "원일",
+          "content": "가나다라마바사 아자차카타파하 가나다라마바사 아자차카타파하 가나다라마바사 아자차카타파하",
+          "createdTime": "2023-08-07T14:57:43",
+          "modifiedTime": "2024-01-11T04:03:47",
+          "memberWritten": true
         }
       ],
       "memberLiked": false
