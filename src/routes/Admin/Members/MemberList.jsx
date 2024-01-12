@@ -96,13 +96,19 @@ const MemberList = ({ members }) => {
 
   // 권한 수정 핸들러
   const handleSaveUser = async ({ row, values, table }) => {
-    const updateMemberId = row.id;
-    await updateUser({ updateMemberId, updateValues: values });
-    table.setEditingRow(null);
+    if (
+      window.confirm(
+        `${values.name}님의 권한을 ${row.original.memberAuthority}에서 ${values.memberAuthority}(으)로 변경하시겠습니까?`
+      )
+    ) {
+      const updateMemberId = row.id;
+      await updateUser({ updateMemberId, updateValues: values });
+      table.setEditingRow(null);
+    }
   };
   // 회원 탈퇴 핸들러
   const openDeleteConfirmModal = (row) => {
-    if (window.confirm("해당 동아리원을 정말 탈퇴시키시겠습니까?")) {
+    if (window.confirm(`${row.original.name}님을 정말 탈퇴시키시겠습니까?`)) {
       deleteUser(row.original);
     }
   };
@@ -190,12 +196,8 @@ function useUpdateUser() {
       });
     },
     // 클라이언트 업데이트
-    onMutate: (newUserInfo) => {
-      queryClient.setQueryData(["members"], (prevUsers) =>
-        prevUsers?.map((prevUser) =>
-          prevUser.id === newUserInfo.id ? newUserInfo : prevUser
-        )
-      );
+    onSuccess: () => {
+      queryClient.invalidateQueries(["members"]);
     },
   });
 }
@@ -210,10 +212,8 @@ function useDeleteUser() {
       return await axios.delete(deleteMemberURL);
     },
     // 클라이언트 업데이트
-    onMutate: (member) => {
-      queryClient.setQueryData(["members"], (prevMembers) =>
-        prevMembers?.filter((prevMember) => prevMember.id !== member.id)
-      );
+    onSuccess: () => {
+      queryClient.invalidateQueries(["members"]);
     },
   });
 }
