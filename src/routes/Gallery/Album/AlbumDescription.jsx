@@ -8,7 +8,10 @@ const AlbumDescription = ({ isAlbumLoading, metaData, comments }) => {
     <div className="w-full flex flex-col bg-white">
       <div className="flex flex-row w-full h-[5rem] p-6 border-y border-border-primary">
         {isAlbumLoading ? (
-          <div>Loading...</div>
+          <div>
+            {/* 로딩 스켈레톤 */}
+            Loading...
+          </div>
         ) : (
           <h2 className="text-lg my-auto">
             댓글
@@ -17,7 +20,10 @@ const AlbumDescription = ({ isAlbumLoading, metaData, comments }) => {
         )}
       </div>
       {isAlbumLoading ? (
-        <div>Loading...</div>
+        <div>
+          {/* 로딩 스켈레톤 */}
+          Loading...
+        </div>
       ) : (
         <>
           <div className="body py-5 px-6 font-semibold">
@@ -25,14 +31,14 @@ const AlbumDescription = ({ isAlbumLoading, metaData, comments }) => {
           </div>
           <ul className="commentsList w-full py-4 px-12 max-h-96 overflow-auto">
             <>
-              {comments ? (
+              {comments.length ? (
                 comments.map((comment) => {
                   return (
                     <Comment
                       key={comment.id}
                       comment={comment}
                       setSelectedCommentId={setSelectedCommentId}
-                      isEditing={
+                      isUpdating={
                         selectedCommentId === comment.id ? true : false
                       }
                     />
