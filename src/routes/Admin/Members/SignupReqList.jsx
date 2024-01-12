@@ -7,7 +7,10 @@ import { Box, IconButton, Tooltip } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { FaHandshakeSimple, FaHandshakeSimpleSlash } from "react-icons/fa6";
 import axios from "axios";
-import { AUTHORITY_ENG_TO_KOR } from "../../../constant/Constant";
+import {
+  AUTHORITY_ENG_TO_KOR,
+  AUTHORITY_KOR_TO_ENG,
+} from "../../../constant/Constant";
 
 /**
  * 회원가입 요청 목록 테이블
@@ -76,13 +79,19 @@ const SignupReqList = () => {
     useDisapproveReq();
 
   // 회원가입 요청 승인 핸들러
-  const handleApproveReq = async (row) => {
-    approveReq(row.original);
+  const handleReqApprove = async ({ id, original }) => {
+    if (
+      window.confirm(`${original.name}님의 회원가입 요청을 승인하시겠습니까?`)
+    ) {
+      approveReq({ id, signupReq: original });
+    }
   };
   // 회원가입 요청 미승인 핸들러
-  const openDeleteConfirmModal = (row) => {
-    if (window.confirm("해당 회원가입 요청을 정말 승인하지 않으시겠습니까?")) {
-      disapproveReq(row.original);
+  const handleReqReject = ({ id, original }) => {
+    if (
+      window.confirm(`${original.name}님의 회원가입 요청을 거절하시겠습니까?`)
+    ) {
+      disapproveReq({ id, signupReq: original });
     }
   };
 
@@ -110,12 +119,12 @@ const SignupReqList = () => {
     renderRowActions: ({ row }) => (
       <Box sx={{ display: "flex", gap: "0.5rem" }}>
         <Tooltip title="승인">
-          <IconButton color="success" onClick={() => handleApproveReq(row)}>
+          <IconButton color="success" onClick={() => handleReqApprove(row)}>
             <FaHandshakeSimple />
           </IconButton>
         </Tooltip>
         <Tooltip title="미승인">
-          <IconButton color="error" onClick={() => openDeleteConfirmModal(row)}>
+          <IconButton color="error" onClick={() => handleReqReject(row)}>
             <FaHandshakeSimpleSlash />
           </IconButton>
         </Tooltip>
@@ -141,54 +150,15 @@ function useGetSignupReqs() {
   return useQuery({
     queryKey: ["signups"],
     queryFn: async () => {
-      //   const allSignupReqsURL = `${process.env.REACT_APP_SERVER}/manager/signup-request`;
-      //   const response = await axios.get(allSignupReqsURL);
-      //   const users = response.data;
+      const signupReqsURL = `${process.env.REACT_APP_SERVER}/manager/signup-request`;
+      return await axios.get(signupReqsURL).then((res) => {
+        const reqs = res.data.response.dtoList;
 
-      // dummy
-      const users = [
-        {
-          id: 1,
-          name: "김진짜",
-          loginId: "real",
-          studentId: "2023036068",
-          grade: 2,
-          graduateYear: 2027,
-          memberAuthority: "WAITING_FOR_APPROVAL",
-        },
-        {
-          id: 2,
-          name: "김가짜",
-          loginId: "fake",
-          studentId: "2023036068",
-          grade: 2,
-          graduateYear: 2027,
-          memberAuthority: "WAITING_FOR_APPROVAL",
-        },
-        {
-          id: 3,
-          name: "박기안",
-          loginId: "kian84",
-          studentId: "2024036068",
-          grade: 1,
-          graduateYear: 2027,
-          memberAuthority: "WAITING_FOR_APPROVAL",
-        },
-        {
-          id: 4,
-          name: "주우재",
-          loginId: "subject",
-          studentId: "2024036068",
-          grade: 1,
-          graduateYear: 2027,
-          memberAuthority: "WAITING_FOR_APPROVAL",
-        },
-      ];
-
-      return users.map((user) => ({
-        ...user,
-        memberAuthority: AUTHORITY_ENG_TO_KOR[user.memberAuthority] ?? "-",
-      }));
+        return reqs.map((req) => ({
+          ...req,
+          memberAuthority: AUTHORITY_ENG_TO_KOR[req.memberAuthority] ?? "-",
+        }));
+      });
     },
     refetchOnWindowFocus: false,
   });
@@ -199,27 +169,16 @@ function useApproveReq() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (signupReq) => {
+    mutationFn: async ({ signupReq }) => {
       const approveReqURL = `${process.env.REACT_APP_SERVER}/manager/approve-signup`;
-      // return await axios
-      //   .post(approveReqURL, {
-      //     loginId: signupReq.loginId,
-      //     memberAuthority: signupReq.memberAuthority,
-      //   })
-      //   .then(function (response) {
-      //     console.log(response);
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
+      return await axios.post(approveReqURL, {
+        loginId: signupReq.loginId,
+        memberAuthority: AUTHORITY_KOR_TO_ENG[signupReq.memberAuthority],
+      });
     },
     // 클라이언트 업데이트
-    onMutate: (signupReq) => {
-      queryClient.setQueryData(["signups"], (prevSignupReqs) =>
-        prevSignupReqs?.filter(
-          (prevSignupReq) => prevSignupReq.id !== signupReq.id
-        )
-      );
+    onSuccess: () => {
+      queryClient.invalidateQueries(["signups"]);
     },
   });
 }
@@ -229,24 +188,16 @@ function useDisapproveReq() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (signupReq) => {
-      const disapproveReqURL = `${process.env.REACT_APP_SERVER}/`;
-      // return await axios
-      //   .post(disapproveReqURL)
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //   });
+    mutationFn: async ({ signupReq }) => {
+      const disapproveReqURL = `${process.env.REACT_APP_SERVER}/manager/reject-signup`;
+      return await axios.post(disapproveReqURL, {
+        loginId: signupReq.loginId,
+        memberAuthority: AUTHORITY_KOR_TO_ENG[signupReq.memberAuthority],
+      });
     },
     // 클라이언트 업데이트
-    onMutate: (signupReq) => {
-      queryClient.setQueryData(["signups"], (prevSignupReqs) =>
-        prevSignupReqs?.filter(
-          (prevSignupReq) => prevSignupReq.id !== signupReq.id
-        )
-      );
+    onSuccess: () => {
+      queryClient.invalidateQueries(["signups"]);
     },
   });
 }
