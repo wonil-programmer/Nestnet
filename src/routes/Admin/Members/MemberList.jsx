@@ -10,6 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import {
   AUTHORITY_ENG_TO_KOR,
+  AUTHORITY_KOR_TO_ENG,
   AVAIL_AUTHORITY,
 } from "../../../constant/Constant";
 
@@ -94,8 +95,9 @@ const MemberList = ({ members }) => {
     useDeleteUser();
 
   // 권한 수정 핸들러
-  const handleSaveUser = async ({ values, table }) => {
-    await updateUser(values);
+  const handleSaveUser = async ({ row, values, table }) => {
+    const updateMemberId = row.id;
+    await updateUser({ updateMemberId, updateValues: values });
     table.setEditingRow(null);
   };
   // 회원 탈퇴 핸들러
@@ -156,200 +158,40 @@ const MemberList = ({ members }) => {
   );
 };
 
-// GET: 동아리원 목록 조회 api
+// REST: 동아리원 목록 조회
 function useGetUsers() {
   return useQuery({
-    queryKey: ["users"],
+    queryKey: ["members"],
     queryFn: async () => {
-      //   const allMembersURL = `${process.env.REACT_APP_SERVER}/manager/member-info`;
-      //   const response = await axios.get(allMembersURL);
-      //   const users = response.data;
+      const allMembersURL = `${process.env.REACT_APP_SERVER}/manager/member-info`;
+      return await axios.get(allMembersURL).then((res) => {
+        const members = res.data.response.dtoList;
 
-      const users = [
-        {
-          id: 1,
-          name: "허원일",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "GENERAL_MEMBER",
-        },
-        {
-          id: 2,
-          name: "최유진",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "PRESIDENT",
-        },
-        {
-          id: 3,
-          name: "정한울",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "VICE_PRESIDENT",
-        },
-        {
-          id: 4,
-          name: "김성호",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "MANAGER",
-        },
-        {
-          id: 5,
-          name: "임상우",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "GRADUATED_MEMBER",
-        },
-        {
-          id: 6,
-          name: "허원일",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "ADMIN",
-        },
-        {
-          id: 7,
-          name: "최유진",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "PRESIDENT",
-        },
-        {
-          id: 8,
-          name: "정한울",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "VICE_PRESIDENT",
-        },
-        {
-          id: 9,
-          name: "김성호",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "MANAGER",
-        },
-        {
-          id: 10,
-          name: "임상우",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "GRADUATED_MEMBER",
-        },
-        {
-          id: 11,
-          name: "허원일",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "ADMIN",
-        },
-        {
-          id: 12,
-          name: "최유진",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "PRESIDENT",
-        },
-        {
-          id: 13,
-          name: "정한울",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "VICE_PRESIDENT",
-        },
-        {
-          id: 14,
-          name: "김성호",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "MANAGER",
-        },
-        {
-          id: 15,
-          name: "임상우",
-          loginId: "wonza",
-          emailAddress: "wonil@naver.com",
-          studentId: "2019036068",
-          grade: 3,
-          graduateYear: 2025,
-          memberAuthority: "GRADUATED_MEMBER",
-        },
-      ];
-      const transformedUsers = users.map((user) => ({
-        ...user,
-        memberAuthority: AUTHORITY_ENG_TO_KOR[user.memberAuthority] ?? "-",
-      }));
-
-      return transformedUsers;
+        return members.map((member) => ({
+          ...member,
+          memberAuthority: AUTHORITY_ENG_TO_KOR[member.memberAuthority] ?? "-",
+        }));
+      });
     },
     refetchOnWindowFocus: false,
   });
 }
 
-// POST: 동아리원 권한 수정 api
+// REST: 동아리원 권한 수정
 function useUpdateUser() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (user) => {
+    mutationFn: async ({ updateMemberId, updateValues }) => {
       const authorityChangeURL = `${process.env.REACT_APP_SERVER}/manager/change-authority`;
-      // return await axios
-      //   .post(authorityChangeURL, {
-      //     id: user.id,
-      //     memberAuthority: user.memberAuthority,
-      //   })
-      //   .then(function (response) {
-      //     console.log(response);
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
+      return await axios.post(authorityChangeURL, {
+        id: updateMemberId,
+        memberAuthority: AUTHORITY_KOR_TO_ENG[updateValues.memberAuthority],
+      });
     },
     // 클라이언트 업데이트
     onMutate: (newUserInfo) => {
-      queryClient.setQueryData(["users"], (prevUsers) =>
+      queryClient.setQueryData(["members"], (prevUsers) =>
         prevUsers?.map((prevUser) =>
           prevUser.id === newUserInfo.id ? newUserInfo : prevUser
         )
@@ -358,26 +200,19 @@ function useUpdateUser() {
   });
 }
 
-// DELETE: 동아리원 탈퇴 api
+// REST: 동아리원 탈퇴
 function useDeleteUser() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (user) => {
-      const deleteUserURL = `${process.env.REACT_APP_SERVER}/manager/member-withdraw/${user["member-id"]}`;
-      // return await axios
-      //   .get(deleteUserURL)
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //   });
+    mutationFn: async (member) => {
+      const deleteMemberURL = `${process.env.REACT_APP_SERVER}/manager/member-withdraw?member-id=${member.id}`;
+      return await axios.delete(deleteMemberURL);
     },
     // 클라이언트 업데이트
-    onMutate: (user) => {
-      queryClient.setQueryData(["users"], (prevUsers) =>
-        prevUsers?.filter((prevUser) => prevUser.id !== user.id)
+    onMutate: (member) => {
+      queryClient.setQueryData(["members"], (prevMembers) =>
+        prevMembers?.filter((prevMember) => prevMember.id !== member.id)
       );
     },
   });
