@@ -1,8 +1,7 @@
 import AlbumDescription from "./AlbumDescription";
 import UnselectedPhotos from "./UnselectedPhotos";
 import SelectedPhoto from "./SelectedPhoto";
-import DownloadBtn from "./DownloadBtn";
-import SideBar from "../../../components/SideBar";
+import CommentRegistration from "./CommentRegistration";
 import AlbumActionBanner from "./AlbumActionBanner";
 import { useState, useEffect, useRef } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
@@ -48,39 +47,41 @@ const Album = () => {
     }
   }, [status, postData?.bodyContent]);
 
-  const [isCommentVisible, setIsCommentVisible] = useState(false);
+  const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
 
   const testRef = useRef();
 
   return (
     <div className="max-w-screen bg-home-background">
       <div className="mainView flex flex-row justify-between">
-        <div className="leftSideView w-1/4 min-w-[12rem]"></div>
-        <div className="centerView w-2/4 min-w-[40rem] h-[calc(100vh-4.7rem)] overflow-y-auto">
-          <div className="relative flex flex-col m-auto items-center w-4/5">
-            <div
-              className={
-                "selectedPhotoContainer relative z-10 max-w-max h-max m-auto my-4 rounded-xl shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]"
-              }
-            >
-              <SelectedPhoto
-                selectedPhoto={selectedPhoto}
-                isCommentVisible={isCommentVisible}
-              />
-              <div className="flex flex-row justify-end absolute top-0 left-0 w-[calc(100%+4.5rem)] h-[calc(100vh-4.5rem)]">
-                <AlbumActionBanner
-                  selectedPhoto={selectedPhoto}
-                  setIsCommentVisible={setIsCommentVisible}
-                />
+        <div className="leftSideView w-1/4 min-w-[12rem]">{/* 사이드바 */}</div>
+        <div className="centerView w-2/4 min-w-[50rem] h-[calc(100vh-4.7rem)] pl-10 overflow-y-auto">
+          <div className="flex flex-row">
+            <div className="relative flex flex-col m-auto items-center w-[40rem]">
+              <div
+                className={`selectedPhotoContainer w-[40rem] h-max mt-4 ${
+                  isDescriptionVisible ? "rounded-t-3xl" : "rounded-3xl"
+                } overflow-hidden shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]`}
+              >
+                <SelectedPhoto selectedPhoto={selectedPhoto} />
               </div>
               <AlbumDescription
                 isAlbumLoading={isAlbumLoading}
                 metaData={metaData}
-                commentData={commentData}
+                comments={commentData}
+                isDescriptionVisible={isDescriptionVisible}
               />
-              <div className="sticky bottom-0 w-full h-[6rem] rounded-b-xl bg-slate-100"></div>
+              <CommentRegistration
+                isDescriptionVisible={isDescriptionVisible}
+              />
             </div>
-            <div className="absolute top-4 right-4"></div>
+            <div className="w-[5rem]">
+              <AlbumActionBanner
+                selectedPhoto={selectedPhoto}
+                setIsDescriptionVisible={setIsDescriptionVisible}
+                isMemberLiked={isMemberLiked}
+              />
+            </div>
           </div>
         </div>
         <div className="relative w-1/4">
@@ -105,9 +106,10 @@ const useGetAlbum = () => {
     queryKey: ["album", postId],
     queryFn: async () => {
       // const albumURL = `${process.env.REACT_APP_SERVER}/photo-post/${postId}`;
-      // test: json-server
-      const albumURL = `${process.env.REACT_APP_SERVER}/album/?postId=${postId}`;
+      // return await axios.get(albumURL).then((res) => res.data.response);
 
+      // test: json-server
+      const albumURL = `${process.env.REACT_APP_SERVER}/album/?id=${postId}`;
       return await axios.get(albumURL).then((res) => res.data[0]);
     },
   });

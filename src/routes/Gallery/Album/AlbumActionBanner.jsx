@@ -1,15 +1,17 @@
 import DownloadBtn from "./DownloadBtn";
 import CommentActivationBtn from "./CommentActivationBtn";
+import LikeBtn from "./LikeBtn";
 
-const AlbumActionBanner = ({ selectedPhoto, setIsCommentVisible }) => {
-  const toggleCommentVisibility = () => {
-    setIsCommentVisible((prev) => !prev);
-  };
-
+const AlbumActionBanner = ({
+  selectedPhoto,
+  setIsDescriptionVisible,
+  isMemberLiked,
+}) => {
   return (
-    <div className="flex flex-col flex-start items-center w-[4.5rem] h-full py-4">
+    <div className="flex flex-col flex-start items-center h-full mt-8 pr-3">
       <DownloadBtn selectedPhoto={selectedPhoto} />
-      <CommentActivationBtn setIsCommentVisible={setIsCommentVisible} />
+      <CommentActivationBtn setIsDescriptionVisible={setIsDescriptionVisible} />
+      <LikeBtn isMemberLiked={isMemberLiked} />
     </div>
   );
 };

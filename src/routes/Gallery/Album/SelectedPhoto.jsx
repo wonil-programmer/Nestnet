@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { memo } from "react";
 import { triggerFullscreen } from "../../../utils/triggerFullScreen";
 
-const SelectedPhoto = ({ selectedPhoto, isCommentVisible }) => {
+const SelectedPhoto = ({ selectedPhoto }) => {
   const selectedPhotoRef = useRef();
   // 각 브라우저에 대한 처리
   const triggerFull = () => {
@@ -11,13 +11,17 @@ const SelectedPhoto = ({ selectedPhoto, isCommentVisible }) => {
 
   return (
     <>
-      <img
-        className={`${isCommentVisible ? "rounded-t-2xl" : "rounded-2xl"}`}
-        src={selectedPhoto}
-        alt="thumbnail"
-        ref={selectedPhotoRef}
-        onDoubleClick={triggerFull}
-      />
+      {selectedPhoto ? (
+        <img
+          className="m-auto"
+          src={selectedPhoto}
+          alt="thumbnail"
+          ref={selectedPhotoRef}
+          onDoubleClick={triggerFull}
+        />
+      ) : (
+        <>{/* 스켈레톤 */}</>
+      )}
     </>
   );
 };
