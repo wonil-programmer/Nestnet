@@ -108,25 +108,18 @@ function useUpdateComment() {
   const { postId } = useParams();
 
   return useMutation({
-    mutationFn: async (newComment) => {
-      // const commentUpdateURL = `${process.env.REACT_APP_SERVER}/comment/modify/${updateId}`;
-      // return await axios
-      //   .post(commentUpdateURL, {
-      //     content: newComment.content,
-      //   })
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //   });
+    mutationFn: async (modifiedComment) => {
+      const commentUpdateURL = `${process.env.REACT_APP_SERVER}/comment/modify/${modifiedComment.id}`;
+      return await axios.post(commentUpdateURL, {
+        content: modifiedComment.content,
+      });
     },
     // 클라이언트 업데이트
-    onMutate: (newComment) => {
+    onMutate: (modifiedComment) => {
       queryClient.setQueryData(["album", postId], (prevAlbum) => ({
         ...prevAlbum,
         commentResponseList: prevAlbum.commentResponseList.map((prevComment) =>
-          prevComment.id === newComment.id ? newComment : prevComment
+          prevComment.id === modifiedComment.id ? modifiedComment : prevComment
         ),
       }));
     },
@@ -141,14 +134,7 @@ function useDeleteComment() {
   return useMutation({
     mutationFn: async (commentId) => {
       const commentDeletionURL = `${process.env.REACT_APP_SERVER}/comment/delete/${commentId}`;
-      // return await axios
-      //   .delete(commentDeletionURL)
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //   });
+      return await axios.delete(commentDeletionURL);
     },
     // 클라이언트 업데이트
     onMutate: (commentId) => {
