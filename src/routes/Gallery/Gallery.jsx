@@ -1,5 +1,4 @@
 import Thumbnail from "./Thumbnail";
-import Header from "../../components/Header";
 import { useEffect, memo } from "react";
 import { Link } from "react-router-dom";
 import { AiFillPlusCircle } from "react-icons/ai";
@@ -25,7 +24,7 @@ function Gallery() {
   } = useInfiniteQuery({
     queryKey: ["albums"],
     queryFn: getMoreAlbums,
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) =>
       lastPage.length ? allPages.length + 1 : undefined,
   });
@@ -101,9 +100,10 @@ function Gallery() {
 
 const getMoreAlbums = async ({ pageParam }) => {
   // const albumsURL = `${process.env.REACT_APP_SERVER}/photo-post?page=${pageParam}`;
+  // return await axios.get(albumsURL).then((res) => res.data.response.dtoList);
+
   // test: json-server
   const albumsURL = `${process.env.REACT_APP_SERVER}/photo-post?_page=${pageParam}`;
-
   return await axios.get(albumsURL).then((res) => res.data);
 };
 
