@@ -5,10 +5,8 @@ import CommentRegistration from "./CommentRegistration";
 import AlbumActionBanner from "./AlbumActionBanner";
 import { useState, useEffect, useRef } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { Dialog, DialogContent, Button, IconButton } from "@mui/material";
-import { TiDelete } from "react-icons/ti";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const Album = () => {
   const navigate = useNavigate();
@@ -19,7 +17,6 @@ const Album = () => {
     setSelectedPhoto(selectedPhotoPath);
   }, [selectedPhotoPath]);
 
-  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [metaData, setMetadata] = useState({
     title,
     bodyContent: null,
@@ -27,16 +24,13 @@ const Album = () => {
     likeCount,
   });
 
+  const { data = {}, isLoading: isAlbumLoading, status } = useGetAlbum();
   const {
-    data: {
-      photoPostDto: postData,
-      fileDtoList: fileData,
-      commentResponseList: commentData,
-      memberLiked: isMemberLiked,
-    } = {},
-    isLoading: isAlbumLoading,
-    status,
-  } = useGetAlbum();
+    photoPostDto: postData,
+    fileDtoList: fileData,
+    commentResponseList: commentData,
+    memberLiked: isMemberLiked,
+  } = data;
 
   useEffect(() => {
     if (status === "success") {
@@ -48,8 +42,6 @@ const Album = () => {
   }, [status, postData?.bodyContent]);
 
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
-
-  const testRef = useRef();
 
   return (
     <div className="max-w-screen bg-home-background">
@@ -80,6 +72,7 @@ const Album = () => {
                 selectedPhoto={selectedPhoto}
                 setIsDescriptionVisible={setIsDescriptionVisible}
                 isMemberLiked={isMemberLiked}
+                data={data}
               />
             </div>
           </div>
