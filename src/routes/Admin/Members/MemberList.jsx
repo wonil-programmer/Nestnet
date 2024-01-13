@@ -11,72 +11,17 @@ import axios from "axios";
 import {
   AUTHORITY_ENG_TO_KOR,
   AUTHORITY_KOR_TO_ENG,
-  AVAIL_AUTHORITY,
+  TABLE_COL_NAME,
+  WINDOW_ALERT_MESSAGE,
 } from "../../../constant/Constant";
 
 /**
  * 동아리원 목록 테이블
  */
-const MemberList = ({ members }) => {
+const MemberList = () => {
   const [validationErrors, setValidationErrors] = useState({});
   const columns = useMemo(
-    () => [
-      {
-        accessorKey: "name",
-        header: "성명",
-        enableEditing: false,
-        size: 50,
-        maxSize: 50,
-      },
-      {
-        accessorKey: "loginId",
-        header: "아이디",
-        enableEditing: false,
-        size: 50,
-        maxSize: 50,
-      },
-      {
-        accessorKey: "emailAddress",
-        header: "이메일",
-        enableEditing: false,
-        size: 50,
-        maxSize: 50,
-      },
-      {
-        accessorKey: "studentId",
-        header: "학번",
-        enableEditing: false,
-        size: 50,
-        maxSize: 50,
-      },
-      {
-        accessorKey: "grade",
-        header: "학년",
-        enableEditing: false,
-        size: 50,
-        maxSize: 50,
-      },
-      {
-        accessorKey: "graduateYear",
-        header: "졸업년도",
-        enableEditing: false,
-        size: 50,
-        maxSize: 50,
-      },
-      {
-        accessorKey: "memberAuthority",
-        header: "권한",
-        editVariant: "select",
-        editSelectOptions: AVAIL_AUTHORITY,
-        size: 50,
-        maxSize: 50,
-        muiEditTextFieldProps: {
-          select: true,
-          error: !!validationErrors?.state,
-          helperText: validationErrors?.state,
-        },
-      },
-    ],
+    (validationErrors) => TABLE_COL_NAME.member(validationErrors),
     [validationErrors]
   );
 
@@ -95,20 +40,16 @@ const MemberList = ({ members }) => {
     useDeleteUser();
 
   // 권한 수정 핸들러
-  const handleSaveUser = async ({ row, values, table }) => {
-    if (
-      window.confirm(
-        `${values.name}님의 권한을 ${row.original.memberAuthority}에서 ${values.memberAuthority}(으)로 변경하시겠습니까?`
-      )
-    ) {
+  const handleMemberEditSave = async ({ row, values, table }) => {
+    if (window.confirm(WINDOW_ALERT_MESSAGE.authorityChange(row, values))) {
       const updateMemberId = row.id;
       await updateUser({ updateMemberId, updateValues: values });
       table.setEditingRow(null);
     }
   };
   // 회원 탈퇴 핸들러
-  const openDeleteConfirmModal = (row) => {
-    if (window.confirm(`${row.original.name}님을 정말 탈퇴시키시겠습니까?`)) {
+  const handleMemberDelete = (row) => {
+    if (window.confirm(WINDOW_ALERT_MESSAGE.memberDeletion(row))) {
       deleteUser(row.original);
     }
   };
@@ -120,7 +61,7 @@ const MemberList = ({ members }) => {
     enableEditing: true,
     getRowId: (row) => row.id,
     onEditingRowCancel: () => setValidationErrors({}),
-    onEditingRowSave: handleSaveUser,
+    onEditingRowSave: handleMemberEditSave,
     initialState: { density: "compact" },
     // enableHiding: false,
     positionActionsColumn: "last",
@@ -143,7 +84,7 @@ const MemberList = ({ members }) => {
           </IconButton>
         </Tooltip>
         <Tooltip title="탈퇴">
-          <IconButton color="error" onClick={() => openDeleteConfirmModal(row)}>
+          <IconButton color="error" onClick={() => handleMemberDelete(row)}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>

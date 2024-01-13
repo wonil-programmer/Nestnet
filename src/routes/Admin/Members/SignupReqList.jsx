@@ -10,59 +10,15 @@ import axios from "axios";
 import {
   AUTHORITY_ENG_TO_KOR,
   AUTHORITY_KOR_TO_ENG,
+  TABLE_COL_NAME,
+  WINDOW_ALERT_MESSAGE,
 } from "../../../constant/Constant";
 
 /**
  * 회원가입 요청 목록 테이블
  */
 const SignupReqList = () => {
-  const columns = useMemo(
-    () => [
-      {
-        accessorKey: "name",
-        header: "성명",
-        enableEditing: false,
-        size: 50,
-        maxSize: 50,
-      },
-      {
-        accessorKey: "loginId",
-        header: "아이디",
-        enableEditing: false,
-        size: 50,
-        maxSize: 50,
-      },
-      {
-        accessorKey: "studentId",
-        header: "학번",
-        enableEditing: false,
-        size: 50,
-        maxSize: 50,
-      },
-      {
-        accessorKey: "grade",
-        header: "학년",
-        enableEditing: false,
-        size: 50,
-        maxSize: 50,
-      },
-      {
-        accessorKey: "graduateYear",
-        header: "졸업년도",
-        enableEditing: false,
-        size: 50,
-        maxSize: 50,
-      },
-      {
-        accessorKey: "memberAuthority",
-        header: "권한",
-        enableEditing: false,
-        size: 50,
-        maxSize: 50,
-      },
-    ],
-    []
-  );
+  const columns = useMemo(() => TABLE_COL_NAME.signup, []);
 
   // call READ hook
   const {
@@ -79,17 +35,13 @@ const SignupReqList = () => {
 
   // 회원가입 요청 승인 핸들러
   const handleReqApprove = async ({ id, original }) => {
-    if (
-      window.confirm(`${original.name}님의 회원가입 요청을 승인하시겠습니까?`)
-    ) {
+    if (window.confirm(WINDOW_ALERT_MESSAGE.signupApproval(original))) {
       approveReq({ id, signupReq: original });
     }
   };
   // 회원가입 요청 거절 핸들러
   const handleReqReject = ({ id, original }) => {
-    if (
-      window.confirm(`${original.name}님의 회원가입 요청을 거절하시겠습니까?`)
-    ) {
+    if (window.confirm(WINDOW_ALERT_MESSAGE.signupReject(original))) {
       rejectReq({ id, signupReq: original });
     }
   };
