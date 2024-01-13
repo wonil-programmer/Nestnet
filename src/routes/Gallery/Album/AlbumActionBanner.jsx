@@ -1,6 +1,8 @@
 import DownloadBtn from "./DownloadBtn";
 import CommentActivationBtn from "./CommentActivationBtn";
 import LikeBtn from "./LikeBtn";
+import DeleteBtn from "./Button/DeleteBtn";
+import ModifyBtn from "./Button/ModifyBtn";
 
 const AlbumActionBanner = ({
   selectedPhoto,
@@ -12,6 +14,8 @@ const AlbumActionBanner = ({
       <DownloadBtn selectedPhoto={selectedPhoto} />
       <CommentActivationBtn setIsDescriptionVisible={setIsDescriptionVisible} />
       <LikeBtn isMemberLiked={isMemberLiked} />
+      <DeleteBtn />
+      <ModifyBtn />
     </div>
   );
 };

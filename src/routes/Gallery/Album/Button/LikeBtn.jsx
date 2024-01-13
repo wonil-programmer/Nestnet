@@ -1,9 +1,9 @@
 import { FaHeart } from "react-icons/fa";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { IsAlbumLikeContext } from "../../../context/IsAlbumLikeContext";
+import { IsAlbumLikeContext } from "../../../../context/IsAlbumLikeContext";
 import axios from "axios";
-import { CircleButton as Button } from "../../../components/CircleButton";
+import { CircleButton as Button } from "../../../../components/CircleButton";
 
 const LikeBtn = ({ isMemberLiked }) => {
   const { postId } = useParams();
@@ -38,23 +38,21 @@ const LikeBtn = ({ isMemberLiked }) => {
   // };
 
   return (
-    <div className="mt-3">
-      <Button
-        content={
-          isMemberLiked ? (
-            <FaHeart
-              className="m-auto text-2xl text-red-400"
-              // onClick={toggleLike}
-            />
-          ) : (
-            <FaHeart
-              className="m-auto text-2xl text-slate-300"
-              // onClick={toggleLike}
-            />
-          )
-        }
-      />
-    </div>
+    <Button
+      content={
+        isMemberLiked ? (
+          <FaHeart
+            className="m-auto text-2xl text-red-400"
+            // onClick={toggleLike}
+          />
+        ) : (
+          <FaHeart
+            className="m-auto text-2xl text-slate-300"
+            // onClick={toggleLike}
+          />
+        )
+      }
+    />
   );
 };
 
