@@ -8,6 +8,7 @@ const AlbumActionBanner = ({
   selectedPhoto,
   setIsDescriptionVisible,
   isMemberLiked,
+  data: existingData,
 }) => {
   return (
     <div className="flex flex-col flex-start items-center h-full mt-8 pr-3">
@@ -15,7 +16,7 @@ const AlbumActionBanner = ({
       <CommentActivationBtn setIsDescriptionVisible={setIsDescriptionVisible} />
       <LikeBtn isMemberLiked={isMemberLiked} />
       <DeleteBtn />
-      <ModifyBtn />
+      <ModifyBtn existingData={existingData} />
     </div>
   );
 };

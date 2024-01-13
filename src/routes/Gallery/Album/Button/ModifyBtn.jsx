@@ -1,11 +1,19 @@
 import { RiPencilFill } from "react-icons/ri";
 
 import { CircleButton as Button } from "../../../../components/CircleButton";
+import { useNavigate } from "react-router-dom";
 
-const ModifyBtn = () => {
+const ModifyBtn = ({ existingData }) => {
+  const navigate = useNavigate();
+  const isDataEmpty = Object.keys(existingData).length === 0;
+
   return (
     <div className="mt-3">
-      <Button content={<RiPencilFill className="mt-1 text-3xl" />} />
+      <Button
+        onClick={() => navigate(`edit`, { state: {} })}
+        content={<RiPencilFill className="mt-1 text-3xl" />}
+        disabled={isDataEmpty}
+      />
     </div>
   );
 };
