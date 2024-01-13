@@ -75,8 +75,7 @@ const SignupReqList = () => {
   const { mutateAsync: approveReq, isPending: isApprovingReq } =
     useApproveReq();
   // call DELETE hook
-  const { mutateAsync: disapproveReq, isPending: isDeletingReq } =
-    useDisapproveReq();
+  const { mutateAsync: rejectReq, isPending: isDeletingReq } = useRejectReq();
 
   // 회원가입 요청 승인 핸들러
   const handleReqApprove = async ({ id, original }) => {
@@ -86,12 +85,12 @@ const SignupReqList = () => {
       approveReq({ id, signupReq: original });
     }
   };
-  // 회원가입 요청 미승인 핸들러
+  // 회원가입 요청 거절 핸들러
   const handleReqReject = ({ id, original }) => {
     if (
       window.confirm(`${original.name}님의 회원가입 요청을 거절하시겠습니까?`)
     ) {
-      disapproveReq({ id, signupReq: original });
+      rejectReq({ id, signupReq: original });
     }
   };
 
@@ -123,7 +122,7 @@ const SignupReqList = () => {
             <FaHandshakeSimple />
           </IconButton>
         </Tooltip>
-        <Tooltip title="미승인">
+        <Tooltip title="거절">
           <IconButton color="error" onClick={() => handleReqReject(row)}>
             <FaHandshakeSimpleSlash />
           </IconButton>
@@ -183,14 +182,14 @@ function useApproveReq() {
   });
 }
 
-// REST: 회원가입 요청 미승인
-function useDisapproveReq() {
+// REST: 회원가입 요청 거절
+function useRejectReq() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async ({ signupReq }) => {
-      const disapproveReqURL = `${process.env.REACT_APP_SERVER}/manager/reject-signup`;
-      return await axios.post(disapproveReqURL, {
+      const rejectReqURL = `${process.env.REACT_APP_SERVER}/manager/reject-signup`;
+      return await axios.post(rejectReqURL, {
         loginId: signupReq.loginId,
         memberAuthority: AUTHORITY_KOR_TO_ENG[signupReq.memberAuthority],
       });
