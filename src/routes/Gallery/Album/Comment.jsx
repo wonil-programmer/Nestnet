@@ -83,12 +83,15 @@ const Comment = ({ comment, setSelectedCommentId, isUpdating }) => {
                 ) : (
                   <>
                     <button
-                      className="mr-2"
+                      className="mr-2 hover:underline hover:underline-offset-2"
                       onClick={() => handleCommentUpdate(comment)}
                     >
                       수정
                     </button>
-                    <button onClick={() => handleCommentDelete(commentId)}>
+                    <button
+                      className="hover:underline hover:underline-offset-2"
+                      onClick={() => handleCommentDelete(commentId)}
+                    >
                       삭제
                     </button>
                   </>
