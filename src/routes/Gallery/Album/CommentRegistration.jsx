@@ -32,7 +32,7 @@ const CommentRegistration = ({ isDescriptionVisible }) => {
             <div className="profile bg-slate-950 w-12 h-12 mr-6 rounded-3xl" />
             <form className="flex-auto" onSubmit={handleCommentCreate}>
               {isCommentPosting ? (
-                <div class="w-full h-full pt-2 pb-1 flex justify-center">
+                <div className="w-full h-full pt-2 pb-1 flex justify-center">
                   <LoadingSpinner />
                 </div>
               ) : (
