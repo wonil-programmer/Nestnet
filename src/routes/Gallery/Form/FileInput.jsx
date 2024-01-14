@@ -14,7 +14,7 @@ const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
 
   return (
     <>
-      <div className={"w-full flex flex-col items-center"}>
+      <div className={"w-1/2 flex flex-col items-center"}>
         <input
           type={"file"}
           ref={fileInputRef}
@@ -25,17 +25,17 @@ const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
         />
         <div
           className={
-            "filesContainer w-full h-fit overflow-x-auto whitespace-nowrap"
+            "filesContainer w-full h-[90%] overflow-y-auto whitespace-nowrap"
           }
         >
           {fileInformation.length === 0 ? (
             <div
               className={
-                "w-full h-[10rem] flex flex-col items-center justify-center bg-slate-200 border-2 border-stone-600 border-dotted rounded-2xl"
+                "w-full h-full flex flex-col items-center justify-center bg-slate-200 border-2 border-stone-600 border-dotted rounded-2xl"
               }
             >
               <AiFillFileImage className={"w-10 h-10 mb-2"} />
-              <span>아래 업로드 버튼을 클릭하여 사진을 추가하세요.</span>
+              <span>업로드 버튼을 클릭하여 사진을 추가하세요.</span>
             </div>
           ) : (
             <>
@@ -43,13 +43,13 @@ const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
                 <div
                   key={fileInfo.id}
                   className={
-                    "relative aspect-auto mx-1 inline-block bg-gray-100 rounded-xl brightness-95 shadow-md overflow-hidden"
+                    "relative flex flex-col w-full my-2 aspect-auto bg-gray-100 rounded-xl brightness-95 shadow-md overflow-hidden"
                   }
                 >
                   {/* 기존 사진 파일인 경우와 새로 업로드하는 파일 src 구분 */}
                   {"originalFileName" in fileInfo ? (
                     <img
-                      className="object-cover"
+                      className="object-scale-down object-center"
                       src={StringCombinator.getImagePath(fileInfo)}
                       alt="기존사진"
                     />
@@ -80,7 +80,7 @@ const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
           type={"button"}
           onClick={() => fileInputRef.current.click()}
           className={
-            "addFileBtn w-12 h-12 mt-6 bg-red-500 text-white rounded-full overflow-hidden shadow-md"
+            "addFileBtn w-[3rem] h-[3rem] mt-6 bg-gray-400 text-white rounded-full overflow-hidden shadow-md hover:bg-gray-500 transition-all"
           }
         >
           <MdUpload className={"w-full h-full p-2"} />

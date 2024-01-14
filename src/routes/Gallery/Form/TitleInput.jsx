@@ -14,7 +14,7 @@ const TitleInput = ({ title, onTitleChange }, ref) => {
         autoComplete={"off"}
         ref={ref}
         className={
-          "title placeholder:text-stone-500 placeholder:font-medium text-black font-medium bg-slate-100 pl-6 py-3 rounded-3xl focus:placeholder:text-slate-400 focus:font-medium outline-red-400"
+          "title w-full mb-2 pl-6 py-3 placeholder:text-stone-500 placeholder:font-medium text-black font-medium bg-slate-100 rounded-3xl focus:placeholder:text-slate-400 focus:font-medium outline-red-400"
         }
       />
     </>
