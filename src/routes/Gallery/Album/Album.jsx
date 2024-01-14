@@ -3,13 +3,12 @@ import UnselectedPhotos from "./UnselectedPhotos";
 import SelectedPhoto from "./SelectedPhoto";
 import CommentRegistration from "./CommentRegistration";
 import AlbumActionBanner from "./AlbumActionBanner";
-import { useState, useEffect, useRef } from "react";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 const Album = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { selectedPhotoPath, title, viewCount, likeCount } = location.state;
   const [selectedPhoto, setSelectedPhoto] = useState("");
@@ -44,7 +43,7 @@ const Album = () => {
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
 
   return (
-    <div className="max-w-screen bg-home-background">
+    <div className="max-w-screen pt-[4.68rem] bg-home-background">
       <div className="mainView flex flex-row justify-between">
         <div className="leftSideView w-1/4 min-w-[12rem]">{/* 사이드바 */}</div>
         <div className="centerView w-2/4 min-w-[50rem] h-[calc(100vh-4.7rem)] pl-10 overflow-y-auto">
