@@ -5,7 +5,7 @@ import Gallery from "./routes/Gallery/Gallery";
 import GalleryBoardPostForm from "./routes/Gallery/GalleryBoardPostForm";
 import AdminHome from "./routes/Admin/AdminHome";
 import MembersMainView from "./routes/Admin/Members/MembersMainView";
-import Header from "./components/Header";
+import { HeadNavbar } from "./components/HeadNavbar";
 import AdminNavBar from "./routes/Admin/AdminNavbar";
 import ScrollToTop from "./utils/ScrollToTop";
 
@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path={"/"} element={<Header />}>
+          <Route path={"/"} element={<HeadNavbar />}>
             <Route path={"/"} element={<Home />} />
             <Route path={`gallery`} element={<Gallery />} />
             <Route path={"gallery/:postId"} element={<Album />} />
