@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Album from "./routes/Gallery/Album/Album";
 import Home from "./routes/MainHome/Home";
 import Gallery from "./routes/Gallery/Gallery";
-import GalleryBoardPostForm from "./routes/Gallery/GalleryBoardPostForm";
+import GalleryPostForm from "./routes/Gallery/GalleryPostForm";
 import AdminHome from "./routes/Admin/AdminHome";
 import MembersMainView from "./routes/Admin/Members/MembersMainView";
 import { HeadNavbar } from "./components/HeadNavbar";
@@ -19,10 +19,10 @@ function App() {
             <Route path={"/"} element={<Home />} />
             <Route path={`gallery`} element={<Gallery />} />
             <Route path={"gallery/:postId"} element={<Album />} />
-            <Route path={"gallery/form"} element={<GalleryBoardPostForm />} />
+            <Route path={"gallery/form"} element={<GalleryPostForm />} />
             <Route
               path={"gallery/:postId/edit"}
-              element={<GalleryBoardPostForm isModifying={true} />}
+              element={<GalleryPostForm isModifying={true} />}
             />
           </Route>
           <Route path={"admin/"} element={<AdminNavBar />}>
