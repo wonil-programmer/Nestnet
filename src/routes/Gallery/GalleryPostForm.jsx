@@ -3,8 +3,7 @@ import TitleInput from "./Form/TitleInput";
 import DescriptionInput from "./Form/DescriptionInput";
 import FileInput from "./Form/FileInput";
 import BoardPostButton from "./Form/BoardPostButton";
-import { useState, useEffect, useRef } from "react";
-import { v4 } from "uuid";
+import { useState, useEffect } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 
 /**
@@ -24,15 +23,7 @@ const GalleryPostForm = ({ isModifying = false }) => {
   const [bodyContent, setBodyContent] = useState("");
   const [isPostBtnDisabled, setIsPostBtnDisabled] = useState(true);
 
-  const descriptionInputRef = useRef(null);
-
   const navigate = useNavigate();
-
-  // 게시물 본문 작성
-  const handleBodyContentChange = () => {
-    let bodyContentInput = descriptionInputRef.current.value;
-    setBodyContent(bodyContentInput);
-  };
 
   // 폼 제출
   const handleFormSubmit = (event) => {
@@ -155,8 +146,7 @@ const GalleryPostForm = ({ isModifying = false }) => {
                 <TitleInput title={title} setTitle={setTitle} />
                 <DescriptionInput
                   bodyContent={bodyContent}
-                  onDescriptionChange={handleBodyContentChange}
-                  ref={descriptionInputRef}
+                  setBodyContent={setBodyContent}
                 />
                 <div className={"flex justify-end"}>
                   <BoardPostButton
