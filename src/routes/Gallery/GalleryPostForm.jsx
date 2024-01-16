@@ -24,16 +24,9 @@ const GalleryPostForm = ({ isModifying = false }) => {
   const [bodyContent, setBodyContent] = useState("");
   const [isPostBtnDisabled, setIsPostBtnDisabled] = useState(true);
 
-  const titleInputRef = useRef(null);
   const descriptionInputRef = useRef(null);
 
   const navigate = useNavigate();
-
-  // 게시물 제목 작성
-  const handleTitleChange = () => {
-    let titleInputValue = titleInputRef.current.value;
-    setTitle(titleInputValue);
-  };
 
   // 게시물 본문 작성
   const handleBodyContentChange = () => {
@@ -159,11 +152,7 @@ const GalleryPostForm = ({ isModifying = false }) => {
                 isModifying={isModifying}
               />
               <div className={"flex flex-col justify-center w-1/2 ml-8"}>
-                <TitleInput
-                  title={title}
-                  onTitleChange={handleTitleChange}
-                  ref={titleInputRef}
-                />
+                <TitleInput title={title} setTitle={setTitle} />
                 <DescriptionInput
                   bodyContent={bodyContent}
                   onDescriptionChange={handleBodyContentChange}
