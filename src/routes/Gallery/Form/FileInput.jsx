@@ -1,4 +1,4 @@
-import { useState, useRef, memo } from "react";
+import { useRef, memo, useEffect } from "react";
 import { MdUpload } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
 import { AiFillFileImage } from "react-icons/ai";
@@ -18,7 +18,7 @@ const FileInput = ({
   isModifying,
 }) => {
   const fileInputRef = useRef(null);
-  const lastFileRef = useRef();
+  const lastFileRef = useRef(null);
 
   // 첨부 파일 추가
   const handleFileInfoChange = (event) => {
@@ -30,13 +30,17 @@ const FileInput = ({
         photoFile,
       })),
     ]);
+    setTimeout(() => {
+      lastFileRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "end",
+      });
+    }, 100);
   };
 
   // 첨부 파일 삭제
   const handleFileDelete = (targetFileId) => {
-    console.log(targetFileId);
-    console.log(uploadPhotos);
-
     // 수정시 사진 Id 리스트 조작 (기존 아이디)
     if (isModifying) {
       setExistingPhotoIds(existingPhotoIds.filter((id) => id !== targetFileId));
@@ -59,6 +63,7 @@ const FileInput = ({
           className={
             "filesContainer w-full h-[90%] overflow-y-auto whitespace-nowrap"
           }
+          // ref={lastFileRef}
         >
           {uploadPhotos.length === 0 ? (
             <div
@@ -71,44 +76,49 @@ const FileInput = ({
             </div>
           ) : (
             <>
-              {uploadPhotos.map((fileInfo, idx) => (
-                <div
-                  key={fileInfo.id}
-                  className={
-                    "relative flex flex-col w-full my-2 aspect-auto bg-gray-100 rounded-xl brightness-95 shadow-md overflow-hidden"
-                  }
-                >
-                  {/* 기존 사진 파일인 경우와 새로 업로드하는 파일 src 구분 */}
-                  {"originalFileName" in fileInfo ? (
-                    <img
-                      className="object-scale-down object-center"
-                      src={StringCombinator.getImagePath(fileInfo)}
-                      alt="기존사진"
-                      ref={idx === uploadPhotos.length - 1 ? lastFileRef : null}
-                    />
-                  ) : (
-                    <img
-                      src={URL.createObjectURL(fileInfo.photoFile)}
-                      alt="업로드된 사진"
-                      ref={idx === uploadPhotos.length - 1 ? lastFileRef : null}
-                    />
-                  )}
-                  <button
-                    type={"button"}
-                    onClick={() => {
-                      fileInputRef.current.value = null;
-                      handleFileDelete(fileInfo.id);
-                    }}
+              {uploadPhotos.map((fileInfo, idx) => {
+                console.log(idx);
+                console.log(uploadPhotos.length);
+                console.log(lastFileRef.current);
+
+                return (
+                  <div
+                    key={fileInfo.id}
                     className={
-                      "absolute w-8 h-8 bg-white bottom-3 right-3 rounded-full duration-300"
+                      "relative flex flex-col w-full my-2 aspect-auto bg-gray-100 rounded-xl brightness-95 shadow-md overflow-hidden"
                     }
                   >
-                    <FaTrash className={"w-4 h-4 mx-auto"} />
-                  </button>
-                </div>
-              ))}
+                    {/* 기존 사진 파일인 경우와 새로 업로드하는 파일 src 구분 */}
+                    {"originalFileName" in fileInfo ? (
+                      <img
+                        className="object-scale-down object-center"
+                        src={StringCombinator.getImagePath(fileInfo)}
+                        alt="기존사진"
+                      />
+                    ) : (
+                      <img
+                        src={URL.createObjectURL(fileInfo.photoFile)}
+                        alt="업로드된 사진"
+                      />
+                    )}
+                    <button
+                      type={"button"}
+                      onClick={() => {
+                        fileInputRef.current.value = null;
+                        handleFileDelete(fileInfo.id);
+                      }}
+                      className={
+                        "absolute w-8 h-8 bg-white bottom-3 right-3 rounded-full duration-300"
+                      }
+                    >
+                      <FaTrash className={"w-4 h-4 mx-auto"} />
+                    </button>
+                  </div>
+                );
+              })}
             </>
           )}
+          <div className="w-full h-[1px] opacity-0" ref={lastFileRef}></div>
         </div>
         <button
           type={"button"}
