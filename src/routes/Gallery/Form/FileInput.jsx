@@ -1,16 +1,48 @@
-import { useRef, memo } from "react";
+import { useState, useRef, memo } from "react";
 import { MdUpload } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
 import { AiFillFileImage } from "react-icons/ai";
 import StringCombinator from "../../../utils/Combinator/StringCombinator";
+import { v4 } from "uuid";
 
 /**
  * 앨범 사진 파일 추가 input
  * @param {}
  * @returns
  */
-const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
+const FileInput = ({
+  uploadPhotos,
+  setUploadPhotos,
+  existingPhotoIds,
+  setExistingPhotoIds,
+  isModifying,
+}) => {
   const fileInputRef = useRef(null);
+  const lastFileRef = useRef();
+
+  // 첨부 파일 추가
+  const handleFileInfoChange = (event) => {
+    let photoFiles = event.target.files;
+    setUploadPhotos([
+      ...uploadPhotos,
+      ...Array.from(photoFiles).map((photoFile) => ({
+        id: v4(),
+        photoFile,
+      })),
+    ]);
+  };
+
+  // 첨부 파일 삭제
+  const handleFileDelete = (targetFileId) => {
+    console.log(targetFileId);
+    console.log(uploadPhotos);
+
+    // 수정시 사진 Id 리스트 조작 (기존 아이디)
+    if (isModifying) {
+      setExistingPhotoIds(existingPhotoIds.filter((id) => id !== targetFileId));
+    }
+    setUploadPhotos(uploadPhotos.filter((file) => file.id !== targetFileId));
+  };
 
   return (
     <>
@@ -19,7 +51,7 @@ const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
           type={"file"}
           ref={fileInputRef}
           className={"hidden"}
-          onChange={onFileInfoChange}
+          onChange={handleFileInfoChange}
           accept=".gif, .jpg, .jpeg, .png"
           multiple={true}
         />
@@ -28,7 +60,7 @@ const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
             "filesContainer w-full h-[90%] overflow-y-auto whitespace-nowrap"
           }
         >
-          {fileInformation.length === 0 ? (
+          {uploadPhotos.length === 0 ? (
             <div
               className={
                 "w-full h-full flex flex-col items-center justify-center bg-slate-200 border-2 border-stone-600 border-dotted rounded-2xl"
@@ -39,7 +71,7 @@ const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
             </div>
           ) : (
             <>
-              {fileInformation.map((fileInfo) => (
+              {uploadPhotos.map((fileInfo, idx) => (
                 <div
                   key={fileInfo.id}
                   className={
@@ -52,18 +84,20 @@ const FileInput = ({ fileInformation, onFileInfoChange, onFileDelete }) => {
                       className="object-scale-down object-center"
                       src={StringCombinator.getImagePath(fileInfo)}
                       alt="기존사진"
+                      ref={idx === uploadPhotos.length - 1 ? lastFileRef : null}
                     />
                   ) : (
                     <img
                       src={URL.createObjectURL(fileInfo.photoFile)}
                       alt="업로드된 사진"
+                      ref={idx === uploadPhotos.length - 1 ? lastFileRef : null}
                     />
                   )}
                   <button
                     type={"button"}
                     onClick={() => {
                       fileInputRef.current.value = null;
-                      onFileDelete(fileInfo.id);
+                      handleFileDelete(fileInfo.id);
                     }}
                     className={
                       "absolute w-8 h-8 bg-white bottom-3 right-3 rounded-full duration-300"
