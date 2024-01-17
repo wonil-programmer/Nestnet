@@ -6,14 +6,14 @@ import Menus from "./Menus/Menus";
 function Home() {
   return (
     <>
-      <div className="homeContainer scrollbar-hide scroll-smooth h-screen overflow-y-scroll snap-y snap-proximity snap-normal bg-home-background">
-        <section className="flex h-screen snap-start">
+      <div className="homeContainer">
+        <section className="flex h-screen">
           <MainView />
         </section>
-        <section className="flex justify-center items-center h-screen snap-start">
+        <section className="flex h-screen">
           <PhotoZone />
         </section>
-        <section className="flex justify-center items-center h-screen snap-start">
+        <section className="flex h-screen">
           <Menus />
         </section>
         <Footer />
