@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{html,js,jsx,tsx}"],
   theme: {
     extend: {
+      textColor: {
+        black: "#111111",
+      },
       fontSize: {
         "home-maintitle": ["8.75rem", "10rem"],
         "home-subtitle": "2.5rem",
@@ -64,5 +67,4 @@ module.exports = {
       },
     },
   },
-  plugins: [],
 };
