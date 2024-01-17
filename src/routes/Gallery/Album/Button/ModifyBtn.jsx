@@ -10,7 +10,7 @@ const ModifyBtn = ({ existingData }) => {
   return (
     <div className="mt-3">
       <Button
-        onClick={() => navigate(`edit`, { state: {} })}
+        onClick={() => navigate(`edit`, { state: existingData })}
         content={<RiPencilFill className="mt-1 text-3xl" />}
         disabled={isDataEmpty}
       />
