@@ -73,6 +73,9 @@ export default function Footer() {
             <li>
               <span>Back. </span>김성호
             </li>
+            <li>
+              <span>Design. </span>허원일
+            </li>
           </ul>
         </div>
       </div>
