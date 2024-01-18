@@ -4,7 +4,7 @@ export const btmSliderItems = [
   {
     id: uuidv4(),
     title: "연혁",
-    src: "assets/unified_board.jpg",
+    src: "assets/history.jpg",
     link: "",
   },
   {
