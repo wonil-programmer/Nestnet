@@ -1,7 +1,7 @@
 import { FaCalendar } from "react-icons/fa";
 import { FaCalendarCheck } from "react-icons/fa";
 import { TfiMouse } from "react-icons/tfi";
-import BtmSlider from "./BtmSlider";
+import LinkSliderMenu from "./LinkSliderMenu";
 
 export default function MainView() {
   return (
@@ -24,7 +24,7 @@ export default function MainView() {
           <div className="max-w-max h-[40rem] ml-1">
             <div className="w-[14rem] h-[18rem] rounded-[2rem] bg-stone-200 shadow-md"></div>
             <div className="relative w-[14rem] h-[7rem] mt-[1rem] box-border rounded-[2rem] overflow-hidden shadow-md">
-              <BtmSlider />
+              <LinkSliderMenu />
             </div>
             <div className="w-[14rem] h-[13rem] mt-[1rem] rounded-[2rem] bg-stone-200 shadow-md"></div>
           </div>
