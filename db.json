@@ -337,6 +337,43 @@
       "memberLiked": false
     }
   ],
+  "new-posts": [
+    {
+      "id": 1,
+      "type": "gallery",
+      "postId": "61",
+      "title": "23 체육대회",
+      "postDate": "2024-03-01"
+    },
+    {
+      "id": 2,
+      "type": "gallery",
+      "postId": "62",
+      "title": "2023년도 2학기 클라우드컴퓨팅 기말고사(노서영 교수님)",
+      "postDate": "2024-03-02"
+    },
+    {
+      "id": 3,
+      "type": "gallery",
+      "postId": "61",
+      "title": "2023학년도 2학기 오픈소스소프트웨어이해와실습 기말고사(신재혁 교수님)",
+      "postDate": "2024-03-05"
+    },
+    {
+      "id": 4,
+      "type": "gallery",
+      "postId": "61",
+      "title": "2022년 선·후배 체육대회 진행계획 초안",
+      "postDate": "2024-03-06"
+    },
+    {
+      "id": 5,
+      "type": "gallery",
+      "postId": "61",
+      "title": " 20학번 김민주입니다.",
+      "postDate": "2024-03-07"
+    }
+  ],
   "study": [
     {
       "id": 1,
