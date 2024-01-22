@@ -1,6 +1,6 @@
 import { useState } from "react";
-import SliderBtn from "../components/Button/SliderBtn";
-import Dot from "../components/Dot";
+import SliderBtn from "./Button/SliderBtn";
+import Dot from "./Dot";
 
 const Slider = ({ items }) => {
   const [slideIdx, setSlideIdx] = useState(1);
