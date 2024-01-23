@@ -120,14 +120,14 @@ const GalleryPostForm = ({ isModifying = false }) => {
   }, []);
 
   return (
-    <div className={"min-h-screen bg-home-background"}>
+    <div className={"min-h-screen min-w-max bg-home-background"}>
       <div
         className={
           "flex flex-col justify-center items-center w-full h-screen pt-[5rem]"
         }
       >
         <div
-          className={`formWrapper w-3/5 h-[90%] p-10 pb-7 rounded-3xl
+          className={`formWrapper w-[46rem] h-[90%] p-8 pb-7 rounded-3xl
                    bg-white shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]`}
         >
           <form
