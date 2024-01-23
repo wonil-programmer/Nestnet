@@ -90,7 +90,10 @@ const GalleryPostForm = ({ isModifying = false }) => {
           headers: { "Content-Type": "multipart/form-data" },
         })
         ?.then((response) => navigate("/gallery"))
-        ?.catch(() => console.log("post fail"));
+        ?.catch(() => {
+          alert("게시물 등록에 실패하였습니다.");
+          navigate(`/gallery`);
+        });
     }
   };
 
