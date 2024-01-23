@@ -3,6 +3,7 @@ import { MdUpload } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
 import { AiFillFileImage } from "react-icons/ai";
 import StringCombinator from "../../../utils/Combinator/StringCombinator";
+import { ORIGINAL_FILE_FLAG } from "../../../constant/Constant";
 import { v4 } from "uuid";
 
 /**
@@ -30,6 +31,7 @@ const FileInput = ({
         photoFile,
       })),
     ]);
+    // 파일 업로드 직후 제일 마지막 파일로 스크롤 이벤트
     setTimeout(() => {
       lastFileRef.current?.scrollIntoView({
         behavior: "smooth",
@@ -41,7 +43,7 @@ const FileInput = ({
 
   // 첨부 파일 삭제
   const handleFileDelete = (targetFileId) => {
-    // 수정시 사진 Id 리스트 조작 (기존 아이디)
+    // 수정 중 파일 삭제시 기존 파일 아이디를 저장한 리스트에서 해당 파일 아이디를 삭제
     if (isModifying) {
       setExistingPhotoIds(existingPhotoIds.filter((id) => id !== targetFileId));
     }
@@ -76,46 +78,40 @@ const FileInput = ({
             </div>
           ) : (
             <>
-              {uploadPhotos.map((fileInfo, idx) => {
-                console.log(idx);
-                console.log(uploadPhotos.length);
-                console.log(lastFileRef.current);
-
-                return (
-                  <div
-                    key={fileInfo.id}
+              {uploadPhotos.map((fileInfo, idx) => (
+                <div
+                  key={fileInfo.id}
+                  className={
+                    "relative flex flex-col w-full my-2 aspect-auto bg-gray-100 rounded-xl brightness-95 shadow-md overflow-hidden"
+                  }
+                >
+                  {/* 기존 사진 파일인 경우와 새로 업로드하는 파일 src 구분 */}
+                  {ORIGINAL_FILE_FLAG in fileInfo ? (
+                    <img
+                      className="object-scale-down object-center"
+                      src={StringCombinator.getImagePath(fileInfo)}
+                      alt="기존사진"
+                    />
+                  ) : (
+                    <img
+                      src={URL.createObjectURL(fileInfo.photoFile)}
+                      alt="업로드된 사진"
+                    />
+                  )}
+                  <button
+                    type={"button"}
+                    onClick={() => {
+                      fileInputRef.current.value = null;
+                      handleFileDelete(fileInfo.id);
+                    }}
                     className={
-                      "relative flex flex-col w-full my-2 aspect-auto bg-gray-100 rounded-xl brightness-95 shadow-md overflow-hidden"
+                      "absolute w-8 h-8 bg-white bottom-3 right-3 rounded-full duration-300"
                     }
                   >
-                    {/* 기존 사진 파일인 경우와 새로 업로드하는 파일 src 구분 */}
-                    {"originalFileName" in fileInfo ? (
-                      <img
-                        className="object-scale-down object-center"
-                        src={StringCombinator.getImagePath(fileInfo)}
-                        alt="기존사진"
-                      />
-                    ) : (
-                      <img
-                        src={URL.createObjectURL(fileInfo.photoFile)}
-                        alt="업로드된 사진"
-                      />
-                    )}
-                    <button
-                      type={"button"}
-                      onClick={() => {
-                        fileInputRef.current.value = null;
-                        handleFileDelete(fileInfo.id);
-                      }}
-                      className={
-                        "absolute w-8 h-8 bg-white bottom-3 right-3 rounded-full duration-300"
-                      }
-                    >
-                      <FaTrash className={"w-4 h-4 mx-auto"} />
-                    </button>
-                  </div>
-                );
-              })}
+                    <FaTrash className={"w-4 h-4 mx-auto"} />
+                  </button>
+                </div>
+              ))}
             </>
           )}
           <div className="w-full h-[1px] opacity-0" ref={lastFileRef}></div>

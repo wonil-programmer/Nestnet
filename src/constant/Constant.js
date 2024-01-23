@@ -1,3 +1,5 @@
+export const ORIGINAL_FILE_FLAG = "originalFileName";
+
 const AVAIL_AUTHORITY = [
   "회장",
   "부회장",
