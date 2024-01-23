@@ -3,11 +3,12 @@ import TitleInput from "./Form/TitleInput";
 import DescriptionInput from "./Form/DescriptionInput";
 import FileInput from "./Form/FileInput";
 import BoardPostButton from "./Form/BoardPostButton";
+import { ORIGINAL_FILE_FLAG } from "../../constant/Constant";
 import { useState, useEffect } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 
 /**
- * 앨범 생성 폼
+ * 앨범 작성 폼
  * @param {boolean} isModifying
  * @returns
  */
@@ -30,10 +31,8 @@ const GalleryPostForm = ({ isModifying = false }) => {
     event.preventDefault();
     const formData = new FormData();
 
+    // REST: 수정시
     if (isModifying) {
-      console.log(existingPhotoIds);
-      console.log(uploadPhotos);
-
       const metaData = {
         id: postId,
         title,
@@ -53,23 +52,26 @@ const GalleryPostForm = ({ isModifying = false }) => {
       formData.append("file-id", existingPhotoIdsBlob);
 
       uploadPhotos.forEach((fileItem) => {
-        if (!fileItem.hasOwnProperty("originalFileName")) {
+        // 기존 사진이 아닌 경우에만 전송할 파일 리스트에 추가
+        if (!fileItem.hasOwnProperty(ORIGINAL_FILE_FLAG)) {
           formData.append("file", fileItem.photoFile);
         }
       });
-
-      for (const [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-      }
 
       axios
         ?.post(`${process.env.REACT_APP_SERVER}/photo-post/modify`, formData, {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         })
-        ?.then((response) => console.log(response))
-        ?.catch(() => console.log("modify fail"));
-    } else {
+        ?.then((response) => navigate(`/gallery`))
+        ?.catch(() => {
+          alert("게시물 수정에 실패하였습니다.");
+          navigate(`/gallery`);
+        });
+    }
+
+    // REST: 수정 아닌 작성시
+    if (!isModifying) {
       const metaData = {
         title,
         bodyContent,
@@ -82,10 +84,6 @@ const GalleryPostForm = ({ isModifying = false }) => {
         formData.append("file", fileItem.photoFile)
       );
 
-      for (const [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-      }
-
       axios
         ?.post(`${process.env.REACT_APP_SERVER}/photo-post/post`, formData, {
           withCredentials: true,
@@ -96,7 +94,7 @@ const GalleryPostForm = ({ isModifying = false }) => {
     }
   };
 
-  // 게시 버튼 활성화 여부 판단
+  // 저장/수정 버튼 활성화 여부 판단
   useEffect(() => {
     setIsPostBtnDisabled(
       uploadPhotos?.length === 0 ||
