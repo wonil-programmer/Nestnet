@@ -9,7 +9,7 @@ const Thumbnail = forwardRef(({ album }, ref) => {
     <>
       <div className="m-4 min-w-[22.65rem] max-w-[22.65rem] h-min" ref={ref}>
         <Link
-          to={`${album.postId}`}
+          to={`${album.id}`}
           state={{
             selectedPhotoPath: StringCombinator.getImagePath(album),
             title: album.title,
