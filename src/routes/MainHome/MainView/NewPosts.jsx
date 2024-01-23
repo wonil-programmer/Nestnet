@@ -19,7 +19,7 @@ const NewPosts = ({ items, isLoading }) => {
 
   return (
     <div className="relative w-full h-full p-6 pr-4">
-      <h1 className="mb-3 text-sm font-semibold text-black">최근 글</h1>
+      <h1 className="mb-2 text-sm font-semibold text-black">최근 글</h1>
       <ul className="w-full h-full text-slate-600">
         {isLoading ? (
           <h1>isLoading</h1>
@@ -30,8 +30,8 @@ const NewPosts = ({ items, isLoading }) => {
                 key={obj.id}
                 className="w-full h-[2rem] mb-[0.7rem] hover:text-black"
               >
-                <div className="text-sm truncate">{obj.title}</div>
-                <div className="text-xs">{obj.postDate}</div>
+                <div className="text-[0.85rem] truncate">{obj.title}</div>
+                <div className="text-[0.65rem]">{obj.postDate}</div>
               </li>
             </Link>
           ))
