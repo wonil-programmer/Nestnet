@@ -70,11 +70,14 @@ const FileInput = ({
           {uploadPhotos.length === 0 ? (
             <div
               className={
-                "w-full h-full flex flex-col items-center justify-center bg-slate-200 border-2 border-stone-600 border-dotted rounded-2xl"
+                "w-full h-full min-w-max flex flex-col items-center justify-center bg-slate-200 border-2 border-stone-600 border-dotted rounded-2xl"
               }
             >
-              <AiFillFileImage className={"w-10 h-10 mb-2"} />
-              <span>업로드 버튼을 클릭하여 사진을 추가하세요.</span>
+              <AiFillFileImage className={"w-10 h-10 mb-4"} />
+              <span className="text-center">
+                아래 업로드 버튼을 클릭하여
+                <hr /> 사진을 추가하세요.
+              </span>
             </div>
           ) : (
             <>
