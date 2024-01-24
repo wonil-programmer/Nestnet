@@ -4,6 +4,11 @@ import axios from "axios";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
+/**
+ * 앨범 댓글 등록 폼
+ * @param {boolean} isDescriptionVisible
+ * @returns
+ */
 const CommentRegistration = ({ isDescriptionVisible }) => {
   const [newComment, setNewComment] = useState("");
 
@@ -28,7 +33,7 @@ const CommentRegistration = ({ isDescriptionVisible }) => {
     <>
       {isDescriptionVisible ? (
         <div className="sticky bottom-0 w-full h-[6rem] rounded-b-3xl bg-white  shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]">
-          <div class="flex flex-row items-center w-full p-6 px-8">
+          <div className="flex flex-row items-center w-full p-6 px-8">
             <div className="profile bg-slate-950 w-12 h-12 mr-6 rounded-3xl" />
             <form className="flex-auto" onSubmit={handleCommentCreate}>
               {isCommentPosting ? (
