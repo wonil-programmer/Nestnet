@@ -1,7 +1,7 @@
 {
   "photo-post": [
     {
-      "postId": 61,
+      "id": 61,
       "title": "23 체육대회",
       "viewCount": 100,
       "likeCount": 200,
@@ -9,7 +9,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 62,
+      "id": 62,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -17,7 +17,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 63,
+      "id": 63,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -25,7 +25,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 64,
+      "id": 64,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -33,7 +33,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 65,
+      "id": 65,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -41,7 +41,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 66,
+      "id": 66,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -49,7 +49,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 67,
+      "id": 67,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -57,7 +57,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 68,
+      "id": 68,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -65,7 +65,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 69,
+      "id": 69,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -73,7 +73,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 70,
+      "id": 70,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -81,7 +81,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 71,
+      "id": 71,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -89,7 +89,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 72,
+      "id": 72,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -97,7 +97,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 73,
+      "id": 73,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -105,7 +105,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 74,
+      "id": 74,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -113,7 +113,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 75,
+      "id": 75,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -121,7 +121,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 76,
+      "id": 76,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -129,7 +129,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 77,
+      "id": 77,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -137,7 +137,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 78,
+      "id": 78,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -145,7 +145,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 79,
+      "id": 79,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -153,7 +153,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 80,
+      "id": 80,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -161,7 +161,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 81,
+      "id": 81,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -169,7 +169,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 82,
+      "id": 82,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -177,7 +177,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 83,
+      "id": 83,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -185,7 +185,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 84,
+      "id": 84,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -193,7 +193,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 85,
+      "id": 85,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -201,7 +201,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 86,
+      "id": 86,
       "title": "test title2",
       "viewCount": 0,
       "likeCount": 0,
@@ -209,7 +209,7 @@
       "saveFilePath": "assets"
     },
     {
-      "postId": 87,
+      "id": 87,
       "title": "last test",
       "viewCount": 0,
       "likeCount": 0,
@@ -269,7 +269,7 @@
           "saveFilePath": "assets"
         }
       ],
-      "commentResponseList": [
+      "commentDtoList": [
         {
           "id": 6,
           "username": "성호",
@@ -316,7 +316,7 @@
           "saveFilePath": "assets"
         }
       ],
-      "commentResponseList": [
+      "commentDtoList": [
         {
           "id": 1,
           "username": "성호",
@@ -341,37 +341,91 @@
     {
       "id": 1,
       "type": "gallery",
-      "postId": "61",
+      "id": "61",
       "title": "23 체육대회",
       "postDate": "2024-03-01"
     },
     {
       "id": 2,
       "type": "gallery",
-      "postId": "62",
+      "id": "62",
       "title": "2023년도 2학기 클라우드컴퓨팅 기말고사(노서영 교수님)",
       "postDate": "2024-03-02"
     },
     {
       "id": 3,
       "type": "gallery",
-      "postId": "61",
+      "id": "61",
       "title": "2023학년도 2학기 오픈소스소프트웨어이해와실습 기말고사(신재혁 교수님)",
       "postDate": "2024-03-05"
     },
     {
       "id": 4,
       "type": "gallery",
-      "postId": "61",
+      "id": "61",
       "title": "2022년 선·후배 체육대회 진행계획 초안",
       "postDate": "2024-03-06"
     },
     {
       "id": 5,
       "type": "gallery",
-      "postId": "61",
+      "id": "61",
       "title": " 20학번 김민주입니다.",
       "postDate": "2024-03-07"
+    }
+  ],
+  "attendance": [
+    {
+      "id": 1,
+      "type": "주간 출석 순위",
+      "rank": [
+        {
+          "name": "김성호",
+          "score": 500
+        },
+        {
+          "name": "최유진",
+          "score": 400
+        },
+        {
+          "name": "김강민",
+          "score": 300
+        },
+        {
+          "name": "정한울",
+          "score": 150
+        },
+        {
+          "name": "김가현",
+          "score": 100
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "월간 출석 순위",
+      "rank": [
+        {
+          "name": "김성호",
+          "score": 1000
+        },
+        {
+          "name": "김강민",
+          "score": 800
+        },
+        {
+          "name": "허원일",
+          "score": 500
+        },
+        {
+          "name": "김민주",
+          "score": 500
+        },
+        {
+          "name": "최유진",
+          "score": 300
+        }
+      ]
     }
   ],
   "study": [
