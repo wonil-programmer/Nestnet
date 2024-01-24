@@ -1,4 +1,4 @@
-import Thumbnail from "./Thumbnail";
+import GalleryThumbnail from "./GalleryThumbnail";
 import { useEffect, memo } from "react";
 import { Link } from "react-router-dom";
 import { AiFillPlusCircle } from "react-icons/ai";
@@ -7,10 +7,13 @@ import Masonry from "react-masonry-css";
 import axios from "axios";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
-import LoadingSpinner from "../../components/LoadingSpinner";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 
+/**
+ * 사진첩
+ * @returns
+ */
 function Gallery() {
   const { ref: observeBtmRef, inView } = useInView();
 
@@ -36,6 +39,7 @@ function Gallery() {
     1000: 1,
   };
 
+  // ref가 inView 영역에 도달하면 다음 페이지를 불러옴
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
@@ -67,29 +71,41 @@ function Gallery() {
               albums.map((album, idx) => {
                 if (albums.length === idx + 1) {
                   return (
-                    <Thumbnail
+                    <div
+                      className="m-4 min-w-[22.65rem] max-w-[22.65rem] h-min"
                       ref={observeBtmRef}
-                      key={album.postId}
-                      album={album}
-                      isFetchingNextPage={isFetchingNextPage}
-                    />
+                    >
+                      <Link to={`${album.id}`}>
+                        <GalleryThumbnail
+                          ref={observeBtmRef}
+                          key={album.postId}
+                          album={album}
+                          isFetchingNextPage={isFetchingNextPage}
+                        />
+                      </Link>
+                    </div>
                   );
                 } else {
                   return (
-                    <Thumbnail
-                      key={album.postId}
-                      album={album}
-                      isFetchingNextPage={isFetchingNextPage}
-                    />
+                    <div className="m-4 min-w-[22.65rem] max-w-[22.65rem] h-min">
+                      <Link to={`${album.id}`}>
+                        <GalleryThumbnail
+                          key={album.postId}
+                          album={album}
+                          isFetchingNextPage={isFetchingNextPage}
+                        />
+                      </Link>
+                    </div>
                   );
                 }
               })
             )}
         </Flex>
-        {isFetchingNextPage && <LoadingSpinner />}
+        {/* 로딩스피너 구현 필요 */}
+        {/* {isFetchingNextPage && <LoadingSpinner />} */}
       </div>
-      {/* 글 작성 버튼 */}
-      <button className="fixed right-10 bottom-8">
+      {/* 앨범 작성 버튼 */}
+      <button className="albumPostBtn fixed right-10 bottom-8">
         <Link to="/gallery/form">
           <AiFillPlusCircle className="w-12 h-12 text-home-primary" />
         </Link>
@@ -100,9 +116,11 @@ function Gallery() {
 
 const getMoreAlbums = async ({ pageParam }) => {
   // const albumsURL = `${process.env.REACT_APP_SERVER}/photo-post?page=${pageParam}`;
-  // return await axios.get(albumsURL).then((res) => res.data.response.dtoList);
+  // return await axios
+  //   .get(albumsURL, { withCredentials: true })
+  //   .then((res) => res.data.response.dtoList);
 
-  // test: json-server
+  // TEST: json-server
   const albumsURL = `${process.env.REACT_APP_SERVER}/photo-post?_page=${pageParam}`;
   return await axios.get(albumsURL).then((res) => res.data);
 };
