@@ -17,6 +17,7 @@ import Box from "@mui/material/Box";
 function Gallery() {
   const { ref: observeBtmRef, inView } = useInView();
 
+  // 리액트 쿼리 무한스크롤 api
   const {
     data,
     status,
@@ -76,12 +77,7 @@ function Gallery() {
                       ref={observeBtmRef}
                     >
                       <Link to={`${album.id}`}>
-                        <GalleryThumbnail
-                          ref={observeBtmRef}
-                          key={album.postId}
-                          album={album}
-                          isFetchingNextPage={isFetchingNextPage}
-                        />
+                        <GalleryThumbnail key={album.postId} album={album} />
                       </Link>
                     </div>
                   );
@@ -89,11 +85,7 @@ function Gallery() {
                   return (
                     <div className="m-4 min-w-[22.65rem] max-w-[22.65rem] h-min">
                       <Link to={`${album.id}`}>
-                        <GalleryThumbnail
-                          key={album.postId}
-                          album={album}
-                          isFetchingNextPage={isFetchingNextPage}
-                        />
+                        <GalleryThumbnail key={album.postId} album={album} />
                       </Link>
                     </div>
                   );
