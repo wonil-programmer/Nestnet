@@ -15,6 +15,7 @@ module.exports = {
         "home-secondary": "#E45F84",
         "home-background": "#f7f8f9",
         "border-primary": "#efefef",
+        skeleton: "#d1d5db",
       },
       width: {
         menus: "75rem",
