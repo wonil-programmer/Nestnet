@@ -23,7 +23,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full h-[25qsrem] border-t-2 border-t-slate-100 bg-red-100/10">
+    <footer className="w-full h-[25qsrem] border-t-2 bg-white">
       <div className="flex flex-col w-full min-w-max px-60 py-10">
         {/* 동아리 소개 */}
         <div className="flex-col mb-8">
