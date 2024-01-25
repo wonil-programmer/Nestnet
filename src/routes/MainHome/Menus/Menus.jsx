@@ -1,4 +1,6 @@
 import MenuCard from "./MenuCard";
+import { useInView } from "react-intersection-observer";
+import { useState, useEffect } from "react";
 
 export default function Menus() {
   class Service {
@@ -14,20 +16,32 @@ export default function Menus() {
     new Service("assets/info_board.jpg", "자료 게시판", ""),
   ];
 
+  const { ref: observeCardRef, inView } = useInView();
+  const [isVisible, setIsVisible] = useState(false);
+
+  // ref가 inView 영역에 도달하면 다음 페이지를 불러옴
+  useEffect(() => {
+    if (inView) {
+      setIsVisible(true);
+    }
+  }, [inView]);
+
   return (
-    <section className="w-full pb-12 pt-[6rem]">
-      <div className="text-5xl text-center font-semibold text-gray-700">
+    <section className="w-full pb-12 pt-[5rem]">
+      <div className="text-[2.5rem] text-center font-semibold text-gray-700">
         서비스
       </div>
       <div className="menuContent h-fit max-w-7xl mx-auto py-20 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-10 gap-x-10">
         {Services.map((service, idx) => (
-          <MenuCard
-            key={idx}
-            imgSrc={service.imgSrc}
-            mainTitle={service.mainTitle}
-            subTitle={service.subTitle}
-            path={service.link}
-          />
+          <div ref={observeCardRef}>
+            <MenuCard
+              key={idx}
+              isVisible={isVisible}
+              imgSrc={service.imgSrc}
+              mainTitle={service.mainTitle}
+              path={service.link}
+            />
+          </div>
         ))}
       </div>
     </section>
