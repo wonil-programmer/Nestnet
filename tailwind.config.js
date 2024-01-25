@@ -11,10 +11,11 @@ module.exports = {
         "home-subtitle": "2.5rem",
       },
       colors: {
-        "home-primary": "#f43f5e",
+        "home-primary": "#9f1239",
         "home-secondary": "#E45F84",
         "home-background": "#f7f8f9",
         "border-primary": "#efefef",
+        "default-gray": "#efefef",
         skeleton: "#d1d5db",
       },
       width: {
@@ -30,10 +31,10 @@ module.exports = {
           "75%": { opacity: "0.2" },
           "100%": { opacity: "0", visibility: "hidden" },
         },
-        fadein: {
-          "0%": { opacity: "0" },
-          "50%": { opacity: "0.5" },
-          "100%": { opacity: "1" },
+        swapdown: {
+          "0%": { opacity: "0", transform: "translate(0, -20%)" },
+          "50%": { opacity: "0.5", transform: "translate(0, -10%)" },
+          "100%": { opacity: "1", transform: "translate(0)" },
         },
         zoomout: {
           "0%": { transform: "scale(1.1)", opacity: "0.7" },
@@ -89,7 +90,7 @@ module.exports = {
       },
       animation: {
         fadeout: "fadeout 1s ease-out forwards",
-        fadein: "fadein 1s ease-in forwards",
+        swapdown: "swapdown 0.5s linear forwards",
         zoomout: "zoomout 12s linear infinite",
         zoomoutnext: "zoomoutnext 12s linear infinite",
         zoomin: "zoomin 5s linear infinite",
