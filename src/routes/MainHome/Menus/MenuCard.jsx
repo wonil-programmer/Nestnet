@@ -1,24 +1,28 @@
 import { Link } from "react-router-dom";
 
-export default function MenuCard({ imgSrc, mainTitle, subTitle, link }) {
+/**
+ * 서비스 메뉴 카드
+ * @param {string, string, string} param0
+ * @returns
+ */
+export default function MenuCard({ imgSrc, mainTitle, path }) {
   return (
-    <Link to={`${link}`}>
+    <Link to={`${path}`}>
       <div
-        className={`flex flex-col w-[22rem] h-[30rem] bg-white rounded-2xl overflow-hidden 
-      shadow-[0_8px_30px_rgb(0,0,0,0.12)] duration-300 hover:-translate-y-2 hover:ease-in-out hover:shadow-lg`}
+        className={`flex flex-col w-full h-full relative bg-white rounded-lg overflow-hidden shadow-lg  
+        duration-300 hover:ease-in-out hover:shadow-xl`}
       >
-        <div className="w-full h-1/2">
+        <div className="w-full h-full overflow-hidden ease-in-out duration-300 hover:scale-110 hover:duration-300">
           <img
             className="w-full h-full object-cover brightness-90"
-            src={`${imgSrc}`}
-            alt="servicePhoto"
+            src={imgSrc}
+            alt="serviceThumbnail"
           />
         </div>
-        <div className="w-full h-1/2 p-8 text-black">
-          <div className="mainTitle mb-4">
-            <span className="text-2xl font-semibold">{mainTitle}</span>
+        <div className="absolute right-0 bottom-0 w-fit px-4 pt-2 pb-1 text-white rounded-tl-lg opacity-90">
+          <div className="mainTitle mb-2 text-white">
+            <span className="text-xl">{mainTitle}</span>
           </div>
-          <h2 className="subTitle h-20">{subTitle}</h2>
         </div>
       </div>
     </Link>
