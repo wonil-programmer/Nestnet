@@ -337,47 +337,43 @@
       "memberLiked": false
     }
   ],
-  "new-posts": [
-    {
-      "id": 1,
-      "type": "gallery",
-      "id": "61",
-      "title": "23 체육대회",
-      "postDate": "2024-03-01"
-    },
-    {
-      "id": 2,
-      "type": "gallery",
-      "id": "62",
-      "title": "2023년도 2학기 클라우드컴퓨팅 기말고사(노서영 교수님)",
-      "postDate": "2024-03-02"
-    },
-    {
-      "id": 3,
-      "type": "gallery",
-      "id": "61",
-      "title": "2023학년도 2학기 오픈소스소프트웨어이해와실습 기말고사(신재혁 교수님)",
-      "postDate": "2024-03-05"
-    },
-    {
-      "id": 4,
-      "type": "gallery",
-      "id": "61",
-      "title": "2022년 선·후배 체육대회 진행계획 초안",
-      "postDate": "2024-03-06"
-    },
-    {
-      "id": 5,
-      "type": "gallery",
-      "id": "61",
-      "title": " 20학번 김민주입니다.",
-      "postDate": "2024-03-07"
-    }
-  ],
+  "recent-posts": {
+    "dtoList": [
+      {
+        "id": 52,
+        "postCategory": "UNIFIED",
+        "title": "2023 체육대회",
+        "createdTime": "2024-01-01"
+      },
+      {
+        "id": 51,
+        "postCategory": "UNIFIED",
+        "title": "2023 개강총회",
+        "createdTime": "2024-01-01"
+      },
+      {
+        "id": 44,
+        "postCategory": "UNIFIED",
+        "title": "2023 체육대회 뒷풀이",
+        "createdTime": "2024-01-01"
+      },
+      {
+        "id": 38,
+        "postCategory": "UNIFIED",
+        "title": "2023 졸업식 기념식 단체사진",
+        "createdTime": "2024-01-01"
+      },
+      {
+        "id": 33,
+        "postCategory": "UNIFIED",
+        "title": "2023 체육대회",
+        "createdTime": "2024-01-01"
+      }
+    ]
+  },
   "attendance": [
     {
       "id": 1,
-      "type": "주간 출석 순위",
       "rank": [
         {
           "name": "김성호",
@@ -403,7 +399,6 @@
     },
     {
       "id": 2,
-      "type": "월간 출석 순위",
       "rank": [
         {
           "name": "김성호",
