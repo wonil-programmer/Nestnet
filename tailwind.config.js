@@ -87,6 +87,10 @@ module.exports = {
           "50%": { transform: "translate(0, -20%)" },
           "100%": { transform: "translate(0, -100%)" },
         },
+        infiniteslide: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         fadeout: "fadeout 1s ease-out forwards",
@@ -97,6 +101,7 @@ module.exports = {
         blink: "blink 2s ease-in-out infinite",
         drawerout: "drawerout 0.25s linear forwards",
         drawerin: "drawerin 0.25s linear forwards",
+        infiniteslide: "infiniteslide 30s linear infinite",
       },
     },
   },

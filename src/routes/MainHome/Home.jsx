@@ -5,9 +5,9 @@ import Menus from "./Menus/Menus";
 
 function Home() {
   return (
-    <>
-      <div className="homeContainer min-w-fit px-20 bg-white">
-        <section className="w-full h-max mx-auto">
+    <div className="overflow-hidden">
+      <div className="homeContainer w-screen bg-white">
+        <section className="w-full h-max px-24">
           <MainView />
         </section>
         {/* 로고 고정 배경 이미지 */}
@@ -15,12 +15,12 @@ function Home() {
         <section className="flex w-full h-max">
           <PhotoZone />
         </section>
-        <section className="flex w-full h-max">
+        <section className="flex w-full h-max px-24">
           <Menus />
         </section>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 export default Home;

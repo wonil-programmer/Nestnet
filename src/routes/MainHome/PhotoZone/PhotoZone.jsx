@@ -1,17 +1,16 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
-import { useRef } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { AiFillFile } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
-import Masonry from "react-masonry-css";
-import { Flex } from "@chakra-ui/react";
+import { FcStackOfPhotos } from "react-icons/fc";
 
 export default function PhotoZone() {
   const [image, setImage] = useState(null);
   const [fileName, setFileName] = useState("No selected file");
 
   const onUploadImage = useCallback((e) => {
+    e.preventDefault();
     if (!e.target.files) {
       return;
     }
@@ -34,64 +33,82 @@ export default function PhotoZone() {
       });
   }, []);
 
-  const breakpointColumnsObj = {
-    default: 6,
-    1200: 5,
-    1000: 4,
-    800: 3,
-  };
-
   return (
-    <section className="photoZone relative bg-white w-full h-screen overflow-hidden">
-      <div className="uploadArea absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="text-home-primary text-4xl ml-4 mb-4 font-semibold">
+    <section className="photoZone w-full h-fit my-10">
+      <div className="mainTitle flex flex-row items-center mb-8 px-16">
+        <span className="text-6xl">
+          <FcStackOfPhotos />
+        </span>
+        <h3 className="text-[2.5rem] font-semibold text-gray-700 mx-4 mr-6 mb-4">
           포토존
+        </h3>
+      </div>
+      {/* 슬라이딩 이미지 */}
+      <div className="animationList inline-block w-[300rem] animate-infiniteslide hover:[animation-play-state:paused]">
+        <div className="imgList inline-block w-[150rem]">
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b1.png"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b2.jpg"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b3.jpg"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b4.png"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b5.png"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b1.png"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b2.jpg"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b3.jpg"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b4.png"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b5.png"></img>
+          </div>
         </div>
-        {/* 사진 업로드하는 폼 */}
-        <form
-          className="w-36 h-32 mt-6 flex-col justify-center items-center border-2 border-dashed border-red-500 rounded-xl overflow-hidden cursor-pointer"
-          onClick={() => {
-            document.querySelector(".inputField").click();
-          }}
-        >
-          <input
-            className="inputField hidden w-full h-full"
-            type="file"
-            accept="image/*"
-            onChange={({ target: { files } }) => {
-              if (files[0]) {
-                setFileName(files[0].name);
-                if (image) {
-                  // 이전에 생성한 객체 URL 해제
-                  URL.revokeObjectURL(image);
-                }
-                // 새로운 객체 URL 생성
-                setImage(URL.createObjectURL(files[0]));
-              }
-            }}
-          />
-          {image ? (
-            <>
-              <img src={image} className="w-full h-full" alt={fileName} />
-              <MdDelete
-                size={25}
-                className="absolute right-4 bottom-4 text-home-secondary "
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setFileName("No selected file");
-                  setImage(null);
-                }}
-              />
-            </>
-          ) : (
-            <>
-              <FaCloudUploadAlt
-                size={60}
-                className="absolute top-32 left-1/2 -translate-x-1/2 -translate-y-1/2 text-home-primary m-auto ease-in-out duration-200 hover:scale-110"
-              />
-            </>
-          )}
-        </form>
+        <div className="imgList inline-block w-[150rem]">
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b1.png"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b2.jpg"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b3.jpg"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b4.png"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b5.png"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b1.png"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b2.jpg"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b3.jpg"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b4.png"></img>
+          </div>
+          <div className="cell w-[15rem] inline-block h-fit px-1">
+            <img src="assets/b5.png"></img>
+          </div>
+        </div>
       </div>
     </section>
   );
