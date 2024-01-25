@@ -1,11 +1,16 @@
 import { useState, memo } from "react";
 import Comment from "./Comment";
 
+/**
+ * 댓글창(앨범의 메타데이터 포함)
+ * @param {boolean, boolean, Object, Object}
+ * @returns
+ */
 const AlbumDescription = ({
   isAlbumLoading,
-  metaData,
-  comments,
   isDescriptionVisible,
+  postData,
+  comments,
 }) => {
   const [selectedCommentId, setSelectedCommentId] = useState(0);
 
@@ -20,10 +25,9 @@ const AlbumDescription = ({
                 Loading...
               </div>
             ) : (
-              <h2 className="text-lg my-auto">
-                댓글
-                <span className="ml-2">{comments.length}</span>
-              </h2>
+              <div className="bodyContent text-md my-auto font-semibold">
+                {postData.bodyContent}
+              </div>
             )}
           </div>
           {isAlbumLoading ? (
@@ -33,9 +37,11 @@ const AlbumDescription = ({
             </div>
           ) : (
             <>
-              <div className="body py-5 px-8 font-semibold">
-                {metaData.bodyContent}
-              </div>
+              <h2 className="text-md py-5 px-8">
+                댓글
+                <span className="ml-2">{comments.length}</span>
+              </h2>
+
               <ul className="commentsList w-full py-4 px-12 max-h-96 overflow-auto">
                 <>
                   {comments.length ? (
