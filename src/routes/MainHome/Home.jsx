@@ -6,17 +6,20 @@ import Menus from "./Menus/Menus";
 function Home() {
   return (
     <>
-      <div className="homeContainer w-min mx-auto">
-        <section className="w-min h-max">{/* <MainView /> */}</section>
-        <section className="flex bg-fixed bg-no-repeat h-[9rem] bg-[url('./assets/images/bgImage.png')]"></section>
+      <div className="homeContainer min-w-fit px-20 bg-white">
+        <section className="w-full h-max mx-auto">
+          <MainView />
+        </section>
+        {/* 로고 고정 배경 이미지 */}
+        <section className="flex bg-fixed bg-bottom bg-no-repeat h-[9rem] bg-[url('./assets/images/bgImage.png')]"></section>
         <section className="flex w-full h-max">
           <PhotoZone />
         </section>
-        <section className="flex w-max h-max">
+        <section className="flex w-full h-max">
           <Menus />
         </section>
-        <Footer />
       </div>
+      <Footer />
     </>
   );
 }
