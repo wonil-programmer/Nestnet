@@ -36,8 +36,7 @@ export default function MainView() {
                 alt="mainView"
               />
               <div
-                className={`before:bg-[url('./assets/images/roundEdge.svg')] before:block before:absolute before:left-[44px] before:-top-[44px] before:w-[44px] before:h-[44px] 
-                absolute bottom-0 right-0 w-[4.5rem] h-[4.5rem] rounded-tl-[0.5rem] bg-white inline`}
+                className={`absolute bottom-0 right-0 w-[4.5rem] h-[4.5rem] rounded-tl-[0.5rem] bg-white inline`}
               ></div>
             </div>
             <div className="absolute bottom-0 right-4 w-[4rem] h-[4rem] rounded-[0.5rem] white border-2 shadow-md transition-all overflow-hidden">
