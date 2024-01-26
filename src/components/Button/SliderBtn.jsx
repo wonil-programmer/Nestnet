@@ -6,9 +6,9 @@ export default function SliderBtn({ moveSlide, direction }) {
     <>
       <button onClick={moveSlide} className="opacity-80">
         {direction === "next" ? (
-          <IoIosArrowForward className="text-4xl" />
+          <IoIosArrowForward className="text-4xl text-home-primary" />
         ) : (
-          <IoIosArrowBack className="text-4xl" />
+          <IoIosArrowBack className="text-4xl text-home-primary" />
         )}
       </button>
     </>
