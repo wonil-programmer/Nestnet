@@ -1,11 +1,10 @@
-import { FaCalendar } from "react-icons/fa";
-import { FaCalendarCheck } from "react-icons/fa";
 import SlidingBanner from "../../../components/SlidingBanner";
 import { SliderItems } from "./SliderItems";
 import RecentPosts from "./RecentPosts";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import AttendanceBtn from "./AttendanceBtn";
 
 export default function MainView() {
   const { data: recentPosts, isLoading: isNewPostsLoading } = useGetNewPosts();
@@ -13,6 +12,7 @@ export default function MainView() {
     data: {
       weeklyStatisticsDtoList: weeklyAttdRank = [],
       monthlyStatisticsDtoList: monthlyAttdRank = [],
+      memberAttended: isMemberAttended,
     } = {},
     isLoading: isAttdRanksLoading,
   } = useGetAttendance();
@@ -29,7 +29,7 @@ export default function MainView() {
       <div className="flex flex-row justify-center">
         <div className="flex flex-row justify-between max-w-[76rem] max-h-max">
           <div className="relative w-max h-max">
-            <div className="relative min-w-[60rem] w-[60rem] h-[40rem] mr-4 rounded-[1rem] overflow-hidden">
+            <div className="relative min-w-[60rem] w-[60rem] h-[40rem] mr-4 rounded-[1rem] rounded-br-[0rem] overflow-hidden">
               <img
                 className="absolute top-0 left-0 w-full h-full object-cover brightness-95"
                 src="assets/mainViewBg.jpg"
@@ -37,12 +37,8 @@ export default function MainView() {
               />
               <div
                 className={`absolute bottom-0 right-0 w-[4.5rem] h-[4.5rem] rounded-tl-[0.5rem] bg-white inline`}
-              ></div>
-            </div>
-            <div className="absolute bottom-0 right-4 w-[4rem] h-[4rem] rounded-[0.5rem] white border-2 shadow-md transition-all overflow-hidden">
-              <div className="flex flex-col justify-center items-center w-full h-full cursor-pointer bg-rose-600">
-                <FaCalendarCheck className="text-4xl text-white" />
-                {/* <FaCalendar className="text-4xl text-slate-400" /> */}
+              >
+                <AttendanceBtn isMemberAttended={isMemberAttended} />
               </div>
             </div>
           </div>
@@ -95,7 +91,7 @@ const useGetAttendance = () => {
       // const attendanceURL = `${process.env.REACT_APP_SERVER}/attendance-statistics`;
 
       return await axios.get(attendanceURL).then((res) => {
-        console.log(res.data);
+        console.log(res.data.response);
         return res.data.response;
       });
     },
