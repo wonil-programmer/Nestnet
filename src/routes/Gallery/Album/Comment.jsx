@@ -1,9 +1,14 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
-const Comment = ({ comment, setSelectedCommentId, isUpdating }) => {
+const Comment = ({
+  comment,
+  selectedCommentId,
+  setSelectedCommentId,
+  isUpdating,
+}) => {
   const {
     id: commentId,
     username,
@@ -23,13 +28,10 @@ const Comment = ({ comment, setSelectedCommentId, isUpdating }) => {
 
   const handleCommentUpdate = (comment) => {
     setUpdateValue(content);
-    setSelectedCommentId(commentId);
+    setSelectedCommentId(comment.id);
   };
-  const handleUpdateComplete = (updatedValue) => {
-    updateComment({
-      ...comment,
-      content: updatedValue,
-    });
+  const handleUpdateComplete = (updateValue) => {
+    updateComment({ commentId, updateValue });
     setSelectedCommentId(0);
   };
 
@@ -111,10 +113,12 @@ function useUpdateComment() {
   const { postId } = useParams();
 
   return useMutation({
-    mutationFn: async (modifiedComment) => {
-      const commentUpdateURL = `${process.env.REACT_APP_SERVER}/comment/modify/${modifiedComment.id}`;
+    mutationFn: async ({ commentId, updateValue }) => {
+      console.log(commentId);
+      console.log(updateValue);
+      const commentUpdateURL = `${process.env.REACT_APP_SERVER}/comment/modify/${commentId}`;
       return await axios.post(commentUpdateURL, {
-        content: modifiedComment.content,
+        content: updateValue,
       });
     },
     // 클라이언트 업데이트
