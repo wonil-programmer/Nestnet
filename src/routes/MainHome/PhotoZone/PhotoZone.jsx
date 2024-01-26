@@ -42,7 +42,7 @@ export default function PhotoZone() {
         </h3>
         {/* 사진 업로드하는 폼 */}
         <form
-          enctype="multipart/form-data"
+          encType="multipart/form-data"
           onClick={() => {
             fileInputRef.current.value = null;
             fileInputRef.current.click();
