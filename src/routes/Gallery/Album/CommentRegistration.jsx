@@ -18,7 +18,7 @@ const CommentRegistration = ({ isDescriptionVisible }) => {
     setNewComment(inputRef.current.value);
   };
 
-  const { mutate: createComment, isPending: isCommentPosting } =
+  const { mutate: createComment, isPending: isCommentPending } =
     useCreateComment();
 
   const handleCommentCreate = (event) => {
@@ -36,7 +36,7 @@ const CommentRegistration = ({ isDescriptionVisible }) => {
           <div className="flex flex-row items-center w-full p-6 px-8">
             <div className="profile bg-slate-950 w-12 h-12 mr-6 rounded-3xl" />
             <form className="flex-auto" onSubmit={handleCommentCreate}>
-              {isCommentPosting ? (
+              {isCommentPending ? (
                 <div className="w-full h-full pt-2 pb-1 flex justify-center">
                   <LoadingSpinner />
                 </div>
@@ -65,6 +65,7 @@ function useCreateComment() {
   return useMutation({
     mutationFn: async (newComment) => {
       const commentPostURL = `${process.env.REACT_APP_SERVER}/comment/${postId}`;
+
       return await axios.post(commentPostURL, {
         content: newComment,
       });
