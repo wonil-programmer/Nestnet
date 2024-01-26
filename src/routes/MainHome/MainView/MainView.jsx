@@ -1,16 +1,28 @@
 import { FaCalendar } from "react-icons/fa";
 import { FaCalendarCheck } from "react-icons/fa";
-import { BsMouseFill } from "react-icons/bs";
-import Slider from "../../../components/Slider";
+import SlidingBanner from "../../../components/SlidingBanner";
 import { SliderItems } from "./SliderItems";
 import RecentPosts from "./RecentPosts";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 export default function MainView() {
   const { data: recentPosts, isLoading: isNewPostsLoading } = useGetNewPosts();
-  const { data: attendanceSlides, isLoading: isAttendanceSlidesLoading } =
-    useGetAttendance();
+  const {
+    data: {
+      weeklyStatisticsDtoList: weeklyAttdRank = [],
+      monthlyStatisticsDtoList: monthlyAttdRank = [],
+    } = {},
+    isLoading: isAttdRanksLoading,
+  } = useGetAttendance();
+  const [attdRankSlides, setAttdRankSlides] = useState([]);
+
+  useEffect(() => {
+    if (weeklyAttdRank.length !== 0 && monthlyAttdRank.length !== 0) {
+      setAttdRankSlides([[...weeklyAttdRank], [...monthlyAttdRank]]);
+    }
+  }, [weeklyAttdRank, monthlyAttdRank]);
 
   return (
     <div className="mVWrapper relative h-screen pt-[6rem] pb-[7rem]">
@@ -20,7 +32,7 @@ export default function MainView() {
             <div className="relative min-w-[60rem] w-[60rem] h-[40rem] mr-4 rounded-[1rem] overflow-hidden">
               <img
                 className="absolute top-0 left-0 w-full h-full object-cover brightness-95"
-                src="assets/a2.jpg"
+                src="assets/mainViewBg.jpg"
                 alt="mainView"
               />
               <div
@@ -39,16 +51,16 @@ export default function MainView() {
             <div className="w-[14rem] h-[17.8rem] rounded-[0.5rem] border-2 border-home-primary bg-white shadow-md">
               <RecentPosts items={recentPosts} isLoading={isNewPostsLoading} />
             </div>
-            <div className="relative w-[14rem] h-[7rem] mt-[1.2rem] box-border rounded-[0.5rem] overflow-hidden shadow-md">
-              <Slider items={SliderItems} isImgObj={true} />
+            <div className="relative w-[14rem] h-[7rem] mt-[1.2rem] box-border rounded-[0.5rem] overflow-hidden brightness-95 shadow-md">
+              <SlidingBanner items={SliderItems} isImgObj={true} />
             </div>
-            <div className="w-[14rem] h-[12.8rem] mt-[1.2rem]  rounded-[0.5rem] bg-gray-100 overflow-hidden shadow-md">
-              {/* <Slider
-                items={attendanceSlides}
+            <div className="w-[14rem] h-[12.8rem] mt-[1.2rem]  rounded-[0.5rem] border-2 border-home-primary bg-white overflow-hidden shadow-md">
+              <SlidingBanner
+                items={attdRankSlides}
                 isImgObj={false}
                 isArrow={false}
-                isLoading={isAttendanceSlidesLoading}
-              /> */}
+                isLoading={isAttdRanksLoading}
+              />
             </div>
           </div>
         </div>
@@ -57,16 +69,19 @@ export default function MainView() {
   );
 }
 
-// REST: 최신글 조회
+// REST: 최근글 조회
 const useGetNewPosts = () => {
   return useQuery({
     queryKey: ["recent-posts"],
     queryFn: async () => {
-      // const recentPostsURL = `${process.env.REACT_APP_SERVER}/post/recent-posts`;
+      const recentPostsURL = `${process.env.REACT_APP_SERVER}/post/recent-posts`;
 
       // TEST: json-server
-      const recentPostsURL = `${process.env.REACT_APP_SERVER}/recent-posts`;
-      return await axios.get(recentPostsURL).then((res) => res.data.dtoList);
+      // const recentPostsURL = `${process.env.REACT_APP_SERVER}/recent-posts`;
+
+      return await axios.get(recentPostsURL).then((res) => {
+        return res.data.response.dtoList;
+      });
     },
   });
 };
@@ -74,11 +89,15 @@ const useGetNewPosts = () => {
 // REST: 출석정보 조회
 const useGetAttendance = () => {
   return useQuery({
-    queryKey: ["attendance-slides"],
+    queryKey: ["attendance-statistics"],
     queryFn: async () => {
-      const attendanceURL = `${process.env.REACT_APP_SERVER}/statistics`;
+      const attendanceURL = `${process.env.REACT_APP_SERVER}/attendance/statistics`;
+      // TEST: json-server
+      // const attendanceURL = `${process.env.REACT_APP_SERVER}/attendance-statistics`;
+
       return await axios.get(attendanceURL).then((res) => {
-        return res.data;
+        console.log(res.data);
+        return res.data.response;
       });
     },
   });
