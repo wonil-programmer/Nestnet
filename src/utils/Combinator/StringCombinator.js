@@ -3,11 +3,14 @@ const StringCombinator = {
     const imageRootPath = `${process.env.REACT_APP_SERVER}/image`;
     let saveFilePath = image.saveFilePath;
     let saveFileName = image.saveFileName;
-    // let imagePath = imageRootPath + "/" + saveFilePath + "/" + saveFileName;
+    let imagePath = imageRootPath + "/" + saveFilePath + "/" + saveFileName;
     // test: json-server
-    let imagePath = "/" + saveFilePath + "/" + saveFileName;
+    // let imagePath = "/" + saveFilePath + "/" + saveFileName;
 
     return imagePath;
+  },
+  getRecentPostPath(category, postId) {
+    return `${category}/${postId}`;
   },
 };
 
