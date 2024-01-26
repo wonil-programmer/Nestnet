@@ -17,8 +17,8 @@ import Box from "@mui/material/Box";
 function Gallery() {
   const { ref: observeBtmRef, inView } = useInView();
 
-  // 리액트 쿼리 무한스크롤 api
   const {
+    // 리액트 쿼리 무한스크롤 api
     data,
     status,
     error,
@@ -36,7 +36,7 @@ function Gallery() {
   // Masonary 레이아웃 열 갯수 (반응형)
   const breakpointColumnsObj = {
     default: 3,
-    1500: 2,
+    1300: 2,
     1000: 1,
   };
 
