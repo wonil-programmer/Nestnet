@@ -371,58 +371,52 @@
       }
     ]
   },
-  "attendance": [
-    {
-      "id": 1,
-      "rank": [
-        {
-          "name": "김성호",
-          "score": 500
-        },
-        {
-          "name": "최유진",
-          "score": 400
-        },
-        {
-          "name": "김강민",
-          "score": 300
-        },
-        {
-          "name": "정한울",
-          "score": 150
-        },
-        {
-          "name": "김가현",
-          "score": 100
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "rank": [
-        {
-          "name": "김성호",
-          "score": 1000
-        },
-        {
-          "name": "김강민",
-          "score": 800
-        },
-        {
-          "name": "허원일",
-          "score": 500
-        },
-        {
-          "name": "김민주",
-          "score": 500
-        },
-        {
-          "name": "최유진",
-          "score": 300
-        }
-      ]
-    }
-  ],
+  "attendance-statistics": {
+    "weeklyStatisticsDtoList": [
+      {
+        "name": "김성호",
+        "score": 500
+      },
+      {
+        "name": "최유진",
+        "score": 400
+      },
+      {
+        "name": "김강민",
+        "score": 300
+      },
+      {
+        "name": "정한울",
+        "score": 150
+      },
+      {
+        "name": "김가현",
+        "score": 100
+      }
+    ],
+    "monthlyStatisticsDtoList": [
+      {
+        "name": "최유진",
+        "score": 500
+      },
+      {
+        "name": "김가현",
+        "score": 400
+      },
+      {
+        "name": "김강민",
+        "score": 300
+      },
+      {
+        "name": "정한울",
+        "score": 150
+      },
+      {
+        "name": "허원일",
+        "score": 100
+      }
+    ]
+  },
   "study": [
     {
       "id": 1,
