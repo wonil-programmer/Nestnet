@@ -65,6 +65,7 @@ const Album = () => {
                 selectedPhoto={selectedPhoto}
                 setIsDescriptionVisible={setIsDescriptionVisible}
                 isMemberLiked={isMemberLiked}
+                likeCount={postData?.likeCount}
                 data={data}
               />
             </div>
@@ -91,12 +92,15 @@ const useGetAlbum = () => {
   return useQuery({
     queryKey: ["album", postId],
     queryFn: async () => {
-      // const albumURL = `${process.env.REACT_APP_SERVER}/photo-post/${postId}`;
-      // return await axios.get(albumURL).then((res) => res.data.response);
+      const albumURL = `${process.env.REACT_APP_SERVER}/photo-post/${postId}`;
+      return await axios.get(albumURL).then((res) => res.data.response);
 
       // TEST: json-server
-      const albumURL = `${process.env.REACT_APP_SERVER}/album/?id=${postId}`;
-      return await axios.get(albumURL).then((res) => res.data[0]);
+      // const albumURL = `${process.env.REACT_APP_SERVER}/album/?id=${postId}`;
+      // return await axios.get(albumURL).then((res) => {
+      //   console.log(res.data[0]);
+      //   return res.data[0];
+      // });
     },
   });
 };
