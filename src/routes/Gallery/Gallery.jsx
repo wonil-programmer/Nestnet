@@ -28,7 +28,7 @@ function Gallery() {
   } = useInfiniteQuery({
     queryKey: ["albums"],
     queryFn: getMoreAlbums,
-    initialPageParam: 0,
+    initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) =>
       lastPage.length ? allPages.length + 1 : undefined,
   });
@@ -107,14 +107,14 @@ function Gallery() {
 }
 
 const getMoreAlbums = async ({ pageParam }) => {
-  // const albumsURL = `${process.env.REACT_APP_SERVER}/photo-post?page=${pageParam}`;
-  // return await axios
-  //   .get(albumsURL, { withCredentials: true })
-  //   .then((res) => res.data.response.dtoList);
+  const albumsURL = `${process.env.REACT_APP_SERVER}/photo-post?page=${pageParam}`;
+  return await axios
+    .get(albumsURL, { withCredentials: true })
+    .then((res) => res.data.response.dtoList);
 
-  // TEST: json-server
-  const albumsURL = `${process.env.REACT_APP_SERVER}/photo-post?_page=${pageParam}`;
-  return await axios.get(albumsURL).then((res) => res.data);
+  // // TEST: json-server
+  // const albumsURL = `${process.env.REACT_APP_SERVER}/photo-post?_page=${pageParam}`;
+  // return await axios.get(albumsURL).then((res) => res.data);
 };
 
 export default memo(Gallery);
