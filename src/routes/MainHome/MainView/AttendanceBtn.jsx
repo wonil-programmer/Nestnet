@@ -10,8 +10,8 @@ const AttendanceBtn = ({ isMemberAttended = false }) => {
   return (
     <div className="absolute bottom-0 right-0 w-[4rem] h-[4rem] overflow-hidden">
       {isMemberAttended ? (
-        <div className="flex flex-col justify-center items-center w-full h-full rounded-[0.5rem] cursor-pointer bg-blue-600">
-          <FaCalendarCheck className="text-3xl text-white" />
+        <div className="flex flex-col justify-center items-center w-full h-full rounded-[0.5rem] bg-white border-2 border-blue-800">
+          <FaCalendarCheck className="text-3xl text-blue-800" />
         </div>
       ) : (
         <div
