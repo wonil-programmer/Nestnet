@@ -4,10 +4,9 @@ import { CircleButton as Button } from "../../../components/CircleButton";
 
 export default function DownloadBtn({ selectedPhoto }) {
   const fileName = extractFileName(selectedPhoto);
-  const downloadPath = `url(${selectedPhoto})`;
 
   return (
-    <a download={fileName} href={downloadPath}>
+    <a download={fileName} href={selectedPhoto}>
       <Button content={<FiDownload className="text-3xl" />} />
     </a>
   );
