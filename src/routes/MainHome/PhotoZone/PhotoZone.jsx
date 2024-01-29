@@ -11,15 +11,16 @@ export default function PhotoZone() {
   const fileInputRef = useRef();
 
   const { data: photos = [], isLoading: isPhotosLoading } = useGetPhotos();
-  const [a, setA] = useState([]);
-  const [b, setB] = useState([]);
+  const [frontPhotos, setFrontPhotos] = useState([]);
+  const [rearPhotos, setRearPhotos] = useState([]);
+
   useEffect(() => {
     if (photos.length !== 0) {
-      const halfIndex = parseInt(photos.length / 2);
-      const aSlice = photos.slice(0, halfIndex);
-      const bSlice = photos.slice(halfIndex, photos.length);
-      setA(aSlice);
-      setB(bSlice);
+      const halfIdx = parseInt(photos.length / 2);
+      const frontPhotosSlice = photos.slice(0, halfIdx);
+      const rearPhotosSlice = photos.slice(halfIdx, photos.length);
+      setFrontPhotos(frontPhotosSlice);
+      setRearPhotos(rearPhotosSlice);
     }
   }, [photos]);
 
@@ -102,8 +103,8 @@ export default function PhotoZone() {
       {/* 슬라이딩 이미지 */}
       <div className="animationList inline-block w-[500rem] animate-infiniteslide hover:[animation-play-state:paused]">
         <div className="imgList inline-block w-[250rem]">
-          {a
-            ? a.map((photo) => (
+          {frontPhotos
+            ? frontPhotos.map((photo) => (
                 <div className="cell w-[25rem] inline-block h-fit px-1">
                   <img
                     className="shadow-md rounded-sm brightness-98"
@@ -115,8 +116,8 @@ export default function PhotoZone() {
             : null}
         </div>
         <div className="imgList inline-block w-[250rem]">
-          {b
-            ? b.map((photo) => (
+          {rearPhotos
+            ? rearPhotos.map((photo) => (
                 <div className="cell w-[25rem] inline-block h-fit px-1">
                   <img
                     className="shadow-md rounded-sm brightness-98"
