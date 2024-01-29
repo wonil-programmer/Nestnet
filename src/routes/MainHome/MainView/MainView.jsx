@@ -1,4 +1,5 @@
-import SlidingBanner from "../../../components/SlidingBanner";
+import LinkBanner from "./LinkBanner";
+import AttendanceBanner from "./AttendanceBanner";
 import { SliderItems } from "./SliderItems";
 import RecentPosts from "./RecentPosts";
 import axios from "axios";
@@ -7,22 +8,26 @@ import { useEffect, useState } from "react";
 import AttendanceBtn from "./AttendanceBtn";
 
 export default function MainView() {
-  const { data: recentPosts, isLoading: isNewPostsLoading } = useGetNewPosts();
+  const {
+    data: recentPosts,
+    status,
+    isLoading: isNewPostsLoading,
+  } = useGetNewPosts();
   const {
     data: {
+      memberAttended: isMemberAttended,
       weeklyStatisticsDtoList: weeklyAttdRank = [],
       monthlyStatisticsDtoList: monthlyAttdRank = [],
-      memberAttended: isMemberAttended,
     } = {},
     isLoading: isAttdRanksLoading,
   } = useGetAttendance();
   const [attdRankSlides, setAttdRankSlides] = useState([]);
 
   useEffect(() => {
-    if (weeklyAttdRank.length !== 0 && monthlyAttdRank.length !== 0) {
+    if (status === "success") {
       setAttdRankSlides([[...weeklyAttdRank], [...monthlyAttdRank]]);
     }
-  }, [weeklyAttdRank, monthlyAttdRank]);
+  }, [status, weeklyAttdRank, monthlyAttdRank]);
 
   return (
     <div className="mVWrapper relative h-screen pt-[6rem] pb-[7rem]">
@@ -47,13 +52,11 @@ export default function MainView() {
               <RecentPosts items={recentPosts} isLoading={isNewPostsLoading} />
             </div>
             <div className="relative w-[14rem] h-[7rem] mt-[1.2rem] box-border rounded-[0.5rem] overflow-hidden brightness-95 shadow-md">
-              <SlidingBanner items={SliderItems} isImgObj={true} />
+              <LinkBanner items={SliderItems} />
             </div>
-            <div className="w-[14rem] h-[12.8rem] mt-[1.2rem]  rounded-[0.5rem] border-2 border-home-primary bg-white overflow-hidden shadow-md">
-              <SlidingBanner
+            <div className="w-[14rem] h-[12.8rem] mt-[1.2rem] rounded-[0.5rem] border-2 border-home-primary bg-white overflow-hidden shadow-md">
+              <AttendanceBanner
                 items={attdRankSlides}
-                isImgObj={false}
-                isArrow={false}
                 isLoading={isAttdRanksLoading}
               />
             </div>
@@ -74,9 +77,9 @@ const useGetNewPosts = () => {
       // TEST: json-server
       // const recentPostsURL = `${process.env.REACT_APP_SERVER}/recent-posts`;
 
-      return await axios.get(recentPostsURL).then((res) => {
-        return res.data.response.dtoList;
-      });
+      return await axios
+        .get(recentPostsURL)
+        .then((res) => res.data.response.dtoList);
     },
   });
 };
@@ -91,7 +94,6 @@ const useGetAttendance = () => {
       // const attendanceURL = `${process.env.REACT_APP_SERVER}/attendance-statistics`;
 
       return await axios.get(attendanceURL).then((res) => {
-        console.log(res.data.response);
         return res.data.response;
       });
     },

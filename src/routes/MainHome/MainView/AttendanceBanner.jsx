@@ -4,7 +4,7 @@ import Dot from "../../../components/Dot";
 // 배너 제목 상수
 const BannerTitle = ["월간순위", "주간순위"];
 
-const AttendanceBanner = ({ items: AttendanceRanks, isLoading }) => {
+const AttendanceBanner = ({ items: attendanceRanks, isLoading }) => {
   const [slideIdx, setSlideIdx] = useState(1);
 
   const handleDotClick = (idx) => {
@@ -14,39 +14,50 @@ const AttendanceBanner = ({ items: AttendanceRanks, isLoading }) => {
   return (
     <div className="relative w-full h-full">
       <>
-        {AttendanceRanks.map((item, idx) => (
+        {attendanceRanks?.map((attendanceRank, idx) => (
           <div
-            key={item.id}
+            key={attendanceRank.id}
             className={`slide absolute top-0 left-0 w-full h-full p-5 pt-4 text-black ${
-              slideIdx === idx + 1 ? "opacity-100" : "opacity-0"
+              slideIdx === idx + 1 ? "visible" : "invisible"
             }`}
           >
-            <div className="mb-1 text-sm font-bold text-home-primary">
+            <div className="mb-[0.35rem] text-sm font-bold text-home-primary">
               {BannerTitle[idx]}
             </div>
-            <div className="flex flex-row w-full h-[1rem] mb-1 pr-2 text-xs font-semibold">
-              <span className="w-10 mr-9">순위</span>
+            <div className="flex flex-row w-full h-[1rem] mb-1 text-xs font-semibold">
+              <span className="w-10 mr-12">순위</span>
               <div className="flex flex-row w-full justify-between">
                 <span>이름</span>
                 <span>점수</span>
               </div>
             </div>
-            <ul className="text-black pr-2">
-              {item.map((item, idx) => (
-                <li className="flex flex-row w-full h-[1.4rem] text-xs">
-                  <span className="w-2 pl-2 mr-12">{idx + 1}</span>
-                  <div className="flex flex-row w-full justify-between">
-                    <span>{item.memberName}</span>
-                    <span className="text-right">{item.point}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            {isLoading ? (
+              // 로딩스피너
+              <p></p>
+            ) : attendanceRank.length === 0 ? (
+              <p className="w-full pt-10 text-center text-xs text-stone-500">
+                출석자가 없습니다
+              </p>
+            ) : (
+              <>
+                <ul className="text-black pr-1">
+                  {attendanceRank.map((ranker, idx) => (
+                    <li className="flex flex-row w-full h-[1.4rem] text-xs">
+                      <span className="w-2 pl-2 mr-14">{idx + 1}</span>
+                      <div className="flex flex-row w-full justify-between">
+                        <span>{ranker.memberName}</span>
+                        <span className="text-right">{ranker.point}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
         ))}
       </>
       <div className="absolute left-1/2 -translate-x-1/2 bottom-0 flex flex-row mb-1">
-        {Array.from({ length: AttendanceRanks?.length }).map((_, idx) => (
+        {Array.from({ length: attendanceRanks?.length }).map((_, idx) => (
           <Dot
             key={idx}
             active={slideIdx === idx + 1 ? "active" : ""}
