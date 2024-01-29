@@ -23,7 +23,7 @@ const RecentPosts = ({ items, isLoading }) => {
               key={post.id}
               className="flex flex-row w-full h-[2rem] mb-[0.7rem] hover:text-black"
             >
-              <span className="w-fit h-[1.3rem] mr-3 px-2 py-[0.2rem] text-[0.6rem] text-nowrap text-white font-semibold bg-home-primary rounded-md">
+              <span className="w-fit h-[1.3rem] mt-[0.2rem] mr-3 px-2 py-[0.2rem] text-[0.6rem] text-nowrap text-white font-semibold bg-home-primary rounded-md">
                 {StringTranslator.getPostCategoryKOR(post.postCategory)}
               </span>
               <div className="flex flex-col w-full truncate">
