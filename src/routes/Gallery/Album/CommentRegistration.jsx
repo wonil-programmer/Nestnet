@@ -32,9 +32,10 @@ const CommentRegistration = ({ isDescriptionVisible }) => {
   return (
     <>
       {isDescriptionVisible ? (
-        <div className="sticky bottom-0 w-full h-[6rem] rounded-b-3xl bg-white  shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]">
+        <div className="sticky bottom-0 w-full h-[6rem] rounded-b-2xl bg-white  shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]">
           <div className="flex flex-row items-center w-full p-6 px-8">
-            <div className="profile bg-slate-950 w-12 h-12 mr-6 rounded-3xl" />
+            {/* profile -> 프로필 원으로 교체 */}
+            <div className="profile bg-slate-950 w-12 h-12 mr-6 rounded-full" />
             <form className="flex-auto" onSubmit={handleCommentCreate}>
               {isCommentPending ? (
                 <div className="w-full h-full pt-2 pb-1 flex justify-center">
@@ -43,7 +44,7 @@ const CommentRegistration = ({ isDescriptionVisible }) => {
               ) : (
                 <input
                   onChange={handleCommentInputChange}
-                  className="flex w-full h-[3rem] py-0 px-6 bg-[#efefef] border-none rounded-3xl outline-4 outline-red-300"
+                  className="flex w-full h-[3rem] py-0 px-6 bg-[#efefef] border-none rounded-2xl outline-4 outline-red-300"
                   type="text"
                   placeholder="댓글 추가"
                   ref={inputRef}
