@@ -2,15 +2,15 @@ export const StringTranslator = {
   getPostCategoryURL(postCategory) {
     switch (postCategory) {
       case "NOTICE":
-        return "notice-post";
+        return "";
       case "UNIFIED":
-        return "unified-post";
+        return "";
       case "EXAM":
-        return "exam-collection-post";
+        return "";
       case "PHOTO":
-        return "photo-post";
+        return "gallery";
       case "INTRODUCTION":
-        return "introduction-post";
+        return "";
       default:
         return null;
     }
