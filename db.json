@@ -374,46 +374,46 @@
   "attendance-statistics": {
     "weeklyStatisticsDtoList": [
       {
-        "name": "김성호",
-        "score": 500
+        "memberName": "김성호",
+        "point": 500
       },
       {
-        "name": "최유진",
-        "score": 400
+        "memberName": "최유진",
+        "point": 400
       },
       {
-        "name": "김강민",
-        "score": 300
+        "memberName": "김강민",
+        "point": 300
       },
       {
-        "name": "정한울",
-        "score": 150
+        "memberName": "정한울",
+        "point": 150
       },
       {
-        "name": "김가현",
-        "score": 100
+        "memberName": "김가현",
+        "point": 100
       }
     ],
     "monthlyStatisticsDtoList": [
       {
-        "name": "최유진",
-        "score": 500
+        "memberName": "최유진",
+        "point": 500
       },
       {
-        "name": "김가현",
-        "score": 400
+        "memberName": "김가현",
+        "point": 400
       },
       {
-        "name": "김강민",
-        "score": 300
+        "memberName": "김강민",
+        "point": 300
       },
       {
-        "name": "정한울",
-        "score": 150
+        "memberName": "정한울",
+        "point": 150
       },
       {
-        "name": "허원일",
-        "score": 100
+        "memberName": "허원일",
+        "point": 100
       }
     ]
   },
