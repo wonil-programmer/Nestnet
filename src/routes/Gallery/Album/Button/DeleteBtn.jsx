@@ -13,7 +13,9 @@ const DeleteBtn = () => {
 
   const { mutate: deleteAlbum, isPending: isDeletingAlbum } = useDeleteAlbum();
   const handleAlbumDelete = () => {
-    deleteAlbum(postId);
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      deleteAlbum(postId);
+    }
   };
 
   return (
