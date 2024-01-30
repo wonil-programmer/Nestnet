@@ -27,7 +27,7 @@ export default function PhotoZone({ inView }) {
 
   return (
     <section className="photoZone w-full h-fit my-10">
-      <div className="header flex flex-row justify-end items-end mr-6 mb-8 px-16">
+      <div className="header flex flex-row justify-end pr-10 items-end mb-8">
         {/* 사진 업로드하는 폼 */}
         <form
           encType="multipart/form-data"
@@ -94,29 +94,37 @@ export default function PhotoZone({ inView }) {
         </form>
       </div>
       {/* 슬라이딩 이미지 */}
-      <div className="animationList flex flex-row w-[1000rem] animate-infiniteslide hover:[animation-play-state:paused]">
-        {photos.length === 0
-          ? null
-          : [...Array(2)].map((_, index) => (
-              <div
-                key={index}
-                className="imgList flex flex-row items-center w-[500rem]"
-              >
-                {photos.map((photo) => (
-                  <div
-                    key={photo.id}
-                    className="cell w-[50rem] inline-block h-fit px-2"
-                  >
-                    <img
-                      className="shadow-md rounded-sm brightness-98"
-                      src={StringCombinator.getImagePath(photo)}
-                      alt={"포토존 사진"}
-                    />
-                  </div>
-                ))}
-              </div>
-            ))}
-      </div>
+      {isPhotosLoading ? (
+        <div className="flex flex-row w-full h-[35rem] overflow-hidden">
+          {Array.from(new Array(5)).map((_, index) => (
+            <div className="w-[20rem] min-w-[25rem] h-[35rem] mx-2 bg-skeleton rounded-sm animate-pulse" />
+          ))}
+        </div>
+      ) : (
+        <div className="animationList flex flex-row w-[1000rem] animate-infiniteslide hover:[animation-play-state:paused]">
+          {photos.length === 0
+            ? null
+            : [...Array(2)].map((_, index) => (
+                <div
+                  key={index}
+                  className="imgList flex flex-row items-center w-[500rem]"
+                >
+                  {photos.map((photo) => (
+                    <div
+                      key={photo.id}
+                      className="cell w-[50rem] inline-block h-fit px-2"
+                    >
+                      <img
+                        className="shadow-md rounded-sm brightness-98"
+                        src={StringCombinator.getImagePath(photo)}
+                        alt={"포토존 사진"}
+                      />
+                    </div>
+                  ))}
+                </div>
+              ))}
+        </div>
+      )}
     </section>
   );
 }
