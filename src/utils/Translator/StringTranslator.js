@@ -1,16 +1,18 @@
+import { PAGE_ROUTE } from "../../constant/Constant";
+
 export const StringTranslator = {
   getPostCategoryURL(postCategory) {
     switch (postCategory) {
       case "NOTICE":
-        return "";
+        return PAGE_ROUTE.NOTICE;
       case "UNIFIED":
-        return "";
+        return PAGE_ROUTE.BOARD;
       case "EXAM":
-        return "";
+        return PAGE_ROUTE.PEDIGREE;
       case "PHOTO":
-        return "gallery";
+        return PAGE_ROUTE.GALLERY;
       case "INTRODUCTION":
-        return "";
+        return PAGE_ROUTE.ABOUT_ME;
       default:
         return null;
     }
