@@ -1,5 +1,6 @@
-import { useState, memo } from "react";
+import { useState, memo, useEffect } from "react";
 import Comment from "./Comment";
+import { useQuery } from "@tanstack/react-query";
 
 /**
  * 댓글창(앨범의 메타데이터 포함)
@@ -9,11 +10,9 @@ import Comment from "./Comment";
 const AlbumDescription = ({
   isAlbumLoading,
   isDescriptionVisible,
-  postData,
+  postMetaData,
   comments,
 }) => {
-  const [selectedCommentId, setSelectedCommentId] = useState(0);
-
   return (
     <>
       {isDescriptionVisible ? (
@@ -21,18 +20,18 @@ const AlbumDescription = ({
           <div className="flex flex-row w-full h-[5rem] p-6 px-8 border-y border-border-primary">
             {isAlbumLoading ? (
               <div>
-                {/* 로딩 스켈레톤 */}
+                {/* 로딩 스피너 */}
                 Loading...
               </div>
             ) : (
               <div className="bodyContent text-md my-auto font-semibold">
-                {postData.bodyContent}
+                {postMetaData.bodyContent}
               </div>
             )}
           </div>
           {isAlbumLoading ? (
             <div>
-              {/* 로딩 스켈레톤 */}
+              {/* 로딩 스피너 */}
               Loading...
             </div>
           ) : (
@@ -50,10 +49,7 @@ const AlbumDescription = ({
                         <Comment
                           key={comment.id}
                           comment={comment}
-                          setSelectedCommentId={setSelectedCommentId}
-                          isUpdating={
-                            selectedCommentId === comment.id ? true : false
-                          }
+                          isAlbumLoading={isAlbumLoading}
                         />
                       );
                     })
