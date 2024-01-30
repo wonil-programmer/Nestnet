@@ -2,13 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import StringCombinator from "../../../utils/Combinator/StringCombinator";
 
-const Comment = ({
-  comment,
-  selectedCommentId,
-  setSelectedCommentId,
-  isUpdating,
-}) => {
+const Comment = ({ comment, isAlbumLoading }) => {
   const {
     id: commentId,
     username,
@@ -18,25 +14,33 @@ const Comment = ({
     memberWritten: isMemberWritten,
   } = comment;
 
-  const [updateValue, setUpdateValue] = useState(content);
+  // 댓글 수정중 내용
+  const [updateValue, setUpdateValue] = useState("");
+  // 수정여부
+  const [isUpdateTarget, setIsUpdateTarget] = useState(false);
   const updateInputRef = useRef(null);
 
-  const { mutate: updateComment, isPending: isUpdatingComment } =
+  const { mutate: updateComment, isPending: isUpdatePending } =
     useUpdateComment();
-  const { mutate: deleteComment, isPending: isDeletingComment } =
-    useDeleteComment();
+  const { mutate: deleteComment } = useDeleteComment();
 
-  const handleCommentUpdate = (comment) => {
+  // 수정 시도
+  const onUpdateTargetClick = () => {
+    setIsUpdateTarget(true);
     setUpdateValue(content);
-    setSelectedCommentId(comment.id);
-  };
-  const handleUpdateComplete = (updateValue) => {
-    updateComment({ commentId, updateValue });
-    setSelectedCommentId(0);
   };
 
-  const handleCommentDelete = (commentId) => {
-    deleteComment(commentId);
+  // 수정 완료
+  const handleUpdateComplete = () => {
+    updateComment({ commentId, updateValue });
+    setIsUpdateTarget(false);
+  };
+
+  // 삭제 시도
+  const handleCommentDelete = () => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      deleteComment(commentId);
+    }
   };
 
   const updateInput = (
@@ -57,48 +61,59 @@ const Comment = ({
       <li className="w-full" key={commentId}>
         <div className="w-full flex pb-4">
           <div className="profile flex flex-col justify-start mr-6 pt-1">
-            <div className="w-[2.3rem] h-[2.3rem] rounded-3xl bg-slate-900">
-              <div>{username}</div>
-              <img className="" src="" alt="" />
-            </div>
+            {/* 프로필 원 */}
+            <div>{username}</div>
           </div>
           <div className="w-full break-all">
-            {isUpdating ? (
+            {isUpdateTarget ? (
               updateInput
             ) : (
-              <div className="w-full whitespace-normal">{content}</div>
-            )}
-            <div className="flex flex-row justify-end mt-2 pr-4 text-[0.8rem]">
-              {isMemberWritten ? (
-                isUpdating ? (
-                  <>
-                    <button
-                      className="mr-2"
-                      onClick={() => setSelectedCommentId(0)}
-                    >
-                      취소
-                    </button>
-                    <button onClick={() => handleUpdateComplete(updateValue)}>
-                      완료
-                    </button>
-                  </>
+              <div className="w-full whitespace-normal">
+                {isUpdatePending ? (
+                  <div className="w-full h-fit text-center">
+                    {/* 로딩스피너 */}
+                  </div>
                 ) : (
-                  <>
-                    <button
-                      className="mr-2 hover:underline hover:underline-offset-2"
-                      onClick={() => handleCommentUpdate(comment)}
-                    >
-                      수정
-                    </button>
-                    <button
-                      className="hover:underline hover:underline-offset-2"
-                      onClick={() => handleCommentDelete(commentId)}
-                    >
-                      삭제
-                    </button>
-                  </>
-                )
-              ) : null}
+                  content
+                )}
+              </div>
+            )}
+            <div className="flex flex-row justify-between mt-2 pr-4 text-[0.8rem]">
+              <div className={`${isUpdateTarget ? "invisible" : ""}`}>
+                {StringCombinator.getFormatDate(createdTime)}
+              </div>
+              <div>
+                {isMemberWritten ? (
+                  isUpdateTarget ? (
+                    <>
+                      <button
+                        className="mr-2"
+                        onClick={() => setIsUpdateTarget(false)}
+                      >
+                        취소
+                      </button>
+                      <button onClick={() => handleUpdateComplete()}>
+                        완료
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="mr-2 hover:underline hover:underline-offset-2"
+                        onClick={() => onUpdateTargetClick()}
+                      >
+                        수정
+                      </button>
+                      <button
+                        className="hover:underline hover:underline-offset-2"
+                        onClick={() => handleCommentDelete()}
+                      >
+                        삭제
+                      </button>
+                    </>
+                  )
+                ) : null}
+              </div>
             </div>
           </div>
         </div>
@@ -114,21 +129,18 @@ function useUpdateComment() {
 
   return useMutation({
     mutationFn: async ({ commentId, updateValue }) => {
-      console.log(commentId);
-      console.log(updateValue);
       const commentUpdateURL = `${process.env.REACT_APP_SERVER}/comment/modify/${commentId}`;
       return await axios.post(commentUpdateURL, {
         content: updateValue,
       });
     },
+
     // 클라이언트 업데이트
-    onMutate: (modifiedComment) => {
-      queryClient.setQueryData(["album", postId], (prevAlbum) => ({
-        ...prevAlbum,
-        commentResponseList: prevAlbum.commentResponseList.map((prevComment) =>
-          prevComment.id === modifiedComment.id ? modifiedComment : prevComment
-        ),
-      }));
+    onSuccess: () => {
+      queryClient.invalidateQueries(["album", postId]);
+    },
+    onError: () => {
+      window.alert("댓글 수정에 실패하였습니다.");
     },
   });
 }
@@ -143,14 +155,13 @@ function useDeleteComment() {
       const commentDeletionURL = `${process.env.REACT_APP_SERVER}/comment/delete/${commentId}`;
       return await axios.delete(commentDeletionURL);
     },
+
     // 클라이언트 업데이트
-    onMutate: (commentId) => {
-      queryClient.setQueryData(["album", postId], (prevAlbum) => ({
-        ...prevAlbum,
-        commentResponseList: prevAlbum.commentResponseList.filter(
-          (prevComment) => prevComment.id !== commentId
-        ),
-      }));
+    onSuccess: () => {
+      queryClient.invalidateQueries(["album", postId]);
+    },
+    onError: () => {
+      window.alert("댓글 삭제에 실패하였습니다.");
     },
   });
 }
