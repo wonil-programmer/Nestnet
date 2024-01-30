@@ -47,6 +47,16 @@ const MemberList = () => {
       table.setEditingRow(null);
     }
   };
+
+  // 회원 탈퇴 재확인
+  const showReconfirm = (inputValue, deleteRow) => {
+    if (inputValue === deleteRow.original.name) {
+      deleteUser(deleteRow.original);
+    } else {
+      window.alert("회원 탈퇴에 실패했습니다.");
+    }
+  };
+
   // 회원 탈퇴 핸들러
   const handleMemberDelete = (row) => {
     if (window.confirm(WINDOW_ALERT_MESSAGE.memberDeletion(row))) {
@@ -54,11 +64,7 @@ const MemberList = () => {
         `탈퇴를 확정하기 위해, 아래 입력칸에 '${row.original.name}'을(를) 입력하세요.`,
         ""
       );
-      if (inputValue === row.original.name) {
-        deleteUser(row.original);
-      } else {
-        window.alert("회원 탈퇴에 실패했습니다.");
-      }
+      showReconfirm(inputValue, row);
     }
   };
 
