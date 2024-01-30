@@ -2,7 +2,7 @@ import { useState } from "react";
 import Dot from "../../../components/Dot";
 
 // 배너 제목 상수
-const BannerTitle = ["월간순위", "주간순위"];
+const BannerTitle = ["주간순위", "월간순위"];
 
 const AttendanceBanner = ({ items: attendanceRanks, isLoading }) => {
   const [slideIdx, setSlideIdx] = useState(1);
