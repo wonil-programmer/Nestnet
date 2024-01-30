@@ -93,7 +93,7 @@ function Gallery() {
               })
             )}
         </Flex>
-        {/* 로딩스피너 구현 필요 */}
+        {/* 로딩스피너 */}
         {/* {isFetchingNextPage && <LoadingSpinner />} */}
       </div>
       {/* 앨범 작성 버튼 */}
@@ -108,9 +108,9 @@ function Gallery() {
 
 const getMoreAlbums = async ({ pageParam }) => {
   const albumsURL = `${process.env.REACT_APP_SERVER}/photo-post?page=${pageParam}`;
-  return await axios
-    .get(albumsURL, { withCredentials: true })
-    .then((res) => res.data.response.dtoList);
+  return await axios.get(albumsURL, { withCredentials: true }).then((res) => {
+    return res.data.response.dtoList;
+  });
 
   // // TEST: json-server
   // const albumsURL = `${process.env.REACT_APP_SERVER}/photo-post?_page=${pageParam}`;
