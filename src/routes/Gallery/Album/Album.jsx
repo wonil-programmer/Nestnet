@@ -80,6 +80,7 @@ const Album = () => {
                     isMemberLiked={isMemberLiked}
                     likeCount={postMetaData?.likeCount}
                   />
+                  {/* 권한자에게만 보이는 버튼 */}
                   {postMetaData?.memberWritten ? (
                     <>
                       <ModifyBtn existingData={originalData} />
