@@ -102,7 +102,7 @@ export default function PhotoZone({ inView }) {
       </div>
       {/* 슬라이딩 이미지 */}
       {/* LOADING: 스켈레톤 */}
-      {!isPhotosLoading ? (
+      {isPhotosLoading ? (
         <div className="flex flex-row w-full h-[35rem] overflow-hidden">
           {Array.from(new Array(5)).map((_, index) => (
             <div className="w-[20rem] min-w-[20rem] h-[30rem] mx-2 bg-skeleton rounded-sm animate-pulse" />
