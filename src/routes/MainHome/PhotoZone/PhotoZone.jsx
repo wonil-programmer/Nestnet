@@ -101,10 +101,11 @@ export default function PhotoZone({ inView }) {
         </form>
       </div>
       {/* 슬라이딩 이미지 */}
-      {isPhotosLoading ? (
+      {/* LOADING: 스켈레톤 */}
+      {!isPhotosLoading ? (
         <div className="flex flex-row w-full h-[35rem] overflow-hidden">
           {Array.from(new Array(5)).map((_, index) => (
-            <div className="w-[20rem] min-w-[25rem] h-[35rem] mx-2 bg-skeleton rounded-sm animate-pulse" />
+            <div className="w-[20rem] min-w-[20rem] h-[30rem] mx-2 bg-skeleton rounded-sm animate-pulse" />
           ))}
         </div>
       ) : (
