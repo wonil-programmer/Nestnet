@@ -13,8 +13,11 @@ export default function PhotoZone({ inView }) {
 
   const { data: photos = [], isLoading: isPhotosLoading } =
     useGetPhotos(inView);
-
-  const { mutate: createPhoto, isPending: isPhotoPending } = usePostPhoto();
+  const {
+    mutate: createPhoto,
+    isPending: isPhotoPending,
+    isError,
+  } = usePostPhoto();
 
   // 폼 제출
   const handlePhotoCreate = (e) => {
@@ -24,6 +27,10 @@ export default function PhotoZone({ inView }) {
     formData.append("file", file);
     createPhoto(formData);
   };
+
+  if (isError) {
+    window.alert("실패");
+  }
 
   return (
     <section className="photoZone w-full h-fit my-10">
@@ -101,18 +108,18 @@ export default function PhotoZone({ inView }) {
           ))}
         </div>
       ) : (
-        <div className="animationList flex flex-row w-[1000rem] animate-infiniteslide hover:[animation-play-state:paused]">
+        <div className="animationList flex flex-row w-[900rem] animate-infiniteslide hover:[animation-play-state:paused]">
           {photos.length === 0
             ? null
             : [...Array(2)].map((_, index) => (
                 <div
                   key={index}
-                  className="imgList flex flex-row items-center w-[500rem]"
+                  className="imgList flex flex-row items-center w-[450rem]"
                 >
                   {photos.map((photo) => (
                     <div
                       key={photo.id}
-                      className="cell w-[50rem] inline-block h-fit px-2"
+                      className="cell w-[45rem] inline-block h-fit px-1"
                     >
                       <img
                         className="shadow-md rounded-sm brightness-98"
