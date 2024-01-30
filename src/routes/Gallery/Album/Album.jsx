@@ -2,7 +2,11 @@ import AlbumDescription from "./AlbumDescription";
 import UnselectedPhotos from "./UnselectedPhotos";
 import SelectedPhoto from "./SelectedPhoto";
 import CommentRegistration from "./CommentRegistration";
-import AlbumActionBanner from "./AlbumActionBanner";
+import DownloadBtn from "./DownloadBtn";
+import CommentActivationBtn from "./CommentActivationBtn";
+import LikeBtn from "./LikeBtn";
+import DeleteBtn from "./Button/DeleteBtn";
+import ModifyBtn from "./Button/ModifyBtn";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -14,25 +18,30 @@ import StringCombinator from "../../../utils/Combinator/StringCombinator";
  * @returns
  */
 const Album = () => {
+  // 선택된 사진의 url
   const [selectedPhoto, setSelectedPhoto] = useState("");
 
   // 앨범 댓글창(메타데이터 포함한 컴포넌트) 표시 여부
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
 
-  const { data = {}, isLoading: isAlbumLoading, status } = useGetAlbum();
   const {
-    photoPostDto: postData,
+    data: originalData = {},
+    isLoading: isAlbumLoading,
+    status,
+  } = useGetAlbum();
+  const {
+    photoPostDto: postMetaData,
     fileDtoList: fileData,
     commentDtoList: commentData,
     memberLiked: isMemberLiked,
-  } = data;
+  } = originalData;
 
   // 요청 성공시 사진 배열 첫번째 요소를 선택된 사진(현재 보고 있는 사진)으로 지정
   useEffect(() => {
     if (status === "success") {
       setSelectedPhoto(StringCombinator.getImagePath(fileData[0]));
     }
-  }, [status, fileData, postData]);
+  }, [status, fileData, postMetaData]);
 
   return (
     <div className="max-w-screen pt-[6rem] bg-home-background">
@@ -45,7 +54,7 @@ const Album = () => {
                 className={`selectedPhotoContainer w-[40rem] mt-4 ${
                   selectedPhoto ? "h-max" : "h-screen"
                 } ${
-                  isDescriptionVisible ? "rounded-t-3xl" : "rounded-3xl"
+                  isDescriptionVisible ? "rounded-t-2xl" : "rounded-2xl"
                 } overflow-hidden shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]`}
               >
                 <SelectedPhoto selectedPhoto={selectedPhoto} />
@@ -53,7 +62,7 @@ const Album = () => {
               <AlbumDescription
                 isAlbumLoading={isAlbumLoading}
                 isDescriptionVisible={isDescriptionVisible}
-                postData={postData}
+                postMetaData={postMetaData}
                 comments={commentData}
               />
               <CommentRegistration
@@ -61,13 +70,24 @@ const Album = () => {
               />
             </div>
             <div className="actionBanner w-[5rem]">
-              <AlbumActionBanner
-                selectedPhoto={selectedPhoto}
-                setIsDescriptionVisible={setIsDescriptionVisible}
-                isMemberLiked={isMemberLiked}
-                likeCount={postData?.likeCount}
-                data={data}
-              />
+              {isAlbumLoading ? null : (
+                <div className="flex flex-col flex-start items-center h-full mt-8 pr-3">
+                  <DownloadBtn selectedPhoto={selectedPhoto} />
+                  <CommentActivationBtn
+                    setIsDescriptionVisible={setIsDescriptionVisible}
+                  />
+                  <LikeBtn
+                    isMemberLiked={isMemberLiked}
+                    likeCount={postMetaData?.likeCount}
+                  />
+                  {postMetaData?.memberWritten ? (
+                    <>
+                      <ModifyBtn existingData={originalData} />
+                      <DeleteBtn />
+                    </>
+                  ) : null}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -93,14 +113,13 @@ const useGetAlbum = () => {
     queryKey: ["album", postId],
     queryFn: async () => {
       const albumURL = `${process.env.REACT_APP_SERVER}/photo-post/${postId}`;
-      return await axios.get(albumURL).then((res) => res.data.response);
+      return await axios.get(albumURL).then((res) => {
+        return res.data.response;
+      });
 
-      // TEST: json-server
-      // const albumURL = `${process.env.REACT_APP_SERVER}/album/?id=${postId}`;
-      // return await axios.get(albumURL).then((res) => {
-      //   console.log(res.data[0]);
-      //   return res.data[0];
-      // });
+      // // TEST: json-server
+      // const albumURL = `${process.env.REACT_APP_SERVER}/album?id=${postId}`;
+      // return await axios.get(albumURL).then((res) => res.data[0]);
     },
   });
 };
