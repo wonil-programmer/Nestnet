@@ -7,7 +7,6 @@ import { useCallback, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const LikeBtn = ({ isMemberLiked, likeCount }) => {
-  // const [oldLikeState, setOldLikeState] = useState(false);
   // const [oldLikeCount, setOldLikeCount] = useState(likeCount);
 
   const { data: isLiked } = useGetIsMemberLiked(isMemberLiked);
@@ -18,33 +17,36 @@ const LikeBtn = ({ isMemberLiked, likeCount }) => {
 
   const handleButtonClick = useCallback(async () => {
     await queryClient.cancelQueries({ queryKey: ["likeState"] });
-    await queryClient.cancelQueries({ queryKey: ["likeCount"] });
+    // await queryClient.cancelQueries({ queryKey: ["likeCount"] });
 
     const previousLikeState = queryClient.getQueryData(["likeState"]);
-    const previousLikeCount = queryClient.getQueryData(["likeCount"]);
+    // const previousLikeCount = queryClient.getQueryData(["likeCount"]);
     queryClient.setQueryData(["likeState"], !previousLikeState);
-    queryClient.setQueryData(
-      ["likeCount"],
-      previousLikeState ? previousLikeCount - 1 : previousLikeCount + 1
-    );
+    // queryClient.setQueryData(
+    //   ["likeCount"],
+    //   previousLikeState ? previousLikeCount - 1 : previousLikeCount + 1
+    // );
     updateAlbumLike();
     // debouncedMutate();
   }, [updateAlbumLike, queryClient]);
 
   return (
-    <div className="mt-3">
+    <div className="relative mt-3">
       <Button
         onClick={() => {
           handleButtonClick().catch((reason) => console.error(reason));
         }}
         content={
           isLiked ? (
-            <FaHeart className="m-auto text-2xl text-red-400" />
+            <FaHeart className="mt-1 text-2xl text-red-400" />
           ) : (
-            <FaHeart className="m-auto text-2xl text-slate-300" />
+            <FaHeart className=" text-2xl text-slate-300" />
           )
         }
       />
+      <span className="absolute w-full bottom-[0.2rem] text-center text-[0.7rem]">
+        {likeCount}
+      </span>
     </div>
   );
 };
