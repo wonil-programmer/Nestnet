@@ -1,5 +1,16 @@
 export const ORIGINAL_FILE_FLAG = "originalFileName";
 
+export const PAGE_ROUTE = Object.freeze({
+  GALLERY: "gallery",
+  HISTORY: "history",
+  PROFESSOR: "professor",
+  EXECUTIVES: "executives",
+  FORMER_EXECUTIVES: "former-executives",
+  BOARD: "board",
+  PEDIGREE: "pedigree",
+  NOTICE: "notice",
+  ABOUT_ME: "about_me",
+});
 const AVAIL_AUTHORITY = [
   "회장",
   "부회장",
