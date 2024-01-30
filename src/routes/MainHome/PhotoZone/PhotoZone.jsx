@@ -94,18 +94,18 @@ export default function PhotoZone({ inView }) {
         </form>
       </div>
       {/* 슬라이딩 이미지 */}
-      <div className="animationList flex flex-row w-[400rem] animate-infiniteslide hover:[animation-play-state:paused]">
+      <div className="animationList flex flex-row w-[1000rem] animate-infiniteslide hover:[animation-play-state:paused]">
         {photos.length === 0
           ? null
-          : Array(2).map((_, index) => (
+          : [...Array(2)].map((_, index) => (
               <div
                 key={index}
-                className="imgList flex flex-row items-center w-[200rem]"
+                className="imgList flex flex-row items-center w-[500rem]"
               >
                 {photos.map((photo) => (
                   <div
                     key={photo.id}
-                    className="cell w-[20rem] inline-block h-fit px-2"
+                    className="cell w-[50rem] inline-block h-fit px-2"
                   >
                     <img
                       className="shadow-md rounded-sm brightness-98"
@@ -128,6 +128,7 @@ const useGetPhotos = (inView) => {
     queryFn: async () => {
       const photoZoneURL = `${process.env.REACT_APP_SERVER}/life4cut?size=20`;
       return await axios.get(photoZoneURL).then((res) => {
+        console.log(res.data.response.dtoList);
         return res.data.response.dtoList;
       });
     },
