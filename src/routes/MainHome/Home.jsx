@@ -11,7 +11,7 @@ function Home() {
   });
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <div className="homeContainer bg-white">
         <section className="w-full h-max px-24">
           <MainView />
@@ -19,9 +19,7 @@ function Home() {
         {/* 로고 고정 배경 이미지 */}
         <section className="flex bg-fixed bg-bottom bg-no-repeat h-[9rem] bg-[url('./assets/images/bgImage.png')]"></section>
         <section className="flex w-full h-max" ref={photoZoneRef}>
-          <div className="overflow-hidden">
-            <PhotoZone inView={inView} />
-          </div>
+          <PhotoZone inView={inView} />
         </section>
         <section className="flex w-full h-max px-24">
           <Menus />
