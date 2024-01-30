@@ -23,7 +23,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full h-[25qsrem] border-t-2 bg-white">
+    <footer className="w-full h-[25rem] border-t-2 bg-white">
       <div className="flex flex-col w-full min-w-max px-60 py-10">
         {/* 동아리 소개 */}
         <div className="flex-col mb-8">
@@ -74,7 +74,7 @@ export default function Footer() {
               <span>Back. </span>김성호
             </li>
             <li>
-              <span>Design. </span>허원일
+              <span>Design. </span>김강민, 허원일
             </li>
           </ul>
         </div>
