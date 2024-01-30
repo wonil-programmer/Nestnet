@@ -32,7 +32,7 @@ module.exports = {
       },
       animation: {
         swapdown: "swapdown 0.5s linear forwards",
-        infiniteslide: "infiniteslide 30s linear infinite",
+        infiniteslide: "infiniteslide 60s linear infinite",
       },
     },
   },
