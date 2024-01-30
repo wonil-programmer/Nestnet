@@ -144,7 +144,6 @@ const useGetPhotos = (inView) => {
     queryFn: async () => {
       const photoZoneURL = `${process.env.REACT_APP_SERVER}/life4cut?size=20`;
       return await axios.get(photoZoneURL).then((res) => {
-        console.log(res.data.response.dtoList);
         return res.data.response.dtoList;
       });
     },
